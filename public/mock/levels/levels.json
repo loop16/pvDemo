@@ -1,0 +1,955 @@
+{
+  "SPX": {
+    "symbol": "SPX",
+    "asof": "2024-01-01",
+    "daily": {
+      "lines": [
+        { "name": "Long_False_1", "value": -9.168977, "style": "dashed", "color": "#16a34a" },
+        { "name": "Long_False_2", "value": -4.795418, "style": "dashed", "color": "#16a34a" },
+        { "name": "Long_False_3", "value": -2.697900, "style": "dashed", "color": "#16a34a" },
+        { "name": "Long_False_4", "value": -2.243337, "style": "dashed", "color": "#16a34a" },
+        { "name": "Long_False_5", "value": 0.005112, "style": "dashed", "color": "#16a34a" },
+        { "name": "Long_False_6", "value": 2.456771, "style": "dashed", "color": "#16a34a" },
+        { "name": "Long_False_7", "value": 2.708125, "style": "dashed", "color": "#16a34a" },
+        { "name": "Long_False_8", "value": 4.221246, "style": "dashed", "color": "#16a34a" },
+        { "name": "Long_False_9", "value": 7.025020, "style": "dashed", "color": "#16a34a" },
+        { "name": "Long_True_1", "value": -1.290178, "style": "solid", "color": "#2563eb" },
+        { "name": "Long_True_2", "value": -0.490851, "style": "solid", "color": "#2563eb" },
+        { "name": "Long_True_3", "value": 0.111622, "style": "solid", "color": "#2563eb" },
+        { "name": "Long_True_4", "value": 0.531834, "style": "solid", "color": "#2563eb" },
+        { "name": "Long_True_5", "value": 3.401242, "style": "solid", "color": "#2563eb" },
+        { "name": "Long_True_6", "value": 6.173355, "style": "solid", "color": "#2563eb" },
+        { "name": "Long_True_7", "value": 6.690861, "style": "solid", "color": "#2563eb" },
+        { "name": "Long_True_8", "value": 9.612021, "style": "solid", "color": "#2563eb" },
+        { "name": "Long_True_9", "value": 13.266499, "style": "solid", "color": "#2563eb" },
+        { "name": "Short_False_1", "value": -6.454686, "style": "dashed", "color": "#ef4444" },
+        { "name": "Short_False_2", "value": -4.563353, "style": "dashed", "color": "#ef4444" },
+        { "name": "Short_False_3", "value": -2.767337, "style": "dashed", "color": "#ef4444" },
+        { "name": "Short_False_4", "value": -2.096099, "style": "dashed", "color": "#ef4444" },
+        { "name": "Short_False_5", "value": 0.090289, "style": "dashed", "color": "#ef4444" },
+        { "name": "Short_False_6", "value": 2.519169, "style": "dashed", "color": "#ef4444" },
+        { "name": "Short_False_7", "value": 2.947916, "style": "dashed", "color": "#ef4444" },
+        { "name": "Short_False_8", "value": 5.602665, "style": "dashed", "color": "#ef4444" },
+        { "name": "Short_False_9", "value": 9.736348, "style": "dashed", "color": "#ef4444" },
+        { "name": "Short_True_1", "value": -20.906993, "style": "solid", "color": "#dc2626" },
+        { "name": "Short_True_2", "value": -10.677462, "style": "solid", "color": "#dc2626" },
+        { "name": "Short_True_3", "value": -7.209864, "style": "solid", "color": "#dc2626" },
+        { "name": "Short_True_4", "value": -6.981632, "style": "solid", "color": "#dc2626" },
+        { "name": "Short_True_5", "value": -3.522494, "style": "solid", "color": "#dc2626" },
+        { "name": "Short_True_6", "value": -0.034099, "style": "solid", "color": "#dc2626" },
+        { "name": "Short_True_7", "value": 0.164876, "style": "solid", "color": "#dc2626" },
+        { "name": "Short_True_8", "value": 0.926728, "style": "solid", "color": "#dc2626" },
+        { "name": "Short_True_9", "value": 1.703717, "style": "solid", "color": "#dc2626" }
+      ]
+    },
+    "meta": { "model_rev": "v1.0" }
+  },
+  "CL": {
+    "symbol": "CL",
+    "asof": "2024-01-01",
+    "daily": {
+      "lines": [
+        {
+          "name": "Long_False_1",
+          "value": -18.969227,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_2",
+          "value": -11.259441,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_3",
+          "value": -5.798648,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_4",
+          "value": -5.408591,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_5",
+          "value": 0.153779,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_6",
+          "value": 4.742883,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_7",
+          "value": 6.106206,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_8",
+          "value": 10.096819,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_9",
+          "value": 17.383840,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_True_1",
+          "value": -3.000261,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_2",
+          "value": -1.507197,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_3",
+          "value": 0.063475,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_4",
+          "value": 0.485978,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_5",
+          "value": 7.013333,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_6",
+          "value": 12.503145,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_7",
+          "value": 13.963191,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_8",
+          "value": 24.023126,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_9",
+          "value": 33.195675,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Short_False_1",
+          "value": -16.047612,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_2",
+          "value": -10.988032,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_3",
+          "value": -5.492766,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_4",
+          "value": -4.230681,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_5",
+          "value": -0.375123,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_6",
+          "value": 4.252746,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_7",
+          "value": 4.742521,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_8",
+          "value": 9.602077,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_9",
+          "value": 20.024138,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_True_1",
+          "value": -29.773173,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_2",
+          "value": -21.086038,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_3",
+          "value": -14.467903,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_4",
+          "value": -13.172357,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_5",
+          "value": -7.097259,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_6",
+          "value": 0.197229,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_7",
+          "value": 0.273385,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_8",
+          "value": 1.240608,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_9",
+          "value": 3.696908,
+          "style": "solid",
+          "color": "#dc2626"
+        }
+      ]
+    },
+    "meta": {
+      "model_rev": "v1.0"
+    }
+  },
+  "GC": {
+    "symbol": "GC",
+    "asof": "2024-01-01",
+    "daily": {
+      "lines": [
+        {
+          "name": "Long_False_1",
+          "value": -10.304057,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_2",
+          "value": -6.419647,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_3",
+          "value": -3.593578,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_4",
+          "value": -2.666538,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_5",
+          "value": -0.438944,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_6",
+          "value": 2.502290,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_7",
+          "value": 2.715690,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_8",
+          "value": 4.344624,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_9",
+          "value": 9.947752,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_True_1",
+          "value": -1.438802,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_2",
+          "value": -0.691809,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_3",
+          "value": -0.112929,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_4",
+          "value": 0.128588,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_5",
+          "value": 4.162236,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_6",
+          "value": 7.444037,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_7",
+          "value": 8.437400,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_8",
+          "value": 11.581243,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_9",
+          "value": 15.755206,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Short_False_1",
+          "value": -5.806594,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_2",
+          "value": -4.185028,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_3",
+          "value": -2.241910,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_4",
+          "value": -1.944296,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_5",
+          "value": 0.691834,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_6",
+          "value": 2.707448,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_7",
+          "value": 3.625577,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_8",
+          "value": 9.591940,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_9",
+          "value": 15.819476,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_True_1",
+          "value": -12.513293,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_2",
+          "value": -7.694611,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_3",
+          "value": -6.015570,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_4",
+          "value": -5.406313,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_5",
+          "value": -2.953080,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_6",
+          "value": 0.049331,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_7",
+          "value": 0.109409,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_8",
+          "value": 0.565428,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_9",
+          "value": 1.276058,
+          "style": "solid",
+          "color": "#dc2626"
+        }
+      ]
+    },
+    "meta": {
+      "model_rev": "v1.0"
+    }
+  },
+  "BTC": {
+    "symbol": "BTC",
+    "asof": "2024-01-01",
+    "daily": {
+      "lines": [
+        {
+          "name": "Long_False_1",
+          "value": -46.202636,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_2",
+          "value": -19.395958,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_3",
+          "value": -12.442410,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_4",
+          "value": -11.653678,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_5",
+          "value": -1.586045,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_6",
+          "value": 8.112786,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_7",
+          "value": 9.270319,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_8",
+          "value": 25.157660,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_9",
+          "value": 49.624590,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_True_1",
+          "value": -6.154487,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_2",
+          "value": -1.438835,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_3",
+          "value": 0.020899,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_4",
+          "value": 0.131477,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_5",
+          "value": 32.653820,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_6",
+          "value": 52.566947,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_7",
+          "value": 65.286740,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_8",
+          "value": 111.640212,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_9",
+          "value": 212.698006,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Short_False_1",
+          "value": -29.360962,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_2",
+          "value": -25.727867,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_3",
+          "value": -21.691558,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_4",
+          "value": -13.942226,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_5",
+          "value": -5.848386,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_6",
+          "value": 9.299129,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_7",
+          "value": 9.994787,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_8",
+          "value": 31.524217,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_9",
+          "value": 66.323040,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_True_1",
+          "value": -61.715474,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_2",
+          "value": -46.172965,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_3",
+          "value": -39.377881,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_4",
+          "value": -34.202193,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_5",
+          "value": -19.452051,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_6",
+          "value": 0.190286,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_7",
+          "value": 0.473779,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_8",
+          "value": 2.804224,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_9",
+          "value": 3.890720,
+          "style": "solid",
+          "color": "#dc2626"
+        }
+      ]
+    },
+    "meta": {
+      "model_rev": "v1.0"
+    }
+  },
+  "NDX": {
+    "symbol": "NDX",
+    "asof": "2024-01-01",
+    "daily": {
+      "lines": [
+        {
+          "name": "Long_False_1",
+          "value": -13.766781,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_2",
+          "value": -6.824719,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_3",
+          "value": -4.086619,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_4",
+          "value": -3.601936,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_5",
+          "value": -0.396280,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_6",
+          "value": 2.912204,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_7",
+          "value": 3.294058,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_8",
+          "value": 6.155001,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_False_9",
+          "value": 10.623558,
+          "style": "dashed",
+          "color": "#16a34a"
+        },
+        {
+          "name": "Long_True_1",
+          "value": -1.628440,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_2",
+          "value": -0.457341,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_3",
+          "value": 0.524292,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_4",
+          "value": 0.707622,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_5",
+          "value": 5.111597,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_6",
+          "value": 8.767715,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_7",
+          "value": 9.698902,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_8",
+          "value": 14.065326,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_True_9",
+          "value": 22.150997,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Short_False_1",
+          "value": -8.746918,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_2",
+          "value": -5.268605,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_3",
+          "value": -2.927705,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_4",
+          "value": -2.434668,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_5",
+          "value": 1.009950,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_6",
+          "value": 4.318530,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_7",
+          "value": 4.947605,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_8",
+          "value": 9.549787,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_False_9",
+          "value": 14.487097,
+          "style": "dashed",
+          "color": "#ef4444"
+        },
+        {
+          "name": "Short_True_1",
+          "value": -30.171032,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_2",
+          "value": -15.450235,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_3",
+          "value": -11.741012,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_4",
+          "value": -10.566579,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_5",
+          "value": -6.393043,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_6",
+          "value": -1.405890,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_7",
+          "value": -1.045074,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_8",
+          "value": 0.145650,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_True_9",
+          "value": 3.126551,
+          "style": "solid",
+          "color": "#dc2626"
+        }
+      ]
+    },
+    "meta": {
+      "model_rev": "v1.0"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "symbol":"GC",
+  "asof":"2025-09-30",
+  "daily":{
+    "lines":[
+      {"name":"Q_Pivot","value":2066.0,"style":"dashed"},
+      {"name":"+1.5SD","value":2085.0},
+      {"name":"AsiaMid","value":2075.0}
+    ]
+  },
+  "meta":{"model_rev":"2025q3.1"}
+}
+

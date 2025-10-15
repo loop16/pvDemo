@@ -1,0 +1,13 @@
+{
+  "symbol":"BTCUSD",
+  "asof":"2025-09-30",
+  "daily":{
+    "lines":[
+      {"name":"Q_Pivot","value":44500.0,"style":"dashed"},
+      {"name":"+1.5SD","value":45600.0},
+      {"name":"AsiaMid","value":44900.0}
+    ]
+  },
+  "meta":{"model_rev":"2025q3.1"}
+}
+

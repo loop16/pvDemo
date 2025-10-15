@@ -1,0 +1,13 @@
+{
+  "symbol":"CL",
+  "asof":"2025-09-30",
+  "daily":{
+    "lines":[
+      {"name":"Q_Pivot","value":76.5,"style":"dashed"},
+      {"name":"+1.5SD","value":78.2},
+      {"name":"AsiaMid","value":77.1}
+    ]
+  },
+  "meta":{"model_rev":"2025q3.1"}
+}
+

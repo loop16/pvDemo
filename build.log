@@ -1,0 +1,12 @@
+Debug generateBuildId typeof: undefined
+
+> Build error occurred
+TypeError: generate is not a function
+    at generateBuildId (/Users/orlandocantoni/Desktop/QPP website/namely-site/node_modules/next/dist/build/generate-build-id.js:12:25)
+    at /Users/orlandocantoni/Desktop/QPP website/namely-site/node_modules/next/dist/build/index.js:360:53
+    at Span.traceAsyncFn (/Users/orlandocantoni/Desktop/QPP website/namely-site/node_modules/next/dist/trace/trace.js:157:26)
+    at getBuildId (/Users/orlandocantoni/Desktop/QPP website/namely-site/node_modules/next/dist/build/index.js:358:63)
+    at /Users/orlandocantoni/Desktop/QPP website/namely-site/node_modules/next/dist/build/index.js:405:35
+    at async Span.traceAsyncFn (/Users/orlandocantoni/Desktop/QPP website/namely-site/node_modules/next/dist/trace/trace.js:157:20)
+    at async build (/Users/orlandocantoni/Desktop/QPP website/namely-site/node_modules/next/dist/build/index.js:381:9)
+[TypeError: generate is not a function]

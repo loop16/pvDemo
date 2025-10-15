@@ -1,0 +1,1137 @@
+{
+  "SPX": {
+    "symbol": "SPX",
+    "asof": "2025-10-12",
+    "daily": {
+      "lines": [
+        {
+          "name": "Long_Low_10",
+          "value": -9.271939,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_10",
+          "value": 14.318458,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_20",
+          "value": -6.6017,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_20",
+          "value": 11.639388,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_30",
+          "value": -4.2128,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_30",
+          "value": 9.449998,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_40",
+          "value": -3.128966,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_40",
+          "value": 7.764568,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_50",
+          "value": -2.08808,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_50",
+          "value": 6.404847,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_60",
+          "value": -1.310724,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_60",
+          "value": 5.146395,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_70",
+          "value": -0.744422,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_70",
+          "value": 4.421412,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_80",
+          "value": -0.407627,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_80",
+          "value": 3.418837,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_90",
+          "value": 0.037528,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_90",
+          "value": 2.680358,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Short_Low_10",
+          "value": -19.296172,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_10",
+          "value": 10.587635,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_20",
+          "value": -10.405204,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_20",
+          "value": 7.437234,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_30",
+          "value": -8.17016,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_30",
+          "value": 5.721075,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_40",
+          "value": -6.926739,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_40",
+          "value": 4.425232,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_50",
+          "value": -6.140647,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_50",
+          "value": 3.015993,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_60",
+          "value": -5.389978,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_60",
+          "value": 2.028734,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_70",
+          "value": -4.305905,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_70",
+          "value": 1.69412,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_80",
+          "value": -3.452292,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_80",
+          "value": 1.015843,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_90",
+          "value": -2.163232,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_90",
+          "value": 0.569788,
+          "style": "solid",
+          "color": "#dc2626"
+        }
+      ]
+    },
+    "meta": {
+      "model_rev": "v1.0_basic"
+    }
+  },
+  "NDX": {
+    "symbol": "NDX",
+    "asof": "2025-10-12",
+    "daily": {
+      "lines": [
+        {
+          "name": "Long_Low_10",
+          "value": -14.063867,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_10",
+          "value": 21.255046,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_20",
+          "value": -7.990609,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_20",
+          "value": 16.213284,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_30",
+          "value": -6.353888,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_30",
+          "value": 13.460418,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_40",
+          "value": -5.0027,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_40",
+          "value": 11.407186,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_50",
+          "value": -3.544612,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_50",
+          "value": 9.736069,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_60",
+          "value": -2.052936,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_60",
+          "value": 8.362046,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_70",
+          "value": -1.053021,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_70",
+          "value": 6.859391,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_80",
+          "value": -0.370872,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_80",
+          "value": 4.347684,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_90",
+          "value": 0.425322,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_90",
+          "value": 3.152992,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Short_Low_10",
+          "value": -20.056358,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_10",
+          "value": 18.841223,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_20",
+          "value": -13.242543,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_20",
+          "value": 12.929228,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_30",
+          "value": -10.236285,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_30",
+          "value": 11.148985,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_40",
+          "value": -8.828414,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_40",
+          "value": 9.198618,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_50",
+          "value": -6.971966,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_50",
+          "value": 7.291845,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_60",
+          "value": -6.353769,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_60",
+          "value": 4.900773,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_70",
+          "value": -4.416733,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_70",
+          "value": 3.550842,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_80",
+          "value": -3.441481,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_80",
+          "value": 2.258116,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_90",
+          "value": -2.422785,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_90",
+          "value": -0.511503,
+          "style": "solid",
+          "color": "#dc2626"
+        }
+      ]
+    },
+    "meta": {
+      "model_rev": "v1.0_basic"
+    }
+  },
+  "CL": {
+    "symbol": "CL",
+    "asof": "2025-10-12",
+    "daily": {
+      "lines": [
+        {
+          "name": "Long_Low_10",
+          "value": -19.138001,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_10",
+          "value": 31.985211,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_20",
+          "value": -14.556399,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_20",
+          "value": 27.278363,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_30",
+          "value": -10.988911,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_30",
+          "value": 22.697238,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_40",
+          "value": -8.379209,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_40",
+          "value": 17.438223,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_50",
+          "value": -5.433186,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_50",
+          "value": 14.482944,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_60",
+          "value": -3.332971,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_60",
+          "value": 11.709618,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_70",
+          "value": -2.437419,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_70",
+          "value": 9.084716,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_80",
+          "value": -1.283837,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_80",
+          "value": 7.347956,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_90",
+          "value": -0.262476,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_90",
+          "value": 4.868398,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Short_Low_10",
+          "value": -28.855465,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_10",
+          "value": 20.294646,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_20",
+          "value": -22.98427,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_20",
+          "value": 12.596964,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_30",
+          "value": -20.843802,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_30",
+          "value": 9.79593,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_40",
+          "value": -16.208148,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_40",
+          "value": 7.607025,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_50",
+          "value": -14.56378,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_50",
+          "value": 4.897109,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_60",
+          "value": -12.5106,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_60",
+          "value": 3.807867,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_70",
+          "value": -10.524651,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_70",
+          "value": 2.47092,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_80",
+          "value": -7.913975,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_80",
+          "value": 1.363146,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_90",
+          "value": -4.776981,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_90",
+          "value": 0.559067,
+          "style": "solid",
+          "color": "#dc2626"
+        }
+      ]
+    },
+    "meta": {
+      "model_rev": "v1.0_basic"
+    }
+  },
+  "GC": {
+    "symbol": "GC",
+    "asof": "2025-10-12",
+    "daily": {
+      "lines": [
+        {
+          "name": "Long_Low_10",
+          "value": -10.746563,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_10",
+          "value": 15.779215,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_20",
+          "value": -7.479526,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_20",
+          "value": 13.179446,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_30",
+          "value": -6.37029,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_30",
+          "value": 11.133883,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_40",
+          "value": -4.288111,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_40",
+          "value": 10.013104,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_50",
+          "value": -2.901046,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_50",
+          "value": 7.295581,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_60",
+          "value": -1.856324,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_60",
+          "value": 5.582359,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_70",
+          "value": -1.111422,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_70",
+          "value": 4.447479,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_80",
+          "value": -0.691678,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_80",
+          "value": 3.211196,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_90",
+          "value": -0.250121,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_90",
+          "value": 2.627815,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Short_Low_10",
+          "value": -12.057251,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_10",
+          "value": 16.718733,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_20",
+          "value": -8.921909,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_20",
+          "value": 14.087131,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_30",
+          "value": -7.693229,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_30",
+          "value": 9.684521,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_40",
+          "value": -6.553739,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_40",
+          "value": 6.08956,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_50",
+          "value": -5.043737,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_50",
+          "value": 3.637747,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_60",
+          "value": -4.529023,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_60",
+          "value": 2.48061,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_70",
+          "value": -4.073738,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_70",
+          "value": 1.200293,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_80",
+          "value": -2.838613,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_80",
+          "value": 0.61777,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_90",
+          "value": -2.009539,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_90",
+          "value": 0.184502,
+          "style": "solid",
+          "color": "#dc2626"
+        }
+      ]
+    },
+    "meta": {
+      "model_rev": "v1.0_basic"
+    }
+  },
+  "BTC": {
+    "symbol": "BTC",
+    "asof": "2025-10-12",
+    "daily": {
+      "lines": [
+        {
+          "name": "Long_Low_10",
+          "value": -46.157885,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_10",
+          "value": 614.795441,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_20",
+          "value": -26.33303,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_20",
+          "value": 168.866593,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_30",
+          "value": -15.104766,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_30",
+          "value": 106.800205,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_40",
+          "value": -12.818564,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_40",
+          "value": 79.299636,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_50",
+          "value": -10.44485,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_50",
+          "value": 55.954739,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_60",
+          "value": -6.402116,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_60",
+          "value": 46.0532,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_70",
+          "value": -2.129318,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_70",
+          "value": 27.572274,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_80",
+          "value": -0.63511,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_80",
+          "value": 16.861376,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_Low_90",
+          "value": 0.054275,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Long_High_90",
+          "value": 9.61835,
+          "style": "solid",
+          "color": "#2563eb"
+        },
+        {
+          "name": "Short_Low_10",
+          "value": -65.426498,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_10",
+          "value": 279.604775,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_20",
+          "value": -52.945194,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_20",
+          "value": 66.012012,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_30",
+          "value": -47.372227,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_30",
+          "value": 37.416381,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_40",
+          "value": -40.437082,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_40",
+          "value": 28.935427,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_50",
+          "value": -28.867405,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_50",
+          "value": 20.33587,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_60",
+          "value": -26.218176,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_60",
+          "value": 9.716524,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_70",
+          "value": -24.088144,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_70",
+          "value": 8.0249,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_80",
+          "value": -21.896691,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_80",
+          "value": 3.545039,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_Low_90",
+          "value": -14.93046,
+          "style": "solid",
+          "color": "#dc2626"
+        },
+        {
+          "name": "Short_High_90",
+          "value": 1.747837,
+          "style": "solid",
+          "color": "#dc2626"
+        }
+      ]
+    },
+    "meta": {
+      "model_rev": "v1.0_basic"
+    }
+  }
+}
