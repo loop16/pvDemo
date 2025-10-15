@@ -1,0 +1,13 @@
+{
+  "symbol":"SPY",
+  "asof":"2025-09-30",
+  "daily":{
+    "lines":[
+      {"name":"Q_Pivot","value":476.0,"style":"dashed"},
+      {"name":"+1.5SD","value":482.5},
+      {"name":"AsiaMid","value":478.2}
+    ]
+  },
+  "meta":{"model_rev":"2025q3.1"}
+}
+

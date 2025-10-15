@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- Sharp triangle background (near-black) -->
+  <path fill="#0b0f17" d="M128 16 244 220H12L128 16Z"/>
+
+  <!-- A-shape chevrons (touching, no gaps): white / blue / white -->
+  <!-- Outer white V -->
+  <path fill="#ffffff" d="M128 44 220 204h-28L128  ninety?"/>
+</svg>
+

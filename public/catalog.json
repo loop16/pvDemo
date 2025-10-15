@@ -1,0 +1,8 @@
+[
+  { "id": "ES",     "label": "S&P 500 (ES futures)",   "class": "futures" },
+  { "id": "NQ",     "label": "Nasdaq 100 (NQ futures)","class": "futures" },
+  { "id": "BTCUSD", "label": "Bitcoin (BTC/USD)",      "class": "crypto"  },
+  { "id": "CL",     "label": "Crude Oil (CL)",         "class": "futures" },
+  { "id": "GC",     "label": "Gold (GC)",              "class": "futures" }
+]
+

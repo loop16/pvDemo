@@ -1,0 +1,13 @@
+{
+  "symbol":"NQ",
+  "asof":"2025-09-30",
+  "daily":{
+    "lines":[
+      {"name":"Q_Pivot","value":16920.0,"style":"dashed"},
+      {"name":"+1.5SD","value":17080.0},
+      {"name":"AsiaMid","value":16980.0}
+    ]
+  },
+  "meta":{"model_rev":"2025q3.1"}
+}
+
