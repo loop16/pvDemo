@@ -51,3 +51,7 @@ export function aggregateToWeekly(bars: Bar[], timeZone = 'America/New_York'): B
   return out;
 }
 
+
+
+
+

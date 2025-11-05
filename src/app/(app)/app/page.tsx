@@ -18,7 +18,7 @@ export default function AppPage() {
     upper20:number; upper50:number; upper80:number; lower20:number; lower50:number; lower80:number;
   }>(null);
   const [metrics, setMetrics] = useState<{ price:number|null; changePct:number|null }>({ price: null, changePct: null });
-  const [selectedModel, setSelectedModel] = useState<'simple' | 'pro' | 'overlay'>('simple');
+  const [selectedModel, setSelectedModel] = useState<'simple' | 'pro' | 'overlay' | 'beta'>('simple');
   const [selectedOutcome, setSelectedOutcome] = useState<OutcomeKey>('AUTO');
   const [overlaySymbol, setOverlaySymbol] = useState<string | null>(null);
   const [overlayLevels, setOverlayLevels] = useState<any>(null);
@@ -85,7 +85,7 @@ export default function AppPage() {
     }
   };
 
-  const handleModelChange = (model: 'simple' | 'pro' | 'overlay') => {
+  const handleModelChange = (model: 'simple' | 'pro' | 'overlay' | 'beta') => {
     setSelectedModel(model);
     // Clear overlay data when switching away from overlay mode
     if (model !== 'overlay') {

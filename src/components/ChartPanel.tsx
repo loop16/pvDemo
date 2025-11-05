@@ -156,7 +156,7 @@ export default function ChartPanel({ data, symbol, onQuarterLevels, selectedMode
   data: Candle[]; 
   symbol?: string; 
   onQuarterLevels?: (l:{upper20:number;upper50:number;upper80:number;lower20:number;lower50:number;lower80:number})=>void;
-  selectedModel?: 'simple' | 'pro' | 'overlay';
+  selectedModel?: 'simple' | 'pro' | 'overlay' | 'beta';
   selectedOutcome?: OutcomeKey;
   overlaySymbol?: string | null;
   overlayLevels?: any;
@@ -1117,6 +1117,7 @@ export default function ChartPanel({ data, symbol, onQuarterLevels, selectedMode
       midBandsRef.current = [];
       try {
         if (symbol) {
+          const isProLikeModel = selectedModel === 'pro' || selectedModel === 'beta';
           let lines: any[] = [];
           
           // Use overlay levels if in overlay mode and overlay data is available
@@ -1154,9 +1155,11 @@ export default function ChartPanel({ data, symbol, onQuarterLevels, selectedMode
                   
                   scenario = key;
                 } else {
-                  // Pro/Overlay model: use selected outcome for latest quarter, otherwise auto-detect
+                  // Pro/Beta/Overlay models: use selected outcome for latest quarter, otherwise auto-detect
                   const isLatestQuarter = (i === ranges.length - 1);
-                  scenario = (selectedModel === 'pro' && selectedOutcome && selectedOutcome !== 'AUTO' && isLatestQuarter) ? selectedOutcome : outcomeForRange(r as any, data);
+                  scenario = (isProLikeModel && selectedOutcome && selectedOutcome !== 'AUTO' && isLatestQuarter)
+                    ? selectedOutcome
+                    : outcomeForRange(r as any, data);
                 }
 
               const t1 = ((r.startTime as number) + DAY) as UTCTimestamp;
@@ -1314,19 +1317,13 @@ export default function ChartPanel({ data, symbol, onQuarterLevels, selectedMode
                   lower80: px(L80),
                 });
               } else {
-                // Pro/Overlay model: use existing logic with scenario-based levels
-                // Determine scenario for quarter levels calculation
-                let scenario: OutcomeKey;
-                if (selectedModel === 'pro') {
-                  // Pro model: use selected outcome when not AUTO, otherwise auto-detect
-                  scenario = (selectedOutcome && selectedOutcome !== 'AUTO') ? selectedOutcome : outcomeForRange(last as any, data);
-                } else {
-                  // Overlay model: use selected outcome when not AUTO, otherwise auto-detect
-                  scenario = (selectedOutcome && selectedOutcome !== 'AUTO') ? selectedOutcome : outcomeForRange(last as any, data);
-                }
-                
+                // Pro/Beta/Overlay models: use existing logic with scenario-based levels
+                const allowManualQuarterOverride = (selectedOutcome && selectedOutcome !== 'AUTO')
+                  && (isProLikeModel || selectedModel === 'overlay');
+                const manualOverride = allowManualQuarterOverride ? selectedOutcome! : null;
+                const scenario = manualOverride ?? outcomeForRange(last as any, data);
+
                 const scenarioKey = (scenario === 'NONE' ? 'LONG_TRUE' : scenario) as Exclude<OutcomeKey,'NONE'|'AUTO'>;
-                const parsed = scenario !== 'NONE' ? parseScenarioFixed(groupedFull[scenarioKey] || []) : { pairs: [], midPct: 0 } as any;
                 const idxMap = levelIndexMap(groupedFull[scenarioKey] || []);
                 const priceAt = (idx:number) => {
                   const e = idxMap[idx];
