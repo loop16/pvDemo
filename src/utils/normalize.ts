@@ -46,3 +46,7 @@ export function normalizeBars(raw: AnyBar[]): { time: UTCTimestamp; open:number;
   }));
 }
 
+
+
+
+

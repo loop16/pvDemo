@@ -6,8 +6,8 @@ type OutcomeKey = 'AUTO' | 'LONG_TRUE' | 'LONG_FALSE' | 'SHORT_TRUE' | 'SHORT_FA
 export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange, selectedOutcome, onOutcomeChange, onOverlaySelect, overlaySymbol, showOverlay, showOutcome }: { 
   quarterLevels: null | { upper20:number; upper50:number; upper80:number; lower20:number; lower50:number; lower80:number }, 
   metrics?: { price:number|null; changePct:number|null },
-  selectedModel?: 'simple' | 'pro' | 'overlay',
-  onModelChange?: (model: 'simple' | 'pro' | 'overlay') => void,
+  selectedModel?: 'simple' | 'pro' | 'overlay' | 'beta',
+  onModelChange?: (model: 'simple' | 'pro' | 'overlay' | 'beta') => void,
   selectedOutcome?: OutcomeKey,
   onOutcomeChange?: (outcome: OutcomeKey) => void,
   onOverlaySelect?: (symbol: string) => void,
@@ -220,6 +220,15 @@ export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange
           >
             Pro
           </button>
+          <button 
+            className={`seg-btn ${currentModel === 'beta' ? 'seg-btn--active' : ''}`}
+            onClick={() => {
+              setShowOverlaySearch(false);
+              onModelChange?.('beta');
+            }}
+          >
+            Beta
+          </button>
           {allowOverlay && (
             <button
               className={`seg-btn ${currentModel === 'overlay' ? 'seg-btn--active' : ''}`}
@@ -230,7 +239,7 @@ export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange
           )}
         </div>
         
-        {allowOutcome && currentModel === 'pro' && (
+        {allowOutcome && (currentModel === 'pro' || currentModel === 'beta') && (
           <div className="mt-3">
             <label className="block text-sm font-medium mb-2">Outcome</label>
             <div className="relative">
