@@ -1,29 +1,36 @@
 @import "tailwindcss";
 
-:root { 
-  color-scheme: light; 
+:root {
+  color-scheme: light;
   font-size: 16px;
-  --header-h: 64px; /* match header height */
+  --header-h: 64px;
+  /* match header height */
 }
-html, body { 
-  background: #fff; 
+
+html,
+body {
+  background: #fff;
   font-size: 1rem;
   line-height: 1.5;
 }
-.container-hero { 
-  max-width: 1280px; 
-  margin: 0 auto; 
-  padding: 3rem 1.5rem; 
+
+.container-hero {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
 }
-.no-scroll { 
-  height: 100vh; 
-  overflow: hidden; 
+
+.no-scroll {
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* Utilities above keep the surface light and constrain content width */
 
 /* Brand utility */
-.text-brand { color: #1B14F4; }
+.text-brand {
+  color: #1B14F4;
+}
 
 /* Landing page zoom (only for marketing pages) */
 .landing-zoom {
@@ -37,7 +44,8 @@ html, body {
 }
 
 /* IMPORTANT: never scale the app/chart pages */
-#app-shell, .chart-root {
+#app-shell,
+.chart-root {
   transform: none !important;
   zoom: 1 !important;
 }
@@ -73,14 +81,17 @@ html, body {
   .app-container {
     font-size: 0.95rem;
   }
+
   .app-input {
     font-size: 0.85rem;
     width: 10rem;
   }
+
   .app-button {
     font-size: 0.85rem;
     padding: 0.45rem 0.9rem;
   }
+
   .app-model-button {
     font-size: 0.8rem;
     padding: 0.35rem 0.7rem;
@@ -91,15 +102,18 @@ html, body {
   .app-container {
     font-size: 0.9rem;
   }
+
   .app-input {
     font-size: 0.8rem;
     width: 8rem;
     padding: 0.4rem 0.6rem;
   }
+
   .app-button {
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
   }
+
   .app-model-button {
     font-size: 0.75rem;
     padding: 0.3rem 0.6rem;
@@ -107,16 +121,28 @@ html, body {
 }
 
 /* Base */
-html, body, #__next { height: 100%; }
-body { margin: 0; box-sizing: border-box; }
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
 
 /* Page layout: header gets natural height, chart gets the rest */
 .app {
-  height: 100dvh;                 /* handles browser UI bars too */
+  height: 100dvh;
+  /* handles browser UI bars too */
   display: grid;
-  grid-template-columns: 1fr 320px;   /* chart + sidebar */
-  grid-template-rows: min-content 1fr;/* header auto, content fills */
-  min-height: 0;                   /* allow child to shrink */
+  grid-template-columns: 1fr 320px;
+  /* chart + sidebar */
+  grid-template-rows: min-content 1fr;
+  /* header auto, content fills */
+  min-height: 0;
+  /* allow child to shrink */
 }
 
 .header {
@@ -133,8 +159,10 @@ body { margin: 0; box-sizing: border-box; }
   grid-row: 2;
   display: flex;
   min-width: 0;
-  min-height: 0;                  /* critical to prevent clipping */
-  padding: 0 16px 16px;           /* optional; won't affect height math */
+  min-height: 0;
+  /* critical to prevent clipping */
+  padding: 0 16px 16px;
+  /* optional; won't affect height math */
 }
 
 .sidebar {
@@ -151,40 +179,43 @@ body { margin: 0; box-sizing: border-box; }
   flex: 1 1 auto;
   min-height: 0;
   min-width: 0;
-  height: 92%;                   /* no calc(100vh - …) */
+  height: 92%;
+  /* no calc(100vh - …) */
   border: 1px solid #e5e7eb;
   border-radius: 0;
   overflow: hidden;
   background: #ffffff;
 }
 
-.chart-root canvas { display: block; }
-
-.symbol-input { 
-  height: 40px; 
-  width: 280px; 
-  padding: 0 12px; 
-  border: 1px solid #e5e7eb; 
-  border-radius: 0; 
+.chart-root canvas {
+  display: block;
 }
 
-.btn-primary { 
-  height: 40px; 
-  padding: 0 14px; 
-  border: 1px solid #1d4ed8; 
-  background: #2563eb; 
-  color: #fff; 
-  border-radius: 0; 
+.symbol-input {
+  height: 40px;
+  width: 280px;
+  padding: 0 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 0;
 }
 
-.feed-pill { 
-  color: #6b7280; 
-  font-size: 14px; 
+.btn-primary {
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid #1d4ed8;
+  background: #2563eb;
+  color: #fff;
+  border-radius: 0;
 }
 
-.error { 
-  color: #b91c1c; 
-  margin-top: 8px; 
+.feed-pill {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.error {
+  color: #b91c1c;
+  margin-top: 8px;
   padding: 8px 12px;
   background: #fef2f2;
   border: 1px solid #fecaca;
@@ -193,10 +224,10 @@ body { margin: 0; box-sizing: border-box; }
 }
 
 /* Toolbar styling */
-.toolbar { 
-  display: flex; 
-  gap: 8px; 
-  align-items: center; 
+.toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
 .symbol-input {
@@ -204,7 +235,8 @@ body { margin: 0; box-sizing: border-box; }
   width: 100%;
   padding: 0 16px;
   border: 1px solid #e5e7eb;
-  border-radius: 0; /* square */
+  border-radius: 0;
+  /* square */
   outline: none;
   transition: border-color .2s, box-shadow .2s;
   font-size: 14px;
@@ -218,21 +250,23 @@ body { margin: 0; box-sizing: border-box; }
 
 .symbol-input:focus {
   border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .15);
 }
 
 /* Flatten symbol dropdown rounding */
 .symbol-menu,
-.symbol-menu * { border-radius: 0 !important; }
+.symbol-menu * {
+  border-radius: 0 !important;
+}
 
 .btn-primary {
-  height: 40px; 
+  height: 40px;
   width: 65px;
-  padding: 0; 
+  padding: 0;
   font-weight: 600;
-  border: 1px solid #1d4ed8; 
-  background: #2563eb; 
-  color: white; 
+  border: 1px solid #1d4ed8;
+  background: #2563eb;
+  color: white;
   border-radius: 0;
   display: flex;
   align-items: center;
@@ -246,73 +280,78 @@ body { margin: 0; box-sizing: border-box; }
   font-size: 14px;
 }
 
-.feed-pill { 
-  color: #6b7280; 
-  font-size: 14px; 
+.feed-pill {
+  color: #6b7280;
+  font-size: 14px;
 }
 
 /* Side panel styling */
-.side-panel { 
-  display: flex; 
-  flex-direction: column; 
-  gap: 16px; 
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .card {
-  background: #fff; 
-  border: 1px solid #e5e7eb; 
-  border-radius: 0; 
-  padding: 16px 20px; /* make left padding equal/right (set both explicitly) */
-  box-shadow: 0 4px 12px rgba(0,0,0,.04);
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0;
+  padding: 16px 20px;
+  /* make left padding equal/right (set both explicitly) */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .04);
 }
 
-.card-title { 
-  font-weight: 700; 
-  margin-bottom: 12px; 
-  font-size: 16px; /* keep titles prominent */
+.card-title {
+  font-weight: 700;
+  margin-bottom: 12px;
+  font-size: 16px;
+  /* keep titles prominent */
 }
 
-.seg { 
-  display: flex; 
-  gap: 8px; 
+.seg {
+  display: flex;
+  gap: 8px;
 }
 
-.seg-btn { 
-  border: 1px solid #e5e7eb; 
-  background: #fff; 
-  padding: 8px 12px; 
+.seg-btn {
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  padding: 8px 12px;
   border-radius: 0;
   font-size: 12px;
   font-weight: 600;
 }
 
-.seg-btn--active { 
-  border-color: #1d4ed8; 
-  background: #eff6ff; 
+.seg-btn--active {
+  border-color: #1d4ed8;
+  background: #eff6ff;
 }
 
-.stat, .kv { 
-  display: flex; 
-  justify-content: space-between; 
-  margin: 8px 0; 
-  font-size: 14px; /* smaller than titles */
+.stat,
+.kv {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  font-size: 14px;
+  /* smaller than titles */
 }
 
-.pos { 
-  color: #16a34a; 
+.pos {
+  color: #16a34a;
 }
 
-.red { 
-  color: #ef4444; 
+.red {
+  color: #ef4444;
 }
 
-.green { 
-  color: #16a34a; 
+.green {
+  color: #16a34a;
 }
 
-.blue { 
-  color: #2563eb; 
+.blue {
+  color: #2563eb;
 }
+
 /* match chart lower band hue */
 .purple {
   color: #7c3aed;
