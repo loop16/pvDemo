@@ -2,7 +2,14 @@ import Link from "next/link";
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto max-w-4xl px-6 py-16 space-y-12">
+    <>
+      <header className="container-hero flex items-center justify-between py-6">
+        <Link href="/" className="flex items-center gap-2">
+          <img src="/logo.svg" alt="Pricevault" width={28} height={28} />
+          <span className="text-[18px] font-semibold tracking-tightest">Pricevault</span>
+        </Link>
+      </header>
+      <main className="mx-auto max-w-4xl px-6 py-16 space-y-12">
       <section className="space-y-4">
         <h1 className="text-4xl font-extrabold tracking-tight text-neutral-900">About Pricevault</h1>
         <p className="text-lg text-neutral-700 leading-relaxed">
@@ -82,5 +89,6 @@ export default function AboutPage() {
       </section>
 
     </main>
+    </>
   );
 }
