@@ -47,6 +47,7 @@ export default function AboutPage() {
           Pricevault offers four distinct models for analyzing price levels, each designed for different use cases and trading styles.
         </p>
         
+        
         <div className="space-y-6">
           <article className="card space-y-3">
             <h3 className="text-lg font-semibold">Simple Model</h3>
