@@ -46,12 +46,6 @@ export default function AboutPage() {
         <p className="text-sm text-neutral-700 leading-relaxed">
           Pricevault offers four distinct models for analyzing price levels, each designed for different use cases and trading styles. Learn more about how each model works and when to use them.
         </p>
-        <Link
-          href="/models"
-          className="inline-block rounded-pill bg-black px-5 py-3 text-sm font-semibold text-white hover:opacity-90"
-        >
-          Learn about our models
-        </Link>
       </section>
 
       <section className="flex flex-wrap gap-4">
@@ -62,10 +56,10 @@ export default function AboutPage() {
           Explore pricing
         </Link>
         <Link
-          href="/signup"
+          href="/models"
           className="rounded-pill border border-neutral-300 px-5 py-3 text-sm font-semibold hover:bg-neutral-50"
         >
-          Join the waitlist
+          Learn about our models
         </Link>
       </section>
 
