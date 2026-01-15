@@ -1373,7 +1373,7 @@ export default function ChartPanel({ data, symbol, onQuarterLevels, selectedMode
         scheduleDraw();
       }
     })();
-  }, [data.length, symbol, selectedModel, selectedOutcome, overlayLevels]);
+  }, [data, symbol, selectedModel, selectedOutcome, overlayLevels, levelsSource]);
 
   // init + keep in sync
   useEffect(() => {
