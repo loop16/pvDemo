@@ -21,5 +21,5 @@ export default auth((req) => {
 });
 
 export const config = {
-    matcher: ["/app/:path*", "/api/levels", "/api/ohlcv", "/api/symbols", "/api/tv/:path*"],
+    matcher: ["/app", "/app/:path*", "/api/levels", "/api/ohlcv", "/api/symbols", "/api/tv/:path*"],
 };

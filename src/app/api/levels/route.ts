@@ -21,6 +21,7 @@ const BETA_CLAMP = 5;
 const LEVELS_LOCAL_DIR = path.join(process.cwd(), "public", "mock", "levels");
 const DEFAULT_LEVELS_SOURCE = (process.env.QPP_LEVELS_SOURCE || "wasabi").toLowerCase();
 const WASABI_PREFIX = (process.env.WASABI_PREFIX || "levels").replace(/^\/+|\/+$/g, "");
+const WASABI_OHLCV_DIR = "ohlcv/symbols";
 const ASSETS_PATH = path.join(process.cwd(), "backend", "assets.json");
 const ASSETS_BASE_DIR = path.join(process.cwd(), "backend");
 const OHLCV_ALIASES: Record<string, string> = {
@@ -158,6 +159,34 @@ function normalizeDate(input: string | number): string {
 
 async function loadOhlcv(symbol: string, source: string): Promise<OhlcvBar[]> {
   const mapped = OHLCV_ALIASES[symbol] || symbol;
+  if (shouldUseWasabi(source)) {
+    try {
+      const rows = await readWasabiJson<RawOhlcvRow[]>(`${WASABI_OHLCV_DIR}/${mapped}.json`);
+      if (Array.isArray(rows)) {
+        const parsed = rows
+          .map(row => {
+            const close = Number(row?.close);
+            const time = row?.time;
+            if (!Number.isFinite(close) || time == null) return null;
+            return { time, close } as OhlcvBar;
+          })
+          .filter((row): row is OhlcvBar => Boolean(row));
+        if (parsed.length) {
+          return parsed.sort((a, b) => {
+            const ta = normalizeDate(a.time);
+            const tb = normalizeDate(b.time);
+            return ta < tb ? -1 : ta > tb ? 1 : 0;
+          });
+        }
+      }
+    } catch (error: any) {
+      const status = error?.$metadata?.httpStatusCode;
+      if (status !== 404 && error?.name !== "NoSuchKey") {
+        console.warn("OHLCV Wasabi load failed, falling back to CSV.", error);
+      }
+    }
+  }
+
   if (source !== "demo") {
     try {
       const assetsMap = await loadAssetsMap();

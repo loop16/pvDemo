@@ -24,8 +24,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
                 const { email, password } = parsed.data;
 
-                const demoUser = process.env.DEMO_USERNAME || "demo";
-                const demoPass = process.env.DEMO_PASSWORD || "demo";
+                const demoUser = process.env.DEMO_USERNAME || "demovault";
+                const demoPass = process.env.DEMO_PASSWORD || "demovault";
 
                 if (email === demoUser && password === demoPass) {
                     return {
