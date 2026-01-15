@@ -84,7 +84,7 @@ def load_daily_assets(path):
     return assets
 
 
-def normalize_ohlc_frame(df, drop_weekdays=None, drop_flat=False):
+def normalize_ohlc_frame(df, drop_weekdays=None, drop_flat=False, drop_duplicate_ohlc=False):
     import pandas as pd
 
     cols = {str(c).lower(): c for c in df.columns}
@@ -116,6 +116,14 @@ def normalize_ohlc_frame(df, drop_weekdays=None, drop_flat=False):
     out["time"] = out["time"].dt.strftime("%Y-%m-%d")
     out = out.dropna(subset=["time", "open", "high", "low", "close"])
     out = out.drop_duplicates(subset=["time"], keep="last").sort_values("time")
+    if drop_duplicate_ohlc:
+        dup_mask = (
+            out["open"].eq(out["open"].shift(1))
+            & out["high"].eq(out["high"].shift(1))
+            & out["low"].eq(out["low"].shift(1))
+            & out["close"].eq(out["close"].shift(1))
+        )
+        out = out[~dup_mask]
     return out
 
 
@@ -146,11 +154,8 @@ def update_daily_csvs(config_path, n_bars, cooldown, only_missing=False):
             time.sleep(item_cooldown)
             continue
 
-        drop_weekdays = None
-        if str(tv_exchange).upper().startswith("CME"):
-            drop_weekdays = {6}
         try:
-            new_norm = normalize_ohlc_frame(df_new, drop_weekdays=drop_weekdays, drop_flat=True)
+            new_norm = normalize_ohlc_frame(df_new, drop_duplicate_ohlc=True)
         except ValueError as exc:
             print(f"   -> Skipped {tv_symbol}: {exc}")
             time.sleep(item_cooldown)
@@ -164,7 +169,7 @@ def update_daily_csvs(config_path, n_bars, cooldown, only_missing=False):
                 continue
             try:
                 existing = pd.read_csv(file_path)
-                existing_norm = normalize_ohlc_frame(existing, drop_weekdays=drop_weekdays, drop_flat=True)
+                existing_norm = normalize_ohlc_frame(existing, drop_duplicate_ohlc=True)
                 existing_rows = len(existing_norm)
             except Exception as exc:
                 # Avoid clobbering history if the existing file cannot be parsed.
@@ -266,9 +271,7 @@ def write_ohlcv_json(assets, output_dir):
             continue
         try:
             df = pd.read_csv(file_path)
-            basename = os.path.basename(file_path)
-            drop_weekdays = {6} if basename.startswith(("CME_", "CME_MINI_")) else None
-            normalized = normalize_ohlc_frame(df, drop_weekdays=drop_weekdays, drop_flat=True)
+            normalized = normalize_ohlc_frame(df, drop_duplicate_ohlc=True)
         except Exception as exc:
             print(f"   -> Skipped {symbol}: {exc}")
             continue
@@ -295,8 +298,7 @@ def clean_ohlcv_dir(ohlcv_dir):
     for path in files:
         try:
             df = pd.read_csv(path)
-            drop_weekdays = {6} if path.name.startswith(("CME_", "CME_MINI_")) else None
-            cleaned = normalize_ohlc_frame(df, drop_weekdays=drop_weekdays, drop_flat=True)
+            cleaned = normalize_ohlc_frame(df, drop_duplicate_ohlc=True)
         except Exception as exc:
             print(f"   -> Skipped {path.name}: {exc}")
             continue
