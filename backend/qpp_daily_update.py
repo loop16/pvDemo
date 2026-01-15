@@ -18,6 +18,7 @@ DEFAULT_DAILY_CONFIG_PATH = os.environ.get(
 )
 DEFAULT_DOWNLOAD_BARS = os.environ.get("QPP_DOWNLOAD_BARS", "5000")
 DEFAULT_DOWNLOAD_COOLDOWN = os.environ.get("QPP_DOWNLOAD_COOLDOWN", "0.4")
+DEFAULT_OHLCV_DIR = os.environ.get("QPP_OHLCV_DIR", os.path.join(BASE_DIR, "Daily data csv"))
 
 
 def load_env_file(path):
@@ -83,7 +84,7 @@ def load_daily_assets(path):
     return assets
 
 
-def normalize_ohlc_frame(df, drop_weekdays=None):
+def normalize_ohlc_frame(df, drop_weekdays=None, drop_flat=False):
     import pandas as pd
 
     cols = {str(c).lower(): c for c in df.columns}
@@ -110,6 +111,8 @@ def normalize_ohlc_frame(df, drop_weekdays=None):
     out = out.dropna(subset=["time"])
     if drop_weekdays:
         out = out[~out["time"].dt.weekday.isin(drop_weekdays)]
+    if drop_flat:
+        out = out[~((out["open"] == out["high"]) & (out["open"] == out["low"]) & (out["open"] == out["close"]))]
     out["time"] = out["time"].dt.strftime("%Y-%m-%d")
     out = out.dropna(subset=["time", "open", "high", "low", "close"])
     out = out.drop_duplicates(subset=["time"], keep="last").sort_values("time")
@@ -147,7 +150,7 @@ def update_daily_csvs(config_path, n_bars, cooldown, only_missing=False):
         if str(tv_exchange).upper().startswith("CME"):
             drop_weekdays = {6}
         try:
-            new_norm = normalize_ohlc_frame(df_new, drop_weekdays=drop_weekdays)
+            new_norm = normalize_ohlc_frame(df_new, drop_weekdays=drop_weekdays, drop_flat=True)
         except ValueError as exc:
             print(f"   -> Skipped {tv_symbol}: {exc}")
             time.sleep(item_cooldown)
@@ -161,7 +164,7 @@ def update_daily_csvs(config_path, n_bars, cooldown, only_missing=False):
                 continue
             try:
                 existing = pd.read_csv(file_path)
-                existing_norm = normalize_ohlc_frame(existing, drop_weekdays=drop_weekdays)
+                existing_norm = normalize_ohlc_frame(existing, drop_weekdays=drop_weekdays, drop_flat=True)
                 existing_rows = len(existing_norm)
             except Exception as exc:
                 # Avoid clobbering history if the existing file cannot be parsed.
@@ -265,7 +268,7 @@ def write_ohlcv_json(assets, output_dir):
             df = pd.read_csv(file_path)
             basename = os.path.basename(file_path)
             drop_weekdays = {6} if basename.startswith(("CME_", "CME_MINI_")) else None
-            normalized = normalize_ohlc_frame(df, drop_weekdays=drop_weekdays)
+            normalized = normalize_ohlc_frame(df, drop_weekdays=drop_weekdays, drop_flat=True)
         except Exception as exc:
             print(f"   -> Skipped {symbol}: {exc}")
             continue
@@ -275,6 +278,33 @@ def write_ohlcv_json(assets, output_dir):
         with open(out_path, "w") as f:
             json.dump(records, f, indent=2)
         print(f"   -> Wrote OHLCV JSON {symbol} ({len(records)} rows)")
+
+
+def clean_ohlcv_dir(ohlcv_dir):
+    import pandas as pd
+    from pathlib import Path
+
+    root = Path(ohlcv_dir)
+    if not root.exists():
+        raise FileNotFoundError(f"OHLCV directory not found: {ohlcv_dir}")
+
+    files = sorted(root.glob("*.csv"))
+    if not files:
+        raise RuntimeError(f"No CSV files found in {ohlcv_dir}")
+
+    for path in files:
+        try:
+            df = pd.read_csv(path)
+            drop_weekdays = {6} if path.name.startswith(("CME_", "CME_MINI_")) else None
+            cleaned = normalize_ohlc_frame(df, drop_weekdays=drop_weekdays, drop_flat=True)
+        except Exception as exc:
+            print(f"   -> Skipped {path.name}: {exc}")
+            continue
+
+        before = len(df)
+        after = len(cleaned)
+        cleaned.to_csv(path, index=False)
+        print(f"   -> Cleaned {path.name}: {before} -> {after}")
 
 
 def write_symbol_level_files(output_dir):
@@ -339,6 +369,8 @@ def main():
     parser.add_argument("--upload", action="store_true", help="Upload JSON files to Wasabi.")
     parser.add_argument("--skip-analysis", action="store_true", help="Skip analysis and only upload.")
     parser.add_argument("--write-ohlcv", action="store_true", help="Write OHLCV JSON files from CSVs.")
+    parser.add_argument("--clean-ohlcv", action="store_true", help="Clean OHLCV CSVs by dropping flat candles.")
+    parser.add_argument("--ohlcv-dir", default=DEFAULT_OHLCV_DIR, help="Directory containing OHLCV CSVs.")
     parser.add_argument("--dry-run", action="store_true", help="Show upload actions without sending files.")
     parser.add_argument("--log-file", default="", help="Write stdout/stderr to this file.")
 
@@ -369,6 +401,9 @@ def main():
             cooldown=float(args.download_cooldown),
             only_missing=args.download_only_missing,
         )
+
+    if args.clean_ohlcv:
+        clean_ohlcv_dir(args.ohlcv_dir)
 
     assets_path = args.assets
     if not os.path.exists(assets_path):

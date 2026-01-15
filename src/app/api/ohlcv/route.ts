@@ -112,6 +112,9 @@ function parseCsvOhlcv(csv: string): OhlcvRow[] {
     if (!time || !Number.isFinite(open) || !Number.isFinite(high) || !Number.isFinite(low) || !Number.isFinite(close)) {
       continue;
     }
+    if (open === high && open === low && open === close) {
+      continue;
+    }
     out.push({ time, open, high, low, close });
   }
   return out;
