@@ -16,8 +16,8 @@ const WASABI_PREFIX = (process.env.WASABI_PREFIX || "levels").replace(/^\/+|\/+$
 const WASABI_OHLCV_DIR = "ohlcv/symbols";
 const SYMBOL_ALIASES: Record<string, string> = {
   BTCUSD: "BTC",
-  "CL1!": "CL",
-  "GC1!": "GC",
+  CL: "CL1!",
+  GC: "GC1!",
 };
 
 async function readJsonFile<T>(filePath: string): Promise<T> {

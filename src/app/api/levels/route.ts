@@ -26,8 +26,8 @@ const ASSETS_PATH = path.join(process.cwd(), "backend", "assets.json");
 const ASSETS_BASE_DIR = path.join(process.cwd(), "backend");
 const OHLCV_ALIASES: Record<string, string> = {
   BTCUSD: "BTC",
-  "CL1!": "CL",
-  "GC1!": "GC",
+  CL: "CL1!",
+  GC: "GC1!",
   NQ: "NQ1!",
 };
 
@@ -424,10 +424,8 @@ export async function GET(req: NextRequest) {
   // Map symbols to the consolidated levels file
   const symbolMap: Record<string, string> = {
     BTCUSD: "BTC",
-    "CL1!": "CL",
-    CL: "CL",
-    "GC1!": "GC",
-    GC: "GC",
+    CL: "CL1!",
+    GC: "GC1!",
     SPX: "SPX",
   };
 

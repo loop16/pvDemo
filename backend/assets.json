@@ -12,11 +12,11 @@
     "file_path": "../Daily data csv/BTC_1D.csv"
   },
   {
-    "asset_name": "CL",
+    "asset_name": "CL1!",
     "file_path": "../Daily data csv/NYMEX_CL1!, 1D.csv"
   },
   {
-    "asset_name": "GC",
+    "asset_name": "GC1!",
     "file_path": "../Daily data csv/COMEX_GC1!, 1D.csv"
   },
   {

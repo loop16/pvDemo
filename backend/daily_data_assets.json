@@ -28,13 +28,13 @@
     ]
   },
   {
-    "asset_name": "CL",
+    "asset_name": "CL1!",
     "file_path": "../Daily data csv/NYMEX_CL1!, 1D.csv",
     "tv_symbol": "CL1!",
     "tv_exchange": "NYMEX"
   },
   {
-    "asset_name": "GC",
+    "asset_name": "GC1!",
     "file_path": "../Daily data csv/COMEX_GC1!, 1D.csv",
     "tv_symbol": "GC1!",
     "tv_exchange": "COMEX"
