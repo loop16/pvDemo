@@ -7,7 +7,7 @@ import { normalizeBars } from "@/utils/normalize";
 
 type OutcomeKey = 'AUTO' | 'LONG_TRUE' | 'LONG_FALSE' | 'SHORT_TRUE' | 'SHORT_FALSE' | 'NONE';
 
-const AVAILABLE_SYMBOLS = ["NQ", "BTCUSD", "CL", "GC", "SPX"];
+type SymbolEntry = { id: string; label: string };
 
 export default function AppPage() {
   const [symbol, setSymbol] = useState("SPX");
@@ -22,9 +22,10 @@ export default function AppPage() {
   const [selectedOutcome, setSelectedOutcome] = useState<OutcomeKey>('AUTO');
   const [overlaySymbol, setOverlaySymbol] = useState<string | null>(null);
   const [overlayLevels, setOverlayLevels] = useState<any>(null);
+  const [availableSymbols, setAvailableSymbols] = useState<SymbolEntry[]>([]);
 
   async function fetchBars(sym: string) {
-    const res = await fetch(`/api/ohlcv?symbol=${encodeURIComponent(sym)}&range=max`, { cache: 'no-store' });
+    const res = await fetch(`/api/ohlcv?symbol=${encodeURIComponent(sym)}&range=max&source=live`, { cache: 'no-store' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const raw = await res.json();
     return normalizeBars(raw); // ensures correct shape & time
@@ -37,16 +38,18 @@ export default function AppPage() {
   }
 
   const handleLoad = async (newSymbol: string) => {
-    if (!AVAILABLE_SYMBOLS.includes(newSymbol.toUpperCase())) {
-      setError(`Symbol ${newSymbol} not supported. Available: ${AVAILABLE_SYMBOLS.join(', ')}`);
+    const nextSymbol = newSymbol.toUpperCase().trim();
+    if (availableSymbols.length && !availableSymbols.some((s) => s.id.toUpperCase() === nextSymbol)) {
+      const preview = availableSymbols.slice(0, 10).map((s) => s.id).join(", ");
+      setError(`Symbol ${newSymbol} not supported. Available: ${preview}${availableSymbols.length > 10 ? "..." : ""}`);
       return;
     }
 
-    setSymbol(newSymbol.toUpperCase());
+    setSymbol(nextSymbol);
     setLoading(true); 
     setError(null);
     try {
-      const data = await fetchBars(newSymbol.trim());
+      const data = await fetchBars(nextSymbol);
       setBars(data);
       // compute metrics: last close and 24h change vs prior close
       if (data.length >= 2) {
@@ -101,10 +104,17 @@ export default function AppPage() {
     handleLoad("SPX");
   }, []);
 
+  useEffect(() => {
+    fetch("/api/symbols?source=live")
+      .then((res) => res.json())
+      .then((data: SymbolEntry[]) => setAvailableSymbols(Array.isArray(data) ? data : []))
+      .catch(() => setAvailableSymbols([]));
+  }, []);
+
   return (
     <div className="app">
       <header className="header">
-        <Toolbar onLoad={handleLoad} />
+        <Toolbar onLoad={handleLoad} symbolsSource="live" />
       </header>
 
       <main className="chart-area">
@@ -130,9 +140,9 @@ export default function AppPage() {
           onOutcomeChange={setSelectedOutcome}
           onOverlaySelect={handleOverlaySelect}
           overlaySymbol={overlaySymbol}
+          symbolsSource="live"
         />
       </aside>
     </div>
   );
 }
-

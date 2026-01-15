@@ -2,22 +2,29 @@
 
 import { useState, useRef, useEffect } from 'react';
 
-const AVAILABLE_SYMBOLS = [
-  { id: "NQ", label: "Nasdaq 100 E-mini (NQ)" },
-  { id: "BTCUSD", label: "Bitcoin (BTC/USD)" },
-  { id: "CL", label: "Crude Oil (CL)" },
-  { id: "GC", label: "Gold (GC)" },
-  { id: "SPX", label: "S&P 500 Index (SPX)" }
-];
+type SymbolEntry = { id: string; label: string };
 
-export function Toolbar({ onLoad }: { onLoad: (symbol: string)=>void }) {
+export function Toolbar({ onLoad, symbolsSource = "live", symbolsOverride }: { 
+  onLoad: (symbol: string)=>void;
+  symbolsSource?: "demo" | "live";
+  symbolsOverride?: SymbolEntry[];
+}) {
   const [query, setQuery] = useState('SPX');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
+  const [symbols, setSymbols] = useState<SymbolEntry[]>(symbolsOverride ?? []);
 
-  const filteredSymbols = AVAILABLE_SYMBOLS.filter(symbol =>
+  useEffect(() => {
+    if (symbolsOverride && symbolsOverride.length) return;
+    fetch(`/api/symbols?source=${symbolsSource}`)
+      .then((res) => res.json())
+      .then((data: SymbolEntry[]) => setSymbols(Array.isArray(data) ? data : []))
+      .catch(() => setSymbols([]));
+  }, [symbolsOverride, symbolsSource]);
+
+  const filteredSymbols = symbols.filter(symbol =>
     symbol.id.toLowerCase().includes(query.toLowerCase()) ||
     symbol.label.toLowerCase().includes(query.toLowerCase())
   );
@@ -66,7 +73,7 @@ export function Toolbar({ onLoad }: { onLoad: (symbol: string)=>void }) {
     }
   };
 
-  const handleSuggestionClick = (symbol: typeof AVAILABLE_SYMBOLS[0]) => {
+  const handleSuggestionClick = (symbol: SymbolEntry) => {
     setQuery(symbol.id);
     setShowSuggestions(false);
     onLoad(symbol.id);

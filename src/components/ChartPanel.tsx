@@ -13,6 +13,13 @@ function hexA(hex: string, a = 1) {
   return `rgba(${r},${g},${b},${a})`;
 }
 
+function isTypingTarget(target: EventTarget | null) {
+  if (!target || !(target as HTMLElement).closest) return false;
+  const el = target as HTMLElement;
+  if (el.isContentEditable) return true;
+  return Boolean(el.closest("input, textarea, [contenteditable='true'], [contenteditable='']"));
+}
+
 // ============================================================================
 // TYPE DEFINITIONS
 // ============================================================================
@@ -152,7 +159,7 @@ function quarterLeftTime(t1: UTCTimestamp, bars: { time: UTCTimestamp }[], offse
 // MAIN COMPONENT
 // ============================================================================
 
-export default function ChartPanel({ data, symbol, onQuarterLevels, selectedModel, selectedOutcome, overlaySymbol, overlayLevels }: { 
+export default function ChartPanel({ data, symbol, onQuarterLevels, selectedModel, selectedOutcome, overlaySymbol, overlayLevels, levelsSource = 'live' }: { 
   data: Candle[]; 
   symbol?: string; 
   onQuarterLevels?: (l:{upper20:number;upper50:number;upper80:number;lower20:number;lower50:number;lower80:number})=>void;
@@ -160,6 +167,7 @@ export default function ChartPanel({ data, symbol, onQuarterLevels, selectedMode
   selectedOutcome?: OutcomeKey;
   overlaySymbol?: string | null;
   overlayLevels?: any;
+  levelsSource?: 'demo' | 'live';
 }) {
   // ============================================================================
   // REFS AND STATE
@@ -1072,6 +1080,7 @@ export default function ChartPanel({ data, symbol, onQuarterLevels, selectedMode
   // Keyboard shortcut: R to reset view
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (isTypingTarget(e.target)) return;
       if (e.key && e.key.toLowerCase() === 'r') {
         e.preventDefault();
         resetView();
@@ -1126,7 +1135,8 @@ export default function ChartPanel({ data, symbol, onQuarterLevels, selectedMode
             lines = overlayLevels?.daily?.lines ?? [];
           } else {
             // Use current symbol levels for simple/pro modes
-            const res = await fetch(`/api/levels?symbol=${encodeURIComponent(symbol)}&model=${selectedModel}`, { cache: 'no-store' });
+            const sourceParam = levelsSource === 'demo' ? '&source=demo' : '';
+            const res = await fetch(`/api/levels?symbol=${encodeURIComponent(symbol)}&model=${selectedModel}${sourceParam}`, { cache: 'no-store' });
             if (requestTokenRef.current === token && res.ok) {
               const lvl: LevelsResponse = await res.json();
               lines = lvl?.daily?.lines ?? [];
@@ -1427,6 +1437,7 @@ export default function ChartPanel({ data, symbol, onQuarterLevels, selectedMode
   // keyboard shortcut (L)
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (isTypingTarget(e.target)) return;
       if (e.key.toLowerCase() === 'l') { e.preventDefault(); toggleYMode(); }
     };
     window.addEventListener('keydown', onKey);

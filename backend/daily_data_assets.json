@@ -1,0 +1,6191 @@
+[
+  {
+    "asset_name": "SPX",
+    "file_path": "../Daily data csv/SPX_1D.csv",
+    "tv_symbol": "SPX",
+    "tv_exchange": [
+      "CBOE",
+      "TVC"
+    ]
+  },
+  {
+    "asset_name": "NDX",
+    "file_path": "../Daily data csv/NDX_1D.csv",
+    "tv_symbol": "NDX",
+    "tv_exchange": [
+      "NASDAQ",
+      "TVC"
+    ]
+  },
+  {
+    "asset_name": "BTC",
+    "file_path": "../Daily data csv/BTC_1D.csv",
+    "tv_symbol": "BTCUSDT",
+    "tv_exchange": [
+      "BINANCE",
+      "BINANCEUS",
+      "COINBASE"
+    ]
+  },
+  {
+    "asset_name": "CL",
+    "file_path": "../Daily data csv/CL_1D.csv",
+    "tv_symbol": "CL1!",
+    "tv_exchange": "NYMEX"
+  },
+  {
+    "asset_name": "GC",
+    "file_path": "../Daily data csv/GC_1D.csv",
+    "tv_symbol": "GC1!",
+    "tv_exchange": "COMEX"
+  },
+  {
+    "asset_name": "ES1!",
+    "file_path": "../Daily data csv/CME_MINI_ES1!, 1D.csv",
+    "tv_symbol": "ES1!",
+    "tv_exchange": "CME_MINI"
+  },
+  {
+    "asset_name": "NQ1!",
+    "file_path": "../Daily data csv/CME_MINI_NQ1!, 1D.csv",
+    "tv_symbol": "NQ1!",
+    "tv_exchange": "CME_MINI"
+  },
+  {
+    "asset_name": "YM1!",
+    "file_path": "../Daily data csv/CBOT_MINI_YM1!, 1D.csv",
+    "tv_symbol": "YM1!",
+    "tv_exchange": "CBOT"
+  },
+  {
+    "asset_name": "ZB1!",
+    "file_path": "../Daily data csv/CBOT_ZB1!, 1D.csv",
+    "tv_symbol": "ZB1!",
+    "tv_exchange": "CBOT"
+  },
+  {
+    "asset_name": "ZC1!",
+    "file_path": "../Daily data csv/CBOT_ZC1!, 1D.csv",
+    "tv_symbol": "ZC1!",
+    "tv_exchange": "CBOT"
+  },
+  {
+    "asset_name": "ZN1!",
+    "file_path": "../Daily data csv/CBOT_ZN1!, 1D.csv",
+    "tv_symbol": "ZN1!",
+    "tv_exchange": "CBOT"
+  },
+  {
+    "asset_name": "ZS1!",
+    "file_path": "../Daily data csv/CBOT_ZS1!, 1D.csv",
+    "tv_symbol": "ZS1!",
+    "tv_exchange": "CBOT"
+  },
+  {
+    "asset_name": "ZW1!",
+    "file_path": "../Daily data csv/CBOT_ZW1!, 1D.csv",
+    "tv_symbol": "ZW1!",
+    "tv_exchange": "CBOT"
+  },
+  {
+    "asset_name": "6E1!",
+    "file_path": "../Daily data csv/CME_6E1!, 1D.csv",
+    "tv_symbol": "6E1!",
+    "tv_exchange": "CME"
+  },
+  {
+    "asset_name": "6J1!",
+    "file_path": "../Daily data csv/CME_6J1!, 1D.csv",
+    "tv_symbol": "6J1!",
+    "tv_exchange": "CME"
+  },
+  {
+    "asset_name": "GF1!",
+    "file_path": "../Daily data csv/CME_GF1!, 1D.csv",
+    "tv_symbol": "GF1!",
+    "tv_exchange": "CME"
+  },
+  {
+    "asset_name": "LE1!",
+    "file_path": "../Daily data csv/CME_LE1!, 1D.csv",
+    "tv_symbol": "LE1!",
+    "tv_exchange": "CME"
+  },
+  {
+    "asset_name": "NG1!",
+    "file_path": "../Daily data csv/NYMEX_NG1!, 1D.csv",
+    "tv_symbol": "NG1!",
+    "tv_exchange": "NYMEX"
+  },
+  {
+    "asset_name": "PL1!",
+    "file_path": "../Daily data csv/NYMEX_PL1!, 1D.csv",
+    "tv_symbol": "PL1!",
+    "tv_exchange": "NYMEX"
+  },
+  {
+    "asset_name": "SI1!",
+    "file_path": "../Daily data csv/COMEX_SI1!, 1D.csv",
+    "tv_symbol": "SI1!",
+    "tv_exchange": "COMEX"
+  },
+  {
+    "asset_name": "EURUSD",
+    "file_path": "../Daily data csv/FX_IDC_EURUSD, 1D.csv",
+    "tv_symbol": "EURUSD",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "HSI",
+    "file_path": "../Daily data csv/HSI_HSI, 1D.csv",
+    "tv_symbol": "HSI",
+    "tv_exchange": [
+      "HSI",
+      "TVC"
+    ]
+  },
+  {
+    "asset_name": "CC1!",
+    "file_path": "../Daily data csv/ICEUS_DLY_CC1!, 1D.csv",
+    "tv_symbol": "CC1!",
+    "tv_exchange": "ICEUS"
+  },
+  {
+    "asset_name": "CT1!",
+    "file_path": "../Daily data csv/ICEUS_DLY_CT1!, 1D.csv",
+    "tv_symbol": "CT1!",
+    "tv_exchange": "ICEUS"
+  },
+  {
+    "asset_name": "KC1!",
+    "file_path": "../Daily data csv/ICEUS_DLY_KC1!, 1D.csv",
+    "tv_symbol": "KC1!",
+    "tv_exchange": "ICEUS"
+  },
+  {
+    "asset_name": "SB1!",
+    "file_path": "../Daily data csv/ICEUS_DLY_SB1!, 1D.csv",
+    "tv_symbol": "SB1!",
+    "tv_exchange": "ICEUS"
+  },
+  {
+    "asset_name": "RTY1!",
+    "file_path": "../Daily data csv/FUTURES_RTY1!, 1D.csv",
+    "tv_symbol": "RTY1!",
+    "tv_exchange": "CME_MINI"
+  },
+  {
+    "asset_name": "HG1!",
+    "file_path": "../Daily data csv/FUTURES_HG1!, 1D.csv",
+    "tv_symbol": "HG1!",
+    "tv_exchange": "COMEX"
+  },
+  {
+    "asset_name": "ZF1!",
+    "file_path": "../Daily data csv/FUTURES_ZF1!, 1D.csv",
+    "tv_symbol": "ZF1!",
+    "tv_exchange": "CBOT"
+  },
+  {
+    "asset_name": "ZT1!",
+    "file_path": "../Daily data csv/FUTURES_ZT1!, 1D.csv",
+    "tv_symbol": "ZT1!",
+    "tv_exchange": "CBOT"
+  },
+  {
+    "asset_name": "HE1!",
+    "file_path": "../Daily data csv/FUTURES_HE1!, 1D.csv",
+    "tv_symbol": "HE1!",
+    "tv_exchange": "CME"
+  },
+  {
+    "asset_name": "6B1!",
+    "file_path": "../Daily data csv/FUTURES_6B1!, 1D.csv",
+    "tv_symbol": "6B1!",
+    "tv_exchange": "CME"
+  },
+  {
+    "asset_name": "6A1!",
+    "file_path": "../Daily data csv/FUTURES_6A1!, 1D.csv",
+    "tv_symbol": "6A1!",
+    "tv_exchange": "CME"
+  },
+  {
+    "asset_name": "6C1!",
+    "file_path": "../Daily data csv/FUTURES_6C1!, 1D.csv",
+    "tv_symbol": "6C1!",
+    "tv_exchange": "CME"
+  },
+  {
+    "asset_name": "6N1!",
+    "file_path": "../Daily data csv/FUTURES_6N1!, 1D.csv",
+    "tv_symbol": "6N1!",
+    "tv_exchange": "CME"
+  },
+  {
+    "asset_name": "DX1!",
+    "file_path": "../Daily data csv/FUTURES_DX1!, 1D.csv",
+    "tv_symbol": "DX1!",
+    "tv_exchange": "ICEUS"
+  },
+  {
+    "asset_name": "ETHUSDT",
+    "file_path": "../Daily data csv/CRYPTO_ETHUSDT, 1D.csv",
+    "tv_symbol": "ETHUSDT",
+    "tv_exchange": [
+      "BINANCE",
+      "BINANCEUS",
+      "COINBASE"
+    ]
+  },
+  {
+    "asset_name": "BNBUSDT",
+    "file_path": "../Daily data csv/CRYPTO_BNBUSDT, 1D.csv",
+    "tv_symbol": "BNBUSDT",
+    "tv_exchange": [
+      "BINANCE",
+      "BINANCEUS"
+    ]
+  },
+  {
+    "asset_name": "SOLUSDT",
+    "file_path": "../Daily data csv/CRYPTO_SOLUSDT, 1D.csv",
+    "tv_symbol": "SOLUSDT",
+    "tv_exchange": [
+      "BINANCE",
+      "BINANCEUS"
+    ]
+  },
+  {
+    "asset_name": "XRPUSDT",
+    "file_path": "../Daily data csv/CRYPTO_XRPUSDT, 1D.csv",
+    "tv_symbol": "XRPUSDT",
+    "tv_exchange": [
+      "BINANCE",
+      "BINANCEUS"
+    ]
+  },
+  {
+    "asset_name": "DOGEUSDT",
+    "file_path": "../Daily data csv/CRYPTO_DOGEUSDT, 1D.csv",
+    "tv_symbol": "DOGEUSDT",
+    "tv_exchange": [
+      "BINANCE",
+      "BINANCEUS"
+    ]
+  },
+  {
+    "asset_name": "ADAUSDT",
+    "file_path": "../Daily data csv/CRYPTO_ADAUSDT, 1D.csv",
+    "tv_symbol": "ADAUSDT",
+    "tv_exchange": [
+      "BINANCE",
+      "BINANCEUS"
+    ]
+  },
+  {
+    "asset_name": "TRXUSDT",
+    "file_path": "../Daily data csv/CRYPTO_TRXUSDT, 1D.csv",
+    "tv_symbol": "TRXUSDT",
+    "tv_exchange": [
+      "BINANCE"
+    ]
+  },
+  {
+    "asset_name": "AVAXUSDT",
+    "file_path": "../Daily data csv/CRYPTO_AVAXUSDT, 1D.csv",
+    "tv_symbol": "AVAXUSDT",
+    "tv_exchange": [
+      "BINANCE"
+    ]
+  },
+  {
+    "asset_name": "LINKUSDT",
+    "file_path": "../Daily data csv/CRYPTO_LINKUSDT, 1D.csv",
+    "tv_symbol": "LINKUSDT",
+    "tv_exchange": [
+      "BINANCE",
+      "BINANCEUS"
+    ]
+  },
+  {
+    "asset_name": "MATICUSDT",
+    "file_path": "../Daily data csv/CRYPTO_MATICUSDT, 1D.csv",
+    "tv_symbol": "MATICUSDT",
+    "tv_exchange": [
+      "BINANCE",
+      "BINANCEUS"
+    ]
+  },
+  {
+    "asset_name": "LTCUSDT",
+    "file_path": "../Daily data csv/CRYPTO_LTCUSDT, 1D.csv",
+    "tv_symbol": "LTCUSDT",
+    "tv_exchange": [
+      "BINANCE",
+      "BINANCEUS"
+    ]
+  },
+  {
+    "asset_name": "BCHUSDT",
+    "file_path": "../Daily data csv/CRYPTO_BCHUSDT, 1D.csv",
+    "tv_symbol": "BCHUSDT",
+    "tv_exchange": [
+      "BINANCE",
+      "BINANCEUS"
+    ]
+  },
+  {
+    "asset_name": "DOTUSDT",
+    "file_path": "../Daily data csv/CRYPTO_DOTUSDT, 1D.csv",
+    "tv_symbol": "DOTUSDT",
+    "tv_exchange": [
+      "BINANCE"
+    ]
+  },
+  {
+    "asset_name": "UNIUSDT",
+    "file_path": "../Daily data csv/CRYPTO_UNIUSDT, 1D.csv",
+    "tv_symbol": "UNIUSDT",
+    "tv_exchange": [
+      "BINANCE",
+      "BINANCEUS"
+    ]
+  },
+  {
+    "asset_name": "XLMUSDT",
+    "file_path": "../Daily data csv/CRYPTO_XLMUSDT, 1D.csv",
+    "tv_symbol": "XLMUSDT",
+    "tv_exchange": [
+      "BINANCE",
+      "BINANCEUS"
+    ]
+  },
+  {
+    "asset_name": "ATOMUSDT",
+    "file_path": "../Daily data csv/CRYPTO_ATOMUSDT, 1D.csv",
+    "tv_symbol": "ATOMUSDT",
+    "tv_exchange": [
+      "BINANCE"
+    ]
+  },
+  {
+    "asset_name": "ETCUSDT",
+    "file_path": "../Daily data csv/CRYPTO_ETCUSDT, 1D.csv",
+    "tv_symbol": "ETCUSDT",
+    "tv_exchange": [
+      "BINANCE",
+      "BINANCEUS"
+    ]
+  },
+  {
+    "asset_name": "FILUSDT",
+    "file_path": "../Daily data csv/CRYPTO_FILUSDT, 1D.csv",
+    "tv_symbol": "FILUSDT",
+    "tv_exchange": [
+      "BINANCE"
+    ]
+  },
+  {
+    "asset_name": "APTUSDT",
+    "file_path": "../Daily data csv/CRYPTO_APTUSDT, 1D.csv",
+    "tv_symbol": "APTUSDT",
+    "tv_exchange": [
+      "BINANCE"
+    ]
+  },
+  {
+    "asset_name": "USDJPY",
+    "file_path": "../Daily data csv/FX_USDJPY, 1D.csv",
+    "tv_symbol": "USDJPY",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "GBPUSD",
+    "file_path": "../Daily data csv/FX_GBPUSD, 1D.csv",
+    "tv_symbol": "GBPUSD",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "AUDUSD",
+    "file_path": "../Daily data csv/FX_AUDUSD, 1D.csv",
+    "tv_symbol": "AUDUSD",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "USDCAD",
+    "file_path": "../Daily data csv/FX_USDCAD, 1D.csv",
+    "tv_symbol": "USDCAD",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "USDCHF",
+    "file_path": "../Daily data csv/FX_USDCHF, 1D.csv",
+    "tv_symbol": "USDCHF",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "NZDUSD",
+    "file_path": "../Daily data csv/FX_NZDUSD, 1D.csv",
+    "tv_symbol": "NZDUSD",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "EURJPY",
+    "file_path": "../Daily data csv/FX_EURJPY, 1D.csv",
+    "tv_symbol": "EURJPY",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "EURGBP",
+    "file_path": "../Daily data csv/FX_EURGBP, 1D.csv",
+    "tv_symbol": "EURGBP",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "EURCHF",
+    "file_path": "../Daily data csv/FX_EURCHF, 1D.csv",
+    "tv_symbol": "EURCHF",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "EURAUD",
+    "file_path": "../Daily data csv/FX_EURAUD, 1D.csv",
+    "tv_symbol": "EURAUD",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "EURCAD",
+    "file_path": "../Daily data csv/FX_EURCAD, 1D.csv",
+    "tv_symbol": "EURCAD",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "GBPJPY",
+    "file_path": "../Daily data csv/FX_GBPJPY, 1D.csv",
+    "tv_symbol": "GBPJPY",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "GBPCHF",
+    "file_path": "../Daily data csv/FX_GBPCHF, 1D.csv",
+    "tv_symbol": "GBPCHF",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "AUDJPY",
+    "file_path": "../Daily data csv/FX_AUDJPY, 1D.csv",
+    "tv_symbol": "AUDJPY",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "CADJPY",
+    "file_path": "../Daily data csv/FX_CADJPY, 1D.csv",
+    "tv_symbol": "CADJPY",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "CHFJPY",
+    "file_path": "../Daily data csv/FX_CHFJPY, 1D.csv",
+    "tv_symbol": "CHFJPY",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "AUDNZD",
+    "file_path": "../Daily data csv/FX_AUDNZD, 1D.csv",
+    "tv_symbol": "AUDNZD",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "AUDCAD",
+    "file_path": "../Daily data csv/FX_AUDCAD, 1D.csv",
+    "tv_symbol": "AUDCAD",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "NZDJPY",
+    "file_path": "../Daily data csv/FX_NZDJPY, 1D.csv",
+    "tv_symbol": "NZDJPY",
+    "tv_exchange": [
+      "FX_IDC",
+      "OANDA"
+    ]
+  },
+  {
+    "asset_name": "DJI",
+    "file_path": "../Daily data csv/INDEX_DJI, 1D.csv",
+    "tv_symbol": "DJI",
+    "tv_exchange": [
+      "DJI",
+      "TVC"
+    ]
+  },
+  {
+    "asset_name": "RUT",
+    "file_path": "../Daily data csv/INDEX_RUT, 1D.csv",
+    "tv_symbol": "RUT",
+    "tv_exchange": [
+      "CBOE",
+      "TVC"
+    ]
+  },
+  {
+    "asset_name": "VIX",
+    "file_path": "../Daily data csv/INDEX_VIX, 1D.csv",
+    "tv_symbol": "VIX",
+    "tv_exchange": [
+      "CBOE",
+      "TVC"
+    ]
+  },
+  {
+    "asset_name": "HSCEI",
+    "file_path": "../Daily data csv/INDEX_HSCEI, 1D.csv",
+    "tv_symbol": "HSCEI",
+    "tv_exchange": [
+      "HSI",
+      "TVC"
+    ]
+  },
+  {
+    "asset_name": "UKX",
+    "file_path": "../Daily data csv/INDEX_UKX, 1D.csv",
+    "tv_symbol": "UKX",
+    "tv_exchange": [
+      "TVC",
+      "LSE"
+    ]
+  },
+  {
+    "asset_name": "DAX",
+    "file_path": "../Daily data csv/INDEX_DAX, 1D.csv",
+    "tv_symbol": "DAX",
+    "tv_exchange": [
+      "XETR",
+      "TVC"
+    ]
+  },
+  {
+    "asset_name": "CAC40",
+    "file_path": "../Daily data csv/INDEX_CAC40, 1D.csv",
+    "tv_symbol": "CAC40",
+    "tv_exchange": [
+      "EURONEXT",
+      "TVC"
+    ]
+  },
+  {
+    "asset_name": "EU50",
+    "file_path": "../Daily data csv/INDEX_EU50, 1D.csv",
+    "tv_symbol": "EU50",
+    "tv_exchange": [
+      "TVC",
+      "EUREX"
+    ]
+  },
+  {
+    "asset_name": "IBEX",
+    "file_path": "../Daily data csv/INDEX_IBEX, 1D.csv",
+    "tv_symbol": "IBEX",
+    "tv_exchange": [
+      "BME",
+      "TVC"
+    ]
+  },
+  {
+    "asset_name": "SMI",
+    "file_path": "../Daily data csv/INDEX_SMI, 1D.csv",
+    "tv_symbol": "SMI",
+    "tv_exchange": [
+      "SIX",
+      "TVC"
+    ]
+  },
+  {
+    "asset_name": "AEX",
+    "file_path": "../Daily data csv/INDEX_AEX, 1D.csv",
+    "tv_symbol": "AEX",
+    "tv_exchange": [
+      "EURONEXT",
+      "TVC"
+    ]
+  },
+  {
+    "asset_name": "OMXS30",
+    "file_path": "../Daily data csv/INDEX_OMXS30, 1D.csv",
+    "tv_symbol": "OMXS30",
+    "tv_exchange": [
+      "OMX",
+      "INDEX"
+    ]
+  },
+  {
+    "asset_name": "OMXC25",
+    "file_path": "../Daily data csv/INDEX_OMXC25, 1D.csv",
+    "tv_symbol": "OMXC25",
+    "tv_exchange": [
+      "OMXCOP",
+      "INDEX"
+    ]
+  },
+  {
+    "asset_name": "XJO",
+    "file_path": "../Daily data csv/INDEX_XJO, 1D.csv",
+    "tv_symbol": "XJO",
+    "tv_exchange": [
+      "ASX",
+      "INDEX"
+    ]
+  },
+  {
+    "asset_name": "NI225",
+    "file_path": "../Daily data csv/INDEX_NI225, 1D.csv",
+    "tv_symbol": "NI225",
+    "tv_exchange": [
+      "TVC",
+      "INDEX"
+    ]
+  },
+  {
+    "asset_name": "KOSPI",
+    "file_path": "../Daily data csv/INDEX_KOSPI, 1D.csv",
+    "tv_symbol": "KOSPI",
+    "tv_exchange": [
+      "KRX",
+      "INDEX"
+    ]
+  },
+  {
+    "asset_name": "NIFTY",
+    "file_path": "../Daily data csv/INDEX_NIFTY, 1D.csv",
+    "tv_symbol": "NIFTY",
+    "tv_exchange": [
+      "NSE",
+      "INDEX"
+    ]
+  },
+  {
+    "asset_name": "A",
+    "file_path": "../Daily data csv/SP500_A, 1D.csv",
+    "tv_symbol": "A",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AAPL",
+    "file_path": "../Daily data csv/SP500_AAPL, 1D.csv",
+    "tv_symbol": "AAPL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ABBV",
+    "file_path": "../Daily data csv/SP500_ABBV, 1D.csv",
+    "tv_symbol": "ABBV",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ABNB",
+    "file_path": "../Daily data csv/SP500_ABNB, 1D.csv",
+    "tv_symbol": "ABNB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ABT",
+    "file_path": "../Daily data csv/SP500_ABT, 1D.csv",
+    "tv_symbol": "ABT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ACGL",
+    "file_path": "../Daily data csv/SP500_ACGL, 1D.csv",
+    "tv_symbol": "ACGL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ACN",
+    "file_path": "../Daily data csv/SP500_ACN, 1D.csv",
+    "tv_symbol": "ACN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ADBE",
+    "file_path": "../Daily data csv/SP500_ADBE, 1D.csv",
+    "tv_symbol": "ADBE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ADI",
+    "file_path": "../Daily data csv/SP500_ADI, 1D.csv",
+    "tv_symbol": "ADI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ADM",
+    "file_path": "../Daily data csv/SP500_ADM, 1D.csv",
+    "tv_symbol": "ADM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ADP",
+    "file_path": "../Daily data csv/SP500_ADP, 1D.csv",
+    "tv_symbol": "ADP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ADSK",
+    "file_path": "../Daily data csv/SP500_ADSK, 1D.csv",
+    "tv_symbol": "ADSK",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AEE",
+    "file_path": "../Daily data csv/SP500_AEE, 1D.csv",
+    "tv_symbol": "AEE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AEP",
+    "file_path": "../Daily data csv/SP500_AEP, 1D.csv",
+    "tv_symbol": "AEP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AES",
+    "file_path": "../Daily data csv/SP500_AES, 1D.csv",
+    "tv_symbol": "AES",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AFL",
+    "file_path": "../Daily data csv/SP500_AFL, 1D.csv",
+    "tv_symbol": "AFL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AIG",
+    "file_path": "../Daily data csv/SP500_AIG, 1D.csv",
+    "tv_symbol": "AIG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AIZ",
+    "file_path": "../Daily data csv/SP500_AIZ, 1D.csv",
+    "tv_symbol": "AIZ",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AJG",
+    "file_path": "../Daily data csv/SP500_AJG, 1D.csv",
+    "tv_symbol": "AJG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AKAM",
+    "file_path": "../Daily data csv/SP500_AKAM, 1D.csv",
+    "tv_symbol": "AKAM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ALB",
+    "file_path": "../Daily data csv/SP500_ALB, 1D.csv",
+    "tv_symbol": "ALB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ALGN",
+    "file_path": "../Daily data csv/SP500_ALGN, 1D.csv",
+    "tv_symbol": "ALGN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ALL",
+    "file_path": "../Daily data csv/SP500_ALL, 1D.csv",
+    "tv_symbol": "ALL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ALLE",
+    "file_path": "../Daily data csv/SP500_ALLE, 1D.csv",
+    "tv_symbol": "ALLE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AMAT",
+    "file_path": "../Daily data csv/SP500_AMAT, 1D.csv",
+    "tv_symbol": "AMAT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AMCR",
+    "file_path": "../Daily data csv/SP500_AMCR, 1D.csv",
+    "tv_symbol": "AMCR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AMD",
+    "file_path": "../Daily data csv/SP500_AMD, 1D.csv",
+    "tv_symbol": "AMD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AME",
+    "file_path": "../Daily data csv/SP500_AME, 1D.csv",
+    "tv_symbol": "AME",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AMGN",
+    "file_path": "../Daily data csv/SP500_AMGN, 1D.csv",
+    "tv_symbol": "AMGN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AMP",
+    "file_path": "../Daily data csv/SP500_AMP, 1D.csv",
+    "tv_symbol": "AMP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AMT",
+    "file_path": "../Daily data csv/SP500_AMT, 1D.csv",
+    "tv_symbol": "AMT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AMZN",
+    "file_path": "../Daily data csv/SP500_AMZN, 1D.csv",
+    "tv_symbol": "AMZN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ANET",
+    "file_path": "../Daily data csv/SP500_ANET, 1D.csv",
+    "tv_symbol": "ANET",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AON",
+    "file_path": "../Daily data csv/SP500_AON, 1D.csv",
+    "tv_symbol": "AON",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AOS",
+    "file_path": "../Daily data csv/SP500_AOS, 1D.csv",
+    "tv_symbol": "AOS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "APA",
+    "file_path": "../Daily data csv/SP500_APA, 1D.csv",
+    "tv_symbol": "APA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "APD",
+    "file_path": "../Daily data csv/SP500_APD, 1D.csv",
+    "tv_symbol": "APD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "APH",
+    "file_path": "../Daily data csv/SP500_APH, 1D.csv",
+    "tv_symbol": "APH",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "APO",
+    "file_path": "../Daily data csv/SP500_APO, 1D.csv",
+    "tv_symbol": "APO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "APTV",
+    "file_path": "../Daily data csv/SP500_APTV, 1D.csv",
+    "tv_symbol": "APTV",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ARE",
+    "file_path": "../Daily data csv/SP500_ARE, 1D.csv",
+    "tv_symbol": "ARE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ATO",
+    "file_path": "../Daily data csv/SP500_ATO, 1D.csv",
+    "tv_symbol": "ATO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AVB",
+    "file_path": "../Daily data csv/SP500_AVB, 1D.csv",
+    "tv_symbol": "AVB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AVGO",
+    "file_path": "../Daily data csv/SP500_AVGO, 1D.csv",
+    "tv_symbol": "AVGO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AVY",
+    "file_path": "../Daily data csv/SP500_AVY, 1D.csv",
+    "tv_symbol": "AVY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AWK",
+    "file_path": "../Daily data csv/SP500_AWK, 1D.csv",
+    "tv_symbol": "AWK",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AXON",
+    "file_path": "../Daily data csv/SP500_AXON, 1D.csv",
+    "tv_symbol": "AXON",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AXP",
+    "file_path": "../Daily data csv/SP500_AXP, 1D.csv",
+    "tv_symbol": "AXP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "AZO",
+    "file_path": "../Daily data csv/SP500_AZO, 1D.csv",
+    "tv_symbol": "AZO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BA",
+    "file_path": "../Daily data csv/SP500_BA, 1D.csv",
+    "tv_symbol": "BA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BAC",
+    "file_path": "../Daily data csv/SP500_BAC, 1D.csv",
+    "tv_symbol": "BAC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BALL",
+    "file_path": "../Daily data csv/SP500_BALL, 1D.csv",
+    "tv_symbol": "BALL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BAX",
+    "file_path": "../Daily data csv/SP500_BAX, 1D.csv",
+    "tv_symbol": "BAX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BBY",
+    "file_path": "../Daily data csv/SP500_BBY, 1D.csv",
+    "tv_symbol": "BBY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BDX",
+    "file_path": "../Daily data csv/SP500_BDX, 1D.csv",
+    "tv_symbol": "BDX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BEN",
+    "file_path": "../Daily data csv/SP500_BEN, 1D.csv",
+    "tv_symbol": "BEN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BF.B",
+    "file_path": "../Daily data csv/SP500_BF.B, 1D.csv",
+    "tv_symbol": "BF.B",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BG",
+    "file_path": "../Daily data csv/SP500_BG, 1D.csv",
+    "tv_symbol": "BG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BIIB",
+    "file_path": "../Daily data csv/SP500_BIIB, 1D.csv",
+    "tv_symbol": "BIIB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BK",
+    "file_path": "../Daily data csv/SP500_BK, 1D.csv",
+    "tv_symbol": "BK",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BKNG",
+    "file_path": "../Daily data csv/SP500_BKNG, 1D.csv",
+    "tv_symbol": "BKNG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BKR",
+    "file_path": "../Daily data csv/SP500_BKR, 1D.csv",
+    "tv_symbol": "BKR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BLDR",
+    "file_path": "../Daily data csv/SP500_BLDR, 1D.csv",
+    "tv_symbol": "BLDR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BLK",
+    "file_path": "../Daily data csv/SP500_BLK, 1D.csv",
+    "tv_symbol": "BLK",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BMY",
+    "file_path": "../Daily data csv/SP500_BMY, 1D.csv",
+    "tv_symbol": "BMY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BR",
+    "file_path": "../Daily data csv/SP500_BR, 1D.csv",
+    "tv_symbol": "BR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BRK.B",
+    "file_path": "../Daily data csv/SP500_BRK.B, 1D.csv",
+    "tv_symbol": "BRK.B",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BRO",
+    "file_path": "../Daily data csv/SP500_BRO, 1D.csv",
+    "tv_symbol": "BRO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BSX",
+    "file_path": "../Daily data csv/SP500_BSX, 1D.csv",
+    "tv_symbol": "BSX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BX",
+    "file_path": "../Daily data csv/SP500_BX, 1D.csv",
+    "tv_symbol": "BX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "BXP",
+    "file_path": "../Daily data csv/SP500_BXP, 1D.csv",
+    "tv_symbol": "BXP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "C",
+    "file_path": "../Daily data csv/SP500_C, 1D.csv",
+    "tv_symbol": "C",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CAG",
+    "file_path": "../Daily data csv/SP500_CAG, 1D.csv",
+    "tv_symbol": "CAG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CAH",
+    "file_path": "../Daily data csv/SP500_CAH, 1D.csv",
+    "tv_symbol": "CAH",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CARR",
+    "file_path": "../Daily data csv/SP500_CARR, 1D.csv",
+    "tv_symbol": "CARR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CAT",
+    "file_path": "../Daily data csv/SP500_CAT, 1D.csv",
+    "tv_symbol": "CAT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CB",
+    "file_path": "../Daily data csv/SP500_CB, 1D.csv",
+    "tv_symbol": "CB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CBOE",
+    "file_path": "../Daily data csv/SP500_CBOE, 1D.csv",
+    "tv_symbol": "CBOE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CBRE",
+    "file_path": "../Daily data csv/SP500_CBRE, 1D.csv",
+    "tv_symbol": "CBRE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CCI",
+    "file_path": "../Daily data csv/SP500_CCI, 1D.csv",
+    "tv_symbol": "CCI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CCL",
+    "file_path": "../Daily data csv/SP500_CCL, 1D.csv",
+    "tv_symbol": "CCL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CDNS",
+    "file_path": "../Daily data csv/SP500_CDNS, 1D.csv",
+    "tv_symbol": "CDNS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CDW",
+    "file_path": "../Daily data csv/SP500_CDW, 1D.csv",
+    "tv_symbol": "CDW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CEG",
+    "file_path": "../Daily data csv/SP500_CEG, 1D.csv",
+    "tv_symbol": "CEG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CF",
+    "file_path": "../Daily data csv/SP500_CF, 1D.csv",
+    "tv_symbol": "CF",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CFG",
+    "file_path": "../Daily data csv/SP500_CFG, 1D.csv",
+    "tv_symbol": "CFG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CHD",
+    "file_path": "../Daily data csv/SP500_CHD, 1D.csv",
+    "tv_symbol": "CHD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CHRW",
+    "file_path": "../Daily data csv/SP500_CHRW, 1D.csv",
+    "tv_symbol": "CHRW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CHTR",
+    "file_path": "../Daily data csv/SP500_CHTR, 1D.csv",
+    "tv_symbol": "CHTR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CI",
+    "file_path": "../Daily data csv/SP500_CI, 1D.csv",
+    "tv_symbol": "CI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CINF",
+    "file_path": "../Daily data csv/SP500_CINF, 1D.csv",
+    "tv_symbol": "CINF",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CL",
+    "file_path": "../Daily data csv/SP500_CL, 1D.csv",
+    "tv_symbol": "CL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CLX",
+    "file_path": "../Daily data csv/SP500_CLX, 1D.csv",
+    "tv_symbol": "CLX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CMCSA",
+    "file_path": "../Daily data csv/SP500_CMCSA, 1D.csv",
+    "tv_symbol": "CMCSA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CME",
+    "file_path": "../Daily data csv/SP500_CME, 1D.csv",
+    "tv_symbol": "CME",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CMG",
+    "file_path": "../Daily data csv/SP500_CMG, 1D.csv",
+    "tv_symbol": "CMG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CMI",
+    "file_path": "../Daily data csv/SP500_CMI, 1D.csv",
+    "tv_symbol": "CMI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CMS",
+    "file_path": "../Daily data csv/SP500_CMS, 1D.csv",
+    "tv_symbol": "CMS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CNC",
+    "file_path": "../Daily data csv/SP500_CNC, 1D.csv",
+    "tv_symbol": "CNC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CNP",
+    "file_path": "../Daily data csv/SP500_CNP, 1D.csv",
+    "tv_symbol": "CNP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "COF",
+    "file_path": "../Daily data csv/SP500_COF, 1D.csv",
+    "tv_symbol": "COF",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "COIN",
+    "file_path": "../Daily data csv/SP500_COIN, 1D.csv",
+    "tv_symbol": "COIN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "COO",
+    "file_path": "../Daily data csv/SP500_COO, 1D.csv",
+    "tv_symbol": "COO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "COP",
+    "file_path": "../Daily data csv/SP500_COP, 1D.csv",
+    "tv_symbol": "COP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "COR",
+    "file_path": "../Daily data csv/SP500_COR, 1D.csv",
+    "tv_symbol": "COR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "COST",
+    "file_path": "../Daily data csv/SP500_COST, 1D.csv",
+    "tv_symbol": "COST",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CPAY",
+    "file_path": "../Daily data csv/SP500_CPAY, 1D.csv",
+    "tv_symbol": "CPAY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CPB",
+    "file_path": "../Daily data csv/SP500_CPB, 1D.csv",
+    "tv_symbol": "CPB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CPRT",
+    "file_path": "../Daily data csv/SP500_CPRT, 1D.csv",
+    "tv_symbol": "CPRT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CPT",
+    "file_path": "../Daily data csv/SP500_CPT, 1D.csv",
+    "tv_symbol": "CPT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CRL",
+    "file_path": "../Daily data csv/SP500_CRL, 1D.csv",
+    "tv_symbol": "CRL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CRM",
+    "file_path": "../Daily data csv/SP500_CRM, 1D.csv",
+    "tv_symbol": "CRM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CRWD",
+    "file_path": "../Daily data csv/SP500_CRWD, 1D.csv",
+    "tv_symbol": "CRWD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CSCO",
+    "file_path": "../Daily data csv/SP500_CSCO, 1D.csv",
+    "tv_symbol": "CSCO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CSGP",
+    "file_path": "../Daily data csv/SP500_CSGP, 1D.csv",
+    "tv_symbol": "CSGP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CSX",
+    "file_path": "../Daily data csv/SP500_CSX, 1D.csv",
+    "tv_symbol": "CSX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CTAS",
+    "file_path": "../Daily data csv/SP500_CTAS, 1D.csv",
+    "tv_symbol": "CTAS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CTRA",
+    "file_path": "../Daily data csv/SP500_CTRA, 1D.csv",
+    "tv_symbol": "CTRA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CTSH",
+    "file_path": "../Daily data csv/SP500_CTSH, 1D.csv",
+    "tv_symbol": "CTSH",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CTVA",
+    "file_path": "../Daily data csv/SP500_CTVA, 1D.csv",
+    "tv_symbol": "CTVA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CVS",
+    "file_path": "../Daily data csv/SP500_CVS, 1D.csv",
+    "tv_symbol": "CVS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CVX",
+    "file_path": "../Daily data csv/SP500_CVX, 1D.csv",
+    "tv_symbol": "CVX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "CZR",
+    "file_path": "../Daily data csv/SP500_CZR, 1D.csv",
+    "tv_symbol": "CZR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "D",
+    "file_path": "../Daily data csv/SP500_D, 1D.csv",
+    "tv_symbol": "D",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DAL",
+    "file_path": "../Daily data csv/SP500_DAL, 1D.csv",
+    "tv_symbol": "DAL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DASH",
+    "file_path": "../Daily data csv/SP500_DASH, 1D.csv",
+    "tv_symbol": "DASH",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DAY",
+    "file_path": "../Daily data csv/SP500_DAY, 1D.csv",
+    "tv_symbol": "DAY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DD",
+    "file_path": "../Daily data csv/SP500_DD, 1D.csv",
+    "tv_symbol": "DD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DDOG",
+    "file_path": "../Daily data csv/SP500_DDOG, 1D.csv",
+    "tv_symbol": "DDOG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DE",
+    "file_path": "../Daily data csv/SP500_DE, 1D.csv",
+    "tv_symbol": "DE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DECK",
+    "file_path": "../Daily data csv/SP500_DECK, 1D.csv",
+    "tv_symbol": "DECK",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DELL",
+    "file_path": "../Daily data csv/SP500_DELL, 1D.csv",
+    "tv_symbol": "DELL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DG",
+    "file_path": "../Daily data csv/SP500_DG, 1D.csv",
+    "tv_symbol": "DG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DGX",
+    "file_path": "../Daily data csv/SP500_DGX, 1D.csv",
+    "tv_symbol": "DGX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DHI",
+    "file_path": "../Daily data csv/SP500_DHI, 1D.csv",
+    "tv_symbol": "DHI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DHR",
+    "file_path": "../Daily data csv/SP500_DHR, 1D.csv",
+    "tv_symbol": "DHR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DIS",
+    "file_path": "../Daily data csv/SP500_DIS, 1D.csv",
+    "tv_symbol": "DIS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DLR",
+    "file_path": "../Daily data csv/SP500_DLR, 1D.csv",
+    "tv_symbol": "DLR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DLTR",
+    "file_path": "../Daily data csv/SP500_DLTR, 1D.csv",
+    "tv_symbol": "DLTR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DOC",
+    "file_path": "../Daily data csv/SP500_DOC, 1D.csv",
+    "tv_symbol": "DOC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DOV",
+    "file_path": "../Daily data csv/SP500_DOV, 1D.csv",
+    "tv_symbol": "DOV",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DOW",
+    "file_path": "../Daily data csv/SP500_DOW, 1D.csv",
+    "tv_symbol": "DOW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DPZ",
+    "file_path": "../Daily data csv/SP500_DPZ, 1D.csv",
+    "tv_symbol": "DPZ",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DRI",
+    "file_path": "../Daily data csv/SP500_DRI, 1D.csv",
+    "tv_symbol": "DRI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DTE",
+    "file_path": "../Daily data csv/SP500_DTE, 1D.csv",
+    "tv_symbol": "DTE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DUK",
+    "file_path": "../Daily data csv/SP500_DUK, 1D.csv",
+    "tv_symbol": "DUK",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DVA",
+    "file_path": "../Daily data csv/SP500_DVA, 1D.csv",
+    "tv_symbol": "DVA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DVN",
+    "file_path": "../Daily data csv/SP500_DVN, 1D.csv",
+    "tv_symbol": "DVN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "DXCM",
+    "file_path": "../Daily data csv/SP500_DXCM, 1D.csv",
+    "tv_symbol": "DXCM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EA",
+    "file_path": "../Daily data csv/SP500_EA, 1D.csv",
+    "tv_symbol": "EA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EBAY",
+    "file_path": "../Daily data csv/SP500_EBAY, 1D.csv",
+    "tv_symbol": "EBAY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ECL",
+    "file_path": "../Daily data csv/SP500_ECL, 1D.csv",
+    "tv_symbol": "ECL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ED",
+    "file_path": "../Daily data csv/SP500_ED, 1D.csv",
+    "tv_symbol": "ED",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EFX",
+    "file_path": "../Daily data csv/SP500_EFX, 1D.csv",
+    "tv_symbol": "EFX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EG",
+    "file_path": "../Daily data csv/SP500_EG, 1D.csv",
+    "tv_symbol": "EG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EIX",
+    "file_path": "../Daily data csv/SP500_EIX, 1D.csv",
+    "tv_symbol": "EIX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EL",
+    "file_path": "../Daily data csv/SP500_EL, 1D.csv",
+    "tv_symbol": "EL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ELV",
+    "file_path": "../Daily data csv/SP500_ELV, 1D.csv",
+    "tv_symbol": "ELV",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EMN",
+    "file_path": "../Daily data csv/SP500_EMN, 1D.csv",
+    "tv_symbol": "EMN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EMR",
+    "file_path": "../Daily data csv/SP500_EMR, 1D.csv",
+    "tv_symbol": "EMR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ENPH",
+    "file_path": "../Daily data csv/SP500_ENPH, 1D.csv",
+    "tv_symbol": "ENPH",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EOG",
+    "file_path": "../Daily data csv/SP500_EOG, 1D.csv",
+    "tv_symbol": "EOG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EPAM",
+    "file_path": "../Daily data csv/SP500_EPAM, 1D.csv",
+    "tv_symbol": "EPAM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EQIX",
+    "file_path": "../Daily data csv/SP500_EQIX, 1D.csv",
+    "tv_symbol": "EQIX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EQR",
+    "file_path": "../Daily data csv/SP500_EQR, 1D.csv",
+    "tv_symbol": "EQR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EQT",
+    "file_path": "../Daily data csv/SP500_EQT, 1D.csv",
+    "tv_symbol": "EQT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ERIE",
+    "file_path": "../Daily data csv/SP500_ERIE, 1D.csv",
+    "tv_symbol": "ERIE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ES",
+    "file_path": "../Daily data csv/SP500_ES, 1D.csv",
+    "tv_symbol": "ES",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ESS",
+    "file_path": "../Daily data csv/SP500_ESS, 1D.csv",
+    "tv_symbol": "ESS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ETN",
+    "file_path": "../Daily data csv/SP500_ETN, 1D.csv",
+    "tv_symbol": "ETN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ETR",
+    "file_path": "../Daily data csv/SP500_ETR, 1D.csv",
+    "tv_symbol": "ETR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EVRG",
+    "file_path": "../Daily data csv/SP500_EVRG, 1D.csv",
+    "tv_symbol": "EVRG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EW",
+    "file_path": "../Daily data csv/SP500_EW, 1D.csv",
+    "tv_symbol": "EW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EXC",
+    "file_path": "../Daily data csv/SP500_EXC, 1D.csv",
+    "tv_symbol": "EXC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EXE",
+    "file_path": "../Daily data csv/SP500_EXE, 1D.csv",
+    "tv_symbol": "EXE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EXPD",
+    "file_path": "../Daily data csv/SP500_EXPD, 1D.csv",
+    "tv_symbol": "EXPD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EXPE",
+    "file_path": "../Daily data csv/SP500_EXPE, 1D.csv",
+    "tv_symbol": "EXPE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "EXR",
+    "file_path": "../Daily data csv/SP500_EXR, 1D.csv",
+    "tv_symbol": "EXR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "F",
+    "file_path": "../Daily data csv/SP500_F, 1D.csv",
+    "tv_symbol": "F",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FANG",
+    "file_path": "../Daily data csv/SP500_FANG, 1D.csv",
+    "tv_symbol": "FANG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FAST",
+    "file_path": "../Daily data csv/SP500_FAST, 1D.csv",
+    "tv_symbol": "FAST",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FCX",
+    "file_path": "../Daily data csv/SP500_FCX, 1D.csv",
+    "tv_symbol": "FCX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FDS",
+    "file_path": "../Daily data csv/SP500_FDS, 1D.csv",
+    "tv_symbol": "FDS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FDX",
+    "file_path": "../Daily data csv/SP500_FDX, 1D.csv",
+    "tv_symbol": "FDX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FE",
+    "file_path": "../Daily data csv/SP500_FE, 1D.csv",
+    "tv_symbol": "FE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FFIV",
+    "file_path": "../Daily data csv/SP500_FFIV, 1D.csv",
+    "tv_symbol": "FFIV",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FI",
+    "file_path": "../Daily data csv/SP500_FI, 1D.csv",
+    "tv_symbol": "FI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FICO",
+    "file_path": "../Daily data csv/SP500_FICO, 1D.csv",
+    "tv_symbol": "FICO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FIS",
+    "file_path": "../Daily data csv/SP500_FIS, 1D.csv",
+    "tv_symbol": "FIS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FITB",
+    "file_path": "../Daily data csv/SP500_FITB, 1D.csv",
+    "tv_symbol": "FITB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FOX",
+    "file_path": "../Daily data csv/SP500_FOX, 1D.csv",
+    "tv_symbol": "FOX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FOXA",
+    "file_path": "../Daily data csv/SP500_FOXA, 1D.csv",
+    "tv_symbol": "FOXA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FRT",
+    "file_path": "../Daily data csv/SP500_FRT, 1D.csv",
+    "tv_symbol": "FRT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FSLR",
+    "file_path": "../Daily data csv/SP500_FSLR, 1D.csv",
+    "tv_symbol": "FSLR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FTNT",
+    "file_path": "../Daily data csv/SP500_FTNT, 1D.csv",
+    "tv_symbol": "FTNT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "FTV",
+    "file_path": "../Daily data csv/SP500_FTV, 1D.csv",
+    "tv_symbol": "FTV",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GD",
+    "file_path": "../Daily data csv/SP500_GD, 1D.csv",
+    "tv_symbol": "GD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GDDY",
+    "file_path": "../Daily data csv/SP500_GDDY, 1D.csv",
+    "tv_symbol": "GDDY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GE",
+    "file_path": "../Daily data csv/SP500_GE, 1D.csv",
+    "tv_symbol": "GE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GEHC",
+    "file_path": "../Daily data csv/SP500_GEHC, 1D.csv",
+    "tv_symbol": "GEHC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GEN",
+    "file_path": "../Daily data csv/SP500_GEN, 1D.csv",
+    "tv_symbol": "GEN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GEV",
+    "file_path": "../Daily data csv/SP500_GEV, 1D.csv",
+    "tv_symbol": "GEV",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GILD",
+    "file_path": "../Daily data csv/SP500_GILD, 1D.csv",
+    "tv_symbol": "GILD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GIS",
+    "file_path": "../Daily data csv/SP500_GIS, 1D.csv",
+    "tv_symbol": "GIS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GL",
+    "file_path": "../Daily data csv/SP500_GL, 1D.csv",
+    "tv_symbol": "GL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GLW",
+    "file_path": "../Daily data csv/SP500_GLW, 1D.csv",
+    "tv_symbol": "GLW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GM",
+    "file_path": "../Daily data csv/SP500_GM, 1D.csv",
+    "tv_symbol": "GM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GNRC",
+    "file_path": "../Daily data csv/SP500_GNRC, 1D.csv",
+    "tv_symbol": "GNRC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GOOG",
+    "file_path": "../Daily data csv/SP500_GOOG, 1D.csv",
+    "tv_symbol": "GOOG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GOOGL",
+    "file_path": "../Daily data csv/SP500_GOOGL, 1D.csv",
+    "tv_symbol": "GOOGL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GPC",
+    "file_path": "../Daily data csv/SP500_GPC, 1D.csv",
+    "tv_symbol": "GPC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GPN",
+    "file_path": "../Daily data csv/SP500_GPN, 1D.csv",
+    "tv_symbol": "GPN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GRMN",
+    "file_path": "../Daily data csv/SP500_GRMN, 1D.csv",
+    "tv_symbol": "GRMN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GS",
+    "file_path": "../Daily data csv/SP500_GS, 1D.csv",
+    "tv_symbol": "GS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "GWW",
+    "file_path": "../Daily data csv/SP500_GWW, 1D.csv",
+    "tv_symbol": "GWW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HAL",
+    "file_path": "../Daily data csv/SP500_HAL, 1D.csv",
+    "tv_symbol": "HAL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HAS",
+    "file_path": "../Daily data csv/SP500_HAS, 1D.csv",
+    "tv_symbol": "HAS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HBAN",
+    "file_path": "../Daily data csv/SP500_HBAN, 1D.csv",
+    "tv_symbol": "HBAN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HCA",
+    "file_path": "../Daily data csv/SP500_HCA, 1D.csv",
+    "tv_symbol": "HCA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HD",
+    "file_path": "../Daily data csv/SP500_HD, 1D.csv",
+    "tv_symbol": "HD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HIG",
+    "file_path": "../Daily data csv/SP500_HIG, 1D.csv",
+    "tv_symbol": "HIG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HII",
+    "file_path": "../Daily data csv/SP500_HII, 1D.csv",
+    "tv_symbol": "HII",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HLT",
+    "file_path": "../Daily data csv/SP500_HLT, 1D.csv",
+    "tv_symbol": "HLT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HOLX",
+    "file_path": "../Daily data csv/SP500_HOLX, 1D.csv",
+    "tv_symbol": "HOLX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HON",
+    "file_path": "../Daily data csv/SP500_HON, 1D.csv",
+    "tv_symbol": "HON",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HPE",
+    "file_path": "../Daily data csv/SP500_HPE, 1D.csv",
+    "tv_symbol": "HPE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HPQ",
+    "file_path": "../Daily data csv/SP500_HPQ, 1D.csv",
+    "tv_symbol": "HPQ",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HRL",
+    "file_path": "../Daily data csv/SP500_HRL, 1D.csv",
+    "tv_symbol": "HRL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HSIC",
+    "file_path": "../Daily data csv/SP500_HSIC, 1D.csv",
+    "tv_symbol": "HSIC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HST",
+    "file_path": "../Daily data csv/SP500_HST, 1D.csv",
+    "tv_symbol": "HST",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HSY",
+    "file_path": "../Daily data csv/SP500_HSY, 1D.csv",
+    "tv_symbol": "HSY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HUBB",
+    "file_path": "../Daily data csv/SP500_HUBB, 1D.csv",
+    "tv_symbol": "HUBB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HUM",
+    "file_path": "../Daily data csv/SP500_HUM, 1D.csv",
+    "tv_symbol": "HUM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "HWM",
+    "file_path": "../Daily data csv/SP500_HWM, 1D.csv",
+    "tv_symbol": "HWM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "IBM",
+    "file_path": "../Daily data csv/SP500_IBM, 1D.csv",
+    "tv_symbol": "IBM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ICE",
+    "file_path": "../Daily data csv/SP500_ICE, 1D.csv",
+    "tv_symbol": "ICE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "IDXX",
+    "file_path": "../Daily data csv/SP500_IDXX, 1D.csv",
+    "tv_symbol": "IDXX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "IEX",
+    "file_path": "../Daily data csv/SP500_IEX, 1D.csv",
+    "tv_symbol": "IEX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "IFF",
+    "file_path": "../Daily data csv/SP500_IFF, 1D.csv",
+    "tv_symbol": "IFF",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "INCY",
+    "file_path": "../Daily data csv/SP500_INCY, 1D.csv",
+    "tv_symbol": "INCY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "INTC",
+    "file_path": "../Daily data csv/SP500_INTC, 1D.csv",
+    "tv_symbol": "INTC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "INTU",
+    "file_path": "../Daily data csv/SP500_INTU, 1D.csv",
+    "tv_symbol": "INTU",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "INVH",
+    "file_path": "../Daily data csv/SP500_INVH, 1D.csv",
+    "tv_symbol": "INVH",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "IP",
+    "file_path": "../Daily data csv/SP500_IP, 1D.csv",
+    "tv_symbol": "IP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "IPG",
+    "file_path": "../Daily data csv/SP500_IPG, 1D.csv",
+    "tv_symbol": "IPG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "IQV",
+    "file_path": "../Daily data csv/SP500_IQV, 1D.csv",
+    "tv_symbol": "IQV",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "IR",
+    "file_path": "../Daily data csv/SP500_IR, 1D.csv",
+    "tv_symbol": "IR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "IRM",
+    "file_path": "../Daily data csv/SP500_IRM, 1D.csv",
+    "tv_symbol": "IRM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ISRG",
+    "file_path": "../Daily data csv/SP500_ISRG, 1D.csv",
+    "tv_symbol": "ISRG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "IT",
+    "file_path": "../Daily data csv/SP500_IT, 1D.csv",
+    "tv_symbol": "IT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ITW",
+    "file_path": "../Daily data csv/SP500_ITW, 1D.csv",
+    "tv_symbol": "ITW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "IVZ",
+    "file_path": "../Daily data csv/SP500_IVZ, 1D.csv",
+    "tv_symbol": "IVZ",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "J",
+    "file_path": "../Daily data csv/SP500_J, 1D.csv",
+    "tv_symbol": "J",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "JBHT",
+    "file_path": "../Daily data csv/SP500_JBHT, 1D.csv",
+    "tv_symbol": "JBHT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "JBL",
+    "file_path": "../Daily data csv/SP500_JBL, 1D.csv",
+    "tv_symbol": "JBL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "JCI",
+    "file_path": "../Daily data csv/SP500_JCI, 1D.csv",
+    "tv_symbol": "JCI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "JKHY",
+    "file_path": "../Daily data csv/SP500_JKHY, 1D.csv",
+    "tv_symbol": "JKHY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "JNJ",
+    "file_path": "../Daily data csv/SP500_JNJ, 1D.csv",
+    "tv_symbol": "JNJ",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "JPM",
+    "file_path": "../Daily data csv/SP500_JPM, 1D.csv",
+    "tv_symbol": "JPM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "K",
+    "file_path": "../Daily data csv/SP500_K, 1D.csv",
+    "tv_symbol": "K",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "KDP",
+    "file_path": "../Daily data csv/SP500_KDP, 1D.csv",
+    "tv_symbol": "KDP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "KEY",
+    "file_path": "../Daily data csv/SP500_KEY, 1D.csv",
+    "tv_symbol": "KEY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "KEYS",
+    "file_path": "../Daily data csv/SP500_KEYS, 1D.csv",
+    "tv_symbol": "KEYS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "KHC",
+    "file_path": "../Daily data csv/SP500_KHC, 1D.csv",
+    "tv_symbol": "KHC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "KIM",
+    "file_path": "../Daily data csv/SP500_KIM, 1D.csv",
+    "tv_symbol": "KIM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "KKR",
+    "file_path": "../Daily data csv/SP500_KKR, 1D.csv",
+    "tv_symbol": "KKR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "KLAC",
+    "file_path": "../Daily data csv/SP500_KLAC, 1D.csv",
+    "tv_symbol": "KLAC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "KMB",
+    "file_path": "../Daily data csv/SP500_KMB, 1D.csv",
+    "tv_symbol": "KMB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "KMI",
+    "file_path": "../Daily data csv/SP500_KMI, 1D.csv",
+    "tv_symbol": "KMI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "KMX",
+    "file_path": "../Daily data csv/SP500_KMX, 1D.csv",
+    "tv_symbol": "KMX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "KO",
+    "file_path": "../Daily data csv/SP500_KO, 1D.csv",
+    "tv_symbol": "KO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "KR",
+    "file_path": "../Daily data csv/SP500_KR, 1D.csv",
+    "tv_symbol": "KR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "KVUE",
+    "file_path": "../Daily data csv/SP500_KVUE, 1D.csv",
+    "tv_symbol": "KVUE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "L",
+    "file_path": "../Daily data csv/SP500_L, 1D.csv",
+    "tv_symbol": "L",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LDOS",
+    "file_path": "../Daily data csv/SP500_LDOS, 1D.csv",
+    "tv_symbol": "LDOS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LEN",
+    "file_path": "../Daily data csv/SP500_LEN, 1D.csv",
+    "tv_symbol": "LEN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LH",
+    "file_path": "../Daily data csv/SP500_LH, 1D.csv",
+    "tv_symbol": "LH",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LHX",
+    "file_path": "../Daily data csv/SP500_LHX, 1D.csv",
+    "tv_symbol": "LHX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LII",
+    "file_path": "../Daily data csv/SP500_LII, 1D.csv",
+    "tv_symbol": "LII",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LIN",
+    "file_path": "../Daily data csv/SP500_LIN, 1D.csv",
+    "tv_symbol": "LIN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LKQ",
+    "file_path": "../Daily data csv/SP500_LKQ, 1D.csv",
+    "tv_symbol": "LKQ",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LLY",
+    "file_path": "../Daily data csv/SP500_LLY, 1D.csv",
+    "tv_symbol": "LLY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LMT",
+    "file_path": "../Daily data csv/SP500_LMT, 1D.csv",
+    "tv_symbol": "LMT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LNT",
+    "file_path": "../Daily data csv/SP500_LNT, 1D.csv",
+    "tv_symbol": "LNT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LOW",
+    "file_path": "../Daily data csv/SP500_LOW, 1D.csv",
+    "tv_symbol": "LOW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LRCX",
+    "file_path": "../Daily data csv/SP500_LRCX, 1D.csv",
+    "tv_symbol": "LRCX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LULU",
+    "file_path": "../Daily data csv/SP500_LULU, 1D.csv",
+    "tv_symbol": "LULU",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LUV",
+    "file_path": "../Daily data csv/SP500_LUV, 1D.csv",
+    "tv_symbol": "LUV",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LVS",
+    "file_path": "../Daily data csv/SP500_LVS, 1D.csv",
+    "tv_symbol": "LVS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LW",
+    "file_path": "../Daily data csv/SP500_LW, 1D.csv",
+    "tv_symbol": "LW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LYB",
+    "file_path": "../Daily data csv/SP500_LYB, 1D.csv",
+    "tv_symbol": "LYB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "LYV",
+    "file_path": "../Daily data csv/SP500_LYV, 1D.csv",
+    "tv_symbol": "LYV",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MA",
+    "file_path": "../Daily data csv/SP500_MA, 1D.csv",
+    "tv_symbol": "MA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MAA",
+    "file_path": "../Daily data csv/SP500_MAA, 1D.csv",
+    "tv_symbol": "MAA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MAR",
+    "file_path": "../Daily data csv/SP500_MAR, 1D.csv",
+    "tv_symbol": "MAR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MAS",
+    "file_path": "../Daily data csv/SP500_MAS, 1D.csv",
+    "tv_symbol": "MAS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MCD",
+    "file_path": "../Daily data csv/SP500_MCD, 1D.csv",
+    "tv_symbol": "MCD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MCHP",
+    "file_path": "../Daily data csv/SP500_MCHP, 1D.csv",
+    "tv_symbol": "MCHP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MCK",
+    "file_path": "../Daily data csv/SP500_MCK, 1D.csv",
+    "tv_symbol": "MCK",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MCO",
+    "file_path": "../Daily data csv/SP500_MCO, 1D.csv",
+    "tv_symbol": "MCO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MDLZ",
+    "file_path": "../Daily data csv/SP500_MDLZ, 1D.csv",
+    "tv_symbol": "MDLZ",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MDT",
+    "file_path": "../Daily data csv/SP500_MDT, 1D.csv",
+    "tv_symbol": "MDT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MET",
+    "file_path": "../Daily data csv/SP500_MET, 1D.csv",
+    "tv_symbol": "MET",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "META",
+    "file_path": "../Daily data csv/SP500_META, 1D.csv",
+    "tv_symbol": "META",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MGM",
+    "file_path": "../Daily data csv/SP500_MGM, 1D.csv",
+    "tv_symbol": "MGM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MHK",
+    "file_path": "../Daily data csv/SP500_MHK, 1D.csv",
+    "tv_symbol": "MHK",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MKC",
+    "file_path": "../Daily data csv/SP500_MKC, 1D.csv",
+    "tv_symbol": "MKC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MKTX",
+    "file_path": "../Daily data csv/SP500_MKTX, 1D.csv",
+    "tv_symbol": "MKTX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MLM",
+    "file_path": "../Daily data csv/SP500_MLM, 1D.csv",
+    "tv_symbol": "MLM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MMC",
+    "file_path": "../Daily data csv/SP500_MMC, 1D.csv",
+    "tv_symbol": "MMC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MMM",
+    "file_path": "../Daily data csv/SP500_MMM, 1D.csv",
+    "tv_symbol": "MMM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MNST",
+    "file_path": "../Daily data csv/SP500_MNST, 1D.csv",
+    "tv_symbol": "MNST",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MO",
+    "file_path": "../Daily data csv/SP500_MO, 1D.csv",
+    "tv_symbol": "MO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MOH",
+    "file_path": "../Daily data csv/SP500_MOH, 1D.csv",
+    "tv_symbol": "MOH",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MOS",
+    "file_path": "../Daily data csv/SP500_MOS, 1D.csv",
+    "tv_symbol": "MOS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MPC",
+    "file_path": "../Daily data csv/SP500_MPC, 1D.csv",
+    "tv_symbol": "MPC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MPWR",
+    "file_path": "../Daily data csv/SP500_MPWR, 1D.csv",
+    "tv_symbol": "MPWR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MRK",
+    "file_path": "../Daily data csv/SP500_MRK, 1D.csv",
+    "tv_symbol": "MRK",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MRNA",
+    "file_path": "../Daily data csv/SP500_MRNA, 1D.csv",
+    "tv_symbol": "MRNA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MRO",
+    "file_path": "../Daily data csv/SP500_MRO, 1D.csv",
+    "tv_symbol": "MRO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MS",
+    "file_path": "../Daily data csv/SP500_MS, 1D.csv",
+    "tv_symbol": "MS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MSCI",
+    "file_path": "../Daily data csv/SP500_MSCI, 1D.csv",
+    "tv_symbol": "MSCI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MSFT",
+    "file_path": "../Daily data csv/SP500_MSFT, 1D.csv",
+    "tv_symbol": "MSFT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MSI",
+    "file_path": "../Daily data csv/SP500_MSI, 1D.csv",
+    "tv_symbol": "MSI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MTB",
+    "file_path": "../Daily data csv/SP500_MTB, 1D.csv",
+    "tv_symbol": "MTB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MTCH",
+    "file_path": "../Daily data csv/SP500_MTCH, 1D.csv",
+    "tv_symbol": "MTCH",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MTD",
+    "file_path": "../Daily data csv/SP500_MTD, 1D.csv",
+    "tv_symbol": "MTD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "MU",
+    "file_path": "../Daily data csv/SP500_MU, 1D.csv",
+    "tv_symbol": "MU",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NCLH",
+    "file_path": "../Daily data csv/SP500_NCLH, 1D.csv",
+    "tv_symbol": "NCLH",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NDAQ",
+    "file_path": "../Daily data csv/SP500_NDAQ, 1D.csv",
+    "tv_symbol": "NDAQ",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NDSN",
+    "file_path": "../Daily data csv/SP500_NDSN, 1D.csv",
+    "tv_symbol": "NDSN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NEE",
+    "file_path": "../Daily data csv/SP500_NEE, 1D.csv",
+    "tv_symbol": "NEE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NEM",
+    "file_path": "../Daily data csv/SP500_NEM, 1D.csv",
+    "tv_symbol": "NEM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NFLX",
+    "file_path": "../Daily data csv/SP500_NFLX, 1D.csv",
+    "tv_symbol": "NFLX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NI",
+    "file_path": "../Daily data csv/SP500_NI, 1D.csv",
+    "tv_symbol": "NI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NKE",
+    "file_path": "../Daily data csv/SP500_NKE, 1D.csv",
+    "tv_symbol": "NKE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NOC",
+    "file_path": "../Daily data csv/SP500_NOC, 1D.csv",
+    "tv_symbol": "NOC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NOW",
+    "file_path": "../Daily data csv/SP500_NOW, 1D.csv",
+    "tv_symbol": "NOW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NRG",
+    "file_path": "../Daily data csv/SP500_NRG, 1D.csv",
+    "tv_symbol": "NRG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NSC",
+    "file_path": "../Daily data csv/SP500_NSC, 1D.csv",
+    "tv_symbol": "NSC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NTAP",
+    "file_path": "../Daily data csv/SP500_NTAP, 1D.csv",
+    "tv_symbol": "NTAP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NTRS",
+    "file_path": "../Daily data csv/SP500_NTRS, 1D.csv",
+    "tv_symbol": "NTRS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NUE",
+    "file_path": "../Daily data csv/SP500_NUE, 1D.csv",
+    "tv_symbol": "NUE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NVDA",
+    "file_path": "../Daily data csv/SP500_NVDA, 1D.csv",
+    "tv_symbol": "NVDA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NVR",
+    "file_path": "../Daily data csv/SP500_NVR, 1D.csv",
+    "tv_symbol": "NVR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NWS",
+    "file_path": "../Daily data csv/SP500_NWS, 1D.csv",
+    "tv_symbol": "NWS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NWSA",
+    "file_path": "../Daily data csv/SP500_NWSA, 1D.csv",
+    "tv_symbol": "NWSA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "NXPI",
+    "file_path": "../Daily data csv/SP500_NXPI, 1D.csv",
+    "tv_symbol": "NXPI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "O",
+    "file_path": "../Daily data csv/SP500_O, 1D.csv",
+    "tv_symbol": "O",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ODFL",
+    "file_path": "../Daily data csv/SP500_ODFL, 1D.csv",
+    "tv_symbol": "ODFL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "OKE",
+    "file_path": "../Daily data csv/SP500_OKE, 1D.csv",
+    "tv_symbol": "OKE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "OMC",
+    "file_path": "../Daily data csv/SP500_OMC, 1D.csv",
+    "tv_symbol": "OMC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ON",
+    "file_path": "../Daily data csv/SP500_ON, 1D.csv",
+    "tv_symbol": "ON",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ORCL",
+    "file_path": "../Daily data csv/SP500_ORCL, 1D.csv",
+    "tv_symbol": "ORCL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ORLY",
+    "file_path": "../Daily data csv/SP500_ORLY, 1D.csv",
+    "tv_symbol": "ORLY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "OTIS",
+    "file_path": "../Daily data csv/SP500_OTIS, 1D.csv",
+    "tv_symbol": "OTIS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "OXY",
+    "file_path": "../Daily data csv/SP500_OXY, 1D.csv",
+    "tv_symbol": "OXY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PANW",
+    "file_path": "../Daily data csv/SP500_PANW, 1D.csv",
+    "tv_symbol": "PANW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PARA",
+    "file_path": "../Daily data csv/SP500_PARA, 1D.csv",
+    "tv_symbol": "PARA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PCG",
+    "file_path": "../Daily data csv/SP500_PCG, 1D.csv",
+    "tv_symbol": "PCG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PEG",
+    "file_path": "../Daily data csv/SP500_PEG, 1D.csv",
+    "tv_symbol": "PEG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PEP",
+    "file_path": "../Daily data csv/SP500_PEP, 1D.csv",
+    "tv_symbol": "PEP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PFE",
+    "file_path": "../Daily data csv/SP500_PFE, 1D.csv",
+    "tv_symbol": "PFE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PFG",
+    "file_path": "../Daily data csv/SP500_PFG, 1D.csv",
+    "tv_symbol": "PFG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PG",
+    "file_path": "../Daily data csv/SP500_PG, 1D.csv",
+    "tv_symbol": "PG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PGR",
+    "file_path": "../Daily data csv/SP500_PGR, 1D.csv",
+    "tv_symbol": "PGR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PH",
+    "file_path": "../Daily data csv/SP500_PH, 1D.csv",
+    "tv_symbol": "PH",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PHM",
+    "file_path": "../Daily data csv/SP500_PHM, 1D.csv",
+    "tv_symbol": "PHM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PKG",
+    "file_path": "../Daily data csv/SP500_PKG, 1D.csv",
+    "tv_symbol": "PKG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PLD",
+    "file_path": "../Daily data csv/SP500_PLD, 1D.csv",
+    "tv_symbol": "PLD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PLTR",
+    "file_path": "../Daily data csv/SP500_PLTR, 1D.csv",
+    "tv_symbol": "PLTR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PM",
+    "file_path": "../Daily data csv/SP500_PM, 1D.csv",
+    "tv_symbol": "PM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PNC",
+    "file_path": "../Daily data csv/SP500_PNC, 1D.csv",
+    "tv_symbol": "PNC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PNR",
+    "file_path": "../Daily data csv/SP500_PNR, 1D.csv",
+    "tv_symbol": "PNR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PNW",
+    "file_path": "../Daily data csv/SP500_PNW, 1D.csv",
+    "tv_symbol": "PNW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PODD",
+    "file_path": "../Daily data csv/SP500_PODD, 1D.csv",
+    "tv_symbol": "PODD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "POOL",
+    "file_path": "../Daily data csv/SP500_POOL, 1D.csv",
+    "tv_symbol": "POOL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PPG",
+    "file_path": "../Daily data csv/SP500_PPG, 1D.csv",
+    "tv_symbol": "PPG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PPL",
+    "file_path": "../Daily data csv/SP500_PPL, 1D.csv",
+    "tv_symbol": "PPL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PRU",
+    "file_path": "../Daily data csv/SP500_PRU, 1D.csv",
+    "tv_symbol": "PRU",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PSA",
+    "file_path": "../Daily data csv/SP500_PSA, 1D.csv",
+    "tv_symbol": "PSA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PSX",
+    "file_path": "../Daily data csv/SP500_PSX, 1D.csv",
+    "tv_symbol": "PSX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PTC",
+    "file_path": "../Daily data csv/SP500_PTC, 1D.csv",
+    "tv_symbol": "PTC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PWR",
+    "file_path": "../Daily data csv/SP500_PWR, 1D.csv",
+    "tv_symbol": "PWR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "PYPL",
+    "file_path": "../Daily data csv/SP500_PYPL, 1D.csv",
+    "tv_symbol": "PYPL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "QCOM",
+    "file_path": "../Daily data csv/SP500_QCOM, 1D.csv",
+    "tv_symbol": "QCOM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "QRVO",
+    "file_path": "../Daily data csv/SP500_QRVO, 1D.csv",
+    "tv_symbol": "QRVO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "RCL",
+    "file_path": "../Daily data csv/SP500_RCL, 1D.csv",
+    "tv_symbol": "RCL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "REG",
+    "file_path": "../Daily data csv/SP500_REG, 1D.csv",
+    "tv_symbol": "REG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "REGN",
+    "file_path": "../Daily data csv/SP500_REGN, 1D.csv",
+    "tv_symbol": "REGN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "RF",
+    "file_path": "../Daily data csv/SP500_RF, 1D.csv",
+    "tv_symbol": "RF",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "RJF",
+    "file_path": "../Daily data csv/SP500_RJF, 1D.csv",
+    "tv_symbol": "RJF",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "RL",
+    "file_path": "../Daily data csv/SP500_RL, 1D.csv",
+    "tv_symbol": "RL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "RMD",
+    "file_path": "../Daily data csv/SP500_RMD, 1D.csv",
+    "tv_symbol": "RMD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ROK",
+    "file_path": "../Daily data csv/SP500_ROK, 1D.csv",
+    "tv_symbol": "ROK",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ROL",
+    "file_path": "../Daily data csv/SP500_ROL, 1D.csv",
+    "tv_symbol": "ROL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ROP",
+    "file_path": "../Daily data csv/SP500_ROP, 1D.csv",
+    "tv_symbol": "ROP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ROST",
+    "file_path": "../Daily data csv/SP500_ROST, 1D.csv",
+    "tv_symbol": "ROST",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "RSG",
+    "file_path": "../Daily data csv/SP500_RSG, 1D.csv",
+    "tv_symbol": "RSG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "RTX",
+    "file_path": "../Daily data csv/SP500_RTX, 1D.csv",
+    "tv_symbol": "RTX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "RVTY",
+    "file_path": "../Daily data csv/SP500_RVTY, 1D.csv",
+    "tv_symbol": "RVTY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SBAC",
+    "file_path": "../Daily data csv/SP500_SBAC, 1D.csv",
+    "tv_symbol": "SBAC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SBUX",
+    "file_path": "../Daily data csv/SP500_SBUX, 1D.csv",
+    "tv_symbol": "SBUX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SCHW",
+    "file_path": "../Daily data csv/SP500_SCHW, 1D.csv",
+    "tv_symbol": "SCHW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SHW",
+    "file_path": "../Daily data csv/SP500_SHW, 1D.csv",
+    "tv_symbol": "SHW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SJM",
+    "file_path": "../Daily data csv/SP500_SJM, 1D.csv",
+    "tv_symbol": "SJM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SLB",
+    "file_path": "../Daily data csv/SP500_SLB, 1D.csv",
+    "tv_symbol": "SLB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SMCI",
+    "file_path": "../Daily data csv/SP500_SMCI, 1D.csv",
+    "tv_symbol": "SMCI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SNA",
+    "file_path": "../Daily data csv/SP500_SNA, 1D.csv",
+    "tv_symbol": "SNA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SNPS",
+    "file_path": "../Daily data csv/SP500_SNPS, 1D.csv",
+    "tv_symbol": "SNPS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SO",
+    "file_path": "../Daily data csv/SP500_SO, 1D.csv",
+    "tv_symbol": "SO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SOLV",
+    "file_path": "../Daily data csv/SP500_SOLV, 1D.csv",
+    "tv_symbol": "SOLV",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SPG",
+    "file_path": "../Daily data csv/SP500_SPG, 1D.csv",
+    "tv_symbol": "SPG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SPGI",
+    "file_path": "../Daily data csv/SP500_SPGI, 1D.csv",
+    "tv_symbol": "SPGI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SRE",
+    "file_path": "../Daily data csv/SP500_SRE, 1D.csv",
+    "tv_symbol": "SRE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "STE",
+    "file_path": "../Daily data csv/SP500_STE, 1D.csv",
+    "tv_symbol": "STE",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "STLD",
+    "file_path": "../Daily data csv/SP500_STLD, 1D.csv",
+    "tv_symbol": "STLD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "STT",
+    "file_path": "../Daily data csv/SP500_STT, 1D.csv",
+    "tv_symbol": "STT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "STX",
+    "file_path": "../Daily data csv/SP500_STX, 1D.csv",
+    "tv_symbol": "STX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "STZ",
+    "file_path": "../Daily data csv/SP500_STZ, 1D.csv",
+    "tv_symbol": "STZ",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SWK",
+    "file_path": "../Daily data csv/SP500_SWK, 1D.csv",
+    "tv_symbol": "SWK",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SWKS",
+    "file_path": "../Daily data csv/SP500_SWKS, 1D.csv",
+    "tv_symbol": "SWKS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SYF",
+    "file_path": "../Daily data csv/SP500_SYF, 1D.csv",
+    "tv_symbol": "SYF",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SYK",
+    "file_path": "../Daily data csv/SP500_SYK, 1D.csv",
+    "tv_symbol": "SYK",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "SYY",
+    "file_path": "../Daily data csv/SP500_SYY, 1D.csv",
+    "tv_symbol": "SYY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "T",
+    "file_path": "../Daily data csv/SP500_T, 1D.csv",
+    "tv_symbol": "T",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TAP",
+    "file_path": "../Daily data csv/SP500_TAP, 1D.csv",
+    "tv_symbol": "TAP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TDG",
+    "file_path": "../Daily data csv/SP500_TDG, 1D.csv",
+    "tv_symbol": "TDG",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TDY",
+    "file_path": "../Daily data csv/SP500_TDY, 1D.csv",
+    "tv_symbol": "TDY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TECH",
+    "file_path": "../Daily data csv/SP500_TECH, 1D.csv",
+    "tv_symbol": "TECH",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TEL",
+    "file_path": "../Daily data csv/SP500_TEL, 1D.csv",
+    "tv_symbol": "TEL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TER",
+    "file_path": "../Daily data csv/SP500_TER, 1D.csv",
+    "tv_symbol": "TER",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TFC",
+    "file_path": "../Daily data csv/SP500_TFC, 1D.csv",
+    "tv_symbol": "TFC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TFX",
+    "file_path": "../Daily data csv/SP500_TFX, 1D.csv",
+    "tv_symbol": "TFX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TGT",
+    "file_path": "../Daily data csv/SP500_TGT, 1D.csv",
+    "tv_symbol": "TGT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TJX",
+    "file_path": "../Daily data csv/SP500_TJX, 1D.csv",
+    "tv_symbol": "TJX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TMO",
+    "file_path": "../Daily data csv/SP500_TMO, 1D.csv",
+    "tv_symbol": "TMO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TMUS",
+    "file_path": "../Daily data csv/SP500_TMUS, 1D.csv",
+    "tv_symbol": "TMUS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TPR",
+    "file_path": "../Daily data csv/SP500_TPR, 1D.csv",
+    "tv_symbol": "TPR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TRGP",
+    "file_path": "../Daily data csv/SP500_TRGP, 1D.csv",
+    "tv_symbol": "TRGP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TRMB",
+    "file_path": "../Daily data csv/SP500_TRMB, 1D.csv",
+    "tv_symbol": "TRMB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TROW",
+    "file_path": "../Daily data csv/SP500_TROW, 1D.csv",
+    "tv_symbol": "TROW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TRV",
+    "file_path": "../Daily data csv/SP500_TRV, 1D.csv",
+    "tv_symbol": "TRV",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TSCO",
+    "file_path": "../Daily data csv/SP500_TSCO, 1D.csv",
+    "tv_symbol": "TSCO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TSLA",
+    "file_path": "../Daily data csv/SP500_TSLA, 1D.csv",
+    "tv_symbol": "TSLA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TSN",
+    "file_path": "../Daily data csv/SP500_TSN, 1D.csv",
+    "tv_symbol": "TSN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TT",
+    "file_path": "../Daily data csv/SP500_TT, 1D.csv",
+    "tv_symbol": "TT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TTWO",
+    "file_path": "../Daily data csv/SP500_TTWO, 1D.csv",
+    "tv_symbol": "TTWO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TXN",
+    "file_path": "../Daily data csv/SP500_TXN, 1D.csv",
+    "tv_symbol": "TXN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TXT",
+    "file_path": "../Daily data csv/SP500_TXT, 1D.csv",
+    "tv_symbol": "TXT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "TYL",
+    "file_path": "../Daily data csv/SP500_TYL, 1D.csv",
+    "tv_symbol": "TYL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "UAL",
+    "file_path": "../Daily data csv/SP500_UAL, 1D.csv",
+    "tv_symbol": "UAL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "UBER",
+    "file_path": "../Daily data csv/SP500_UBER, 1D.csv",
+    "tv_symbol": "UBER",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "UDR",
+    "file_path": "../Daily data csv/SP500_UDR, 1D.csv",
+    "tv_symbol": "UDR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "UHS",
+    "file_path": "../Daily data csv/SP500_UHS, 1D.csv",
+    "tv_symbol": "UHS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ULTA",
+    "file_path": "../Daily data csv/SP500_ULTA, 1D.csv",
+    "tv_symbol": "ULTA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "UNH",
+    "file_path": "../Daily data csv/SP500_UNH, 1D.csv",
+    "tv_symbol": "UNH",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "UNP",
+    "file_path": "../Daily data csv/SP500_UNP, 1D.csv",
+    "tv_symbol": "UNP",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "UPS",
+    "file_path": "../Daily data csv/SP500_UPS, 1D.csv",
+    "tv_symbol": "UPS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "URI",
+    "file_path": "../Daily data csv/SP500_URI, 1D.csv",
+    "tv_symbol": "URI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "USB",
+    "file_path": "../Daily data csv/SP500_USB, 1D.csv",
+    "tv_symbol": "USB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "V",
+    "file_path": "../Daily data csv/SP500_V, 1D.csv",
+    "tv_symbol": "V",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "VICI",
+    "file_path": "../Daily data csv/SP500_VICI, 1D.csv",
+    "tv_symbol": "VICI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "VLO",
+    "file_path": "../Daily data csv/SP500_VLO, 1D.csv",
+    "tv_symbol": "VLO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "VLTO",
+    "file_path": "../Daily data csv/SP500_VLTO, 1D.csv",
+    "tv_symbol": "VLTO",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "VMC",
+    "file_path": "../Daily data csv/SP500_VMC, 1D.csv",
+    "tv_symbol": "VMC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "VRSK",
+    "file_path": "../Daily data csv/SP500_VRSK, 1D.csv",
+    "tv_symbol": "VRSK",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "VRSN",
+    "file_path": "../Daily data csv/SP500_VRSN, 1D.csv",
+    "tv_symbol": "VRSN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "VRTX",
+    "file_path": "../Daily data csv/SP500_VRTX, 1D.csv",
+    "tv_symbol": "VRTX",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "VST",
+    "file_path": "../Daily data csv/SP500_VST, 1D.csv",
+    "tv_symbol": "VST",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "VTR",
+    "file_path": "../Daily data csv/SP500_VTR, 1D.csv",
+    "tv_symbol": "VTR",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "VTRS",
+    "file_path": "../Daily data csv/SP500_VTRS, 1D.csv",
+    "tv_symbol": "VTRS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "VZ",
+    "file_path": "../Daily data csv/SP500_VZ, 1D.csv",
+    "tv_symbol": "VZ",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WAB",
+    "file_path": "../Daily data csv/SP500_WAB, 1D.csv",
+    "tv_symbol": "WAB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WAT",
+    "file_path": "../Daily data csv/SP500_WAT, 1D.csv",
+    "tv_symbol": "WAT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WBA",
+    "file_path": "../Daily data csv/SP500_WBA, 1D.csv",
+    "tv_symbol": "WBA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WBD",
+    "file_path": "../Daily data csv/SP500_WBD, 1D.csv",
+    "tv_symbol": "WBD",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WDC",
+    "file_path": "../Daily data csv/SP500_WDC, 1D.csv",
+    "tv_symbol": "WDC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WEC",
+    "file_path": "../Daily data csv/SP500_WEC, 1D.csv",
+    "tv_symbol": "WEC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WELL",
+    "file_path": "../Daily data csv/SP500_WELL, 1D.csv",
+    "tv_symbol": "WELL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WFC",
+    "file_path": "../Daily data csv/SP500_WFC, 1D.csv",
+    "tv_symbol": "WFC",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WM",
+    "file_path": "../Daily data csv/SP500_WM, 1D.csv",
+    "tv_symbol": "WM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WMB",
+    "file_path": "../Daily data csv/SP500_WMB, 1D.csv",
+    "tv_symbol": "WMB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WMT",
+    "file_path": "../Daily data csv/SP500_WMT, 1D.csv",
+    "tv_symbol": "WMT",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WRB",
+    "file_path": "../Daily data csv/SP500_WRB, 1D.csv",
+    "tv_symbol": "WRB",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WRK",
+    "file_path": "../Daily data csv/SP500_WRK, 1D.csv",
+    "tv_symbol": "WRK",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WST",
+    "file_path": "../Daily data csv/SP500_WST, 1D.csv",
+    "tv_symbol": "WST",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WTW",
+    "file_path": "../Daily data csv/SP500_WTW, 1D.csv",
+    "tv_symbol": "WTW",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WY",
+    "file_path": "../Daily data csv/SP500_WY, 1D.csv",
+    "tv_symbol": "WY",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "WYNN",
+    "file_path": "../Daily data csv/SP500_WYNN, 1D.csv",
+    "tv_symbol": "WYNN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "XEL",
+    "file_path": "../Daily data csv/SP500_XEL, 1D.csv",
+    "tv_symbol": "XEL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "XOM",
+    "file_path": "../Daily data csv/SP500_XOM, 1D.csv",
+    "tv_symbol": "XOM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "XYL",
+    "file_path": "../Daily data csv/SP500_XYL, 1D.csv",
+    "tv_symbol": "XYL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "YUM",
+    "file_path": "../Daily data csv/SP500_YUM, 1D.csv",
+    "tv_symbol": "YUM",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ZBH",
+    "file_path": "../Daily data csv/SP500_ZBH, 1D.csv",
+    "tv_symbol": "ZBH",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ZBRA",
+    "file_path": "../Daily data csv/SP500_ZBRA, 1D.csv",
+    "tv_symbol": "ZBRA",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  },
+  {
+    "asset_name": "ZTS",
+    "file_path": "../Daily data csv/SP500_ZTS, 1D.csv",
+    "tv_symbol": "ZTS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "AMEX",
+      ""
+    ]
+  }
+]

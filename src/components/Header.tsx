@@ -15,7 +15,7 @@ export default function Header() {
           About
         </Link>
         <Link
-          href="/signup"
+          href="/login"
           className="rounded-pill bg-black px-4 py-2 text-[14px] font-medium text-white hover:opacity-90"
         >
           Login

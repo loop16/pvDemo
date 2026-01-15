@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import path from "path";
 import { promises as fs } from "fs";
+import { Readable } from "stream";
 
 export const runtime = "nodejs";
 
@@ -17,10 +18,127 @@ type LevelsEntry = {
 const BENCHMARK_SYMBOL = "SPX";
 const BETA_LOOKBACK_DAYS = 252;
 const BETA_CLAMP = 5;
+const LEVELS_LOCAL_DIR = path.join(process.cwd(), "public", "mock", "levels");
+const DEFAULT_LEVELS_SOURCE = (process.env.QPP_LEVELS_SOURCE || "wasabi").toLowerCase();
+const WASABI_PREFIX = (process.env.WASABI_PREFIX || "levels").replace(/^\/+|\/+$/g, "");
+const ASSETS_PATH = path.join(process.cwd(), "backend", "assets.json");
+const ASSETS_BASE_DIR = path.join(process.cwd(), "backend");
+const OHLCV_ALIASES: Record<string, string> = {
+  BTCUSD: "BTC",
+  NQ: "NQ1!",
+};
 
 async function readJsonFile<T>(filePath: string): Promise<T> {
   const raw = await fs.readFile(filePath, "utf-8");
   return JSON.parse(raw) as T;
+}
+
+async function loadAssetsMap(): Promise<Map<string, string>> {
+  const entries = await readJsonFile<Array<{ asset_name?: string; file_path?: string }>>(ASSETS_PATH);
+  const map = new Map<string, string>();
+  for (const entry of entries || []) {
+    if (!entry?.asset_name || !entry?.file_path) continue;
+    const resolved = path.isAbsolute(entry.file_path)
+      ? entry.file_path
+      : path.resolve(ASSETS_BASE_DIR, entry.file_path);
+    map.set(entry.asset_name.toUpperCase(), resolved);
+  }
+  return map;
+}
+
+function parseCsvCloses(csv: string): OhlcvBar[] {
+  const lines = csv.trim().split(/\r?\n/);
+  if (lines.length <= 1) return [];
+  const headers = lines[0].split(",").map((h) => h.trim().toLowerCase());
+  const idxTime = headers.indexOf("time") >= 0 ? headers.indexOf("time") : headers.indexOf("date");
+  const idxClose = headers.indexOf("close");
+  if (idxTime < 0 || idxClose < 0) return [];
+
+  const out: OhlcvBar[] = [];
+  for (let i = 1; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) continue;
+    const parts = line.split(",");
+    const time = parts[idxTime];
+    const close = Number(parts[idxClose]);
+    if (!time || !Number.isFinite(close)) continue;
+    out.push({ time, close });
+  }
+  return out;
+}
+
+function shouldUseWasabi(source: string) {
+  if (source === "demo" || source === "local") return false;
+  if (DEFAULT_LEVELS_SOURCE === "local") return false;
+  return Boolean(
+    process.env.WASABI_BUCKET &&
+    process.env.WASABI_ACCESS_KEY_ID &&
+    process.env.WASABI_SECRET_ACCESS_KEY
+  );
+}
+
+async function streamToString(stream: unknown): Promise<string> {
+  if (!stream) return "";
+  if (typeof stream === "string") return stream;
+  if (stream instanceof Uint8Array) return Buffer.from(stream).toString("utf-8");
+  if (typeof (stream as { transformToString?: () => Promise<string> }).transformToString === "function") {
+    return (stream as { transformToString: () => Promise<string> }).transformToString();
+  }
+  if (stream instanceof Readable) {
+    return await new Promise((resolve, reject) => {
+      const chunks: Buffer[] = [];
+      stream.on("data", (chunk) => chunks.push(Buffer.from(chunk)));
+      stream.on("error", reject);
+      stream.on("end", () => resolve(Buffer.concat(chunks).toString("utf-8")));
+    });
+  }
+  return String(stream);
+}
+
+function buildWasabiKey(pathParts: string) {
+  return WASABI_PREFIX ? `${WASABI_PREFIX}/${pathParts}` : pathParts;
+}
+
+async function readWasabiJson<T>(pathParts: string): Promise<T> {
+  const { S3Client, GetObjectCommand } = await import("@aws-sdk/client-s3");
+  const bucket = process.env.WASABI_BUCKET || "";
+  const accessKeyId = process.env.WASABI_ACCESS_KEY_ID || "";
+  const secretAccessKey = process.env.WASABI_SECRET_ACCESS_KEY || "";
+  const endpoint = process.env.WASABI_ENDPOINT || "https://s3.us-east-1.wasabisys.com";
+  const region = process.env.WASABI_REGION || "us-east-1";
+
+  const key = buildWasabiKey(pathParts);
+  const client = new S3Client({
+    region,
+    endpoint,
+    credentials: { accessKeyId, secretAccessKey },
+  });
+  const resp = await client.send(new GetObjectCommand({ Bucket: bucket, Key: key }));
+  const raw = await streamToString(resp.Body);
+  return JSON.parse(raw) as T;
+}
+
+async function loadLevelsData(model: string, source: string): Promise<Record<string, LevelsEntry>> {
+  const fileName = model === "simple" ? "basic_levels.json" : "levels.json";
+  if (shouldUseWasabi(source)) {
+    return await readWasabiJson<Record<string, LevelsEntry>>(fileName);
+  }
+  return await readJsonFile<Record<string, LevelsEntry>>(path.join(LEVELS_LOCAL_DIR, fileName));
+}
+
+async function loadLevelsEntry(symbol: string, model: string, source: string): Promise<LevelsEntry | null> {
+  const fileName = model === "simple" ? "basic_levels.json" : "levels.json";
+  if (shouldUseWasabi(source)) {
+    try {
+      return await readWasabiJson<LevelsEntry>(`symbols/${symbol}/${fileName}`);
+    } catch (error) {
+      console.warn(`Wasabi per-symbol levels missing for ${symbol}:`, error);
+      const allLevels = await loadLevelsData(model, source);
+      return allLevels[symbol] ?? null;
+    }
+  }
+  const allLevels = await loadLevelsData(model, source);
+  return allLevels[symbol] ?? null;
 }
 
 function normalizeDate(input: string | number): string {
@@ -38,10 +156,29 @@ function normalizeDate(input: string | number): string {
   return String(input);
 }
 
-async function loadOhlcv(symbol: string): Promise<OhlcvBar[]> {
-  const file = path.join(process.cwd(), "public", "mock", "ohlcv", `${symbol}.json`);
+async function loadOhlcv(symbol: string, source: string): Promise<OhlcvBar[]> {
+  const mapped = OHLCV_ALIASES[symbol] || symbol;
+  if (source !== "demo") {
+    try {
+      const assetsMap = await loadAssetsMap();
+      const filePath = assetsMap.get(mapped);
+      if (filePath) {
+        const csv = await fs.readFile(filePath, "utf-8");
+        const rows = parseCsvCloses(csv);
+        return rows.sort((a, b) => {
+          const ta = normalizeDate(a.time);
+          const tb = normalizeDate(b.time);
+          return ta < tb ? -1 : ta > tb ? 1 : 0;
+        });
+      }
+    } catch (error) {
+      console.warn("OHLCV CSV load failed, falling back to demo data.", error);
+    }
+  }
+
+  const file = path.join(process.cwd(), "public", "mock", "ohlcv", `${mapped}.json`);
   const rows = await readJsonFile<RawOhlcvRow[]>(file);
-  if (!Array.isArray(rows)) throw new Error(`Unexpected OHLCV shape for ${symbol}`);
+  if (!Array.isArray(rows)) throw new Error(`Unexpected OHLCV shape for ${mapped}`);
 
   return rows
     .map(row => {
@@ -199,7 +336,7 @@ function computeBeta(assetBars: OhlcvBar[], benchmarkBars: OhlcvBar[], lookback 
 function computeVolRatio(assetBars: OhlcvBar[], benchmarkBars: OhlcvBar[], lookback = 1250) {
   const paired = buildAlignedReturnSeries(assetBars, benchmarkBars);
 
-  if (paired.length < 5) {
+  if (paired.length < 2) {
     return { ratio: 1, sampleSize: paired.length };
   }
 
@@ -251,10 +388,10 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const rawSymbol = (searchParams.get("symbol") || "SPY").toUpperCase();
   const model = (searchParams.get("model") || "pro").toLowerCase();
+  const source = (searchParams.get("source") || DEFAULT_LEVELS_SOURCE).toLowerCase();
   
   // Map symbols to the consolidated levels file
   const symbolMap: Record<string, string> = {
-    NQ: "NDX",
     BTCUSD: "BTC",
     CL: "CL",
     GC: "GC",
@@ -263,13 +400,11 @@ export async function GET(req: NextRequest) {
 
   if (model === "beta") {
     try {
-      const [assetBars, benchmarkBars, levelsData] = await Promise.all([
-        loadOhlcv(rawSymbol),
-        loadOhlcv(BENCHMARK_SYMBOL),
-        readJsonFile<Record<string, LevelsEntry>>(path.join(process.cwd(), "public", "mock", "levels", "levels.json")),
+      const [assetBars, benchmarkBars, spxLevels] = await Promise.all([
+        loadOhlcv(rawSymbol, source),
+        loadOhlcv(BENCHMARK_SYMBOL, source),
+        loadLevelsEntry(BENCHMARK_SYMBOL, "pro", source),
       ]);
-
-      const spxLevels = levelsData[BENCHMARK_SYMBOL];
       if (!spxLevels) {
         console.error("Missing SPX levels in levels.json");
         return Response.json({ error: "benchmark levels unavailable" }, { status: 500 });
@@ -354,16 +489,10 @@ export async function GET(req: NextRequest) {
 
   const mappedSymbol = symbolMap[rawSymbol] || rawSymbol;
   
-  // Choose the appropriate levels file based on model
-  const levelsFile = model === "simple" 
-    ? path.join(process.cwd(), "public", "mock", "levels", "basic_levels.json")
-    : path.join(process.cwd(), "public", "mock", "levels", "levels.json");
-
   try {
-    const allLevels = await readJsonFile<Record<string, LevelsEntry>>(levelsFile);
-    
-    if (allLevels[mappedSymbol]) {
-      return Response.json(allLevels[mappedSymbol], {
+    const entry = await loadLevelsEntry(mappedSymbol, model, source);
+    if (entry) {
+      return Response.json(entry, {
         headers: {
           "content-type": "application/json",
           "cache-control": "public, max-age=3600, s-maxage=3600",
@@ -377,4 +506,3 @@ export async function GET(req: NextRequest) {
     return Response.json({ error: "not found" }, { status: 404 });
   }
 }
-

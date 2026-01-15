@@ -1,0 +1,2350 @@
+[
+  {
+    "asset_name": "SPX",
+    "file_path": "../Daily data csv/SPX_1D.csv"
+  },
+  {
+    "asset_name": "NDX",
+    "file_path": "../Daily data csv/NDX_1D.csv"
+  },
+  {
+    "asset_name": "BTC",
+    "file_path": "../Daily data csv/BTC_1D.csv"
+  },
+  {
+    "asset_name": "CL",
+    "file_path": "../Daily data csv/CL_1D.csv"
+  },
+  {
+    "asset_name": "GC",
+    "file_path": "../Daily data csv/GC_1D.csv"
+  },
+  {
+    "asset_name": "ES1!",
+    "file_path": "../Daily data csv/CME_MINI_ES1!, 1D.csv"
+  },
+  {
+    "asset_name": "NQ1!",
+    "file_path": "../Daily data csv/CME_MINI_NQ1!, 1D.csv"
+  },
+  {
+    "asset_name": "YM1!",
+    "file_path": "../Daily data csv/CBOT_MINI_YM1!, 1D.csv"
+  },
+  {
+    "asset_name": "ZB1!",
+    "file_path": "../Daily data csv/CBOT_ZB1!, 1D.csv"
+  },
+  {
+    "asset_name": "ZC1!",
+    "file_path": "../Daily data csv/CBOT_ZC1!, 1D.csv"
+  },
+  {
+    "asset_name": "ZN1!",
+    "file_path": "../Daily data csv/CBOT_ZN1!, 1D.csv"
+  },
+  {
+    "asset_name": "ZS1!",
+    "file_path": "../Daily data csv/CBOT_ZS1!, 1D.csv"
+  },
+  {
+    "asset_name": "ZW1!",
+    "file_path": "../Daily data csv/CBOT_ZW1!, 1D.csv"
+  },
+  {
+    "asset_name": "6E1!",
+    "file_path": "../Daily data csv/CME_6E1!, 1D.csv"
+  },
+  {
+    "asset_name": "6J1!",
+    "file_path": "../Daily data csv/CME_6J1!, 1D.csv"
+  },
+  {
+    "asset_name": "GF1!",
+    "file_path": "../Daily data csv/CME_GF1!, 1D.csv"
+  },
+  {
+    "asset_name": "LE1!",
+    "file_path": "../Daily data csv/CME_LE1!, 1D.csv"
+  },
+  {
+    "asset_name": "NG1!",
+    "file_path": "../Daily data csv/NYMEX_NG1!, 1D.csv"
+  },
+  {
+    "asset_name": "PL1!",
+    "file_path": "../Daily data csv/NYMEX_PL1!, 1D.csv"
+  },
+  {
+    "asset_name": "SI1!",
+    "file_path": "../Daily data csv/COMEX_SI1!, 1D.csv"
+  },
+  {
+    "asset_name": "EURUSD",
+    "file_path": "../Daily data csv/FX_IDC_EURUSD, 1D.csv"
+  },
+  {
+    "asset_name": "HSI",
+    "file_path": "../Daily data csv/HSI_HSI, 1D.csv"
+  },
+  {
+    "asset_name": "CC1!",
+    "file_path": "../Daily data csv/ICEUS_DLY_CC1!, 1D.csv"
+  },
+  {
+    "asset_name": "CT1!",
+    "file_path": "../Daily data csv/ICEUS_DLY_CT1!, 1D.csv"
+  },
+  {
+    "asset_name": "KC1!",
+    "file_path": "../Daily data csv/ICEUS_DLY_KC1!, 1D.csv"
+  },
+  {
+    "asset_name": "SB1!",
+    "file_path": "../Daily data csv/ICEUS_DLY_SB1!, 1D.csv"
+  },
+  {
+    "asset_name": "RTY1!",
+    "file_path": "../Daily data csv/FUTURES_RTY1!, 1D.csv"
+  },
+  {
+    "asset_name": "HG1!",
+    "file_path": "../Daily data csv/FUTURES_HG1!, 1D.csv"
+  },
+  {
+    "asset_name": "ZF1!",
+    "file_path": "../Daily data csv/FUTURES_ZF1!, 1D.csv"
+  },
+  {
+    "asset_name": "ZT1!",
+    "file_path": "../Daily data csv/FUTURES_ZT1!, 1D.csv"
+  },
+  {
+    "asset_name": "HE1!",
+    "file_path": "../Daily data csv/FUTURES_HE1!, 1D.csv"
+  },
+  {
+    "asset_name": "6B1!",
+    "file_path": "../Daily data csv/FUTURES_6B1!, 1D.csv"
+  },
+  {
+    "asset_name": "6A1!",
+    "file_path": "../Daily data csv/FUTURES_6A1!, 1D.csv"
+  },
+  {
+    "asset_name": "6C1!",
+    "file_path": "../Daily data csv/FUTURES_6C1!, 1D.csv"
+  },
+  {
+    "asset_name": "6N1!",
+    "file_path": "../Daily data csv/FUTURES_6N1!, 1D.csv"
+  },
+  {
+    "asset_name": "DX1!",
+    "file_path": "../Daily data csv/FUTURES_DX1!, 1D.csv"
+  },
+  {
+    "asset_name": "ETHUSDT",
+    "file_path": "../Daily data csv/CRYPTO_ETHUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "BNBUSDT",
+    "file_path": "../Daily data csv/CRYPTO_BNBUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "SOLUSDT",
+    "file_path": "../Daily data csv/CRYPTO_SOLUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "XRPUSDT",
+    "file_path": "../Daily data csv/CRYPTO_XRPUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "DOGEUSDT",
+    "file_path": "../Daily data csv/CRYPTO_DOGEUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "ADAUSDT",
+    "file_path": "../Daily data csv/CRYPTO_ADAUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "TRXUSDT",
+    "file_path": "../Daily data csv/CRYPTO_TRXUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "AVAXUSDT",
+    "file_path": "../Daily data csv/CRYPTO_AVAXUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "LINKUSDT",
+    "file_path": "../Daily data csv/CRYPTO_LINKUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "MATICUSDT",
+    "file_path": "../Daily data csv/CRYPTO_MATICUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "LTCUSDT",
+    "file_path": "../Daily data csv/CRYPTO_LTCUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "BCHUSDT",
+    "file_path": "../Daily data csv/CRYPTO_BCHUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "DOTUSDT",
+    "file_path": "../Daily data csv/CRYPTO_DOTUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "UNIUSDT",
+    "file_path": "../Daily data csv/CRYPTO_UNIUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "XLMUSDT",
+    "file_path": "../Daily data csv/CRYPTO_XLMUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "ATOMUSDT",
+    "file_path": "../Daily data csv/CRYPTO_ATOMUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "ETCUSDT",
+    "file_path": "../Daily data csv/CRYPTO_ETCUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "FILUSDT",
+    "file_path": "../Daily data csv/CRYPTO_FILUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "APTUSDT",
+    "file_path": "../Daily data csv/CRYPTO_APTUSDT, 1D.csv"
+  },
+  {
+    "asset_name": "USDJPY",
+    "file_path": "../Daily data csv/FX_USDJPY, 1D.csv"
+  },
+  {
+    "asset_name": "GBPUSD",
+    "file_path": "../Daily data csv/FX_GBPUSD, 1D.csv"
+  },
+  {
+    "asset_name": "AUDUSD",
+    "file_path": "../Daily data csv/FX_AUDUSD, 1D.csv"
+  },
+  {
+    "asset_name": "USDCAD",
+    "file_path": "../Daily data csv/FX_USDCAD, 1D.csv"
+  },
+  {
+    "asset_name": "USDCHF",
+    "file_path": "../Daily data csv/FX_USDCHF, 1D.csv"
+  },
+  {
+    "asset_name": "NZDUSD",
+    "file_path": "../Daily data csv/FX_NZDUSD, 1D.csv"
+  },
+  {
+    "asset_name": "EURJPY",
+    "file_path": "../Daily data csv/FX_EURJPY, 1D.csv"
+  },
+  {
+    "asset_name": "EURGBP",
+    "file_path": "../Daily data csv/FX_EURGBP, 1D.csv"
+  },
+  {
+    "asset_name": "EURCHF",
+    "file_path": "../Daily data csv/FX_EURCHF, 1D.csv"
+  },
+  {
+    "asset_name": "EURAUD",
+    "file_path": "../Daily data csv/FX_EURAUD, 1D.csv"
+  },
+  {
+    "asset_name": "EURCAD",
+    "file_path": "../Daily data csv/FX_EURCAD, 1D.csv"
+  },
+  {
+    "asset_name": "GBPJPY",
+    "file_path": "../Daily data csv/FX_GBPJPY, 1D.csv"
+  },
+  {
+    "asset_name": "GBPCHF",
+    "file_path": "../Daily data csv/FX_GBPCHF, 1D.csv"
+  },
+  {
+    "asset_name": "AUDJPY",
+    "file_path": "../Daily data csv/FX_AUDJPY, 1D.csv"
+  },
+  {
+    "asset_name": "CADJPY",
+    "file_path": "../Daily data csv/FX_CADJPY, 1D.csv"
+  },
+  {
+    "asset_name": "CHFJPY",
+    "file_path": "../Daily data csv/FX_CHFJPY, 1D.csv"
+  },
+  {
+    "asset_name": "AUDNZD",
+    "file_path": "../Daily data csv/FX_AUDNZD, 1D.csv"
+  },
+  {
+    "asset_name": "AUDCAD",
+    "file_path": "../Daily data csv/FX_AUDCAD, 1D.csv"
+  },
+  {
+    "asset_name": "NZDJPY",
+    "file_path": "../Daily data csv/FX_NZDJPY, 1D.csv"
+  },
+  {
+    "asset_name": "DJI",
+    "file_path": "../Daily data csv/INDEX_DJI, 1D.csv"
+  },
+  {
+    "asset_name": "RUT",
+    "file_path": "../Daily data csv/INDEX_RUT, 1D.csv"
+  },
+  {
+    "asset_name": "VIX",
+    "file_path": "../Daily data csv/INDEX_VIX, 1D.csv"
+  },
+  {
+    "asset_name": "HSCEI",
+    "file_path": "../Daily data csv/INDEX_HSCEI, 1D.csv"
+  },
+  {
+    "asset_name": "UKX",
+    "file_path": "../Daily data csv/INDEX_UKX, 1D.csv"
+  },
+  {
+    "asset_name": "DAX",
+    "file_path": "../Daily data csv/INDEX_DAX, 1D.csv"
+  },
+  {
+    "asset_name": "CAC40",
+    "file_path": "../Daily data csv/INDEX_CAC40, 1D.csv"
+  },
+  {
+    "asset_name": "EU50",
+    "file_path": "../Daily data csv/INDEX_EU50, 1D.csv"
+  },
+  {
+    "asset_name": "IBEX",
+    "file_path": "../Daily data csv/INDEX_IBEX, 1D.csv"
+  },
+  {
+    "asset_name": "SMI",
+    "file_path": "../Daily data csv/INDEX_SMI, 1D.csv"
+  },
+  {
+    "asset_name": "AEX",
+    "file_path": "../Daily data csv/INDEX_AEX, 1D.csv"
+  },
+  {
+    "asset_name": "OMXS30",
+    "file_path": "../Daily data csv/INDEX_OMXS30, 1D.csv"
+  },
+  {
+    "asset_name": "OMXC25",
+    "file_path": "../Daily data csv/INDEX_OMXC25, 1D.csv"
+  },
+  {
+    "asset_name": "XJO",
+    "file_path": "../Daily data csv/INDEX_XJO, 1D.csv"
+  },
+  {
+    "asset_name": "NI225",
+    "file_path": "../Daily data csv/INDEX_NI225, 1D.csv"
+  },
+  {
+    "asset_name": "KOSPI",
+    "file_path": "../Daily data csv/INDEX_KOSPI, 1D.csv"
+  },
+  {
+    "asset_name": "NIFTY",
+    "file_path": "../Daily data csv/INDEX_NIFTY, 1D.csv"
+  },
+  {
+    "asset_name": "A",
+    "file_path": "../Daily data csv/SP500_A, 1D.csv"
+  },
+  {
+    "asset_name": "AAPL",
+    "file_path": "../Daily data csv/SP500_AAPL, 1D.csv"
+  },
+  {
+    "asset_name": "ABBV",
+    "file_path": "../Daily data csv/SP500_ABBV, 1D.csv"
+  },
+  {
+    "asset_name": "ABNB",
+    "file_path": "../Daily data csv/SP500_ABNB, 1D.csv"
+  },
+  {
+    "asset_name": "ABT",
+    "file_path": "../Daily data csv/SP500_ABT, 1D.csv"
+  },
+  {
+    "asset_name": "ACGL",
+    "file_path": "../Daily data csv/SP500_ACGL, 1D.csv"
+  },
+  {
+    "asset_name": "ACN",
+    "file_path": "../Daily data csv/SP500_ACN, 1D.csv"
+  },
+  {
+    "asset_name": "ADBE",
+    "file_path": "../Daily data csv/SP500_ADBE, 1D.csv"
+  },
+  {
+    "asset_name": "ADI",
+    "file_path": "../Daily data csv/SP500_ADI, 1D.csv"
+  },
+  {
+    "asset_name": "ADM",
+    "file_path": "../Daily data csv/SP500_ADM, 1D.csv"
+  },
+  {
+    "asset_name": "ADP",
+    "file_path": "../Daily data csv/SP500_ADP, 1D.csv"
+  },
+  {
+    "asset_name": "ADSK",
+    "file_path": "../Daily data csv/SP500_ADSK, 1D.csv"
+  },
+  {
+    "asset_name": "AEE",
+    "file_path": "../Daily data csv/SP500_AEE, 1D.csv"
+  },
+  {
+    "asset_name": "AEP",
+    "file_path": "../Daily data csv/SP500_AEP, 1D.csv"
+  },
+  {
+    "asset_name": "AES",
+    "file_path": "../Daily data csv/SP500_AES, 1D.csv"
+  },
+  {
+    "asset_name": "AFL",
+    "file_path": "../Daily data csv/SP500_AFL, 1D.csv"
+  },
+  {
+    "asset_name": "AIG",
+    "file_path": "../Daily data csv/SP500_AIG, 1D.csv"
+  },
+  {
+    "asset_name": "AIZ",
+    "file_path": "../Daily data csv/SP500_AIZ, 1D.csv"
+  },
+  {
+    "asset_name": "AJG",
+    "file_path": "../Daily data csv/SP500_AJG, 1D.csv"
+  },
+  {
+    "asset_name": "AKAM",
+    "file_path": "../Daily data csv/SP500_AKAM, 1D.csv"
+  },
+  {
+    "asset_name": "ALB",
+    "file_path": "../Daily data csv/SP500_ALB, 1D.csv"
+  },
+  {
+    "asset_name": "ALGN",
+    "file_path": "../Daily data csv/SP500_ALGN, 1D.csv"
+  },
+  {
+    "asset_name": "ALL",
+    "file_path": "../Daily data csv/SP500_ALL, 1D.csv"
+  },
+  {
+    "asset_name": "ALLE",
+    "file_path": "../Daily data csv/SP500_ALLE, 1D.csv"
+  },
+  {
+    "asset_name": "AMAT",
+    "file_path": "../Daily data csv/SP500_AMAT, 1D.csv"
+  },
+  {
+    "asset_name": "AMCR",
+    "file_path": "../Daily data csv/SP500_AMCR, 1D.csv"
+  },
+  {
+    "asset_name": "AMD",
+    "file_path": "../Daily data csv/SP500_AMD, 1D.csv"
+  },
+  {
+    "asset_name": "AME",
+    "file_path": "../Daily data csv/SP500_AME, 1D.csv"
+  },
+  {
+    "asset_name": "AMGN",
+    "file_path": "../Daily data csv/SP500_AMGN, 1D.csv"
+  },
+  {
+    "asset_name": "AMP",
+    "file_path": "../Daily data csv/SP500_AMP, 1D.csv"
+  },
+  {
+    "asset_name": "AMT",
+    "file_path": "../Daily data csv/SP500_AMT, 1D.csv"
+  },
+  {
+    "asset_name": "AMZN",
+    "file_path": "../Daily data csv/SP500_AMZN, 1D.csv"
+  },
+  {
+    "asset_name": "ANET",
+    "file_path": "../Daily data csv/SP500_ANET, 1D.csv"
+  },
+  {
+    "asset_name": "AON",
+    "file_path": "../Daily data csv/SP500_AON, 1D.csv"
+  },
+  {
+    "asset_name": "AOS",
+    "file_path": "../Daily data csv/SP500_AOS, 1D.csv"
+  },
+  {
+    "asset_name": "APA",
+    "file_path": "../Daily data csv/SP500_APA, 1D.csv"
+  },
+  {
+    "asset_name": "APD",
+    "file_path": "../Daily data csv/SP500_APD, 1D.csv"
+  },
+  {
+    "asset_name": "APH",
+    "file_path": "../Daily data csv/SP500_APH, 1D.csv"
+  },
+  {
+    "asset_name": "APO",
+    "file_path": "../Daily data csv/SP500_APO, 1D.csv"
+  },
+  {
+    "asset_name": "APTV",
+    "file_path": "../Daily data csv/SP500_APTV, 1D.csv"
+  },
+  {
+    "asset_name": "ARE",
+    "file_path": "../Daily data csv/SP500_ARE, 1D.csv"
+  },
+  {
+    "asset_name": "ATO",
+    "file_path": "../Daily data csv/SP500_ATO, 1D.csv"
+  },
+  {
+    "asset_name": "AVB",
+    "file_path": "../Daily data csv/SP500_AVB, 1D.csv"
+  },
+  {
+    "asset_name": "AVGO",
+    "file_path": "../Daily data csv/SP500_AVGO, 1D.csv"
+  },
+  {
+    "asset_name": "AVY",
+    "file_path": "../Daily data csv/SP500_AVY, 1D.csv"
+  },
+  {
+    "asset_name": "AWK",
+    "file_path": "../Daily data csv/SP500_AWK, 1D.csv"
+  },
+  {
+    "asset_name": "AXON",
+    "file_path": "../Daily data csv/SP500_AXON, 1D.csv"
+  },
+  {
+    "asset_name": "AXP",
+    "file_path": "../Daily data csv/SP500_AXP, 1D.csv"
+  },
+  {
+    "asset_name": "AZO",
+    "file_path": "../Daily data csv/SP500_AZO, 1D.csv"
+  },
+  {
+    "asset_name": "BA",
+    "file_path": "../Daily data csv/SP500_BA, 1D.csv"
+  },
+  {
+    "asset_name": "BAC",
+    "file_path": "../Daily data csv/SP500_BAC, 1D.csv"
+  },
+  {
+    "asset_name": "BALL",
+    "file_path": "../Daily data csv/SP500_BALL, 1D.csv"
+  },
+  {
+    "asset_name": "BAX",
+    "file_path": "../Daily data csv/SP500_BAX, 1D.csv"
+  },
+  {
+    "asset_name": "BBY",
+    "file_path": "../Daily data csv/SP500_BBY, 1D.csv"
+  },
+  {
+    "asset_name": "BDX",
+    "file_path": "../Daily data csv/SP500_BDX, 1D.csv"
+  },
+  {
+    "asset_name": "BEN",
+    "file_path": "../Daily data csv/SP500_BEN, 1D.csv"
+  },
+  {
+    "asset_name": "BF.B",
+    "file_path": "../Daily data csv/SP500_BF.B, 1D.csv"
+  },
+  {
+    "asset_name": "BG",
+    "file_path": "../Daily data csv/SP500_BG, 1D.csv"
+  },
+  {
+    "asset_name": "BIIB",
+    "file_path": "../Daily data csv/SP500_BIIB, 1D.csv"
+  },
+  {
+    "asset_name": "BK",
+    "file_path": "../Daily data csv/SP500_BK, 1D.csv"
+  },
+  {
+    "asset_name": "BKNG",
+    "file_path": "../Daily data csv/SP500_BKNG, 1D.csv"
+  },
+  {
+    "asset_name": "BKR",
+    "file_path": "../Daily data csv/SP500_BKR, 1D.csv"
+  },
+  {
+    "asset_name": "BLDR",
+    "file_path": "../Daily data csv/SP500_BLDR, 1D.csv"
+  },
+  {
+    "asset_name": "BLK",
+    "file_path": "../Daily data csv/SP500_BLK, 1D.csv"
+  },
+  {
+    "asset_name": "BMY",
+    "file_path": "../Daily data csv/SP500_BMY, 1D.csv"
+  },
+  {
+    "asset_name": "BR",
+    "file_path": "../Daily data csv/SP500_BR, 1D.csv"
+  },
+  {
+    "asset_name": "BRK.B",
+    "file_path": "../Daily data csv/SP500_BRK.B, 1D.csv"
+  },
+  {
+    "asset_name": "BRO",
+    "file_path": "../Daily data csv/SP500_BRO, 1D.csv"
+  },
+  {
+    "asset_name": "BSX",
+    "file_path": "../Daily data csv/SP500_BSX, 1D.csv"
+  },
+  {
+    "asset_name": "BX",
+    "file_path": "../Daily data csv/SP500_BX, 1D.csv"
+  },
+  {
+    "asset_name": "BXP",
+    "file_path": "../Daily data csv/SP500_BXP, 1D.csv"
+  },
+  {
+    "asset_name": "C",
+    "file_path": "../Daily data csv/SP500_C, 1D.csv"
+  },
+  {
+    "asset_name": "CAG",
+    "file_path": "../Daily data csv/SP500_CAG, 1D.csv"
+  },
+  {
+    "asset_name": "CAH",
+    "file_path": "../Daily data csv/SP500_CAH, 1D.csv"
+  },
+  {
+    "asset_name": "CARR",
+    "file_path": "../Daily data csv/SP500_CARR, 1D.csv"
+  },
+  {
+    "asset_name": "CAT",
+    "file_path": "../Daily data csv/SP500_CAT, 1D.csv"
+  },
+  {
+    "asset_name": "CB",
+    "file_path": "../Daily data csv/SP500_CB, 1D.csv"
+  },
+  {
+    "asset_name": "CBOE",
+    "file_path": "../Daily data csv/SP500_CBOE, 1D.csv"
+  },
+  {
+    "asset_name": "CBRE",
+    "file_path": "../Daily data csv/SP500_CBRE, 1D.csv"
+  },
+  {
+    "asset_name": "CCI",
+    "file_path": "../Daily data csv/SP500_CCI, 1D.csv"
+  },
+  {
+    "asset_name": "CCL",
+    "file_path": "../Daily data csv/SP500_CCL, 1D.csv"
+  },
+  {
+    "asset_name": "CDNS",
+    "file_path": "../Daily data csv/SP500_CDNS, 1D.csv"
+  },
+  {
+    "asset_name": "CDW",
+    "file_path": "../Daily data csv/SP500_CDW, 1D.csv"
+  },
+  {
+    "asset_name": "CEG",
+    "file_path": "../Daily data csv/SP500_CEG, 1D.csv"
+  },
+  {
+    "asset_name": "CF",
+    "file_path": "../Daily data csv/SP500_CF, 1D.csv"
+  },
+  {
+    "asset_name": "CFG",
+    "file_path": "../Daily data csv/SP500_CFG, 1D.csv"
+  },
+  {
+    "asset_name": "CHD",
+    "file_path": "../Daily data csv/SP500_CHD, 1D.csv"
+  },
+  {
+    "asset_name": "CHRW",
+    "file_path": "../Daily data csv/SP500_CHRW, 1D.csv"
+  },
+  {
+    "asset_name": "CHTR",
+    "file_path": "../Daily data csv/SP500_CHTR, 1D.csv"
+  },
+  {
+    "asset_name": "CI",
+    "file_path": "../Daily data csv/SP500_CI, 1D.csv"
+  },
+  {
+    "asset_name": "CINF",
+    "file_path": "../Daily data csv/SP500_CINF, 1D.csv"
+  },
+  {
+    "asset_name": "CLX",
+    "file_path": "../Daily data csv/SP500_CLX, 1D.csv"
+  },
+  {
+    "asset_name": "CMCSA",
+    "file_path": "../Daily data csv/SP500_CMCSA, 1D.csv"
+  },
+  {
+    "asset_name": "CME",
+    "file_path": "../Daily data csv/SP500_CME, 1D.csv"
+  },
+  {
+    "asset_name": "CMG",
+    "file_path": "../Daily data csv/SP500_CMG, 1D.csv"
+  },
+  {
+    "asset_name": "CMI",
+    "file_path": "../Daily data csv/SP500_CMI, 1D.csv"
+  },
+  {
+    "asset_name": "CMS",
+    "file_path": "../Daily data csv/SP500_CMS, 1D.csv"
+  },
+  {
+    "asset_name": "CNC",
+    "file_path": "../Daily data csv/SP500_CNC, 1D.csv"
+  },
+  {
+    "asset_name": "CNP",
+    "file_path": "../Daily data csv/SP500_CNP, 1D.csv"
+  },
+  {
+    "asset_name": "COF",
+    "file_path": "../Daily data csv/SP500_COF, 1D.csv"
+  },
+  {
+    "asset_name": "COIN",
+    "file_path": "../Daily data csv/SP500_COIN, 1D.csv"
+  },
+  {
+    "asset_name": "COO",
+    "file_path": "../Daily data csv/SP500_COO, 1D.csv"
+  },
+  {
+    "asset_name": "COP",
+    "file_path": "../Daily data csv/SP500_COP, 1D.csv"
+  },
+  {
+    "asset_name": "COR",
+    "file_path": "../Daily data csv/SP500_COR, 1D.csv"
+  },
+  {
+    "asset_name": "COST",
+    "file_path": "../Daily data csv/SP500_COST, 1D.csv"
+  },
+  {
+    "asset_name": "CPAY",
+    "file_path": "../Daily data csv/SP500_CPAY, 1D.csv"
+  },
+  {
+    "asset_name": "CPB",
+    "file_path": "../Daily data csv/SP500_CPB, 1D.csv"
+  },
+  {
+    "asset_name": "CPRT",
+    "file_path": "../Daily data csv/SP500_CPRT, 1D.csv"
+  },
+  {
+    "asset_name": "CPT",
+    "file_path": "../Daily data csv/SP500_CPT, 1D.csv"
+  },
+  {
+    "asset_name": "CRL",
+    "file_path": "../Daily data csv/SP500_CRL, 1D.csv"
+  },
+  {
+    "asset_name": "CRM",
+    "file_path": "../Daily data csv/SP500_CRM, 1D.csv"
+  },
+  {
+    "asset_name": "CRWD",
+    "file_path": "../Daily data csv/SP500_CRWD, 1D.csv"
+  },
+  {
+    "asset_name": "CSCO",
+    "file_path": "../Daily data csv/SP500_CSCO, 1D.csv"
+  },
+  {
+    "asset_name": "CSGP",
+    "file_path": "../Daily data csv/SP500_CSGP, 1D.csv"
+  },
+  {
+    "asset_name": "CSX",
+    "file_path": "../Daily data csv/SP500_CSX, 1D.csv"
+  },
+  {
+    "asset_name": "CTAS",
+    "file_path": "../Daily data csv/SP500_CTAS, 1D.csv"
+  },
+  {
+    "asset_name": "CTRA",
+    "file_path": "../Daily data csv/SP500_CTRA, 1D.csv"
+  },
+  {
+    "asset_name": "CTSH",
+    "file_path": "../Daily data csv/SP500_CTSH, 1D.csv"
+  },
+  {
+    "asset_name": "CTVA",
+    "file_path": "../Daily data csv/SP500_CTVA, 1D.csv"
+  },
+  {
+    "asset_name": "CVS",
+    "file_path": "../Daily data csv/SP500_CVS, 1D.csv"
+  },
+  {
+    "asset_name": "CVX",
+    "file_path": "../Daily data csv/SP500_CVX, 1D.csv"
+  },
+  {
+    "asset_name": "CZR",
+    "file_path": "../Daily data csv/SP500_CZR, 1D.csv"
+  },
+  {
+    "asset_name": "D",
+    "file_path": "../Daily data csv/SP500_D, 1D.csv"
+  },
+  {
+    "asset_name": "DAL",
+    "file_path": "../Daily data csv/SP500_DAL, 1D.csv"
+  },
+  {
+    "asset_name": "DASH",
+    "file_path": "../Daily data csv/SP500_DASH, 1D.csv"
+  },
+  {
+    "asset_name": "DAY",
+    "file_path": "../Daily data csv/SP500_DAY, 1D.csv"
+  },
+  {
+    "asset_name": "DD",
+    "file_path": "../Daily data csv/SP500_DD, 1D.csv"
+  },
+  {
+    "asset_name": "DDOG",
+    "file_path": "../Daily data csv/SP500_DDOG, 1D.csv"
+  },
+  {
+    "asset_name": "DE",
+    "file_path": "../Daily data csv/SP500_DE, 1D.csv"
+  },
+  {
+    "asset_name": "DECK",
+    "file_path": "../Daily data csv/SP500_DECK, 1D.csv"
+  },
+  {
+    "asset_name": "DELL",
+    "file_path": "../Daily data csv/SP500_DELL, 1D.csv"
+  },
+  {
+    "asset_name": "DG",
+    "file_path": "../Daily data csv/SP500_DG, 1D.csv"
+  },
+  {
+    "asset_name": "DGX",
+    "file_path": "../Daily data csv/SP500_DGX, 1D.csv"
+  },
+  {
+    "asset_name": "DHI",
+    "file_path": "../Daily data csv/SP500_DHI, 1D.csv"
+  },
+  {
+    "asset_name": "DHR",
+    "file_path": "../Daily data csv/SP500_DHR, 1D.csv"
+  },
+  {
+    "asset_name": "DIS",
+    "file_path": "../Daily data csv/SP500_DIS, 1D.csv"
+  },
+  {
+    "asset_name": "DLR",
+    "file_path": "../Daily data csv/SP500_DLR, 1D.csv"
+  },
+  {
+    "asset_name": "DLTR",
+    "file_path": "../Daily data csv/SP500_DLTR, 1D.csv"
+  },
+  {
+    "asset_name": "DOC",
+    "file_path": "../Daily data csv/SP500_DOC, 1D.csv"
+  },
+  {
+    "asset_name": "DOV",
+    "file_path": "../Daily data csv/SP500_DOV, 1D.csv"
+  },
+  {
+    "asset_name": "DOW",
+    "file_path": "../Daily data csv/SP500_DOW, 1D.csv"
+  },
+  {
+    "asset_name": "DPZ",
+    "file_path": "../Daily data csv/SP500_DPZ, 1D.csv"
+  },
+  {
+    "asset_name": "DRI",
+    "file_path": "../Daily data csv/SP500_DRI, 1D.csv"
+  },
+  {
+    "asset_name": "DTE",
+    "file_path": "../Daily data csv/SP500_DTE, 1D.csv"
+  },
+  {
+    "asset_name": "DUK",
+    "file_path": "../Daily data csv/SP500_DUK, 1D.csv"
+  },
+  {
+    "asset_name": "DVA",
+    "file_path": "../Daily data csv/SP500_DVA, 1D.csv"
+  },
+  {
+    "asset_name": "DVN",
+    "file_path": "../Daily data csv/SP500_DVN, 1D.csv"
+  },
+  {
+    "asset_name": "DXCM",
+    "file_path": "../Daily data csv/SP500_DXCM, 1D.csv"
+  },
+  {
+    "asset_name": "EA",
+    "file_path": "../Daily data csv/SP500_EA, 1D.csv"
+  },
+  {
+    "asset_name": "EBAY",
+    "file_path": "../Daily data csv/SP500_EBAY, 1D.csv"
+  },
+  {
+    "asset_name": "ECL",
+    "file_path": "../Daily data csv/SP500_ECL, 1D.csv"
+  },
+  {
+    "asset_name": "ED",
+    "file_path": "../Daily data csv/SP500_ED, 1D.csv"
+  },
+  {
+    "asset_name": "EFX",
+    "file_path": "../Daily data csv/SP500_EFX, 1D.csv"
+  },
+  {
+    "asset_name": "EG",
+    "file_path": "../Daily data csv/SP500_EG, 1D.csv"
+  },
+  {
+    "asset_name": "EIX",
+    "file_path": "../Daily data csv/SP500_EIX, 1D.csv"
+  },
+  {
+    "asset_name": "EL",
+    "file_path": "../Daily data csv/SP500_EL, 1D.csv"
+  },
+  {
+    "asset_name": "ELV",
+    "file_path": "../Daily data csv/SP500_ELV, 1D.csv"
+  },
+  {
+    "asset_name": "EMN",
+    "file_path": "../Daily data csv/SP500_EMN, 1D.csv"
+  },
+  {
+    "asset_name": "EMR",
+    "file_path": "../Daily data csv/SP500_EMR, 1D.csv"
+  },
+  {
+    "asset_name": "ENPH",
+    "file_path": "../Daily data csv/SP500_ENPH, 1D.csv"
+  },
+  {
+    "asset_name": "EOG",
+    "file_path": "../Daily data csv/SP500_EOG, 1D.csv"
+  },
+  {
+    "asset_name": "EPAM",
+    "file_path": "../Daily data csv/SP500_EPAM, 1D.csv"
+  },
+  {
+    "asset_name": "EQIX",
+    "file_path": "../Daily data csv/SP500_EQIX, 1D.csv"
+  },
+  {
+    "asset_name": "EQR",
+    "file_path": "../Daily data csv/SP500_EQR, 1D.csv"
+  },
+  {
+    "asset_name": "EQT",
+    "file_path": "../Daily data csv/SP500_EQT, 1D.csv"
+  },
+  {
+    "asset_name": "ERIE",
+    "file_path": "../Daily data csv/SP500_ERIE, 1D.csv"
+  },
+  {
+    "asset_name": "ES",
+    "file_path": "../Daily data csv/SP500_ES, 1D.csv"
+  },
+  {
+    "asset_name": "ESS",
+    "file_path": "../Daily data csv/SP500_ESS, 1D.csv"
+  },
+  {
+    "asset_name": "ETN",
+    "file_path": "../Daily data csv/SP500_ETN, 1D.csv"
+  },
+  {
+    "asset_name": "ETR",
+    "file_path": "../Daily data csv/SP500_ETR, 1D.csv"
+  },
+  {
+    "asset_name": "EVRG",
+    "file_path": "../Daily data csv/SP500_EVRG, 1D.csv"
+  },
+  {
+    "asset_name": "EW",
+    "file_path": "../Daily data csv/SP500_EW, 1D.csv"
+  },
+  {
+    "asset_name": "EXC",
+    "file_path": "../Daily data csv/SP500_EXC, 1D.csv"
+  },
+  {
+    "asset_name": "EXE",
+    "file_path": "../Daily data csv/SP500_EXE, 1D.csv"
+  },
+  {
+    "asset_name": "EXPD",
+    "file_path": "../Daily data csv/SP500_EXPD, 1D.csv"
+  },
+  {
+    "asset_name": "EXPE",
+    "file_path": "../Daily data csv/SP500_EXPE, 1D.csv"
+  },
+  {
+    "asset_name": "EXR",
+    "file_path": "../Daily data csv/SP500_EXR, 1D.csv"
+  },
+  {
+    "asset_name": "F",
+    "file_path": "../Daily data csv/SP500_F, 1D.csv"
+  },
+  {
+    "asset_name": "FANG",
+    "file_path": "../Daily data csv/SP500_FANG, 1D.csv"
+  },
+  {
+    "asset_name": "FAST",
+    "file_path": "../Daily data csv/SP500_FAST, 1D.csv"
+  },
+  {
+    "asset_name": "FCX",
+    "file_path": "../Daily data csv/SP500_FCX, 1D.csv"
+  },
+  {
+    "asset_name": "FDS",
+    "file_path": "../Daily data csv/SP500_FDS, 1D.csv"
+  },
+  {
+    "asset_name": "FDX",
+    "file_path": "../Daily data csv/SP500_FDX, 1D.csv"
+  },
+  {
+    "asset_name": "FE",
+    "file_path": "../Daily data csv/SP500_FE, 1D.csv"
+  },
+  {
+    "asset_name": "FFIV",
+    "file_path": "../Daily data csv/SP500_FFIV, 1D.csv"
+  },
+  {
+    "asset_name": "FI",
+    "file_path": "../Daily data csv/SP500_FI, 1D.csv"
+  },
+  {
+    "asset_name": "FICO",
+    "file_path": "../Daily data csv/SP500_FICO, 1D.csv"
+  },
+  {
+    "asset_name": "FIS",
+    "file_path": "../Daily data csv/SP500_FIS, 1D.csv"
+  },
+  {
+    "asset_name": "FITB",
+    "file_path": "../Daily data csv/SP500_FITB, 1D.csv"
+  },
+  {
+    "asset_name": "FOX",
+    "file_path": "../Daily data csv/SP500_FOX, 1D.csv"
+  },
+  {
+    "asset_name": "FOXA",
+    "file_path": "../Daily data csv/SP500_FOXA, 1D.csv"
+  },
+  {
+    "asset_name": "FRT",
+    "file_path": "../Daily data csv/SP500_FRT, 1D.csv"
+  },
+  {
+    "asset_name": "FSLR",
+    "file_path": "../Daily data csv/SP500_FSLR, 1D.csv"
+  },
+  {
+    "asset_name": "FTNT",
+    "file_path": "../Daily data csv/SP500_FTNT, 1D.csv"
+  },
+  {
+    "asset_name": "FTV",
+    "file_path": "../Daily data csv/SP500_FTV, 1D.csv"
+  },
+  {
+    "asset_name": "GD",
+    "file_path": "../Daily data csv/SP500_GD, 1D.csv"
+  },
+  {
+    "asset_name": "GDDY",
+    "file_path": "../Daily data csv/SP500_GDDY, 1D.csv"
+  },
+  {
+    "asset_name": "GE",
+    "file_path": "../Daily data csv/SP500_GE, 1D.csv"
+  },
+  {
+    "asset_name": "GEHC",
+    "file_path": "../Daily data csv/SP500_GEHC, 1D.csv"
+  },
+  {
+    "asset_name": "GEN",
+    "file_path": "../Daily data csv/SP500_GEN, 1D.csv"
+  },
+  {
+    "asset_name": "GEV",
+    "file_path": "../Daily data csv/SP500_GEV, 1D.csv"
+  },
+  {
+    "asset_name": "GILD",
+    "file_path": "../Daily data csv/SP500_GILD, 1D.csv"
+  },
+  {
+    "asset_name": "GIS",
+    "file_path": "../Daily data csv/SP500_GIS, 1D.csv"
+  },
+  {
+    "asset_name": "GL",
+    "file_path": "../Daily data csv/SP500_GL, 1D.csv"
+  },
+  {
+    "asset_name": "GLW",
+    "file_path": "../Daily data csv/SP500_GLW, 1D.csv"
+  },
+  {
+    "asset_name": "GM",
+    "file_path": "../Daily data csv/SP500_GM, 1D.csv"
+  },
+  {
+    "asset_name": "GNRC",
+    "file_path": "../Daily data csv/SP500_GNRC, 1D.csv"
+  },
+  {
+    "asset_name": "GOOG",
+    "file_path": "../Daily data csv/SP500_GOOG, 1D.csv"
+  },
+  {
+    "asset_name": "GOOGL",
+    "file_path": "../Daily data csv/SP500_GOOGL, 1D.csv"
+  },
+  {
+    "asset_name": "GPC",
+    "file_path": "../Daily data csv/SP500_GPC, 1D.csv"
+  },
+  {
+    "asset_name": "GPN",
+    "file_path": "../Daily data csv/SP500_GPN, 1D.csv"
+  },
+  {
+    "asset_name": "GRMN",
+    "file_path": "../Daily data csv/SP500_GRMN, 1D.csv"
+  },
+  {
+    "asset_name": "GS",
+    "file_path": "../Daily data csv/SP500_GS, 1D.csv"
+  },
+  {
+    "asset_name": "GWW",
+    "file_path": "../Daily data csv/SP500_GWW, 1D.csv"
+  },
+  {
+    "asset_name": "HAL",
+    "file_path": "../Daily data csv/SP500_HAL, 1D.csv"
+  },
+  {
+    "asset_name": "HAS",
+    "file_path": "../Daily data csv/SP500_HAS, 1D.csv"
+  },
+  {
+    "asset_name": "HBAN",
+    "file_path": "../Daily data csv/SP500_HBAN, 1D.csv"
+  },
+  {
+    "asset_name": "HCA",
+    "file_path": "../Daily data csv/SP500_HCA, 1D.csv"
+  },
+  {
+    "asset_name": "HD",
+    "file_path": "../Daily data csv/SP500_HD, 1D.csv"
+  },
+  {
+    "asset_name": "HIG",
+    "file_path": "../Daily data csv/SP500_HIG, 1D.csv"
+  },
+  {
+    "asset_name": "HII",
+    "file_path": "../Daily data csv/SP500_HII, 1D.csv"
+  },
+  {
+    "asset_name": "HLT",
+    "file_path": "../Daily data csv/SP500_HLT, 1D.csv"
+  },
+  {
+    "asset_name": "HOLX",
+    "file_path": "../Daily data csv/SP500_HOLX, 1D.csv"
+  },
+  {
+    "asset_name": "HON",
+    "file_path": "../Daily data csv/SP500_HON, 1D.csv"
+  },
+  {
+    "asset_name": "HPE",
+    "file_path": "../Daily data csv/SP500_HPE, 1D.csv"
+  },
+  {
+    "asset_name": "HPQ",
+    "file_path": "../Daily data csv/SP500_HPQ, 1D.csv"
+  },
+  {
+    "asset_name": "HRL",
+    "file_path": "../Daily data csv/SP500_HRL, 1D.csv"
+  },
+  {
+    "asset_name": "HSIC",
+    "file_path": "../Daily data csv/SP500_HSIC, 1D.csv"
+  },
+  {
+    "asset_name": "HST",
+    "file_path": "../Daily data csv/SP500_HST, 1D.csv"
+  },
+  {
+    "asset_name": "HSY",
+    "file_path": "../Daily data csv/SP500_HSY, 1D.csv"
+  },
+  {
+    "asset_name": "HUBB",
+    "file_path": "../Daily data csv/SP500_HUBB, 1D.csv"
+  },
+  {
+    "asset_name": "HUM",
+    "file_path": "../Daily data csv/SP500_HUM, 1D.csv"
+  },
+  {
+    "asset_name": "HWM",
+    "file_path": "../Daily data csv/SP500_HWM, 1D.csv"
+  },
+  {
+    "asset_name": "IBM",
+    "file_path": "../Daily data csv/SP500_IBM, 1D.csv"
+  },
+  {
+    "asset_name": "ICE",
+    "file_path": "../Daily data csv/SP500_ICE, 1D.csv"
+  },
+  {
+    "asset_name": "IDXX",
+    "file_path": "../Daily data csv/SP500_IDXX, 1D.csv"
+  },
+  {
+    "asset_name": "IEX",
+    "file_path": "../Daily data csv/SP500_IEX, 1D.csv"
+  },
+  {
+    "asset_name": "IFF",
+    "file_path": "../Daily data csv/SP500_IFF, 1D.csv"
+  },
+  {
+    "asset_name": "INCY",
+    "file_path": "../Daily data csv/SP500_INCY, 1D.csv"
+  },
+  {
+    "asset_name": "INTC",
+    "file_path": "../Daily data csv/SP500_INTC, 1D.csv"
+  },
+  {
+    "asset_name": "INTU",
+    "file_path": "../Daily data csv/SP500_INTU, 1D.csv"
+  },
+  {
+    "asset_name": "INVH",
+    "file_path": "../Daily data csv/SP500_INVH, 1D.csv"
+  },
+  {
+    "asset_name": "IP",
+    "file_path": "../Daily data csv/SP500_IP, 1D.csv"
+  },
+  {
+    "asset_name": "IPG",
+    "file_path": "../Daily data csv/SP500_IPG, 1D.csv"
+  },
+  {
+    "asset_name": "IQV",
+    "file_path": "../Daily data csv/SP500_IQV, 1D.csv"
+  },
+  {
+    "asset_name": "IR",
+    "file_path": "../Daily data csv/SP500_IR, 1D.csv"
+  },
+  {
+    "asset_name": "IRM",
+    "file_path": "../Daily data csv/SP500_IRM, 1D.csv"
+  },
+  {
+    "asset_name": "ISRG",
+    "file_path": "../Daily data csv/SP500_ISRG, 1D.csv"
+  },
+  {
+    "asset_name": "IT",
+    "file_path": "../Daily data csv/SP500_IT, 1D.csv"
+  },
+  {
+    "asset_name": "ITW",
+    "file_path": "../Daily data csv/SP500_ITW, 1D.csv"
+  },
+  {
+    "asset_name": "IVZ",
+    "file_path": "../Daily data csv/SP500_IVZ, 1D.csv"
+  },
+  {
+    "asset_name": "J",
+    "file_path": "../Daily data csv/SP500_J, 1D.csv"
+  },
+  {
+    "asset_name": "JBHT",
+    "file_path": "../Daily data csv/SP500_JBHT, 1D.csv"
+  },
+  {
+    "asset_name": "JBL",
+    "file_path": "../Daily data csv/SP500_JBL, 1D.csv"
+  },
+  {
+    "asset_name": "JCI",
+    "file_path": "../Daily data csv/SP500_JCI, 1D.csv"
+  },
+  {
+    "asset_name": "JKHY",
+    "file_path": "../Daily data csv/SP500_JKHY, 1D.csv"
+  },
+  {
+    "asset_name": "JNJ",
+    "file_path": "../Daily data csv/SP500_JNJ, 1D.csv"
+  },
+  {
+    "asset_name": "JPM",
+    "file_path": "../Daily data csv/SP500_JPM, 1D.csv"
+  },
+  {
+    "asset_name": "K",
+    "file_path": "../Daily data csv/SP500_K, 1D.csv"
+  },
+  {
+    "asset_name": "KDP",
+    "file_path": "../Daily data csv/SP500_KDP, 1D.csv"
+  },
+  {
+    "asset_name": "KEY",
+    "file_path": "../Daily data csv/SP500_KEY, 1D.csv"
+  },
+  {
+    "asset_name": "KEYS",
+    "file_path": "../Daily data csv/SP500_KEYS, 1D.csv"
+  },
+  {
+    "asset_name": "KHC",
+    "file_path": "../Daily data csv/SP500_KHC, 1D.csv"
+  },
+  {
+    "asset_name": "KIM",
+    "file_path": "../Daily data csv/SP500_KIM, 1D.csv"
+  },
+  {
+    "asset_name": "KKR",
+    "file_path": "../Daily data csv/SP500_KKR, 1D.csv"
+  },
+  {
+    "asset_name": "KLAC",
+    "file_path": "../Daily data csv/SP500_KLAC, 1D.csv"
+  },
+  {
+    "asset_name": "KMB",
+    "file_path": "../Daily data csv/SP500_KMB, 1D.csv"
+  },
+  {
+    "asset_name": "KMI",
+    "file_path": "../Daily data csv/SP500_KMI, 1D.csv"
+  },
+  {
+    "asset_name": "KMX",
+    "file_path": "../Daily data csv/SP500_KMX, 1D.csv"
+  },
+  {
+    "asset_name": "KO",
+    "file_path": "../Daily data csv/SP500_KO, 1D.csv"
+  },
+  {
+    "asset_name": "KR",
+    "file_path": "../Daily data csv/SP500_KR, 1D.csv"
+  },
+  {
+    "asset_name": "KVUE",
+    "file_path": "../Daily data csv/SP500_KVUE, 1D.csv"
+  },
+  {
+    "asset_name": "L",
+    "file_path": "../Daily data csv/SP500_L, 1D.csv"
+  },
+  {
+    "asset_name": "LDOS",
+    "file_path": "../Daily data csv/SP500_LDOS, 1D.csv"
+  },
+  {
+    "asset_name": "LEN",
+    "file_path": "../Daily data csv/SP500_LEN, 1D.csv"
+  },
+  {
+    "asset_name": "LH",
+    "file_path": "../Daily data csv/SP500_LH, 1D.csv"
+  },
+  {
+    "asset_name": "LHX",
+    "file_path": "../Daily data csv/SP500_LHX, 1D.csv"
+  },
+  {
+    "asset_name": "LII",
+    "file_path": "../Daily data csv/SP500_LII, 1D.csv"
+  },
+  {
+    "asset_name": "LIN",
+    "file_path": "../Daily data csv/SP500_LIN, 1D.csv"
+  },
+  {
+    "asset_name": "LKQ",
+    "file_path": "../Daily data csv/SP500_LKQ, 1D.csv"
+  },
+  {
+    "asset_name": "LLY",
+    "file_path": "../Daily data csv/SP500_LLY, 1D.csv"
+  },
+  {
+    "asset_name": "LMT",
+    "file_path": "../Daily data csv/SP500_LMT, 1D.csv"
+  },
+  {
+    "asset_name": "LNT",
+    "file_path": "../Daily data csv/SP500_LNT, 1D.csv"
+  },
+  {
+    "asset_name": "LOW",
+    "file_path": "../Daily data csv/SP500_LOW, 1D.csv"
+  },
+  {
+    "asset_name": "LRCX",
+    "file_path": "../Daily data csv/SP500_LRCX, 1D.csv"
+  },
+  {
+    "asset_name": "LULU",
+    "file_path": "../Daily data csv/SP500_LULU, 1D.csv"
+  },
+  {
+    "asset_name": "LUV",
+    "file_path": "../Daily data csv/SP500_LUV, 1D.csv"
+  },
+  {
+    "asset_name": "LVS",
+    "file_path": "../Daily data csv/SP500_LVS, 1D.csv"
+  },
+  {
+    "asset_name": "LW",
+    "file_path": "../Daily data csv/SP500_LW, 1D.csv"
+  },
+  {
+    "asset_name": "LYB",
+    "file_path": "../Daily data csv/SP500_LYB, 1D.csv"
+  },
+  {
+    "asset_name": "LYV",
+    "file_path": "../Daily data csv/SP500_LYV, 1D.csv"
+  },
+  {
+    "asset_name": "MA",
+    "file_path": "../Daily data csv/SP500_MA, 1D.csv"
+  },
+  {
+    "asset_name": "MAA",
+    "file_path": "../Daily data csv/SP500_MAA, 1D.csv"
+  },
+  {
+    "asset_name": "MAR",
+    "file_path": "../Daily data csv/SP500_MAR, 1D.csv"
+  },
+  {
+    "asset_name": "MAS",
+    "file_path": "../Daily data csv/SP500_MAS, 1D.csv"
+  },
+  {
+    "asset_name": "MCD",
+    "file_path": "../Daily data csv/SP500_MCD, 1D.csv"
+  },
+  {
+    "asset_name": "MCHP",
+    "file_path": "../Daily data csv/SP500_MCHP, 1D.csv"
+  },
+  {
+    "asset_name": "MCK",
+    "file_path": "../Daily data csv/SP500_MCK, 1D.csv"
+  },
+  {
+    "asset_name": "MCO",
+    "file_path": "../Daily data csv/SP500_MCO, 1D.csv"
+  },
+  {
+    "asset_name": "MDLZ",
+    "file_path": "../Daily data csv/SP500_MDLZ, 1D.csv"
+  },
+  {
+    "asset_name": "MDT",
+    "file_path": "../Daily data csv/SP500_MDT, 1D.csv"
+  },
+  {
+    "asset_name": "MET",
+    "file_path": "../Daily data csv/SP500_MET, 1D.csv"
+  },
+  {
+    "asset_name": "META",
+    "file_path": "../Daily data csv/SP500_META, 1D.csv"
+  },
+  {
+    "asset_name": "MGM",
+    "file_path": "../Daily data csv/SP500_MGM, 1D.csv"
+  },
+  {
+    "asset_name": "MHK",
+    "file_path": "../Daily data csv/SP500_MHK, 1D.csv"
+  },
+  {
+    "asset_name": "MKC",
+    "file_path": "../Daily data csv/SP500_MKC, 1D.csv"
+  },
+  {
+    "asset_name": "MKTX",
+    "file_path": "../Daily data csv/SP500_MKTX, 1D.csv"
+  },
+  {
+    "asset_name": "MLM",
+    "file_path": "../Daily data csv/SP500_MLM, 1D.csv"
+  },
+  {
+    "asset_name": "MMC",
+    "file_path": "../Daily data csv/SP500_MMC, 1D.csv"
+  },
+  {
+    "asset_name": "MMM",
+    "file_path": "../Daily data csv/SP500_MMM, 1D.csv"
+  },
+  {
+    "asset_name": "MNST",
+    "file_path": "../Daily data csv/SP500_MNST, 1D.csv"
+  },
+  {
+    "asset_name": "MO",
+    "file_path": "../Daily data csv/SP500_MO, 1D.csv"
+  },
+  {
+    "asset_name": "MOH",
+    "file_path": "../Daily data csv/SP500_MOH, 1D.csv"
+  },
+  {
+    "asset_name": "MOS",
+    "file_path": "../Daily data csv/SP500_MOS, 1D.csv"
+  },
+  {
+    "asset_name": "MPC",
+    "file_path": "../Daily data csv/SP500_MPC, 1D.csv"
+  },
+  {
+    "asset_name": "MPWR",
+    "file_path": "../Daily data csv/SP500_MPWR, 1D.csv"
+  },
+  {
+    "asset_name": "MRK",
+    "file_path": "../Daily data csv/SP500_MRK, 1D.csv"
+  },
+  {
+    "asset_name": "MRNA",
+    "file_path": "../Daily data csv/SP500_MRNA, 1D.csv"
+  },
+  {
+    "asset_name": "MRO",
+    "file_path": "../Daily data csv/SP500_MRO, 1D.csv"
+  },
+  {
+    "asset_name": "MS",
+    "file_path": "../Daily data csv/SP500_MS, 1D.csv"
+  },
+  {
+    "asset_name": "MSCI",
+    "file_path": "../Daily data csv/SP500_MSCI, 1D.csv"
+  },
+  {
+    "asset_name": "MSFT",
+    "file_path": "../Daily data csv/SP500_MSFT, 1D.csv"
+  },
+  {
+    "asset_name": "MSI",
+    "file_path": "../Daily data csv/SP500_MSI, 1D.csv"
+  },
+  {
+    "asset_name": "MTB",
+    "file_path": "../Daily data csv/SP500_MTB, 1D.csv"
+  },
+  {
+    "asset_name": "MTCH",
+    "file_path": "../Daily data csv/SP500_MTCH, 1D.csv"
+  },
+  {
+    "asset_name": "MTD",
+    "file_path": "../Daily data csv/SP500_MTD, 1D.csv"
+  },
+  {
+    "asset_name": "MU",
+    "file_path": "../Daily data csv/SP500_MU, 1D.csv"
+  },
+  {
+    "asset_name": "NCLH",
+    "file_path": "../Daily data csv/SP500_NCLH, 1D.csv"
+  },
+  {
+    "asset_name": "NDAQ",
+    "file_path": "../Daily data csv/SP500_NDAQ, 1D.csv"
+  },
+  {
+    "asset_name": "NDSN",
+    "file_path": "../Daily data csv/SP500_NDSN, 1D.csv"
+  },
+  {
+    "asset_name": "NEE",
+    "file_path": "../Daily data csv/SP500_NEE, 1D.csv"
+  },
+  {
+    "asset_name": "NEM",
+    "file_path": "../Daily data csv/SP500_NEM, 1D.csv"
+  },
+  {
+    "asset_name": "NFLX",
+    "file_path": "../Daily data csv/SP500_NFLX, 1D.csv"
+  },
+  {
+    "asset_name": "NI",
+    "file_path": "../Daily data csv/SP500_NI, 1D.csv"
+  },
+  {
+    "asset_name": "NKE",
+    "file_path": "../Daily data csv/SP500_NKE, 1D.csv"
+  },
+  {
+    "asset_name": "NOC",
+    "file_path": "../Daily data csv/SP500_NOC, 1D.csv"
+  },
+  {
+    "asset_name": "NOW",
+    "file_path": "../Daily data csv/SP500_NOW, 1D.csv"
+  },
+  {
+    "asset_name": "NRG",
+    "file_path": "../Daily data csv/SP500_NRG, 1D.csv"
+  },
+  {
+    "asset_name": "NSC",
+    "file_path": "../Daily data csv/SP500_NSC, 1D.csv"
+  },
+  {
+    "asset_name": "NTAP",
+    "file_path": "../Daily data csv/SP500_NTAP, 1D.csv"
+  },
+  {
+    "asset_name": "NTRS",
+    "file_path": "../Daily data csv/SP500_NTRS, 1D.csv"
+  },
+  {
+    "asset_name": "NUE",
+    "file_path": "../Daily data csv/SP500_NUE, 1D.csv"
+  },
+  {
+    "asset_name": "NVDA",
+    "file_path": "../Daily data csv/SP500_NVDA, 1D.csv"
+  },
+  {
+    "asset_name": "NVR",
+    "file_path": "../Daily data csv/SP500_NVR, 1D.csv"
+  },
+  {
+    "asset_name": "NWS",
+    "file_path": "../Daily data csv/SP500_NWS, 1D.csv"
+  },
+  {
+    "asset_name": "NWSA",
+    "file_path": "../Daily data csv/SP500_NWSA, 1D.csv"
+  },
+  {
+    "asset_name": "NXPI",
+    "file_path": "../Daily data csv/SP500_NXPI, 1D.csv"
+  },
+  {
+    "asset_name": "O",
+    "file_path": "../Daily data csv/SP500_O, 1D.csv"
+  },
+  {
+    "asset_name": "ODFL",
+    "file_path": "../Daily data csv/SP500_ODFL, 1D.csv"
+  },
+  {
+    "asset_name": "OKE",
+    "file_path": "../Daily data csv/SP500_OKE, 1D.csv"
+  },
+  {
+    "asset_name": "OMC",
+    "file_path": "../Daily data csv/SP500_OMC, 1D.csv"
+  },
+  {
+    "asset_name": "ON",
+    "file_path": "../Daily data csv/SP500_ON, 1D.csv"
+  },
+  {
+    "asset_name": "ORCL",
+    "file_path": "../Daily data csv/SP500_ORCL, 1D.csv"
+  },
+  {
+    "asset_name": "ORLY",
+    "file_path": "../Daily data csv/SP500_ORLY, 1D.csv"
+  },
+  {
+    "asset_name": "OTIS",
+    "file_path": "../Daily data csv/SP500_OTIS, 1D.csv"
+  },
+  {
+    "asset_name": "OXY",
+    "file_path": "../Daily data csv/SP500_OXY, 1D.csv"
+  },
+  {
+    "asset_name": "PANW",
+    "file_path": "../Daily data csv/SP500_PANW, 1D.csv"
+  },
+  {
+    "asset_name": "PARA",
+    "file_path": "../Daily data csv/SP500_PARA, 1D.csv"
+  },
+  {
+    "asset_name": "PCG",
+    "file_path": "../Daily data csv/SP500_PCG, 1D.csv"
+  },
+  {
+    "asset_name": "PEG",
+    "file_path": "../Daily data csv/SP500_PEG, 1D.csv"
+  },
+  {
+    "asset_name": "PEP",
+    "file_path": "../Daily data csv/SP500_PEP, 1D.csv"
+  },
+  {
+    "asset_name": "PFE",
+    "file_path": "../Daily data csv/SP500_PFE, 1D.csv"
+  },
+  {
+    "asset_name": "PFG",
+    "file_path": "../Daily data csv/SP500_PFG, 1D.csv"
+  },
+  {
+    "asset_name": "PG",
+    "file_path": "../Daily data csv/SP500_PG, 1D.csv"
+  },
+  {
+    "asset_name": "PGR",
+    "file_path": "../Daily data csv/SP500_PGR, 1D.csv"
+  },
+  {
+    "asset_name": "PH",
+    "file_path": "../Daily data csv/SP500_PH, 1D.csv"
+  },
+  {
+    "asset_name": "PHM",
+    "file_path": "../Daily data csv/SP500_PHM, 1D.csv"
+  },
+  {
+    "asset_name": "PKG",
+    "file_path": "../Daily data csv/SP500_PKG, 1D.csv"
+  },
+  {
+    "asset_name": "PLD",
+    "file_path": "../Daily data csv/SP500_PLD, 1D.csv"
+  },
+  {
+    "asset_name": "PLTR",
+    "file_path": "../Daily data csv/SP500_PLTR, 1D.csv"
+  },
+  {
+    "asset_name": "PM",
+    "file_path": "../Daily data csv/SP500_PM, 1D.csv"
+  },
+  {
+    "asset_name": "PNC",
+    "file_path": "../Daily data csv/SP500_PNC, 1D.csv"
+  },
+  {
+    "asset_name": "PNR",
+    "file_path": "../Daily data csv/SP500_PNR, 1D.csv"
+  },
+  {
+    "asset_name": "PNW",
+    "file_path": "../Daily data csv/SP500_PNW, 1D.csv"
+  },
+  {
+    "asset_name": "PODD",
+    "file_path": "../Daily data csv/SP500_PODD, 1D.csv"
+  },
+  {
+    "asset_name": "POOL",
+    "file_path": "../Daily data csv/SP500_POOL, 1D.csv"
+  },
+  {
+    "asset_name": "PPG",
+    "file_path": "../Daily data csv/SP500_PPG, 1D.csv"
+  },
+  {
+    "asset_name": "PPL",
+    "file_path": "../Daily data csv/SP500_PPL, 1D.csv"
+  },
+  {
+    "asset_name": "PRU",
+    "file_path": "../Daily data csv/SP500_PRU, 1D.csv"
+  },
+  {
+    "asset_name": "PSA",
+    "file_path": "../Daily data csv/SP500_PSA, 1D.csv"
+  },
+  {
+    "asset_name": "PSX",
+    "file_path": "../Daily data csv/SP500_PSX, 1D.csv"
+  },
+  {
+    "asset_name": "PTC",
+    "file_path": "../Daily data csv/SP500_PTC, 1D.csv"
+  },
+  {
+    "asset_name": "PWR",
+    "file_path": "../Daily data csv/SP500_PWR, 1D.csv"
+  },
+  {
+    "asset_name": "PYPL",
+    "file_path": "../Daily data csv/SP500_PYPL, 1D.csv"
+  },
+  {
+    "asset_name": "QCOM",
+    "file_path": "../Daily data csv/SP500_QCOM, 1D.csv"
+  },
+  {
+    "asset_name": "QRVO",
+    "file_path": "../Daily data csv/SP500_QRVO, 1D.csv"
+  },
+  {
+    "asset_name": "RCL",
+    "file_path": "../Daily data csv/SP500_RCL, 1D.csv"
+  },
+  {
+    "asset_name": "REG",
+    "file_path": "../Daily data csv/SP500_REG, 1D.csv"
+  },
+  {
+    "asset_name": "REGN",
+    "file_path": "../Daily data csv/SP500_REGN, 1D.csv"
+  },
+  {
+    "asset_name": "RF",
+    "file_path": "../Daily data csv/SP500_RF, 1D.csv"
+  },
+  {
+    "asset_name": "RJF",
+    "file_path": "../Daily data csv/SP500_RJF, 1D.csv"
+  },
+  {
+    "asset_name": "RL",
+    "file_path": "../Daily data csv/SP500_RL, 1D.csv"
+  },
+  {
+    "asset_name": "RMD",
+    "file_path": "../Daily data csv/SP500_RMD, 1D.csv"
+  },
+  {
+    "asset_name": "ROK",
+    "file_path": "../Daily data csv/SP500_ROK, 1D.csv"
+  },
+  {
+    "asset_name": "ROL",
+    "file_path": "../Daily data csv/SP500_ROL, 1D.csv"
+  },
+  {
+    "asset_name": "ROP",
+    "file_path": "../Daily data csv/SP500_ROP, 1D.csv"
+  },
+  {
+    "asset_name": "ROST",
+    "file_path": "../Daily data csv/SP500_ROST, 1D.csv"
+  },
+  {
+    "asset_name": "RSG",
+    "file_path": "../Daily data csv/SP500_RSG, 1D.csv"
+  },
+  {
+    "asset_name": "RTX",
+    "file_path": "../Daily data csv/SP500_RTX, 1D.csv"
+  },
+  {
+    "asset_name": "RVTY",
+    "file_path": "../Daily data csv/SP500_RVTY, 1D.csv"
+  },
+  {
+    "asset_name": "SBAC",
+    "file_path": "../Daily data csv/SP500_SBAC, 1D.csv"
+  },
+  {
+    "asset_name": "SBUX",
+    "file_path": "../Daily data csv/SP500_SBUX, 1D.csv"
+  },
+  {
+    "asset_name": "SCHW",
+    "file_path": "../Daily data csv/SP500_SCHW, 1D.csv"
+  },
+  {
+    "asset_name": "SHW",
+    "file_path": "../Daily data csv/SP500_SHW, 1D.csv"
+  },
+  {
+    "asset_name": "SJM",
+    "file_path": "../Daily data csv/SP500_SJM, 1D.csv"
+  },
+  {
+    "asset_name": "SLB",
+    "file_path": "../Daily data csv/SP500_SLB, 1D.csv"
+  },
+  {
+    "asset_name": "SMCI",
+    "file_path": "../Daily data csv/SP500_SMCI, 1D.csv"
+  },
+  {
+    "asset_name": "SNA",
+    "file_path": "../Daily data csv/SP500_SNA, 1D.csv"
+  },
+  {
+    "asset_name": "SNPS",
+    "file_path": "../Daily data csv/SP500_SNPS, 1D.csv"
+  },
+  {
+    "asset_name": "SO",
+    "file_path": "../Daily data csv/SP500_SO, 1D.csv"
+  },
+  {
+    "asset_name": "SOLV",
+    "file_path": "../Daily data csv/SP500_SOLV, 1D.csv"
+  },
+  {
+    "asset_name": "SPG",
+    "file_path": "../Daily data csv/SP500_SPG, 1D.csv"
+  },
+  {
+    "asset_name": "SPGI",
+    "file_path": "../Daily data csv/SP500_SPGI, 1D.csv"
+  },
+  {
+    "asset_name": "SRE",
+    "file_path": "../Daily data csv/SP500_SRE, 1D.csv"
+  },
+  {
+    "asset_name": "STE",
+    "file_path": "../Daily data csv/SP500_STE, 1D.csv"
+  },
+  {
+    "asset_name": "STLD",
+    "file_path": "../Daily data csv/SP500_STLD, 1D.csv"
+  },
+  {
+    "asset_name": "STT",
+    "file_path": "../Daily data csv/SP500_STT, 1D.csv"
+  },
+  {
+    "asset_name": "STX",
+    "file_path": "../Daily data csv/SP500_STX, 1D.csv"
+  },
+  {
+    "asset_name": "STZ",
+    "file_path": "../Daily data csv/SP500_STZ, 1D.csv"
+  },
+  {
+    "asset_name": "SWK",
+    "file_path": "../Daily data csv/SP500_SWK, 1D.csv"
+  },
+  {
+    "asset_name": "SWKS",
+    "file_path": "../Daily data csv/SP500_SWKS, 1D.csv"
+  },
+  {
+    "asset_name": "SYF",
+    "file_path": "../Daily data csv/SP500_SYF, 1D.csv"
+  },
+  {
+    "asset_name": "SYK",
+    "file_path": "../Daily data csv/SP500_SYK, 1D.csv"
+  },
+  {
+    "asset_name": "SYY",
+    "file_path": "../Daily data csv/SP500_SYY, 1D.csv"
+  },
+  {
+    "asset_name": "T",
+    "file_path": "../Daily data csv/SP500_T, 1D.csv"
+  },
+  {
+    "asset_name": "TAP",
+    "file_path": "../Daily data csv/SP500_TAP, 1D.csv"
+  },
+  {
+    "asset_name": "TDG",
+    "file_path": "../Daily data csv/SP500_TDG, 1D.csv"
+  },
+  {
+    "asset_name": "TDY",
+    "file_path": "../Daily data csv/SP500_TDY, 1D.csv"
+  },
+  {
+    "asset_name": "TECH",
+    "file_path": "../Daily data csv/SP500_TECH, 1D.csv"
+  },
+  {
+    "asset_name": "TEL",
+    "file_path": "../Daily data csv/SP500_TEL, 1D.csv"
+  },
+  {
+    "asset_name": "TER",
+    "file_path": "../Daily data csv/SP500_TER, 1D.csv"
+  },
+  {
+    "asset_name": "TFC",
+    "file_path": "../Daily data csv/SP500_TFC, 1D.csv"
+  },
+  {
+    "asset_name": "TFX",
+    "file_path": "../Daily data csv/SP500_TFX, 1D.csv"
+  },
+  {
+    "asset_name": "TGT",
+    "file_path": "../Daily data csv/SP500_TGT, 1D.csv"
+  },
+  {
+    "asset_name": "TJX",
+    "file_path": "../Daily data csv/SP500_TJX, 1D.csv"
+  },
+  {
+    "asset_name": "TMO",
+    "file_path": "../Daily data csv/SP500_TMO, 1D.csv"
+  },
+  {
+    "asset_name": "TMUS",
+    "file_path": "../Daily data csv/SP500_TMUS, 1D.csv"
+  },
+  {
+    "asset_name": "TPR",
+    "file_path": "../Daily data csv/SP500_TPR, 1D.csv"
+  },
+  {
+    "asset_name": "TRGP",
+    "file_path": "../Daily data csv/SP500_TRGP, 1D.csv"
+  },
+  {
+    "asset_name": "TRMB",
+    "file_path": "../Daily data csv/SP500_TRMB, 1D.csv"
+  },
+  {
+    "asset_name": "TROW",
+    "file_path": "../Daily data csv/SP500_TROW, 1D.csv"
+  },
+  {
+    "asset_name": "TRV",
+    "file_path": "../Daily data csv/SP500_TRV, 1D.csv"
+  },
+  {
+    "asset_name": "TSCO",
+    "file_path": "../Daily data csv/SP500_TSCO, 1D.csv"
+  },
+  {
+    "asset_name": "TSLA",
+    "file_path": "../Daily data csv/SP500_TSLA, 1D.csv"
+  },
+  {
+    "asset_name": "TSN",
+    "file_path": "../Daily data csv/SP500_TSN, 1D.csv"
+  },
+  {
+    "asset_name": "TT",
+    "file_path": "../Daily data csv/SP500_TT, 1D.csv"
+  },
+  {
+    "asset_name": "TTWO",
+    "file_path": "../Daily data csv/SP500_TTWO, 1D.csv"
+  },
+  {
+    "asset_name": "TXN",
+    "file_path": "../Daily data csv/SP500_TXN, 1D.csv"
+  },
+  {
+    "asset_name": "TXT",
+    "file_path": "../Daily data csv/SP500_TXT, 1D.csv"
+  },
+  {
+    "asset_name": "TYL",
+    "file_path": "../Daily data csv/SP500_TYL, 1D.csv"
+  },
+  {
+    "asset_name": "UAL",
+    "file_path": "../Daily data csv/SP500_UAL, 1D.csv"
+  },
+  {
+    "asset_name": "UBER",
+    "file_path": "../Daily data csv/SP500_UBER, 1D.csv"
+  },
+  {
+    "asset_name": "UDR",
+    "file_path": "../Daily data csv/SP500_UDR, 1D.csv"
+  },
+  {
+    "asset_name": "UHS",
+    "file_path": "../Daily data csv/SP500_UHS, 1D.csv"
+  },
+  {
+    "asset_name": "ULTA",
+    "file_path": "../Daily data csv/SP500_ULTA, 1D.csv"
+  },
+  {
+    "asset_name": "UNH",
+    "file_path": "../Daily data csv/SP500_UNH, 1D.csv"
+  },
+  {
+    "asset_name": "UNP",
+    "file_path": "../Daily data csv/SP500_UNP, 1D.csv"
+  },
+  {
+    "asset_name": "UPS",
+    "file_path": "../Daily data csv/SP500_UPS, 1D.csv"
+  },
+  {
+    "asset_name": "URI",
+    "file_path": "../Daily data csv/SP500_URI, 1D.csv"
+  },
+  {
+    "asset_name": "USB",
+    "file_path": "../Daily data csv/SP500_USB, 1D.csv"
+  },
+  {
+    "asset_name": "V",
+    "file_path": "../Daily data csv/SP500_V, 1D.csv"
+  },
+  {
+    "asset_name": "VICI",
+    "file_path": "../Daily data csv/SP500_VICI, 1D.csv"
+  },
+  {
+    "asset_name": "VLO",
+    "file_path": "../Daily data csv/SP500_VLO, 1D.csv"
+  },
+  {
+    "asset_name": "VLTO",
+    "file_path": "../Daily data csv/SP500_VLTO, 1D.csv"
+  },
+  {
+    "asset_name": "VMC",
+    "file_path": "../Daily data csv/SP500_VMC, 1D.csv"
+  },
+  {
+    "asset_name": "VRSK",
+    "file_path": "../Daily data csv/SP500_VRSK, 1D.csv"
+  },
+  {
+    "asset_name": "VRSN",
+    "file_path": "../Daily data csv/SP500_VRSN, 1D.csv"
+  },
+  {
+    "asset_name": "VRTX",
+    "file_path": "../Daily data csv/SP500_VRTX, 1D.csv"
+  },
+  {
+    "asset_name": "VST",
+    "file_path": "../Daily data csv/SP500_VST, 1D.csv"
+  },
+  {
+    "asset_name": "VTR",
+    "file_path": "../Daily data csv/SP500_VTR, 1D.csv"
+  },
+  {
+    "asset_name": "VTRS",
+    "file_path": "../Daily data csv/SP500_VTRS, 1D.csv"
+  },
+  {
+    "asset_name": "VZ",
+    "file_path": "../Daily data csv/SP500_VZ, 1D.csv"
+  },
+  {
+    "asset_name": "WAB",
+    "file_path": "../Daily data csv/SP500_WAB, 1D.csv"
+  },
+  {
+    "asset_name": "WAT",
+    "file_path": "../Daily data csv/SP500_WAT, 1D.csv"
+  },
+  {
+    "asset_name": "WBA",
+    "file_path": "../Daily data csv/SP500_WBA, 1D.csv"
+  },
+  {
+    "asset_name": "WBD",
+    "file_path": "../Daily data csv/SP500_WBD, 1D.csv"
+  },
+  {
+    "asset_name": "WDC",
+    "file_path": "../Daily data csv/SP500_WDC, 1D.csv"
+  },
+  {
+    "asset_name": "WEC",
+    "file_path": "../Daily data csv/SP500_WEC, 1D.csv"
+  },
+  {
+    "asset_name": "WELL",
+    "file_path": "../Daily data csv/SP500_WELL, 1D.csv"
+  },
+  {
+    "asset_name": "WFC",
+    "file_path": "../Daily data csv/SP500_WFC, 1D.csv"
+  },
+  {
+    "asset_name": "WM",
+    "file_path": "../Daily data csv/SP500_WM, 1D.csv"
+  },
+  {
+    "asset_name": "WMB",
+    "file_path": "../Daily data csv/SP500_WMB, 1D.csv"
+  },
+  {
+    "asset_name": "WMT",
+    "file_path": "../Daily data csv/SP500_WMT, 1D.csv"
+  },
+  {
+    "asset_name": "WRB",
+    "file_path": "../Daily data csv/SP500_WRB, 1D.csv"
+  },
+  {
+    "asset_name": "WRK",
+    "file_path": "../Daily data csv/SP500_WRK, 1D.csv"
+  },
+  {
+    "asset_name": "WST",
+    "file_path": "../Daily data csv/SP500_WST, 1D.csv"
+  },
+  {
+    "asset_name": "WTW",
+    "file_path": "../Daily data csv/SP500_WTW, 1D.csv"
+  },
+  {
+    "asset_name": "WY",
+    "file_path": "../Daily data csv/SP500_WY, 1D.csv"
+  },
+  {
+    "asset_name": "WYNN",
+    "file_path": "../Daily data csv/SP500_WYNN, 1D.csv"
+  },
+  {
+    "asset_name": "XEL",
+    "file_path": "../Daily data csv/SP500_XEL, 1D.csv"
+  },
+  {
+    "asset_name": "XOM",
+    "file_path": "../Daily data csv/SP500_XOM, 1D.csv"
+  },
+  {
+    "asset_name": "XYL",
+    "file_path": "../Daily data csv/SP500_XYL, 1D.csv"
+  },
+  {
+    "asset_name": "YUM",
+    "file_path": "../Daily data csv/SP500_YUM, 1D.csv"
+  },
+  {
+    "asset_name": "ZBH",
+    "file_path": "../Daily data csv/SP500_ZBH, 1D.csv"
+  },
+  {
+    "asset_name": "ZBRA",
+    "file_path": "../Daily data csv/SP500_ZBRA, 1D.csv"
+  },
+  {
+    "asset_name": "ZTS",
+    "file_path": "../Daily data csv/SP500_ZTS, 1D.csv"
+  }
+]

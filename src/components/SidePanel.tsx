@@ -3,9 +3,9 @@ import React, { useState, useRef, useEffect } from 'react';
 
 type OutcomeKey = 'AUTO' | 'LONG_TRUE' | 'LONG_FALSE' | 'SHORT_TRUE' | 'SHORT_FALSE' | 'NONE';
 
-export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange, selectedOutcome, onOutcomeChange, onOverlaySelect, overlaySymbol, showOverlay, showOutcome }: { 
-  quarterLevels: null | { upper20:number; upper50:number; upper80:number; lower20:number; lower50:number; lower80:number }, 
-  metrics?: { price:number|null; changePct:number|null },
+export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange, selectedOutcome, onOutcomeChange, onOverlaySelect, overlaySymbol, showOverlay, showOutcome, symbolsSource = "live", symbolsOverride }: {
+  quarterLevels: null | { upper20: number; upper50: number; upper80: number; lower20: number; lower50: number; lower80: number },
+  metrics?: { price: number | null; changePct: number | null },
   selectedModel?: 'simple' | 'pro' | 'overlay' | 'beta',
   onModelChange?: (model: 'simple' | 'pro' | 'overlay' | 'beta') => void,
   selectedOutcome?: OutcomeKey,
@@ -14,23 +14,25 @@ export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange
   overlaySymbol?: string | null,
   showOverlay?: boolean,
   showOutcome?: boolean,
+  symbolsSource?: "demo" | "live",
+  symbolsOverride?: { id: string; label: string }[],
 }) {
   // Use props if provided, otherwise fall back to local state
   const currentModel = selectedModel ?? 'simple';
   const allowOverlay = showOverlay ?? true;
   const allowOutcome = showOutcome ?? true;
   const currentOutcome = selectedOutcome ?? 'AUTO';
-  
+
   // Custom dropdown state
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
-  
+
   // Overlay state
   const [showOverlaySearch, setShowOverlaySearch] = useState(false);
   const [overlayQuery, setOverlayQuery] = useState('');
-  const [overlaySymbols, setOverlaySymbols] = useState<{ id: string; label: string }[]>([]);
+  const [availableSymbols, setAvailableSymbols] = useState<{ id: string; label: string }[]>(symbolsOverride ?? []);
   const [selectedOverlayIndex, setSelectedOverlayIndex] = useState(-1);
   const [isEditingOverlay, setIsEditingOverlay] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -46,14 +48,15 @@ export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange
 
   const currentOption: (typeof outcomeOptions)[number] = outcomeOptions.find(opt => opt.value === currentOutcome) || outcomeOptions[0];
 
-  // Available symbols for overlay (only site-supported assets)
-  const availableSymbols = [
-    { id: "NQ", label: "Nasdaq 100 E-mini (NQ)" },
-    { id: "BTCUSD", label: "Bitcoin (BTC/USD)" },
-    { id: "CL", label: "Crude Oil (CL)" },
-    { id: "GC", label: "Gold (GC)" },
-    { id: "SPX", label: "S&P 500 Index (SPX)" }
-  ];
+  useEffect(() => {
+    if (symbolsOverride && symbolsOverride.length) return;
+    fetch(`/api/symbols?source=${symbolsSource}`)
+      .then((res) => res.json())
+      .then((data: { id: string; label: string }[]) => {
+        setAvailableSymbols(Array.isArray(data) ? data : []);
+      })
+      .catch(() => setAvailableSymbols([]));
+  }, [symbolsOverride, symbolsSource]);
 
   const handleOptionClick = (option: (typeof outcomeOptions)[number]) => {
     onOutcomeChange?.(option.value as OutcomeKey);
@@ -71,7 +74,6 @@ export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange
     const value = e.target.value;
     setOverlayQuery(value);
     setIsEditingOverlay(true);
-    setOverlaySymbols(filteredOverlaySymbols);
     setSelectedOverlayIndex(-1);
   };
 
@@ -81,7 +83,7 @@ export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
-        setSelectedOverlayIndex(prev => 
+        setSelectedOverlayIndex(prev =>
           prev < filteredOverlaySymbols.length - 1 ? prev + 1 : 0
         );
         break;
@@ -132,7 +134,7 @@ export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange
       // If already in overlay mode, toggle search visibility
       setShowOverlaySearch(!showOverlaySearch);
       setOverlayQuery('');
-      setOverlaySymbols(filteredOverlaySymbols);
+
       setSelectedOverlayIndex(-1);
       setIsEditingOverlay(false);
       if (!showOverlaySearch && overlayInputRef.current) {
@@ -143,7 +145,7 @@ export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange
       onModelChange?.('overlay');
       setShowOverlaySearch(true);
       setOverlayQuery('');
-      setOverlaySymbols(filteredOverlaySymbols);
+
       setSelectedOverlayIndex(-1);
       setIsEditingOverlay(false);
       setTimeout(() => overlayInputRef.current?.focus(), 0);
@@ -162,7 +164,7 @@ export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
-        setSelectedIndex(prev => 
+        setSelectedIndex(prev =>
           prev < outcomeOptions.length - 1 ? prev + 1 : 0
         );
         break;
@@ -187,12 +189,12 @@ export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
-          inputRef.current && !inputRef.current.contains(event.target as Node)) {
+        inputRef.current && !inputRef.current.contains(event.target as Node)) {
         setShowDropdown(false);
         setSelectedIndex(-1);
       }
       if (overlayRef.current && !overlayRef.current.contains(event.target as Node) &&
-          overlayInputRef.current && !overlayInputRef.current.contains(event.target as Node)) {
+        overlayInputRef.current && !overlayInputRef.current.contains(event.target as Node)) {
         setShowOverlaySearch(false);
         setOverlayQuery('');
         setSelectedOverlayIndex(-1);
@@ -208,19 +210,19 @@ export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange
       <div className="card">
         <div className="card-title">Models</div>
         <div className="seg">
-          <button 
+          <button
             className={`seg-btn ${currentModel === 'simple' ? 'seg-btn--active' : ''}`}
             onClick={() => onModelChange?.('simple')}
           >
             Simple
           </button>
-          <button 
+          <button
             className={`seg-btn ${currentModel === 'pro' ? 'seg-btn--active' : ''}`}
             onClick={() => onModelChange?.('pro')}
           >
             Pro
           </button>
-          <button 
+          <button
             className={`seg-btn ${currentModel === 'beta' ? 'seg-btn--active' : ''}`}
             onClick={() => {
               setShowOverlaySearch(false);
@@ -238,7 +240,7 @@ export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange
             </button>
           )}
         </div>
-        
+
         {allowOutcome && (currentModel === 'pro' || currentModel === 'beta') && (
           <div className="mt-3">
             <label className="block text-sm font-medium mb-2">Outcome</label>
@@ -261,20 +263,19 @@ export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange
               >
                 <span className="font-medium">{currentOption.label}</span>
               </div>
-              
+
               {showDropdown && (
-                <div 
+                <div
                   ref={dropdownRef}
                   className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-none shadow-lg z-50 max-h-48 overflow-y-auto symbol-menu"
                 >
                   {outcomeOptions.map((option, index) => (
                     <div
                       key={option.value}
-                      className={`px-3 py-2 cursor-pointer text-sm ${
-                        index === selectedIndex 
-                          ? 'bg-blue-50 text-blue-700' 
+                      className={`px-3 py-2 cursor-pointer text-sm ${index === selectedIndex
+                          ? 'bg-blue-50 text-blue-700'
                           : 'hover:bg-gray-50'
-                      }`}
+                        }`}
                       onClick={() => handleOptionClick(option)}
                     >
                       <div className="font-medium">{option.label}</div>
@@ -311,20 +312,19 @@ export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange
                 autoCapitalize="none"
                 spellCheck={false}
               />
-              
+
               {overlayQuery.length > 0 && filteredOverlaySymbols.length > 0 && (
-                <div 
+                <div
                   ref={overlayRef}
                   className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-none shadow-lg z-50 max-h-48 overflow-y-auto symbol-menu"
                 >
                   {filteredOverlaySymbols.map((symbol, index) => (
                     <div
                       key={symbol.id}
-                      className={`px-3 py-2 cursor-pointer text-sm ${
-                        index === selectedOverlayIndex 
-                          ? 'bg-blue-50 text-blue-700' 
+                      className={`px-3 py-2 cursor-pointer text-sm ${index === selectedOverlayIndex
+                          ? 'bg-blue-50 text-blue-700'
                           : 'hover:bg-gray-50'
-                      }`}
+                        }`}
                       onClick={() => handleOverlaySymbolClick(symbol)}
                     >
                       <div className="font-medium">{symbol.id}</div>

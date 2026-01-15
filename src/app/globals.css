@@ -12,6 +12,7 @@ body {
   background: #fff;
   font-size: 1rem;
   line-height: 1.5;
+  scrollbar-gutter: stable;
 }
 
 .container-hero {
@@ -41,6 +42,23 @@ body {
   /* keep the layout from overflowing when scaled */
   width: calc(100% / 1.2);
   min-height: calc(100dvh / 1.2);
+}
+
+/* Scale header on non-zoomed marketing pages to match pricing page header size */
+.marketing-no-zoom>header {
+  transform: scale(1.2);
+  transform-origin: top center;
+  width: calc(100% / 1.2);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Header-only zoom for non-marketing pages (no min-height) */
+.header-zoom {
+  transform: scale(1.2);
+  transform-origin: top left;
+  width: calc(100% / 1.2);
 }
 
 /* IMPORTANT: never scale the app/chart pages */

@@ -5,7 +5,7 @@ import type { OhlcBar, Levels } from "@/types";
 
 const HEADER_H = 64; // keep in sync with CSS var
 
-export default function ChartClient({ symbol = "SPY" }: { symbol?: string }) {
+export default function ChartClient({ symbol = "SPY", levelsSource = "demo" }: { symbol?: string; levelsSource?: "demo" | "live" }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const chartRef = useRef<any>(null);
 
@@ -76,7 +76,8 @@ export default function ChartClient({ symbol = "SPY" }: { symbol?: string }) {
       
       series.setData(filteredData as any);
 
-      const levels: Levels = await fetch(`/api/levels?symbol=${symbol}&asof=today`).then(r => r.json());
+      const sourceParam = levelsSource === "demo" ? "&source=demo" : "";
+      const levels: Levels = await fetch(`/api/levels?symbol=${symbol}&asof=today${sourceParam}`).then(r => r.json());
       for (const L of levels.daily.lines) {
         series.createPriceLine({
           price: L.value,
@@ -119,4 +120,3 @@ export default function ChartClient({ symbol = "SPY" }: { symbol?: string }) {
 
   return <div id="chart-root" ref={ref} className="chart-root w-full h-full border border-neutral-200" />;
 }
-

@@ -19,7 +19,7 @@ export default function DemoPage() {
   const [selectedModel, setSelectedModel] = useState<SimpleModel>("simple");
 
   async function fetchBars(sym: string) {
-    const res = await fetch(`/api/ohlcv?symbol=${encodeURIComponent(sym)}&range=max`, { cache: "no-store" });
+    const res = await fetch(`/api/ohlcv?symbol=${encodeURIComponent(sym)}&range=max&source=demo`, { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const raw = await res.json();
     return normalizeBars(raw);
@@ -63,7 +63,7 @@ export default function DemoPage() {
   return (
     <div className="app">
       <header className="header">
-        <Toolbar onLoad={handleLoad} />
+        <Toolbar onLoad={handleLoad} symbolsSource="demo" />
       </header>
 
       <main className="chart-area">
@@ -72,6 +72,7 @@ export default function DemoPage() {
           symbol={symbol}
           selectedModel={selectedModel}
           selectedOutcome={"AUTO" as any}
+          levelsSource="demo"
         />
         {error && <div className="error">{error}</div>}
       </main>
@@ -89,6 +90,7 @@ export default function DemoPage() {
           onOutcomeChange={() => {}}
           showOverlay={false}
           showOutcome={false}
+          symbolsSource="demo"
         />
 
         <div className="card mt-4">

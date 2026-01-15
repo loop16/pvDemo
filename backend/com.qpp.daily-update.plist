@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.qpp.daily-update</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/usr/bin/python3</string>
+      <string>__REPO_ROOT__/namely-site/backend/qpp_daily_update.py</string>
+      <string>--download</string>
+      <string>--daily-config</string>
+      <string>__REPO_ROOT__/namely-site/backend/daily_data_assets.json</string>
+      <string>--assets</string>
+      <string>__REPO_ROOT__/namely-site/backend/assets.json</string>
+      <string>--env</string>
+      <string>__REPO_ROOT__/namely-site/backend/env.local</string>
+      <string>--output-dir</string>
+      <string>__REPO_ROOT__/namely-site/data/levels</string>
+      <string>--upload</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+      <key>Hour</key>
+      <integer>17</integer>
+      <key>Minute</key>
+      <integer>15</integer>
+    </dict>
+    <key>WorkingDirectory</key>
+    <string>__REPO_ROOT__/namely-site</string>
+    <key>StandardOutPath</key>
+    <string>__REPO_ROOT__/namely-site/backend/logs/daily-update.log</string>
+    <key>StandardErrorPath</key>
+    <string>__REPO_ROOT__/namely-site/backend/logs/daily-update.err</string>
+    <key>RunAtLoad</key>
+    <true/>
+  </dict>
+</plist>
