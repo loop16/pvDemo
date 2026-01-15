@@ -14,7 +14,7 @@ export default function DemoLayout({ children }: { children: React.ReactNode }) 
             About
           </Link>
           <Link
-            href="/signup"
+            href="/login"
             className="px-4 py-2 bg-black text-white text-xs font-semibold hover:bg-gray-800 flex items-center justify-center"
           >
             Sign up

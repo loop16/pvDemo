@@ -83,7 +83,7 @@ def load_daily_assets(path):
     return assets
 
 
-def normalize_ohlc_frame(df):
+def normalize_ohlc_frame(df, drop_weekdays=None):
     import pandas as pd
 
     cols = {str(c).lower(): c for c in df.columns}
@@ -96,15 +96,21 @@ def normalize_ohlc_frame(df):
         raise ValueError("Missing required OHLC columns for normalization")
 
     time_vals = pd.to_datetime(df[time_col], errors="coerce")
+    if getattr(time_vals.dt, "tz", None) is not None:
+        time_vals = time_vals.dt.tz_convert(None)
     out = pd.DataFrame(
         {
-            "time": time_vals.dt.strftime("%Y-%m-%d"),
+            "time": time_vals,
             "open": pd.to_numeric(df[open_col], errors="coerce"),
             "high": pd.to_numeric(df[high_col], errors="coerce"),
             "low": pd.to_numeric(df[low_col], errors="coerce"),
             "close": pd.to_numeric(df[close_col], errors="coerce"),
         }
     )
+    out = out.dropna(subset=["time"])
+    if drop_weekdays:
+        out = out[~out["time"].dt.weekday.isin(drop_weekdays)]
+    out["time"] = out["time"].dt.strftime("%Y-%m-%d")
     out = out.dropna(subset=["time", "open", "high", "low", "close"])
     out = out.drop_duplicates(subset=["time"], keep="last").sort_values("time")
     return out
@@ -137,8 +143,11 @@ def update_daily_csvs(config_path, n_bars, cooldown, only_missing=False):
             time.sleep(item_cooldown)
             continue
 
+        drop_weekdays = None
+        if str(tv_exchange).upper().startswith("CME"):
+            drop_weekdays = {6}
         try:
-            new_norm = normalize_ohlc_frame(df_new)
+            new_norm = normalize_ohlc_frame(df_new, drop_weekdays=drop_weekdays)
         except ValueError as exc:
             print(f"   -> Skipped {tv_symbol}: {exc}")
             time.sleep(item_cooldown)
@@ -152,7 +161,7 @@ def update_daily_csvs(config_path, n_bars, cooldown, only_missing=False):
                 continue
             try:
                 existing = pd.read_csv(file_path)
-                existing_norm = normalize_ohlc_frame(existing)
+                existing_norm = normalize_ohlc_frame(existing, drop_weekdays=drop_weekdays)
                 existing_rows = len(existing_norm)
             except Exception as exc:
                 # Avoid clobbering history if the existing file cannot be parsed.
@@ -254,7 +263,9 @@ def write_ohlcv_json(assets, output_dir):
             continue
         try:
             df = pd.read_csv(file_path)
-            normalized = normalize_ohlc_frame(df)
+            basename = os.path.basename(file_path)
+            drop_weekdays = {6} if basename.startswith(("CME_", "CME_MINI_")) else None
+            normalized = normalize_ohlc_frame(df, drop_weekdays=drop_weekdays)
         except Exception as exc:
             print(f"   -> Skipped {symbol}: {exc}")
             continue
