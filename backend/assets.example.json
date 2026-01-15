@@ -1,7 +1,7 @@
 [
   { "asset_name": "SPX", "file_path": "../Daily data csv/SPX_1D.csv" },
   { "asset_name": "NDX", "file_path": "../Daily data csv/NDX_1D.csv" },
-  { "asset_name": "CL", "file_path": "../Daily data csv/CL_1D.csv" },
-  { "asset_name": "GC", "file_path": "../Daily data csv/GC_1D.csv" },
+  { "asset_name": "CL", "file_path": "../Daily data csv/NYMEX_CL1!, 1D.csv" },
+  { "asset_name": "GC", "file_path": "../Daily data csv/COMEX_GC1!, 1D.csv" },
   { "asset_name": "BTC", "file_path": "../Daily data csv/BTC_1D.csv" }
 ]
