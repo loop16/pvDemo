@@ -1,21 +1,25 @@
-
+import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 
-export default auth((req) => {
-  const isLoggedIn = !!req.auth;
-  const isOnApp = req.nextUrl.pathname.startsWith("/app");
+const PUBLIC_DEMO_APIS = new Set(["/api/levels", "/api/ohlcv", "/api/symbols"]);
 
-  if (isOnApp && !isLoggedIn) {
-    return Response.redirect(new URL("/login", req.nextUrl.origin));
-  }
+function isDemoApiRequest(req: Request) {
+    const url = new URL(req.url);
+    return PUBLIC_DEMO_APIS.has(url.pathname) && url.searchParams.get("source") === "demo";
+}
+
+export default auth((req) => {
+    if (isDemoApiRequest(req)) return NextResponse.next();
+
+    if (!req.auth) {
+        const loginUrl = new URL("/login", req.nextUrl.origin);
+        loginUrl.searchParams.set("callbackUrl", req.nextUrl.pathname + req.nextUrl.search);
+        return NextResponse.redirect(loginUrl);
+    }
+
+    return NextResponse.next();
 });
 
 export const config = {
-  // Match all request paths except for the ones starting with:
-  // - api (API routes)
-  // - _next/static (static files)
-  // - _next/image (image optimization files)
-  // - favicon.ico (favicon file)
-  // - public folder
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+    matcher: ["/app/:path*", "/api/levels", "/api/ohlcv", "/api/symbols", "/api/tv/:path*"],
 };

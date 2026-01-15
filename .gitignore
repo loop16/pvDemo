@@ -33,6 +33,11 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 /backend/env.local
+credentials.csv
+
+# OAuth credentials
+**/client_secret*.json
+backend/*client_secret*.json
 
 # vercel
 .vercel

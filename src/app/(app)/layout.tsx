@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const handleLogout = () => {
-    document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    window.location.href = "/";
+    signOut({ callbackUrl: "/" });
   };
 
   return (
@@ -30,4 +30,3 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
-
