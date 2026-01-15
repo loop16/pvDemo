@@ -130,7 +130,7 @@ function LoginForm() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="symbol-input w-full"
-                        placeholder="demovault"
+                        placeholder="Username or Email"
                     />
                 </div>
 

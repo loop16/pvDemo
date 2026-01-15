@@ -6,6 +6,10 @@ import { Readable } from "stream";
 export const runtime = "nodejs";
 
 type SymbolEntry = { id: string; label: string };
+const SYMBOL_ID_RENAMES: Record<string, string> = {
+  CL: "CL1!",
+  GC: "GC1!",
+};
 
 const DEFAULT_LEVELS_SOURCE = (process.env.QPP_LEVELS_SOURCE || "wasabi").toLowerCase();
 const WASABI_PREFIX = (process.env.WASABI_PREFIX || "levels").replace(/^\/+|\/+$/g, "");
@@ -95,10 +99,25 @@ export async function GET(req: NextRequest) {
     return Response.json(catalog, { headers: { "cache-control": "public, max-age=300, s-maxage=300" } });
   }
 
+  const rewriteSymbols = (symbols: SymbolEntry[]) => {
+    const seen = new Set<string>();
+    const mapped = symbols.map((entry) => {
+      const mappedId = SYMBOL_ID_RENAMES[entry.id] || entry.id;
+      const mappedLabel = entry.label === entry.id ? mappedId : entry.label;
+      return { ...entry, id: mappedId, label: mappedLabel };
+    });
+    return mapped.filter((entry) => {
+      const key = entry.id.toUpperCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  };
+
   if (shouldUseWasabi(source)) {
     try {
       const data = await readWasabiJson<SymbolEntry[]>("symbols/index.json");
-      return Response.json(data, { headers: { "cache-control": "public, max-age=300, s-maxage=300" } });
+      return Response.json(rewriteSymbols(data), { headers: { "cache-control": "public, max-age=300, s-maxage=300" } });
     } catch (error) {
       console.warn("Wasabi symbols index missing, falling back to local.", error);
     }
@@ -106,9 +125,9 @@ export async function GET(req: NextRequest) {
 
   try {
     const data = await readJsonFile<SymbolEntry[]>(LEVELS_INDEX_LOCAL);
-    return Response.json(data, { headers: { "cache-control": "public, max-age=300, s-maxage=300" } });
+    return Response.json(rewriteSymbols(data), { headers: { "cache-control": "public, max-age=300, s-maxage=300" } });
   } catch {
     const fallback = await loadFallbackSymbols();
-    return Response.json(fallback, { headers: { "cache-control": "public, max-age=300, s-maxage=300" } });
+    return Response.json(rewriteSymbols(fallback), { headers: { "cache-control": "public, max-age=300, s-maxage=300" } });
   }
 }
