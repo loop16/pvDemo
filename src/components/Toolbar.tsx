@@ -24,10 +24,33 @@ export function Toolbar({ onLoad, symbolsSource = "live", symbolsOverride }: {
       .catch(() => setSymbols([]));
   }, [symbolsOverride, symbolsSource]);
 
-  const filteredSymbols = symbols.filter(symbol =>
-    symbol.id.toLowerCase().includes(query.toLowerCase()) ||
-    symbol.label.toLowerCase().includes(query.toLowerCase())
-  );
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredSymbols = symbols
+    .filter(symbol => {
+      if (!normalizedQuery) return true;
+      return (
+        symbol.id.toLowerCase().includes(normalizedQuery) ||
+        symbol.label.toLowerCase().includes(normalizedQuery)
+      );
+    })
+    .sort((a, b) => {
+      if (!normalizedQuery) return 0;
+      const aId = a.id.toLowerCase();
+      const bId = b.id.toLowerCase();
+      const aLabel = a.label.toLowerCase();
+      const bLabel = b.label.toLowerCase();
+      const rank = (id: string, label: string) => {
+        if (id.startsWith(normalizedQuery)) return 0;
+        if (label.startsWith(normalizedQuery)) return 1;
+        if (id.includes(normalizedQuery)) return 2;
+        if (label.includes(normalizedQuery)) return 3;
+        return 4;
+      };
+      const ra = rank(aId, aLabel);
+      const rb = rank(bId, bLabel);
+      if (ra !== rb) return ra - rb;
+      return aId.localeCompare(bId);
+    });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

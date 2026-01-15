@@ -1146,8 +1146,9 @@ export default function ChartPanel({ data, symbol, onQuarterLevels, selectedMode
           if (lines.length) {
             const groupedFull = groupScenarioLines(lines as any);
             const DAY = 24 * 60 * 60;
+            const rangeOrder = Array.from({ length: ranges.length }, (_, idx) => ranges.length - 1 - idx);
             // Build boxes + midline only from (1–2), (3–4), mid=5, (6–7), (8–9)
-            for (let i = 0; i < ranges.length; i++) {
+            for (const i of rangeOrder) {
               const r = ranges[i];
                 // Determine scenario based on model
                 let scenario: OutcomeKey;

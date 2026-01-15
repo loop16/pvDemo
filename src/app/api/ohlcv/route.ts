@@ -116,6 +116,8 @@ function parseCsvOhlcv(csv: string): OhlcvRow[] {
     }
     const prev = out[out.length - 1];
     if (prev && prev.open === open && prev.high === high && prev.low === low && prev.close === close) {
+      // Keep the latest date when consecutive candles are identical.
+      out[out.length - 1] = { time, open, high, low, close };
       continue;
     }
     out.push({ time, open, high, low, close });

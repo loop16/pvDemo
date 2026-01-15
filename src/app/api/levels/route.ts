@@ -522,8 +522,16 @@ export async function GET(req: NextRequest) {
   
   try {
     const entry = await loadLevelsEntry(mappedSymbol, model, source);
-    if (entry) {
-      return Response.json(entry, {
+    const normalized = (() => {
+      if (entry && entry.daily?.lines) return entry;
+      const maybeMap = entry as unknown as Record<string, LevelsEntry>;
+      if (maybeMap && mappedSymbol in maybeMap && maybeMap[mappedSymbol]?.daily?.lines) {
+        return maybeMap[mappedSymbol];
+      }
+      return null;
+    })();
+    if (normalized) {
+      return Response.json(normalized, {
         headers: {
           "content-type": "application/json",
           "cache-control": "public, max-age=3600, s-maxage=3600",

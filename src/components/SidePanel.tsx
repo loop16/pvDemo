@@ -65,10 +65,33 @@ export function SidePanel({ quarterLevels, metrics, selectedModel, onModelChange
   };
 
   // Overlay search functionality
-  const filteredOverlaySymbols = availableSymbols.filter(symbol =>
-    symbol.id.toLowerCase().includes(overlayQuery.toLowerCase()) ||
-    symbol.label.toLowerCase().includes(overlayQuery.toLowerCase())
-  );
+  const normalizedOverlayQuery = overlayQuery.trim().toLowerCase();
+  const filteredOverlaySymbols = availableSymbols
+    .filter(symbol => {
+      if (!normalizedOverlayQuery) return true;
+      return (
+        symbol.id.toLowerCase().includes(normalizedOverlayQuery) ||
+        symbol.label.toLowerCase().includes(normalizedOverlayQuery)
+      );
+    })
+    .sort((a, b) => {
+      if (!normalizedOverlayQuery) return 0;
+      const aId = a.id.toLowerCase();
+      const bId = b.id.toLowerCase();
+      const aLabel = a.label.toLowerCase();
+      const bLabel = b.label.toLowerCase();
+      const rank = (id: string, label: string) => {
+        if (id.startsWith(normalizedOverlayQuery)) return 0;
+        if (label.startsWith(normalizedOverlayQuery)) return 1;
+        if (id.includes(normalizedOverlayQuery)) return 2;
+        if (label.includes(normalizedOverlayQuery)) return 3;
+        return 4;
+      };
+      const ra = rank(aId, aLabel);
+      const rb = rank(bId, bLabel);
+      if (ra !== rb) return ra - rb;
+      return aId.localeCompare(bId);
+    });
 
   const handleOverlayInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

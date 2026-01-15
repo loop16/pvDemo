@@ -117,11 +117,12 @@ def normalize_ohlc_frame(df, drop_weekdays=None, drop_flat=False, drop_duplicate
     out = out.dropna(subset=["time", "open", "high", "low", "close"])
     out = out.drop_duplicates(subset=["time"], keep="last").sort_values("time")
     if drop_duplicate_ohlc:
+        # If consecutive candles are identical, keep the latest date (drop the earlier row).
         dup_mask = (
-            out["open"].eq(out["open"].shift(1))
-            & out["high"].eq(out["high"].shift(1))
-            & out["low"].eq(out["low"].shift(1))
-            & out["close"].eq(out["close"].shift(1))
+            out["open"].eq(out["open"].shift(-1))
+            & out["high"].eq(out["high"].shift(-1))
+            & out["low"].eq(out["low"].shift(-1))
+            & out["close"].eq(out["close"].shift(-1))
         )
         out = out[~dup_mask]
     return out
@@ -130,6 +131,23 @@ def normalize_ohlc_frame(df, drop_weekdays=None, drop_flat=False, drop_duplicate
 def update_daily_csvs(config_path, n_bars, cooldown, only_missing=False):
     import pandas as pd
     from quarterly_and_downloader_bundle import Downloader
+
+    cme_exchanges = {"CME", "CME_MINI", "COMEX", "NYMEX", "CBOT"}
+
+    def shift_cme_dates(df, exch):
+        if not exch:
+            return df
+        if exch.upper() not in cme_exchanges:
+            return df
+        cols = {str(c).lower(): c for c in df.columns}
+        time_col = cols.get("date") or cols.get("time") or cols.get("datetime")
+        if not time_col:
+            print(f"   -> Skipped date shift for {exch}: no date column found")
+            return df
+        out = df.copy()
+        out[time_col] = pd.to_datetime(out[time_col], errors="coerce") + pd.Timedelta(days=1)
+        print(f"   -> Shifted dates +1 day for {exch}")
+        return out
 
     assets = load_daily_assets(config_path)
     assets = resolve_asset_paths(assets, os.path.dirname(config_path))
@@ -155,6 +173,7 @@ def update_daily_csvs(config_path, n_bars, cooldown, only_missing=False):
             continue
 
         try:
+            df_new = shift_cme_dates(df_new, used_exch or tv_exchange)
             new_norm = normalize_ohlc_frame(df_new, drop_duplicate_ohlc=True)
         except ValueError as exc:
             print(f"   -> Skipped {tv_symbol}: {exc}")
@@ -177,7 +196,13 @@ def update_daily_csvs(config_path, n_bars, cooldown, only_missing=False):
                 time.sleep(item_cooldown)
                 continue
 
-            merged = pd.concat([existing_norm, new_norm], ignore_index=True)
+            # Find the earliest date in the new data
+            new_start_date = new_norm["time"].min()
+            # Keep only existing data BEFORE the new data starts
+            existing_before = existing_norm[existing_norm["time"] < new_start_date]
+            print(f"   -> Keeping {len(existing_before)} existing rows before {new_start_date}")
+            # Merge: old data (before start) + all new data
+            merged = pd.concat([existing_before, new_norm], ignore_index=True)
             merged = merged.drop_duplicates(subset=["time"], keep="last").sort_values("time")
         else:
             os.makedirs(os.path.dirname(file_path), exist_ok=True)
