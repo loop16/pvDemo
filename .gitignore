@@ -45,3 +45,7 @@ backend/*client_secret*.json
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+backend/logs/
+Daily data csv/
+data/levels/
