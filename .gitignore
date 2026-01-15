@@ -39,6 +39,11 @@ credentials.csv
 **/client_secret*.json
 backend/*client_secret*.json
 
+# backend outputs
+backend/logs/
+Daily data csv/
+data/levels/
+
 # vercel
 .vercel
 
