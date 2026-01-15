@@ -43,6 +43,7 @@ backend/*client_secret*.json
 backend/logs/
 Daily data csv/
 data/levels/
+data/*.json
 
 # vercel
 .vercel
