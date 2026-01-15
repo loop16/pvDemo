@@ -238,6 +238,34 @@ def upload_json_files(output_dir, dry_run=False):
         print(f"Uploaded {local_path} -> s3://{bucket}/{key}")
 
 
+def write_ohlcv_json(assets, output_dir):
+    import pandas as pd
+
+    out_dir = os.path.join(output_dir, "ohlcv", "symbols")
+    os.makedirs(out_dir, exist_ok=True)
+
+    for item in assets:
+        symbol = str(item.get("asset_name") or "").upper()
+        file_path = item.get("file_path")
+        if not symbol or not file_path:
+            continue
+        if not os.path.exists(file_path):
+            print(f"   -> Missing CSV for {symbol}: {file_path}")
+            continue
+        try:
+            df = pd.read_csv(file_path)
+            normalized = normalize_ohlc_frame(df)
+        except Exception as exc:
+            print(f"   -> Skipped {symbol}: {exc}")
+            continue
+
+        records = normalized.to_dict(orient="records")
+        out_path = os.path.join(out_dir, f"{symbol}.json")
+        with open(out_path, "w") as f:
+            json.dump(records, f, indent=2)
+        print(f"   -> Wrote OHLCV JSON {symbol} ({len(records)} rows)")
+
+
 def write_symbol_level_files(output_dir):
     label_map = {}
     daily_config = DEFAULT_DAILY_CONFIG_PATH
@@ -299,6 +327,7 @@ def main():
     parser.add_argument("--download-cooldown", default=DEFAULT_DOWNLOAD_COOLDOWN, help="Delay between requests in seconds.")
     parser.add_argument("--upload", action="store_true", help="Upload JSON files to Wasabi.")
     parser.add_argument("--skip-analysis", action="store_true", help="Skip analysis and only upload.")
+    parser.add_argument("--write-ohlcv", action="store_true", help="Write OHLCV JSON files from CSVs.")
     parser.add_argument("--dry-run", action="store_true", help="Show upload actions without sending files.")
     parser.add_argument("--log-file", default="", help="Write stdout/stderr to this file.")
 
@@ -339,11 +368,19 @@ def main():
         else:
             raise FileNotFoundError(f"Assets config not found: {assets_path}")
 
+    assets = None
     if not args.skip_analysis:
         assets = load_assets(assets_path)
         assets = resolve_asset_paths(assets, os.path.dirname(assets_path))
         os.makedirs(args.output_dir, exist_ok=True)
         run_analysis(assets, args.output_dir)
+
+    if args.write_ohlcv:
+        if assets is None:
+            assets = load_assets(assets_path)
+            assets = resolve_asset_paths(assets, os.path.dirname(assets_path))
+        os.makedirs(args.output_dir, exist_ok=True)
+        write_ohlcv_json(assets, args.output_dir)
 
     if args.upload:
         write_symbol_level_files(args.output_dir)
