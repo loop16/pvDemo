@@ -11,9 +11,8 @@ export default function Home() {
         <section className="container-hero mt-[4vh] md:mt-[6vh] grid grid-cols-1 items-start gap-10 pt-0 pb-12 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-6 max-w-[640px]">
             <h1 className="serif text-[48px] md:text-[62px] leading-[1.08] text-neutral-900">
-              Institutional Grade
-              <br />Pricing Models for
-              <br /><span style={{ color: '#1a5bb5' }}><em>Everyone</em></span>
+              Stop Levels that
+              <br /><span style={{ color: '#003087' }}><em>Matter</em></span>
             </h1>
 
             <p className="mt-6 max-w-[500px] text-[16px] leading-[1.7] text-neutral-500">
