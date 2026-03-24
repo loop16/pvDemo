@@ -133,7 +133,7 @@ function findQuarterRanges(bars: Bar[]): QuarterRange[] {
       endTime = bars[nextFri].time;
     }
 
-    ranges.push({ qkey: key, startTime: bars[firstFriIdx].time, endTime, high, low, mid });
+    ranges.push({ qkey: key, fridayIdx: firstFriIdx, prevIdx: Math.max(0, firstFriIdx - 1), startTime: bars[firstFriIdx].time, endTime, high, low, mid });
   }
   return ranges;
 }
