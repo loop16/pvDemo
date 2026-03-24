@@ -1,45 +1,46 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import BrowserCard from "@/components/BrowserCard";
-
 export default function Home() {
   return (
-    <>
-      <Header />
+    <div className="h-screen overflow-hidden relative">
+      {/* Content */}
+      <div className="relative z-20">
+        <Header />
 
-      <div aria-hidden className="h-6 md:h-8 lg:h-10" />
+        <section className="container-hero mt-[4vh] md:mt-[6vh] grid grid-cols-1 items-start gap-10 pt-0 pb-12 md:grid-cols-12 md:gap-12">
+          <div className="md:col-span-6 max-w-[640px]">
+            <h1 className="serif text-[48px] md:text-[62px] leading-[1.08] text-neutral-900">
+              Institutional Grade
+              <br />Pricing Models for
+              <br /><span style={{ color: '#1a5bb5' }}><em>Everyone</em></span>
+            </h1>
 
-      <section
-        id="hero"
-        className="container-hero mt-[7.5vh] md:mt-[10vh] grid grid-cols-1 items-start gap-10 pt-0 pb-8 md:grid-cols-12 md:gap-12"
-      >
-        {/* Left copy */}
-        <div className="md:col-span-6 max-w-[640px]">
-          <h1 className="text-[44px] md:text-[58px] leading-[1.04] font-extrabold tracking-tightest">
-            Institutional Grade
-            <br /> Pricing Models for
-            <br /> <span className="text-brand">Everyone</span>
-          </h1>
+            <p className="mt-6 max-w-[500px] text-[16px] leading-[1.7] text-neutral-500">
+              Historical datasets across stocks, crypto, FX, and futures. Quarter models recomputed nightly. Probability levels surfaced every morning.
+            </p>
 
-          <p className="mt-5 max-w-[520px] text-[15px] md:text-[16px] leading-[1.68] text-neutral-600">
-            Explore historical datasets across 1200+ assets spanning up to 60 years. Stocks, Crypto, FX, and Futures.
-          </p>
-
-          <div className="mt-8 flex items-center gap-3">
-            <Link href="/demo" className="rounded-pill bg-black px-5 py-3 text-white hover:opacity-90">
-              See Demo
-            </Link>
-            <Link href="/pricing" className="rounded-pill border border-neutral-300 px-5 py-3 hover:bg-neutral-50">
-              Pricing
-            </Link>
+            <div className="mt-10 flex items-center gap-3">
+              <Link
+                href="/demo"
+                className="text-[15px] font-medium text-white bg-neutral-900 border border-neutral-900 px-7 py-3 hover:opacity-85 transition-opacity"
+              >
+                See Demo
+              </Link>
+              <Link
+                href="/pricing"
+                className="text-[15px] font-medium text-neutral-500 border border-neutral-200 bg-white px-7 py-3 hover:border-neutral-400 hover:text-neutral-700 transition-all"
+              >
+                Pricing
+              </Link>
+            </div>
           </div>
-        </div>
 
-        {/* Right image card */}
-        <div className="md:col-span-6 md:pt-4">
-          <BrowserCard />
-        </div>
-      </section>
-    </>
+          <div className="md:col-span-6 md:pt-2">
+            <BrowserCard />
+          </div>
+        </section>
+      </div>
+    </div>
   );
 }

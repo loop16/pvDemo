@@ -1,11 +1,16 @@
-"use client";
-import { usePathname } from "next/navigation";
+import HalftoneCanvas from "@/components/HalftoneCanvasV1";
+import GridLines from "@/components/GridLines";
 
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  // Apply zoom to landing, pricing, and signup pages, but NOT to models and about
-  const shouldZoom = pathname === "/" || pathname === "/pricing" || pathname === "/signup";
-  return <div className={shouldZoom ? "landing-zoom" : "marketing-no-zoom"}>{children}</div>;
+  return (
+    <>
+      <div className="fixed inset-0 z-0">
+        <HalftoneCanvas />
+      </div>
+      <GridLines />
+      {children}
+    </>
+  );
 }
 
 
