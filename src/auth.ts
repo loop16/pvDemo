@@ -3,6 +3,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import { z } from "zod";
+import { createUser, getUser, upsertUserByEmail, verifyPassword } from "@/lib/user-store";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
@@ -15,7 +16,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             authorize: async (credentials) => {
                 const parsed = z
                     .object({
-                        email: z.string(), // Allow username-like values for demo
+                        email: z.string(),
                         password: z.string().min(4),
                     })
                     .safeParse(credentials);
@@ -34,8 +35,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                         name: "Demo User",
                     };
                 }
+                
+                const existing = await getUser(email);
+                if (!existing) return null;
 
-                return null;
+                const ok = await verifyPassword(existing, password);
+                if (!ok) return null;
+                return { id: existing.id, email: existing.email, name: existing.name ?? undefined };
             },
         }),
         ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
@@ -53,6 +59,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     callbacks: {
         async jwt({ token, user, account }) {
+            if (user?.email) {
+                const stored = await upsertUserByEmail(user.email, {
+                    name: user.name ?? undefined,
+                });
+                token.paid = stored.stripePaid ?? false;
+                token.email = stored.email;
+            } else if (token.email) {
+                const stored = await getUser(token.email as string);
+                if (stored) token.paid = stored.stripePaid ?? false;
+            }
+
             // If user logs in with Google, we might want to store them in our JSON db too
             if (account?.provider === "google" && user?.email) {
                 // Keep token enrichment only; user storage is disabled in demo-only mode.
@@ -62,6 +79,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         async session({ session, token }) {
             if (token.sub && session.user) {
                 session.user.id = token.sub;
+            }
+            if (session.user) {
+                session.user.paid = (token.paid as boolean) ?? false;
             }
             return session;
         },

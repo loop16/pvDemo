@@ -99,5 +99,3 @@ export function markersFromRanges(_ranges: QuarterRange[]): SeriesMarker<UTCTime
   return [];
 }
 
-
-

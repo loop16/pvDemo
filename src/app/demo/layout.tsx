@@ -4,18 +4,21 @@ import Link from "next/link";
 export default function DemoLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="h-screen flex flex-col">
-      <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200">
+      <div className="flex items-center justify-between px-5 py-3 border-b border-neutral-200">
         <Link href="/" className="flex items-center gap-2">
-          <img src="/logo.svg" alt="Pricevault" width={28} height={28} />
-          <span className="text-lg font-semibold">Pricevault</span>
+          <img src="/logo.svg" alt="Pricevault" width={22} height={22} />
+          <span className="mono text-[14px] font-semibold tracking-tight">Pricevault</span>
+          <span className="mono ml-1 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-neutral-400 border border-neutral-200">
+            Demo
+          </span>
         </Link>
-        <nav className="flex items-center gap-3">
-          <Link href="/about" className="rounded-full px-4 py-2 text-sm hover:bg-neutral-50">
+        <nav className="flex items-center gap-1">
+          <Link href="/about" className="mono px-3 py-1.5 text-[11px] text-neutral-500 hover:text-neutral-900 transition-colors uppercase tracking-wider">
             About
           </Link>
           <Link
             href="/login"
-            className="px-4 py-2 bg-black text-white text-xs font-semibold hover:bg-gray-800 flex items-center justify-center"
+            className="mono ml-2 border border-neutral-900 bg-neutral-900 text-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider hover:opacity-85 transition-opacity"
           >
             Sign up
           </Link>
