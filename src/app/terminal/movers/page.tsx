@@ -472,15 +472,15 @@ export default function MoversPage() {
         style={{
           cursor: "pointer",
           position: "relative",
-          background: idx % 2 === 0 ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.3)',
-          borderBottom: '1px solid rgba(255,255,255,0.35)',
+          background: idx % 2 === 0 ? (theme.frosted ? 'rgba(255,255,255,0.4)' : C.bg) : (theme.frosted ? 'rgba(255,255,255,0.3)' : C.surface),
+          borderBottom: theme.frosted ? '1px solid rgba(255,255,255,0.35)' : `1px solid ${C.borderLight}`,
           transition: "background 0.1s",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.background = 'rgba(255,255,255,0.55)';
+          e.currentTarget.style.background = theme.frosted ? 'rgba(255,255,255,0.55)' : C.hoverBg;
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.background = idx % 2 === 0 ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.3)';
+          e.currentTarget.style.background = idx % 2 === 0 ? (theme.frosted ? 'rgba(255,255,255,0.4)' : C.bg) : (theme.frosted ? 'rgba(255,255,255,0.3)' : C.surface);
         }}
       >
         {/* SYMBOL */}
@@ -657,10 +657,9 @@ export default function MoversPage() {
             fontWeight: 700,
             letterSpacing: "0.12em",
             color: C.textSecondary,
-            background: 'rgba(255,255,255,0.6)',
-            backdropFilter: 'blur(30px)',
-            WebkitBackdropFilter: 'blur(30px)',
-            borderBottom: '1px solid rgba(255,255,255,0.5)',
+            background: theme.frosted ? 'rgba(255,255,255,0.6)' : C.surface,
+            ...(theme.frosted ? { backdropFilter: 'blur(30px)', WebkitBackdropFilter: 'blur(30px)' } : {}),
+            borderBottom: theme.frosted ? '1px solid rgba(255,255,255,0.5)' : `1px solid ${C.border}`,
           }}
         >
           {CLASS_SECTION_LABELS[assetClass]}
@@ -712,9 +711,8 @@ export default function MoversPage() {
                 position: "sticky",
                 top: 0,
                 zIndex: 10,
-                background: 'rgba(255,255,255,0.7)',
-                backdropFilter: 'blur(30px)',
-                WebkitBackdropFilter: 'blur(30px)',
+                background: theme.frosted ? 'rgba(255,255,255,0.7)' : C.bg,
+                ...(theme.frosted ? { backdropFilter: 'blur(30px)', WebkitBackdropFilter: 'blur(30px)' } : {}),
                 padding: "6px 8px 6px 12px",
                 fontSize: 9,
                 fontWeight: 600,
@@ -837,9 +835,8 @@ export default function MoversPage() {
     <div
       className="flex flex-col h-full"
       style={{
-        background: 'rgba(255,255,255,0.3)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        background: theme.frosted ? 'rgba(255,255,255,0.3)' : C.bg,
+        ...(theme.frosted ? { backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' } : {}),
         color: C.textPrimary,
         fontFamily: C.font,
         overflow: "hidden",
@@ -850,10 +847,9 @@ export default function MoversPage() {
         className="flex items-center justify-between shrink-0"
         style={{
           padding: "10px 24px",
-          borderBottom: '1px solid rgba(255,255,255,0.5)',
-          background: 'rgba(255,255,255,0.4)',
-          backdropFilter: 'blur(30px) saturate(1.6)',
-          WebkitBackdropFilter: 'blur(30px) saturate(1.6)',
+          borderBottom: theme.frosted ? '1px solid rgba(255,255,255,0.5)' : `1px solid ${C.border}`,
+          background: theme.frosted ? 'rgba(255,255,255,0.4)' : C.surface,
+          ...(theme.frosted ? { backdropFilter: 'blur(30px) saturate(1.6)', WebkitBackdropFilter: 'blur(30px) saturate(1.6)' } : {}),
         }}
       >
         <div className="flex items-center" style={{ gap: 16 }}>
@@ -968,10 +964,9 @@ export default function MoversPage() {
         className="flex items-center justify-between shrink-0"
         style={{
           padding: "10px 24px",
-          borderBottom: '1px solid rgba(255,255,255,0.5)',
-          background: 'rgba(255,255,255,0.5)',
-          backdropFilter: 'blur(30px) saturate(1.6)',
-          WebkitBackdropFilter: 'blur(30px) saturate(1.6)',
+          borderBottom: theme.frosted ? '1px solid rgba(255,255,255,0.5)' : `1px solid ${C.border}`,
+          background: theme.frosted ? 'rgba(255,255,255,0.5)' : C.surface,
+          ...(theme.frosted ? { backdropFilter: 'blur(30px) saturate(1.6)', WebkitBackdropFilter: 'blur(30px) saturate(1.6)' } : {}),
         }}
       >
         {/* Asset class tabs */}
@@ -1165,8 +1160,8 @@ export default function MoversPage() {
         className="flex items-center justify-between shrink-0"
         style={{
           padding: "6px 24px",
-          borderTop: '1px solid rgba(255,255,255,0.5)',
-          background: 'rgba(255,255,255,0.4)',
+          borderTop: theme.frosted ? '1px solid rgba(255,255,255,0.5)' : `1px solid ${C.border}`,
+          background: theme.frosted ? 'rgba(255,255,255,0.4)' : C.surface,
           backdropFilter: 'blur(30px) saturate(1.6)',
           WebkitBackdropFilter: 'blur(30px) saturate(1.6)',
           fontSize: 9,
