@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import BrowserCard from "@/components/BrowserCard";
 export default function Home() {
   return (
-    <div className="h-screen overflow-hidden relative">
+    <div className="h-[100dvh] overflow-hidden relative">
       {/* Content */}
       <div className="relative z-20">
         <Header />

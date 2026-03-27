@@ -38,7 +38,7 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className="flex flex-col relative"
+      className="flex flex-col relative overflow-hidden"
       style={{
         height: "100dvh",
         background: theme.bg,

@@ -7,7 +7,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="relative z-20">
+    <header className="relative z-20" style={menuOpen ? { background: '#ffffff' } : undefined}>
       <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-between" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
         <Link href="/" className="flex items-center gap-2.5">
           <img src="/logo.svg" alt="Pricevault" width={28} height={28} />
@@ -37,7 +37,7 @@ export default function Header() {
 
       {/* Mobile dropdown */}
       {menuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-neutral-200 z-50 px-6 py-4 flex flex-col gap-4">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-neutral-200 z-50 px-6 py-4 flex flex-col gap-4">
           <Link href="/about" className="text-[15px] text-neutral-600" onClick={() => setMenuOpen(false)}>About</Link>
           <Link href="/models" className="text-[15px] text-neutral-600" onClick={() => setMenuOpen(false)}>Models</Link>
           <Link href="/pricing" className="text-[15px] text-neutral-600" onClick={() => setMenuOpen(false)}>Pricing</Link>

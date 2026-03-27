@@ -12,7 +12,7 @@ function DemoLayoutInner({ children }: { children: React.ReactNode }) {
   const isDark = theme.bg.startsWith('#0') || theme.bg.startsWith('#1') || theme.bg.startsWith('#2') || theme.bg === '#000000';
 
   return (
-    <div className="flex flex-col relative" style={{ height: '100dvh', background: theme.bg }}>
+    <div className="flex flex-col relative overflow-hidden" style={{ height: '100dvh', background: theme.bg }}>
       <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0, filter: 'blur(12px)', opacity: 0.3 }}>
         <HalftoneCanvas />
       </div>
