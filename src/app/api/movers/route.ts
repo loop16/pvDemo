@@ -43,6 +43,8 @@ type CombinedAssetEntry = {
   tv_exchange: string | string[];
 };
 
+type ModelType = "pro" | "simple" | "beta";
+
 type MoverRow = {
   symbol: string;
   price: number;
@@ -54,6 +56,8 @@ type MoverRow = {
   magnitude: number;
   direction: "above" | "below";
   assetClass: AssetClass;
+  lastQCloseZone?: string;
+  [key: string]: unknown;
 };
 
 type CachedResult = {
@@ -61,13 +65,17 @@ type CachedResult = {
   timestamp: number;
 };
 
+const BENCHMARK_SYMBOL = "SPX";
+const BETA_LOOKBACK = 1250;
+const BETA_CLAMP = 5;
+
 /* ── Config ────────────────────────────────────────────── */
 
 const DEMO_SYMBOLS = ["SPX", "NQ", "BTCUSD", "CL", "GC"];
 const BATCH_SIZE = 200; // Higher parallelism for I/O-bound reads
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes — data updates nightly
 const STALE_SERVE_MS = 60 * 60 * 1000; // Serve stale cache up to 1 hour while recomputing
-const TAIL_BYTES = 12_288; // Read last 12 KB of each CSV (~150 rows, covers current quarter)
+const TAIL_BYTES = 32_768; // Read last 32 KB of each CSV (~400 rows, covers 1.5+ years for reliable quarter detection)
 
 const LEVELS_LOCAL_DIR = path.join(process.cwd(), "public", "mock", "levels");
 const DEMO_OHLCV_DIR = path.join(process.cwd(), "public", "mock", "ohlcv");
@@ -85,10 +93,10 @@ const OHLCV_ALIASES: Record<string, string> = {
   NQ: "NQ1!",
 };
 
-/* ── In-memory cache ───────────────────────────────────── */
+/* ── In-memory cache (per model) ──────────────────────── */
 
-let moversCache: CachedResult | null = null;
-let recomputeInProgress = false;
+const moversCacheByModel: Record<string, CachedResult | null> = {};
+const recomputeInProgressByModel: Record<string, boolean> = {};
 
 /* ── Asset classification ──────────────────────────────── */
 
@@ -362,13 +370,128 @@ async function loadOhlcvFast(symbol: string, source: string, resolvedFilePath?: 
   throw new Error(`No OHLCV data available for ${symbol}`);
 }
 
-async function loadLevelsData(source: string): Promise<Record<string, LevelsEntry>> {
-  if (shouldUseWasabi(source)) {
-    return await readWasabiJson<Record<string, LevelsEntry>>("levels.json");
+async function loadLevelsData(source: string, model: ModelType = "pro"): Promise<Record<string, LevelsEntry>> {
+  // Determine which file to use based on model
+  const consolidatedFileName = model === "simple" ? "basic_levels.json" : "levels.json";
+  const perSymbolFileOrder = model === "simple"
+    ? ["basic_levels.json"]
+    : model === "beta"
+      ? ["levels.json"]  // beta uses pro (SPX) levels, scaled later
+      : ["levels.json", "basic_levels.json"];
+
+  // Try consolidated file first
+  let consolidated: Record<string, LevelsEntry> = {};
+  try {
+    if (shouldUseWasabi(source)) {
+      consolidated = await readWasabiJson<Record<string, LevelsEntry>>(consolidatedFileName);
+    } else {
+      consolidated = await readJsonFile<Record<string, LevelsEntry>>(
+        path.join(LEVELS_LOCAL_DIR, consolidatedFileName),
+      );
+    }
+  } catch {}
+
+  // Also load per-symbol levels from data/levels/symbols/
+  const perSymbolDir = path.resolve(process.cwd(), "data", "levels", "symbols");
+  try {
+    const dirs = await fs.readdir(perSymbolDir);
+    await Promise.allSettled(dirs.map(async (sym) => {
+      if (consolidated[sym]) return; // already have it
+      for (const fname of perSymbolFileOrder) {
+        try {
+          const filePath = path.join(perSymbolDir, sym, fname);
+          const raw = await fs.readFile(filePath, "utf-8");
+          const parsed = JSON.parse(raw);
+          if (parsed.daily?.lines) {
+            consolidated[sym] = parsed;
+            break;
+          } else if (typeof parsed === "object") {
+            const firstKey = Object.keys(parsed)[0];
+            if (firstKey && parsed[firstKey]?.daily?.lines) {
+              consolidated[sym] = parsed[firstKey];
+              break;
+            }
+          }
+        } catch {}
+      }
+    }));
+  } catch {}
+
+  return consolidated;
+}
+
+/* ── Beta model: volatility ratio scaling ──────────────── */
+
+/**
+ * Compute volatility ratio: sigma_asset / sigma_SPX
+ * Used to scale SPX percentage levels to equivalent asset-specific levels.
+ * Requires OHLCV bars for both the asset and the benchmark (SPX).
+ */
+function computeVolRatioFromBars(assetBars: OhlcvBar[], benchBars: OhlcvBar[], lookback = BETA_LOOKBACK): number {
+  // Build date-indexed log returns
+  const assetByDate = new Map<string, number>();
+  const benchByDate = new Map<string, number>();
+
+  for (let i = 1; i < assetBars.length; i++) {
+    const prev = assetBars[i - 1].close;
+    const curr = assetBars[i].close;
+    if (prev > 0 && curr > 0) {
+      const ret = Math.log(curr / prev);
+      if (Number.isFinite(ret)) {
+        assetByDate.set(normalizeDate(assetBars[i].time), ret);
+      }
+    }
   }
-  return await readJsonFile<Record<string, LevelsEntry>>(
-    path.join(LEVELS_LOCAL_DIR, "levels.json"),
-  );
+  for (let i = 1; i < benchBars.length; i++) {
+    const prev = benchBars[i - 1].close;
+    const curr = benchBars[i].close;
+    if (prev > 0 && curr > 0) {
+      const ret = Math.log(curr / prev);
+      if (Number.isFinite(ret)) {
+        benchByDate.set(normalizeDate(benchBars[i].time), ret);
+      }
+    }
+  }
+
+  // Pair by common dates
+  const paired: { asset: number; bench: number }[] = [];
+  for (const [date, aRet] of assetByDate) {
+    const bRet = benchByDate.get(date);
+    if (bRet !== undefined) {
+      paired.push({ asset: aRet, bench: bRet });
+    }
+  }
+
+  // Take last N
+  const sample = paired.slice(Math.max(0, paired.length - lookback));
+  if (sample.length < 20) return 1; // not enough data
+
+  const mean = (arr: number[]) => arr.reduce((s, v) => s + v, 0) / arr.length;
+  const sd = (arr: number[], m: number) => {
+    if (arr.length < 2) return 0;
+    return Math.sqrt(arr.reduce((s, v) => s + (v - m) ** 2, 0) / (arr.length - 1));
+  };
+
+  const rA = sample.map((p) => p.asset);
+  const rB = sample.map((p) => p.bench);
+  const sdA = sd(rA, mean(rA));
+  const sdB = sd(rB, mean(rB));
+
+  if (sdB < 1e-12) return 1;
+  const ratio = sdA / sdB;
+  // Clamp to reasonable bounds
+  return Math.min(BETA_CLAMP, Math.max(1 / BETA_CLAMP, Number.isFinite(ratio) ? ratio : 1));
+}
+
+/**
+ * Scale SPX pro levels by a volatility ratio to produce beta-model levels for any symbol.
+ */
+function scaleLevelsForBeta(spxLines: LevelLineLike[], volRatio: number): LevelLineLike[] {
+  return spxLines.map((line) => {
+    const pct = Number(line.value);
+    if (!Number.isFinite(pct)) return { ...line };
+    return { ...line, value: Number((pct * volRatio).toFixed(6)) };
+  });
 }
 
 /* ── Quarter detection (server-side, mirrors client logic) ── */
@@ -391,9 +514,13 @@ function toEpochSeconds(time: string | number): number {
 
 type QuarterRange = {
   qkey: string;
-  high: number;
-  low: number;
+  high: number;      // first Friday range high
+  low: number;       // first Friday range low
   mid: number;
+  quarterHigh: number; // highest traded price in the full quarter
+  quarterLow: number;  // lowest traded price in the full quarter
+  prevQLastClose?: number; // previous quarter's last bar close
+  prevQMid?: number;       // previous quarter's mid (for zone classification)
 };
 
 function findCurrentQuarterMid(bars: OhlcvBar[]): QuarterRange | null {
@@ -425,7 +552,9 @@ function findCurrentQuarterMid(bars: OhlcvBar[]): QuarterRange | null {
         const low = Math.min(bars[idxs[0]].low, bars[idxs[1]].low);
         const mid = (high + low) / 2;
         if (mid !== 0) {
-          ranges.push({ qkey: key, high, low, mid });
+          let qH = -Infinity, qL = Infinity;
+          for (const idx of idxs) { qH = Math.max(qH, bars[idx].high); qL = Math.min(qL, bars[idx].low); }
+          ranges.push({ qkey: key, high, low, mid, quarterHigh: qH, quarterLow: qL });
         }
       }
       continue;
@@ -442,14 +571,94 @@ function findCurrentQuarterMid(bars: OhlcvBar[]): QuarterRange | null {
     const high = Math.max(bars[prevIdx].high, bars[firstFriIdx].high);
     const low = Math.min(bars[prevIdx].low, bars[firstFriIdx].low);
     const mid = (high + low) / 2;
-    ranges.push({ qkey: key, high, low, mid });
+    // Track full quarter high/low
+    let qH = -Infinity, qL = Infinity;
+    for (const idx of idxs) { qH = Math.max(qH, bars[idx].high); qL = Math.min(qL, bars[idx].low); }
+    ranges.push({ qkey: key, high, low, mid, quarterHigh: qH, quarterLow: qL });
   }
 
-  // Return the last (current) quarter range
-  return ranges.length ? ranges[ranges.length - 1] : null;
+  // Return the last (current) quarter range, with previous quarter's last close
+  if (!ranges.length) return null;
+
+  const current = ranges[ranges.length - 1];
+
+  // Find previous quarter's last close
+  if (ranges.length >= 2) {
+    const prevRange = ranges[ranges.length - 2];
+    const prevQKey = prevRange.qkey;
+    const prevIdxs = byQ.get(prevQKey);
+    if (prevIdxs && prevIdxs.length > 0) {
+      const lastIdxInPrevQ = prevIdxs[prevIdxs.length - 1];
+      current.prevQLastClose = bars[lastIdxInPrevQ].close;
+      current.prevQMid = prevRange.mid;
+    }
+  }
+
+  return current;
 }
 
 /* ── Zone classification ───────────────────────────────── */
+
+/**
+ * Extract the 80%, 50%, 20% thresholds from level lines.
+ * Supports both Pro model (Long_True) and Simple model (Long_High / Long_Low).
+ * Returns { t80, t50, t20 } for the given direction, or null if no lines match.
+ */
+function extractThresholds(
+  lines: LevelLineLike[],
+  direction: "above" | "below",
+): { t80: number; t50: number; t20: number } | null {
+  // Try Pro model: Long_True_* naming
+  const longTrue = lines
+    .filter((l) => l.name && /^Long_True_\d+$/i.test(l.name))
+    .map((l) => ({ name: l.name!, value: Number(l.value) }))
+    .filter((l) => Number.isFinite(l.value));
+
+  if (longTrue.length > 0) {
+    if (direction === "above") {
+      const l7 = longTrue.find((l) => /Long_True_7/i.test(l.name));
+      const l8 = longTrue.find((l) => /Long_True_8/i.test(l.name));
+      const l9 = longTrue.find((l) => /Long_True_9/i.test(l.name));
+      return {
+        t80: l7 ? Math.abs(l7.value) : 5,
+        t50: l8 ? Math.abs(l8.value) : 15,
+        t20: l9 ? Math.abs(l9.value) : 30,
+      };
+    } else {
+      const l3 = longTrue.find((l) => /Long_True_3/i.test(l.name));
+      const l2 = longTrue.find((l) => /Long_True_2/i.test(l.name));
+      const l1 = longTrue.find((l) => /Long_True_1/i.test(l.name));
+      return {
+        t80: l3 ? Math.abs(l3.value) : 5,
+        t50: l2 ? Math.abs(l2.value) : 15,
+        t20: l1 ? Math.abs(l1.value) : 30,
+      };
+    }
+  }
+
+  // Try Simple model: Long_High_*/Long_Low_* naming
+  // Simple model uses Long_High_80, Long_High_50, Long_High_20 (upper)
+  // and Long_Low_80, Long_Low_50, Long_Low_20 (lower)
+  const prefix = direction === "above" ? "Long_High_" : "Long_Low_";
+  const simpleLines = lines
+    .filter((l) => l.name && l.name.startsWith(prefix))
+    .map((l) => ({ name: l.name!, value: Number(l.value) }))
+    .filter((l) => Number.isFinite(l.value));
+
+  if (simpleLines.length > 0) {
+    const find = (pct: number) => simpleLines.find((l) => l.name === `${prefix}${pct}`);
+    const l80 = find(80);
+    const l50 = find(50);
+    const l20 = find(20);
+    return {
+      t80: l80 ? Math.abs(l80.value) : 5,
+      t50: l50 ? Math.abs(l50.value) : 15,
+      t20: l20 ? Math.abs(l20.value) : 30,
+    };
+  }
+
+  return null;
+}
 
 function classifyZone(
   vsMidPct: number,
@@ -457,40 +666,20 @@ function classifyZone(
 ): { zone: string; direction: "above" | "below" } {
   const direction = vsMidPct >= 0 ? "above" : "below";
   const absPct = Math.abs(vsMidPct);
-
-  // Extract Long_True levels (the main model lines) sorted by value
-  const longTrue = lines
-    .filter((l) => l.name && /^Long_True_\d+$/i.test(l.name))
-    .map((l) => ({ name: l.name!, value: Number(l.value) }))
-    .filter((l) => Number.isFinite(l.value))
-    .sort((a, b) => a.value - b.value);
-
-  if (!longTrue.length) {
-    // No model lines available, use simple thresholds
-    if (absPct < 1) return { zone: "NEAR MID", direction };
-    if (absPct < 3) return { zone: `0-20% ${direction === "above" ? "UP" : "DN"}`, direction };
-    if (absPct < 5) return { zone: `20-50% ${direction === "above" ? "UP" : "DN"}`, direction };
-    if (absPct < 8) return { zone: `50-80% ${direction === "above" ? "UP" : "DN"}`, direction };
-    return { zone: `BEYOND 80% ${direction === "above" ? "UP" : "DN"}`, direction };
-  }
-
-  const median = longTrue.find((l) => /Long_True_5/i.test(l.name));
-  const l2 = longTrue.find((l) => /Long_True_2/i.test(l.name));
-  const l8 = longTrue.find((l) => /Long_True_8/i.test(l.name));
-  const l9 = longTrue.find((l) => /Long_True_9/i.test(l.name));
-
-  const t20 = l2 ? Math.abs(l2.value) : 1;
-  const t50 = median ? Math.abs(median.value) : 3;
-  const t80 = l8 ? Math.abs(l8.value) : 7;
-  const t90 = l9 ? Math.abs(l9.value) : 10;
-
   const dir = direction === "above" ? "UP" : "DN";
 
-  if (absPct < t20) return { zone: "NEAR MID", direction };
-  if (absPct < t50) return { zone: `20-50% ${dir}`, direction };
-  if (absPct < t80) return { zone: `50-80% ${dir}`, direction };
-  if (absPct < t90) return { zone: `80-90% ${dir}`, direction };
-  return { zone: `BEYOND 90% ${dir}`, direction };
+  const thresholds = extractThresholds(lines, direction);
+  if (!thresholds) {
+    return { zone: `NOT ENOUGH DATA`, direction };
+  }
+
+  const { t80, t50, t20 } = thresholds;
+
+  // Zones match chart labels: 80% closest to mid, 20% furthest
+  if (absPct < t80) return { zone: `WITHIN 80% ${dir}`, direction };
+  if (absPct < t50) return { zone: `50-80% ${dir}`, direction };
+  if (absPct < t20) return { zone: `50-20% ${dir}`, direction };
+  return { zone: `BEYOND 20% ${dir}`, direction };
 }
 
 /* ── Build full symbol list with asset classes ─────────── */
@@ -584,6 +773,9 @@ async function processSymbol(
   sym: SymbolWithClass,
   source: string,
   levelsMap: Record<string, LevelsEntry>,
+  model: ModelType = "pro",
+  spxLevelsLines?: LevelLineLike[],
+  spxBars?: OhlcvBar[],
 ): Promise<MoverRow | null> {
   try {
     const bars = await loadOhlcvFast(sym.symbol, source, sym.filePath);
@@ -608,18 +800,43 @@ async function processSymbol(
     const magnitude = Math.abs(vsMid);
 
     // Load levels for zone classification from pre-loaded map
-    // Try multiple symbol name variants for lookup
     let lines: LevelLineLike[] = [];
-    const levelsLookups = [sym.symbol, OHLCV_ALIASES[sym.symbol], sym.symbol.replace(/1!$/, "")].filter(Boolean);
-    for (const lookupSym of levelsLookups) {
-      const entry = levelsMap[lookupSym!];
-      if (entry?.daily?.lines) {
-        lines = entry.daily.lines;
-        break;
+
+    if (model === "beta" && spxLevelsLines && spxBars) {
+      // Beta model: scale SPX levels by this symbol's vol ratio
+      if (sym.symbol === BENCHMARK_SYMBOL) {
+        lines = spxLevelsLines;
+      } else {
+        const volRatio = computeVolRatioFromBars(bars, spxBars);
+        lines = scaleLevelsForBeta(spxLevelsLines, volRatio);
+      }
+    } else {
+      // Pro or Simple model: look up from the model-appropriate levels map
+      const levelsLookups = [sym.symbol, OHLCV_ALIASES[sym.symbol], sym.symbol.replace(/1!$/, "")].filter(Boolean);
+      for (const lookupSym of levelsLookups) {
+        const entry = levelsMap[lookupSym!];
+        if (entry?.daily?.lines) {
+          lines = entry.daily.lines;
+          break;
+        }
       }
     }
 
     const { zone, direction } = classifyZone(vsMid, lines);
+
+    // Compute zones for the quarter's actual traded high and low
+    const actualHighVsMid = ((qr.quarterHigh - mid) / mid) * 100;
+    const actualLowVsMid = ((qr.quarterLow - mid) / mid) * 100;
+    const highZone = classifyZone(actualHighVsMid, lines);
+    const lowZone = classifyZone(actualLowVsMid, lines);
+
+    // Compute last quarter's close zone
+    let lastQCloseZone: string | undefined;
+    if (qr.prevQLastClose != null && qr.prevQMid != null && qr.prevQMid !== 0) {
+      const prevCloseVsMid = ((qr.prevQLastClose - qr.prevQMid) / qr.prevQMid) * 100;
+      const prevCloseResult = classifyZone(prevCloseVsMid, lines);
+      lastQCloseZone = prevCloseResult.zone;
+    }
 
     return {
       symbol: sym.symbol,
@@ -627,6 +844,11 @@ async function processSymbol(
       prevClose,
       changePct: Number(changePct.toFixed(2)),
       mid: Number(mid.toFixed(2)),
+      quarterHigh: Number(qr.quarterHigh.toFixed(2)),
+      quarterLow: Number(qr.quarterLow.toFixed(2)),
+      highZone: highZone.zone,
+      lowZone: lowZone.zone,
+      lastQCloseZone,
       vsMid: Number(vsMid.toFixed(2)),
       zone,
       magnitude: Number(magnitude.toFixed(2)),
@@ -645,6 +867,9 @@ async function processInBatches(
   symbols: SymbolWithClass[],
   source: string,
   levelsMap: Record<string, LevelsEntry>,
+  model: ModelType = "pro",
+  spxLevelsLines?: LevelLineLike[],
+  spxBars?: OhlcvBar[],
 ): Promise<MoverRow[]> {
   const allMovers: MoverRow[] = [];
   let failedCount = 0;
@@ -652,7 +877,7 @@ async function processInBatches(
   for (let i = 0; i < symbols.length; i += BATCH_SIZE) {
     const batch = symbols.slice(i, i + BATCH_SIZE);
     const results = await Promise.allSettled(
-      batch.map((sym) => processSymbol(sym, source, levelsMap)),
+      batch.map((sym) => processSymbol(sym, source, levelsMap, model, spxLevelsLines, spxBars)),
     );
 
     for (const result of results) {
@@ -664,19 +889,21 @@ async function processInBatches(
     }
   }
 
-  console.log(`[movers] Processed ${symbols.length} symbols: ${allMovers.length} succeeded, ${failedCount} failed/skipped`);
+  console.log(`[movers] Processed ${symbols.length} symbols (model=${model}): ${allMovers.length} succeeded, ${failedCount} failed/skipped`);
   return allMovers;
 }
 
 /* ── Full recomputation pipeline ───────────────────────── */
 
-async function recomputeMovers(source: string): Promise<MoverRow[]> {
+async function recomputeMovers(source: string, model: ModelType = "pro"): Promise<MoverRow[]> {
   const t0 = performance.now();
 
   // Load symbols and levels data in parallel
+  // For beta model, load pro levels (will use SPX's for scaling)
+  const levelsModel = model === "beta" ? "pro" : model;
   const [allSymbols, levelsMap] = await Promise.all([
     loadSymbolsWithClasses(source),
-    loadLevelsData(source).catch((err) => {
+    loadLevelsData(source, levelsModel).catch((err) => {
       console.log("[movers] Failed to load levels, using empty map:", err instanceof Error ? err.message : String(err));
       return {} as Record<string, LevelsEntry>;
     }),
@@ -693,14 +920,40 @@ async function recomputeMovers(source: string): Promise<MoverRow[]> {
 
   console.log(
     `[movers] ${allSymbols.length} total symbols, ${symbols.length} with accessible files ` +
-    `(config: ${(t1 - t0).toFixed(0)}ms, access-check: ${(t2 - t1).toFixed(0)}ms)`,
+    `(model=${model}, config: ${(t1 - t0).toFixed(0)}ms, access-check: ${(t2 - t1).toFixed(0)}ms)`,
   );
 
+  // For beta model: extract SPX levels and load SPX OHLCV for vol ratio computation
+  let spxLevelsLines: LevelLineLike[] | undefined;
+  let spxBars: OhlcvBar[] | undefined;
+
+  if (model === "beta") {
+    // Get SPX pro levels
+    const spxEntry = levelsMap[BENCHMARK_SYMBOL];
+    if (spxEntry?.daily?.lines) {
+      spxLevelsLines = spxEntry.daily.lines;
+    }
+
+    // Load SPX bars for vol ratio computation
+    const spxSym = symbols.find((s) => s.symbol === BENCHMARK_SYMBOL);
+    if (spxSym) {
+      try {
+        spxBars = await loadOhlcvFast(BENCHMARK_SYMBOL, source, spxSym.filePath);
+      } catch {
+        console.warn("[movers] Failed to load SPX bars for beta model");
+      }
+    }
+
+    if (!spxLevelsLines || !spxBars) {
+      console.warn("[movers] Beta model missing SPX data, falling back to pro");
+    }
+  }
+
   // Process all accessible symbols in parallel batches
-  const allMovers = await processInBatches(symbols, source, levelsMap);
+  const allMovers = await processInBatches(symbols, source, levelsMap, model, spxLevelsLines, spxBars);
 
   const t3 = performance.now();
-  console.log(`[movers] Full computation: ${(t3 - t0).toFixed(0)}ms total`);
+  console.log(`[movers] Full computation (model=${model}): ${(t3 - t0).toFixed(0)}ms total`);
 
   return allMovers;
 }
@@ -770,54 +1023,62 @@ export async function GET(req: NextRequest) {
   const source = (searchParams.get("source") || "live").toLowerCase();
   const classFilter = (searchParams.get("class") || "all").toLowerCase() as AssetClass | "all";
   const directionFilter = (searchParams.get("direction") || "all").toLowerCase();
+  const model = (searchParams.get("model") || "pro").toLowerCase() as ModelType;
+  const validModels: ModelType[] = ["pro", "simple", "beta"];
+  const safeModel: ModelType = validModels.includes(model) ? model : "pro";
+
+  // Per-model cache key
+  const cacheKey = safeModel;
 
   try {
     const now = Date.now();
+    const cached = moversCacheByModel[cacheKey] ?? null;
+    const recomputeInProgress = recomputeInProgressByModel[cacheKey] ?? false;
 
     // ── Serve from cache if fresh ──
     if (
       source !== "demo" &&
-      moversCache &&
-      now - moversCache.timestamp < CACHE_TTL_MS
+      cached &&
+      now - cached.timestamp < CACHE_TTL_MS
     ) {
-      const movers = applyFilters([...moversCache.movers], classFilter, directionFilter);
-      return buildResponse(movers, moversCache.movers.length, source, true, moversCache.timestamp);
+      const movers = applyFilters([...cached.movers], classFilter, directionFilter);
+      return buildResponse(movers, cached.movers.length, source, true, cached.timestamp);
     }
 
     // ── Serve stale cache while recomputing in background ──
     if (
       source !== "demo" &&
-      moversCache &&
-      now - moversCache.timestamp < STALE_SERVE_MS &&
+      cached &&
+      now - cached.timestamp < STALE_SERVE_MS &&
       !recomputeInProgress
     ) {
       // Trigger background recomputation (fire-and-forget)
-      recomputeInProgress = true;
-      recomputeMovers(source)
+      recomputeInProgressByModel[cacheKey] = true;
+      recomputeMovers(source, safeModel)
         .then((allMovers) => {
-          moversCache = { movers: allMovers, timestamp: Date.now() };
-          console.log(`[movers] Background recompute complete: ${allMovers.length} symbols`);
+          moversCacheByModel[cacheKey] = { movers: allMovers, timestamp: Date.now() };
+          console.log(`[movers] Background recompute complete (model=${safeModel}): ${allMovers.length} symbols`);
         })
         .catch((err) => {
-          console.error("[movers] Background recompute failed:", err);
+          console.error(`[movers] Background recompute failed (model=${safeModel}):`, err);
         })
         .finally(() => {
-          recomputeInProgress = false;
+          recomputeInProgressByModel[cacheKey] = false;
         });
 
       // Serve stale data immediately
-      const movers = applyFilters([...moversCache.movers], classFilter, directionFilter);
-      return buildResponse(movers, moversCache.movers.length, source, true, moversCache.timestamp);
+      const movers = applyFilters([...cached.movers], classFilter, directionFilter);
+      return buildResponse(movers, cached.movers.length, source, true, cached.timestamp);
     }
 
     // ── First request or cache expired: compute synchronously ──
     const t0 = performance.now();
-    const allMovers = await recomputeMovers(source);
+    const allMovers = await recomputeMovers(source, safeModel);
     const computeMs = performance.now() - t0;
 
     // Cache the full results (before filtering)
     if (source !== "demo") {
-      moversCache = { movers: allMovers, timestamp: now };
+      moversCacheByModel[cacheKey] = { movers: allMovers, timestamp: now };
     }
 
     const movers = applyFilters([...allMovers], classFilter, directionFilter);

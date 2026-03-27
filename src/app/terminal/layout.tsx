@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeProvider, useTheme } from "@/components/terminal/ThemeContext";
 import SettingsPanel from "@/components/terminal/SettingsPanel";
+import HalftoneCanvas from "@/components/HalftoneCanvasV1";
 
 const NAV_ITEMS = [
   { href: "/terminal", label: "CHARTS" },
@@ -20,21 +21,40 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className="flex flex-col"
+      className="flex flex-col relative"
       style={{
         height: "100dvh",
         background: theme.bg,
         fontFamily: "'SF Mono', 'JetBrains Mono', 'Fira Code', monospace",
       }}
     >
+      {/* Halftone background — blurred, normal + rotated 180° for top density */}
+      {theme.frosted && (<>
+        <div className="fixed inset-0 pointer-events-none" style={{
+          zIndex: 0,
+          filter: 'blur(18px)',
+          opacity: 0.16,
+        }}>
+          <HalftoneCanvas />
+        </div>
+        <div className="fixed inset-0 pointer-events-none" style={{
+          zIndex: 0,
+          filter: 'blur(18px)',
+          opacity: 0.13,
+          transform: 'rotate(180deg)',
+        }}>
+          <HalftoneCanvas />
+        </div>
+      </>)}
+
       {/* Top bar — 44px */}
       <header
-        className="flex items-center justify-between shrink-0"
+        className="flex items-center justify-between shrink-0 relative z-10"
         style={{
           height: 44,
           padding: "0 20px",
-          borderBottom: `1px solid ${theme.border}`,
-          background: theme.surface,
+          borderBottom: theme.frosted ? '1px solid rgba(200,200,210,0.3)' : `1px solid ${theme.border}`,
+          background: theme.frosted ? 'rgba(255,255,255,0.4)' : theme.surface,
         }}
       >
         {/* Left: Pricevault branding */}
@@ -145,7 +165,7 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
       </header>
 
       {/* Content area fills remaining viewport height */}
-      <div className="flex-1 overflow-hidden" style={{ minHeight: 0 }}>
+      <div className="flex-1 overflow-hidden relative z-10" style={{ minHeight: 0 }}>
         {children}
       </div>
 

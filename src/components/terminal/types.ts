@@ -100,7 +100,8 @@ export type LayoutMode = '1x1' | '1x2' | '2x1' | '2x2';
 export type PanelConfig = {
   id: string;
   symbol: string;
-  model: 'simple' | 'pro' | 'beta';
+  model: 'simple' | 'pro' | 'beta' | 'overlay';
+  overlaySymbol?: string;
 };
 
 /** Asset class for symbol classification */

@@ -63,13 +63,13 @@ function writeLS(key: string, value: unknown) {
 // ============================================================================
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [themeName, setThemeName] = useState<string>('light');
+  const [themeName, setThemeName] = useState<string>('pricevault');
   const [customCandles, setCustomCandlesState] = useState<CustomCandles | null>(null);
   const [mounted, setMounted] = useState(false);
 
   // Read persisted values on mount
   useEffect(() => {
-    const saved = readLS<string>(LS_THEME_KEY, 'light');
+    const saved = readLS<string>(LS_THEME_KEY, 'pricevault');
     if (THEME_KEYS.includes(saved)) {
       setThemeName(saved);
     }
@@ -138,12 +138,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   // Render children immediately but with default theme until mounted
   // This prevents hydration mismatches
   if (!mounted) {
-    const defaultTheme = getTheme('light');
+    const defaultTheme = getTheme('pricevault');
     return (
       <ThemeContext.Provider
         value={{
           theme: defaultTheme,
-          themeName: 'light',
+          themeName: 'pricevault',
           setTheme,
           customCandles: null,
           setCustomCandles,

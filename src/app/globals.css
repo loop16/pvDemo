@@ -15,10 +15,15 @@ html, body {
   -ms-overflow-style: none !important; /* IE/Edge legacy */
 }
 html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-  display: none !important; /* Chrome/Safari/Edge */
+body::-webkit-scrollbar,
+.hide-scrollbar::-webkit-scrollbar {
+  display: none !important;
   width: 0 !important;
   height: 0 !important;
+}
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 html,

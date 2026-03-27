@@ -4,20 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { useTheme } from './ThemeContext';
 import type { SymbolEntry } from './types';
 
-// ============================================================================
-// SYMBOL SEARCH (white theme)
-// ============================================================================
-
 const MONO = "'SF Mono', 'JetBrains Mono', 'Fira Code', ui-monospace, monospace";
-
-const CLASS_COLORS: Record<string, string> = {
-  equity: '#6366f1',
-  crypto: '#f59e0b',
-  futures: '#10b981',
-  fx: '#3b82f6',
-  index: '#8b5cf6',
-  etf: '#ec4899',
-};
 
 export interface SymbolSearchProps {
   value: string;
@@ -34,7 +21,6 @@ export default function SymbolSearch({ value, onChange, symbols }: SymbolSearchP
   const dropdownRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
-  // Filter and rank symbols based on query
   const q = query.toLowerCase();
   const filtered = query
     ? symbols
@@ -99,21 +85,14 @@ export default function SymbolSearch({ value, onChange, symbols }: SymbolSearchP
     [open, filtered, selectedIdx, query, handleSelect]
   );
 
-  // Scroll selected item into view
   useEffect(() => {
     if (!open || !listRef.current) return;
     const item = listRef.current.children[selectedIdx] as HTMLElement | undefined;
-    if (item) {
-      item.scrollIntoView({ block: 'nearest' });
-    }
+    if (item) item.scrollIntoView({ block: 'nearest' });
   }, [selectedIdx, open]);
 
-  // Reset selection on query change
-  useEffect(() => {
-    setSelectedIdx(0);
-  }, [query]);
+  useEffect(() => { setSelectedIdx(0); }, [query]);
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -125,19 +104,13 @@ export default function SymbolSearch({ value, onChange, symbols }: SymbolSearchP
   }, []);
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative" ref={dropdownRef} style={{ zIndex: 50 }}>
       <input
         ref={inputRef}
         type="text"
         value={open ? query : value}
-        onChange={(e) => {
-          setQuery(e.target.value);
-          setOpen(true);
-        }}
-        onFocus={() => {
-          setQuery('');
-          setOpen(true);
-        }}
+        onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
+        onFocus={() => { setQuery(''); setOpen(true); }}
         onKeyDown={handleKeyDown}
         placeholder="Symbol..."
         className="w-[140px] h-[28px] px-2 text-[12px] outline-none"
@@ -146,6 +119,9 @@ export default function SymbolSearch({ value, onChange, symbols }: SymbolSearchP
           background: theme.bg,
           border: `1px solid ${theme.border}`,
           color: theme.text,
+          borderRadius: 4,
+          position: 'relative',
+          zIndex: 51,
         }}
         spellCheck={false}
         autoComplete="off"
@@ -153,30 +129,48 @@ export default function SymbolSearch({ value, onChange, symbols }: SymbolSearchP
       {open && (
         <div
           ref={listRef}
-          className="absolute top-full left-0 mt-0.5 w-[160px] max-h-[240px] overflow-y-auto z-50 shadow-sm"
-          style={{ background: theme.bg, border: `1px solid ${theme.border}` }}
+          className="hide-scrollbar"
+          style={{
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            marginTop: 2,
+            width: 180,
+            maxHeight: 240,
+            overflowY: 'auto',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            background: `${theme.bg}ee`,
+            border: `1px solid ${theme.border}`,
+            borderRadius: 6,
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+            zIndex: 100,
+          }}
         >
           {filtered.length === 0 ? (
-            <div
-              className="px-2 py-2 text-[11px]"
-              style={{ fontFamily: MONO, color: theme.textDim }}
-            >
+            <div style={{ padding: '8px 10px', fontSize: 11, color: theme.textDim, fontFamily: MONO }}>
               No results
             </div>
           ) : (
             filtered.map((s, i) => (
               <button
                 key={s.id}
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  handleSelect(s.id);
-                }}
+                onMouseDown={(e) => { e.preventDefault(); handleSelect(s.id); }}
                 onMouseEnter={() => setSelectedIdx(i)}
-                className="w-full text-left px-2 py-1.5 text-[11px] transition-colors"
                 style={{
+                  display: 'block',
+                  width: '100%',
+                  textAlign: 'left',
+                  padding: '6px 10px',
+                  fontSize: 11,
                   fontFamily: MONO,
                   background: i === selectedIdx ? theme.activeNavBg : 'transparent',
                   color: i === selectedIdx ? theme.text : theme.textSecondary,
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'background 0.1s',
                 }}
               >
                 {s.id}

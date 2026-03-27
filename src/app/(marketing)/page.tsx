@@ -15,7 +15,7 @@ export default function Home() {
             </h1>
 
             <p className="mt-6 max-w-[500px] text-[16px] leading-[1.7] text-neutral-500">
-              Historical datasets across stocks, crypto, FX, and futures. Quarter models recomputed nightly. Probability levels surfaced every morning.
+              Place your stop in historically meaningful areas. 1,200+ assets across stocks, crypto, FX, and futures. Quarter models recomputed nightly. Probability levels surfaced every morning.
             </p>
 
             <div className="mt-10 flex items-center gap-3">

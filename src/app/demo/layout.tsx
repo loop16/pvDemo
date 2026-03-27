@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ThemeProvider, useTheme } from "@/components/terminal/ThemeContext";
+import HalftoneCanvas from "@/components/HalftoneCanvasV1";
 import SettingsPanel from "@/components/terminal/SettingsPanel";
 
 function DemoLayoutInner({ children }: { children: React.ReactNode }) {
@@ -11,10 +12,13 @@ function DemoLayoutInner({ children }: { children: React.ReactNode }) {
   const isDark = theme.bg.startsWith('#0') || theme.bg.startsWith('#1') || theme.bg.startsWith('#2') || theme.bg === '#000000';
 
   return (
-    <div className="flex flex-col" style={{ height: '100dvh', background: theme.bg }}>
+    <div className="flex flex-col relative" style={{ height: '100dvh', background: theme.bg }}>
+      <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0, filter: 'blur(12px)', opacity: 0.3 }}>
+        <HalftoneCanvas />
+      </div>
       <header
-        className="flex items-center justify-between shrink-0"
-        style={{ height: 44, padding: '0 20px', borderBottom: `1px solid ${theme.border}`, background: theme.surface }}
+        className="flex items-center justify-between shrink-0 relative z-10"
+        style={{ height: 44, padding: '0 20px', borderBottom: '1px solid rgba(255,255,255,0.5)', background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(30px) saturate(1.6)', WebkitBackdropFilter: 'blur(30px) saturate(1.6)' }}
       >
         <Link href="/" className="flex items-center gap-2" style={{ textDecoration: 'none' }}>
           <img
@@ -34,12 +38,6 @@ function DemoLayoutInner({ children }: { children: React.ReactNode }) {
 
         <nav className="flex items-center" style={{ gap: 2 }}>
           <Link
-            href="/terminal"
-            style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', padding: '6px 14px', color: theme.textDim, textDecoration: 'none', fontFamily: "'SF Mono', monospace", transition: 'color 0.15s' }}
-          >
-            FULL APP
-          </Link>
-          <Link
             href="/login"
             style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', padding: '6px 14px', color: theme.text, background: theme.activeNavBg, textDecoration: 'none', fontFamily: "'SF Mono', monospace" }}
           >
@@ -58,7 +56,7 @@ function DemoLayoutInner({ children }: { children: React.ReactNode }) {
         </button>
       </header>
 
-      <div className="flex-1 overflow-hidden" style={{ minHeight: 0 }}>
+      <div className="flex-1 overflow-hidden relative z-10" style={{ minHeight: 0 }}>
         {children}
       </div>
 

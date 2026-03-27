@@ -128,13 +128,15 @@ def normalize_ohlc_frame(df, drop_weekdays=None, drop_flat=False, drop_duplicate
     return out
 
 
-def update_daily_csvs(config_path, n_bars, cooldown, only_missing=False):
+def update_daily_csvs(config_path, n_bars, cooldown, only_missing=False, resume_log_path="", resume_from=""):
     import pandas as pd
     from quarterly_and_downloader_bundle import Downloader
 
     cme_exchanges = {"CME", "CME_MINI", "COMEX", "NYMEX", "CBOT"}
 
     def shift_cme_dates(df, exch):
+        if isinstance(exch, (list, tuple)):
+            exch = exch[0] if exch else ""
         if not exch:
             return df
         if exch.upper() not in cme_exchanges:
@@ -152,6 +154,18 @@ def update_daily_csvs(config_path, n_bars, cooldown, only_missing=False):
     assets = load_daily_assets(config_path)
     assets = resolve_asset_paths(assets, os.path.dirname(config_path))
 
+    resume_from = (resume_from or "").strip().upper()
+    if resume_log_path and os.path.exists(resume_log_path):
+        try:
+            with open(resume_log_path, "r") as f:
+                logged = f.read().strip()
+            if logged:
+                resume_from = logged.upper()
+        except Exception:
+            pass
+
+    skipping = bool(resume_from)
+
     for idx, item in enumerate(assets, start=1):
         tv_symbol = item["tv_symbol"]
         tv_exchange = item["tv_exchange"]
@@ -160,20 +174,38 @@ def update_daily_csvs(config_path, n_bars, cooldown, only_missing=False):
         item_bars = int(item.get("n_bars", n_bars))
         item_cooldown = float(item.get("cooldown", cooldown))
 
-        print(f"[daily {idx:02d}/{len(assets)}] Fetching {tv_exchange}:{tv_symbol} -> {label}")
-        df_new, used_exch = Downloader.fetch_symbol(
-            Downloader.tv,
-            tv_symbol,
-            tv_exchange,
-            n_bars=item_bars,
-        )
+        if skipping:
+            if str(tv_symbol).upper() == resume_from:
+                skipping = False
+            else:
+                print(f"[daily {idx:02d}/{len(assets)}] Skipping {tv_symbol} (resume from {resume_from})")
+                continue
+
+        exchanges = tv_exchange if isinstance(tv_exchange, list) else [tv_exchange]
+        print(f"[daily {idx:02d}/{len(assets)}] Fetching {exchanges}:{tv_symbol} -> {label}")
+        df_new, used_exch = None, None
+        for ex in exchanges:
+            try:
+                df_new, used_exch = Downloader.fetch_symbol(
+                    Downloader.tv,
+                    tv_symbol,
+                    ex,
+                    n_bars=item_bars,
+                    use_cache=True,
+                )
+            except Exception as exc:
+                print(f"   -> Error fetching {tv_symbol} via {ex}: {exc}")
+                df_new, used_exch = None, None
+            if df_new is not None and not df_new.empty:
+                break
         if df_new is None or df_new.empty:
             print(f"   -> No data returned for {tv_symbol}")
             time.sleep(item_cooldown)
             continue
 
         try:
-            df_new = shift_cme_dates(df_new, used_exch or tv_exchange)
+            exch_for_shift = used_exch or (exchanges[0] if exchanges else "")
+            df_new = shift_cme_dates(df_new, exch_for_shift)
             new_norm = normalize_ohlc_frame(df_new, drop_duplicate_ohlc=True)
         except ValueError as exc:
             print(f"   -> Skipped {tv_symbol}: {exc}")
@@ -215,6 +247,13 @@ def update_daily_csvs(config_path, n_bars, cooldown, only_missing=False):
 
         merged.to_csv(file_path, index=False)
         print(f"   -> Updated {os.path.basename(file_path)} via {used_exch or 'default'} ({len(merged)} rows)")
+        if resume_log_path:
+            try:
+                os.makedirs(os.path.dirname(resume_log_path), exist_ok=True)
+                with open(resume_log_path, "w") as f:
+                    f.write(str(tv_symbol))
+            except Exception:
+                pass
         time.sleep(item_cooldown)
 
 
@@ -224,7 +263,7 @@ def run_analysis(assets, output_dir):
     process_multiple_assets(assets, output_dir=output_dir)
 
 
-def upload_json_files(output_dir, dry_run=False):
+def upload_json_files(output_dir, dry_run=False, only_prefix=""):
     try:
         import boto3
     except ImportError as exc:
@@ -262,11 +301,20 @@ def upload_json_files(output_dir, dry_run=False):
     if not files:
         raise RuntimeError(f"No JSON files found in {output_dir}")
 
+    upload_files = []
     for local_path in files:
         rel_path = os.path.relpath(local_path, output_dir).replace(os.sep, "/")
+        if only_prefix and not rel_path.startswith(only_prefix):
+            continue
+        upload_files.append((local_path, rel_path))
+    if not upload_files:
+        raise RuntimeError(f"No JSON files found in {output_dir} for prefix '{only_prefix}'")
+
+    total = len(upload_files)
+    for idx, (local_path, rel_path) in enumerate(upload_files, start=1):
         key = f"{prefix}/{rel_path}" if prefix else rel_path
         if dry_run:
-            print(f"[dry-run] Upload {local_path} -> s3://{bucket}/{key}")
+            print(f"[{idx}/{total}] [dry-run] Upload {local_path} -> s3://{bucket}/{key}")
             continue
         s3.upload_file(
             local_path,
@@ -277,7 +325,7 @@ def upload_json_files(output_dir, dry_run=False):
                 "CacheControl": "public, max-age=300",
             },
         )
-        print(f"Uploaded {local_path} -> s3://{bucket}/{key}")
+        print(f"[{idx}/{total}] Uploaded {local_path} -> s3://{bucket}/{key}")
 
 
 def write_ohlcv_json(assets, output_dir):
@@ -394,12 +442,17 @@ def main():
     parser.add_argument("--download-bars", default=DEFAULT_DOWNLOAD_BARS, help="Bars to fetch per symbol.")
     parser.add_argument("--download-cooldown", default=DEFAULT_DOWNLOAD_COOLDOWN, help="Delay between requests in seconds.")
     parser.add_argument("--upload", action="store_true", help="Upload JSON files to Wasabi.")
+    parser.add_argument("--upload-ohlcv", action="store_true", help="Upload only OHLCV JSONs to Wasabi.")
     parser.add_argument("--skip-analysis", action="store_true", help="Skip analysis and only upload.")
     parser.add_argument("--write-ohlcv", action="store_true", help="Write OHLCV JSON files from CSVs.")
+    parser.add_argument("--write-symbol-levels", action="store_true", help="Write per-symbol level JSON files.")
     parser.add_argument("--clean-ohlcv", action="store_true", help="Clean OHLCV CSVs by dropping flat candles.")
     parser.add_argument("--ohlcv-dir", default=DEFAULT_OHLCV_DIR, help="Directory containing OHLCV CSVs.")
     parser.add_argument("--dry-run", action="store_true", help="Show upload actions without sending files.")
     parser.add_argument("--log-file", default="", help="Write stdout/stderr to this file.")
+    parser.add_argument("--resume-log", default="", help="Write last processed symbol to this file and resume from it.")
+    parser.add_argument("--resume-from", default="", help="Resume daily download from this symbol (inclusive).")
+    parser.add_argument("--exchange-log", default="", help="Write exchange cache snapshot to this file.")
 
     args = parser.parse_args()
 
@@ -427,7 +480,19 @@ def main():
             n_bars=int(float(args.download_bars)),
             cooldown=float(args.download_cooldown),
             only_missing=args.download_only_missing,
+            resume_log_path=args.resume_log,
+            resume_from=args.resume_from,
         )
+        if args.exchange_log:
+            try:
+                from quarterly_and_downloader_bundle import Downloader
+
+                os.makedirs(os.path.dirname(args.exchange_log), exist_ok=True)
+                with open(args.exchange_log, "w") as f:
+                    json.dump(Downloader.EXCHANGE_CACHE, f, indent=2, sort_keys=True)
+                print(f"Wrote exchange cache snapshot to {args.exchange_log}")
+            except Exception as exc:
+                print(f"Failed to write exchange log: {exc}")
 
     if args.clean_ohlcv:
         clean_ohlcv_dir(args.ohlcv_dir)
@@ -455,7 +520,13 @@ def main():
         os.makedirs(args.output_dir, exist_ok=True)
         write_ohlcv_json(assets, args.output_dir)
 
-    if args.upload:
+    if args.write_symbol_levels:
+        os.makedirs(args.output_dir, exist_ok=True)
+        write_symbol_level_files(args.output_dir)
+
+    if args.upload_ohlcv:
+        upload_json_files(args.output_dir, dry_run=args.dry_run, only_prefix="ohlcv/")
+    elif args.upload:
         write_symbol_level_files(args.output_dir)
         upload_json_files(args.output_dir, dry_run=args.dry_run)
 

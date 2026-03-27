@@ -4,10 +4,16 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTheme } from "@/components/terminal/ThemeContext";
 import type { ChartTheme } from "@/components/terminal/themes";
+import dynamic from "next/dynamic";
+import { useChartData } from "@/hooks/useChartData";
+
+const NativeChart = dynamic(() => import("@/components/terminal/NativeChart"), { ssr: false });
 
 /* -- Types --------------------------------------------------------- */
 
 type AssetClass = "equity" | "futures" | "crypto" | "fx" | "index" | "etf";
+
+type ModelType = "pro" | "simple" | "beta";
 
 type MoverRow = {
   symbol: string;
@@ -15,6 +21,11 @@ type MoverRow = {
   prevClose: number;
   changePct: number;
   mid: number;
+  quarterHigh: number;
+  quarterLow: number;
+  highZone: string;
+  lowZone: string;
+  lastQCloseZone?: string;
   vsMid: number;
   zone: string;
   magnitude: number;
@@ -22,7 +33,7 @@ type MoverRow = {
   assetClass: AssetClass;
 };
 
-type SortKey = "symbol" | "assetClass" | "price" | "changePct" | "vsMid" | "zone" | "magnitude";
+type SortKey = "symbol" | "assetClass" | "price" | "changePct" | "vsMid" | "zone" | "magnitude" | "highZone" | "lowZone" | "lastQCloseZone";
 type SortDir = "asc" | "desc";
 type ClassTab = "ALL" | "EQUITIES" | "FUTURES" | "CRYPTO" | "FX" | "INDICES" | "ETFS";
 type DirectionFilter = "ALL" | "ABOVE" | "BELOW" | "EXTREMES";
@@ -128,10 +139,10 @@ function getVsMidColor(row: MoverRow, c: ReturnType<typeof buildC>): string {
 }
 
 function getZoneColor(row: MoverRow, c: ReturnType<typeof buildC>): string {
-  if (row.zone.includes("NEAR MID")) return c.textDim;
   if (row.zone.includes("BEYOND") || row.zone.includes("80-90%")) return c.amber;
-  if (row.direction === "above") return c.blue;
-  return c.purple;
+  if (row.zone.includes("UP")) return c.blue;
+  if (row.zone.includes("DN")) return c.purple;
+  return c.textDim;
 }
 
 function isExtreme(row: MoverRow): boolean {
@@ -150,10 +161,15 @@ export default function MoversPage() {
   const [computeMs, setComputeMs] = useState<number | null>(null);
   const [isCached, setIsCached] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [model, setModel] = useState<ModelType>("pro");
   const [classTab, setClassTab] = useState<ClassTab>("ALL");
   const [dirFilter, setDirFilter] = useState<DirectionFilter>("ALL");
   const [sortKey, setSortKey] = useState<SortKey>("magnitude");
   const [sortDir, setSortDir] = useState<SortDir>("desc");
+  const [highZoneFilter, setHighZoneFilter] = useState<string>("ALL");
+  const [lowZoneFilter, setLowZoneFilter] = useState<string>("ALL");
+  const [closeZoneFilter, setCloseZoneFilter] = useState<string>("ALL");
+  const [lastQZoneFilter, setLastQZoneFilter] = useState<string>("ALL");
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
   const [countdown, setCountdown] = useState(REFRESH_INTERVAL_MS / 1000);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -161,7 +177,8 @@ export default function MoversPage() {
   const loadingTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   /* -- Fetch -- */
-  const fetchMovers = useCallback(async () => {
+  const fetchMovers = useCallback(async (fetchModel?: ModelType) => {
+    const m = fetchModel ?? model;
     const fetchStart = Date.now();
     setLoadingElapsed(0);
     // Show a ticking elapsed timer while loading
@@ -171,7 +188,7 @@ export default function MoversPage() {
     }, 200);
 
     try {
-      const res = await fetch("/api/movers?source=live", { cache: "no-store" });
+      const res = await fetch(`/api/movers?source=live&model=${m}`, { cache: "no-store" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       setMovers(data.movers || []);
@@ -190,11 +207,11 @@ export default function MoversPage() {
         loadingTimerRef.current = null;
       }
     }
-  }, []);
+  }, [model]);
 
   useEffect(() => {
     fetchMovers();
-    intervalRef.current = setInterval(fetchMovers, REFRESH_INTERVAL_MS);
+    intervalRef.current = setInterval(() => fetchMovers(), REFRESH_INTERVAL_MS);
     countdownRef.current = setInterval(() => {
       setCountdown((c) => Math.max(0, c - 1));
     }, 1000);
@@ -204,6 +221,15 @@ export default function MoversPage() {
       if (loadingTimerRef.current) clearInterval(loadingTimerRef.current);
     };
   }, [fetchMovers]);
+
+  /* -- Model change handler -- */
+  const handleModelChange = useCallback((newModel: ModelType) => {
+    if (newModel === model) return;
+    setModel(newModel);
+    setLoading(true);
+    setCountdown(REFRESH_INTERVAL_MS / 1000);
+    // The useEffect will re-trigger because model change updates fetchMovers
+  }, [model]);
 
   /* -- Sort handler -- */
   const handleSort = useCallback(
@@ -241,6 +267,20 @@ export default function MoversPage() {
         break;
     }
 
+    // Zone cross-filters
+    if (highZoneFilter !== "ALL") {
+      filtered = filtered.filter((m) => m.highZone === highZoneFilter);
+    }
+    if (lowZoneFilter !== "ALL") {
+      filtered = filtered.filter((m) => m.lowZone === lowZoneFilter);
+    }
+    if (closeZoneFilter !== "ALL") {
+      filtered = filtered.filter((m) => m.zone === closeZoneFilter);
+    }
+    if (lastQZoneFilter !== "ALL") {
+      filtered = filtered.filter((m) => m.lastQCloseZone === lastQZoneFilter);
+    }
+
     filtered.sort((a, b) => {
       let cmp = 0;
       switch (sortKey) {
@@ -265,12 +305,21 @@ export default function MoversPage() {
         case "magnitude":
           cmp = a.magnitude - b.magnitude;
           break;
+        case "highZone":
+          cmp = a.highZone.localeCompare(b.highZone);
+          break;
+        case "lowZone":
+          cmp = a.lowZone.localeCompare(b.lowZone);
+          break;
+        case "lastQCloseZone":
+          cmp = (a.lastQCloseZone || "").localeCompare(b.lastQCloseZone || "");
+          break;
       }
       return sortDir === "asc" ? cmp : -cmp;
     });
 
     return filtered;
-  }, [movers, classTab, dirFilter, sortKey, sortDir]);
+  }, [movers, classTab, dirFilter, sortKey, sortDir, highZoneFilter, lowZoneFilter, closeZoneFilter, lastQZoneFilter]);
 
   /* -- Stats -- */
   const stats = useMemo(() => {
@@ -327,22 +376,62 @@ export default function MoversPage() {
   );
 
   /* -- Row click -- */
+  const [previewSymbol, setPreviewSymbol] = useState<string | null>(null);
+  const [previewPos, setPreviewPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const previewRef = useRef<HTMLDivElement>(null);
+
   const handleRowClick = useCallback(
-    (symbol: string) => {
-      router.push(`/terminal?symbol=${encodeURIComponent(symbol)}`);
+    (symbol: string, e?: React.MouseEvent) => {
+      if (previewSymbol === symbol) {
+        setPreviewSymbol(null);
+      } else {
+        if (e) {
+          setPreviewPos({ x: e.clientX, y: e.clientY });
+        }
+        setPreviewSymbol(symbol);
+      }
     },
-    [router],
+    [previewSymbol],
   );
+
+  // Close preview on outside click
+  useEffect(() => {
+    if (!previewSymbol) return;
+    const handler = (e: MouseEvent) => {
+      if (previewRef.current && !previewRef.current.contains(e.target as Node)) {
+        setPreviewSymbol(null);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [previewSymbol]);
+
+  /* -- Unique zone values for filter dropdowns -- */
+  const uniqueZones = useMemo(() => {
+    const highSet = new Set<string>();
+    const lowSet = new Set<string>();
+    const closeSet = new Set<string>();
+    const lastQSet = new Set<string>();
+    for (const m of movers) {
+      if (m.highZone) highSet.add(m.highZone);
+      if (m.lowZone) lowSet.add(m.lowZone);
+      if (m.zone) closeSet.add(m.zone);
+      if (m.lastQCloseZone) lastQSet.add(m.lastQCloseZone);
+    }
+    const sort = (s: Set<string>) => Array.from(s).sort();
+    return { high: sort(highSet), low: sort(lowSet), close: sort(closeSet), lastQ: sort(lastQSet) };
+  }, [movers]);
 
   /* -- Column headers -- */
   const columns: { key: SortKey; label: string; align: "left" | "right"; flex: number }[] = [
     { key: "symbol", label: "SYMBOL", align: "left", flex: 1.1 },
-    { key: "assetClass", label: "CLASS", align: "left", flex: 0.7 },
-    { key: "price", label: "PRICE", align: "right", flex: 0.9 },
+    { key: "assetClass", label: "CLASS", align: "left", flex: 0.6 },
+    { key: "lastQCloseZone", label: "LAST Q", align: "left", flex: 1.1 },
+    { key: "highZone", label: "HIGH ZONE", align: "left", flex: 1.1 },
+    { key: "lowZone", label: "LOW ZONE", align: "left", flex: 1.1 },
+    { key: "zone", label: "CURRENT ZONE", align: "left", flex: 1.2 },
     { key: "changePct", label: "CHG %", align: "right", flex: 0.7 },
-    { key: "vsMid", label: "VS MID", align: "right", flex: 0.7 },
-    { key: "zone", label: "ZONE", align: "left", flex: 1.3 },
-    { key: "magnitude", label: "MAGNITUDE", align: "right", flex: 1.1 },
+    { key: "magnitude", label: "MAGNITUDE", align: "right", flex: 1 },
   ];
 
   /* -- Class tabs -- */
@@ -368,28 +457,30 @@ export default function MoversPage() {
   const renderRow = (row: MoverRow, idx: number) => {
     const barWidth = (row.magnitude / maxMagnitude) * 100;
     const barColor =
-      row.direction === "above"
-        ? "rgba(41, 98, 255, 0.06)"
-        : "rgba(156, 39, 176, 0.06)";
+      isExtreme(row)
+        ? "rgba(217, 119, 6, 0.12)"
+        : row.direction === "above"
+          ? "rgba(41, 98, 255, 0.12)"
+          : "rgba(156, 39, 176, 0.12)";
     const isExtremeRow = isExtreme(row);
     const badge = CLASS_BADGE_COLORS[row.assetClass];
 
     return (
       <tr
         key={`${row.assetClass}-${row.symbol}`}
-        onClick={() => handleRowClick(row.symbol)}
+        onClick={(e) => handleRowClick(row.symbol, e)}
         style={{
           cursor: "pointer",
           position: "relative",
-          background: idx % 2 === 0 ? C.bg : C.surface,
-          borderBottom: `1px solid ${C.borderLight}`,
+          background: idx % 2 === 0 ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.3)',
+          borderBottom: '1px solid rgba(255,255,255,0.35)',
           transition: "background 0.1s",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.background = C.hoverBg;
+          e.currentTarget.style.background = 'rgba(255,255,255,0.55)';
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.background = idx % 2 === 0 ? C.bg : C.surface;
+          e.currentTarget.style.background = idx % 2 === 0 ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.3)';
         }}
       >
         {/* SYMBOL */}
@@ -436,18 +527,62 @@ export default function MoversPage() {
           </span>
         </td>
 
-        {/* PRICE */}
+        {/* LAST Q CLOSE ZONE */}
         <td
           style={{
             padding: "8px 12px",
-            fontSize: 12,
+            fontSize: 10,
             fontWeight: 500,
-            textAlign: "right",
-            color: C.textPrimary,
-            fontVariantNumeric: "tabular-nums",
+            letterSpacing: "0.04em",
+            color: row.lastQCloseZone?.includes("BEYOND") || row.lastQCloseZone?.includes("80-90%") ? C.amber
+              : row.lastQCloseZone?.includes("UP") ? C.blue
+              : row.lastQCloseZone?.includes("DN") ? C.purple : C.textDim,
           }}
         >
-          {formatPrice(row.price)}
+          {row.lastQCloseZone || "\u2014"}
+        </td>
+
+        {/* HIGH ZONE */}
+        <td
+          style={{
+            padding: "8px 12px",
+            fontSize: 10,
+            fontWeight: 500,
+            letterSpacing: "0.04em",
+            color: row.highZone?.includes("BEYOND") || row.highZone?.includes("80-90%") ? C.amber
+              : row.highZone?.includes("UP") ? C.blue
+              : row.highZone?.includes("DN") ? C.purple : C.textDim,
+          }}
+        >
+          {row.highZone || "—"}
+        </td>
+
+        {/* LOW ZONE */}
+        <td
+          style={{
+            padding: "8px 12px",
+            fontSize: 10,
+            fontWeight: 500,
+            letterSpacing: "0.04em",
+            color: row.lowZone?.includes("BEYOND") || row.lowZone?.includes("80-90%") ? C.amber
+              : row.lowZone?.includes("DN") ? C.purple
+              : row.lowZone?.includes("UP") ? C.blue : C.textDim,
+          }}
+        >
+          {row.lowZone || "—"}
+        </td>
+
+        {/* CURRENT ZONE */}
+        <td
+          style={{
+            padding: "8px 12px",
+            fontSize: 10,
+            fontWeight: isExtremeRow ? 700 : 500,
+            letterSpacing: "0.06em",
+            color: getZoneColor(row, C),
+          }}
+        >
+          {row.zone || "—"}
         </td>
 
         {/* CHG % */}
@@ -462,33 +597,6 @@ export default function MoversPage() {
           }}
         >
           {formatPct(row.changePct)}
-        </td>
-
-        {/* VS MID */}
-        <td
-          style={{
-            padding: "8px 12px",
-            fontSize: 11,
-            fontWeight: 600,
-            textAlign: "right",
-            color: getVsMidColor(row, C),
-            fontVariantNumeric: "tabular-nums",
-          }}
-        >
-          {formatPct(row.vsMid)}
-        </td>
-
-        {/* ZONE */}
-        <td
-          style={{
-            padding: "8px 12px",
-            fontSize: 10,
-            fontWeight: isExtremeRow ? 700 : 500,
-            letterSpacing: "0.06em",
-            color: getZoneColor(row, C),
-          }}
-        >
-          {row.zone}
         </td>
 
         {/* MAGNITUDE */}
@@ -549,8 +657,10 @@ export default function MoversPage() {
             fontWeight: 700,
             letterSpacing: "0.12em",
             color: C.textSecondary,
-            background: C.bg,
-            borderBottom: `1px solid ${C.border}`,
+            background: 'rgba(255,255,255,0.6)',
+            backdropFilter: 'blur(30px)',
+            WebkitBackdropFilter: 'blur(30px)',
+            borderBottom: '1px solid rgba(255,255,255,0.5)',
           }}
         >
           {CLASS_SECTION_LABELS[assetClass]}
@@ -565,46 +675,160 @@ export default function MoversPage() {
     );
   };
 
+  /* -- Zone filter dropdown state -- */
+  const [openFilterCol, setOpenFilterCol] = useState<string | null>(null);
+  const filterDropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!openFilterCol) return;
+    const handler = (e: MouseEvent) => {
+      if (filterDropdownRef.current && !filterDropdownRef.current.contains(e.target as Node)) {
+        setOpenFilterCol(null);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [openFilterCol]);
+
+  /* -- Zone filter config -- */
+  const zoneFilterConfig: Record<string, { value: string; setter: (v: string) => void; options: string[] }> = {
+    lastQCloseZone: { value: lastQZoneFilter, setter: setLastQZoneFilter, options: uniqueZones.lastQ },
+    highZone: { value: highZoneFilter, setter: setHighZoneFilter, options: uniqueZones.high },
+    lowZone: { value: lowZoneFilter, setter: setLowZoneFilter, options: uniqueZones.low },
+    zone: { value: closeZoneFilter, setter: setCloseZoneFilter, options: uniqueZones.close },
+  };
+
   /* -- Render table header -- */
   const renderTableHeader = () => (
     <thead>
       <tr>
-        {columns.map((col) => (
-          <th
-            key={col.key}
-            onClick={() => handleSort(col.key)}
-            style={{
-              position: "sticky",
-              top: 0,
-              zIndex: 10,
-              background: C.bg,
-              padding: "10px 12px 8px",
-              fontSize: 9,
-              fontWeight: 600,
-              letterSpacing: "0.12em",
-              color: sortKey === col.key ? C.textPrimary : C.textDim,
-              textAlign: col.align,
-              cursor: "pointer",
-              borderBottom: `1px solid ${C.border}`,
-              userSelect: "none",
-              width: `${(col.flex / columns.reduce((s, c) => s + c.flex, 0)) * 100}%`,
-              transition: "color 0.15s",
-            }}
-            onMouseEnter={(e) => {
-              if (sortKey !== col.key) e.currentTarget.style.color = C.textSecondary;
-            }}
-            onMouseLeave={(e) => {
-              if (sortKey !== col.key) e.currentTarget.style.color = C.textDim;
-            }}
-          >
-            {col.label}
-            {sortKey === col.key && (
-              <span style={{ marginLeft: 4, fontSize: 8, opacity: 0.6 }}>
-                {sortDir === "asc" ? "\u25B2" : "\u25BC"}
-              </span>
-            )}
-          </th>
-        ))}
+        {columns.map((col) => {
+          const zf = zoneFilterConfig[col.key];
+          const totalFlex = columns.reduce((s, c) => s + c.flex, 0);
+          return (
+            <th
+              key={col.key}
+              style={{
+                position: "sticky",
+                top: 0,
+                zIndex: 10,
+                background: 'rgba(255,255,255,0.7)',
+                backdropFilter: 'blur(30px)',
+                WebkitBackdropFilter: 'blur(30px)',
+                padding: "6px 8px 6px 12px",
+                fontSize: 9,
+                fontWeight: 600,
+                letterSpacing: "0.12em",
+                color: sortKey === col.key ? C.textPrimary : C.textDim,
+                textAlign: col.align,
+                borderBottom: `1px solid ${C.border}`,
+                userSelect: "none",
+                width: `${(col.flex / totalFlex) * 100}%`,
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", justifyContent: col.align === "right" ? "flex-end" : "flex-start", gap: 4 }}>
+                {/* Sort button */}
+                <span
+                  onClick={() => handleSort(col.key)}
+                  style={{ cursor: "pointer", transition: "color 0.15s" }}
+                  onMouseEnter={(e) => { if (sortKey !== col.key) (e.target as HTMLElement).style.color = C.textSecondary; }}
+                  onMouseLeave={(e) => { if (sortKey !== col.key) (e.target as HTMLElement).style.color = C.textDim; }}
+                >
+                  {col.label}
+                  {sortKey === col.key && (
+                    <span style={{ marginLeft: 3, fontSize: 7, opacity: 0.6 }}>
+                      {sortDir === "asc" ? "\u25B2" : "\u25BC"}
+                    </span>
+                  )}
+                </span>
+                {/* Filter dropdown for zone columns */}
+                {zf && (
+                  <div style={{ position: "relative" }} ref={openFilterCol === col.key ? filterDropdownRef : undefined}>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setOpenFilterCol(openFilterCol === col.key ? null : col.key); }}
+                      style={{
+                        fontSize: 8,
+                        fontFamily: C.font,
+                        fontWeight: 600,
+                        padding: "2px 4px",
+                        border: `1px solid ${zf.value !== "ALL" ? C.accent : C.border}`,
+                        borderRadius: 2,
+                        background: zf.value !== "ALL" ? (C.accent + "15") : "transparent",
+                        color: zf.value !== "ALL" ? C.accent : C.textDim,
+                        cursor: "pointer",
+                        lineHeight: 1,
+                      }}
+                    >
+                      {zf.value === "ALL" ? "▾" : "✓"}
+                    </button>
+                    {openFilterCol === col.key && (
+                      <div
+                        className="hide-scrollbar"
+                        style={{
+                          position: "absolute",
+                          top: "100%",
+                          right: 0,
+                          marginTop: 2,
+                          zIndex: 100,
+                          background: C.bg,
+                          border: `1px solid ${C.border}`,
+                          borderRadius: 4,
+                          boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
+                          maxHeight: 200,
+                          overflowY: "auto",
+                          minWidth: 140,
+                        }}
+                      >
+                        <button
+                          onClick={() => { zf.setter("ALL"); setOpenFilterCol(null); }}
+                          style={{
+                            display: "block",
+                            width: "100%",
+                            textAlign: "left",
+                            padding: "5px 10px",
+                            fontSize: 9,
+                            fontFamily: C.font,
+                            fontWeight: zf.value === "ALL" ? 700 : 500,
+                            border: "none",
+                            background: zf.value === "ALL" ? C.activeNavBg : "transparent",
+                            color: zf.value === "ALL" ? C.textPrimary : C.textSecondary,
+                            cursor: "pointer",
+                          }}
+                        >
+                          ALL (no filter)
+                        </button>
+                        {zf.options.map(z => (
+                          <button
+                            key={z}
+                            onClick={() => { zf.setter(z); setOpenFilterCol(null); }}
+                            style={{
+                              display: "block",
+                              width: "100%",
+                              textAlign: "left",
+                              padding: "5px 10px",
+                              fontSize: 9,
+                              fontFamily: C.font,
+                              fontWeight: zf.value === z ? 700 : 500,
+                              border: "none",
+                              background: zf.value === z ? C.activeNavBg : "transparent",
+                              color: zf.value === z ? C.textPrimary : C.textDim,
+                              cursor: "pointer",
+                              borderTop: `1px solid ${C.borderLight}`,
+                            }}
+                            onMouseEnter={(e) => { if (zf.value !== z) e.currentTarget.style.background = C.hoverBg; }}
+                            onMouseLeave={(e) => { if (zf.value !== z) e.currentTarget.style.background = "transparent"; }}
+                          >
+                            {z}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </th>
+          );
+        })}
       </tr>
     </thead>
   );
@@ -613,7 +837,9 @@ export default function MoversPage() {
     <div
       className="flex flex-col h-full"
       style={{
-        background: C.bg,
+        background: 'rgba(255,255,255,0.3)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
         color: C.textPrimary,
         fontFamily: C.font,
         overflow: "hidden",
@@ -624,8 +850,10 @@ export default function MoversPage() {
         className="flex items-center justify-between shrink-0"
         style={{
           padding: "10px 24px",
-          borderBottom: `1px solid ${C.border}`,
-          background: C.surface,
+          borderBottom: '1px solid rgba(255,255,255,0.5)',
+          background: 'rgba(255,255,255,0.4)',
+          backdropFilter: 'blur(30px) saturate(1.6)',
+          WebkitBackdropFilter: 'blur(30px) saturate(1.6)',
         }}
       >
         <div className="flex items-center" style={{ gap: 16 }}>
@@ -648,6 +876,54 @@ export default function MoversPage() {
           <span style={{ fontSize: 10, color: C.textDim, letterSpacing: "0.04em" }}>
             <span style={{ color: C.amber, fontWeight: 600 }}>{stats.extremes}</span> at extremes
           </span>
+
+          {/* Model selector */}
+          <div style={{ marginLeft: 8, borderLeft: `1px solid ${C.border}`, paddingLeft: 12, display: "flex", alignItems: "center", gap: 6 }}>
+            <span
+              style={{
+                fontSize: 10,
+                fontWeight: 600,
+                letterSpacing: "0.06em",
+                color: C.textDim,
+              }}
+            >
+              MODEL
+            </span>
+            <div className="flex" style={{ gap: 2 }}>
+              {(["pro", "simple", "beta"] as ModelType[]).map((m) => (
+                <button
+                  key={m}
+                  onClick={() => handleModelChange(m)}
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 600,
+                    fontFamily: C.font,
+                    letterSpacing: "0.08em",
+                    padding: "3px 8px",
+                    border: `1px solid ${model === m ? "#d1d5db" : C.border}`,
+                    background: model === m ? "#f0f4ff" : "transparent",
+                    color: model === m ? C.textPrimary : C.textDim,
+                    cursor: "pointer",
+                    transition: "all 0.15s",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (model !== m) {
+                      e.currentTarget.style.borderColor = "#d1d5db";
+                      e.currentTarget.style.color = C.textSecondary;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (model !== m) {
+                      e.currentTarget.style.borderColor = C.border;
+                      e.currentTarget.style.color = C.textDim;
+                    }
+                  }}
+                >
+                  {m.toUpperCase()}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
         <div className="flex items-center" style={{ gap: 12 }}>
           {lastUpdate && (
@@ -692,7 +968,10 @@ export default function MoversPage() {
         className="flex items-center justify-between shrink-0"
         style={{
           padding: "10px 24px",
-          borderBottom: `1px solid ${C.border}`,
+          borderBottom: '1px solid rgba(255,255,255,0.5)',
+          background: 'rgba(255,255,255,0.5)',
+          backdropFilter: 'blur(30px) saturate(1.6)',
+          WebkitBackdropFilter: 'blur(30px) saturate(1.6)',
         }}
       >
         {/* Asset class tabs */}
@@ -794,7 +1073,7 @@ export default function MoversPage() {
       </div>
 
       {/* -- Content -- */}
-      <div className="flex-1 overflow-auto" style={{ padding: "0 24px" }}>
+      <div className="flex-1 overflow-auto" style={{ padding: "0 24px", backdropFilter: 'blur(40px) saturate(1.8)', WebkitBackdropFilter: 'blur(40px) saturate(1.8)' }}>
         {loading ? (
           <div
             className="flex flex-col items-center justify-center"
@@ -829,10 +1108,40 @@ export default function MoversPage() {
           </div>
         ) : rows.length === 0 ? (
           <div
-            className="flex items-center justify-center"
-            style={{ height: "100%", color: C.textDim, fontSize: 12 }}
+            className="flex flex-col items-center justify-center"
+            style={{ height: "100%", color: C.textDim, fontSize: 12, gap: 12 }}
           >
-            <span style={{ letterSpacing: "0.1em" }}>NO DATA</span>
+            <span style={{ letterSpacing: "0.1em" }}>NO MATCHES</span>
+            <span style={{ fontSize: 10, opacity: 0.6 }}>
+              {movers.length} symbols loaded — filters too restrictive
+            </span>
+            <button
+              onClick={() => {
+                setHighZoneFilter("ALL");
+                setLowZoneFilter("ALL");
+                setCloseZoneFilter("ALL");
+                setLastQZoneFilter("ALL");
+                setDirFilter("ALL");
+                setClassTab("ALL");
+              }}
+              style={{
+                fontSize: 10,
+                fontWeight: 600,
+                fontFamily: C.font,
+                letterSpacing: "0.06em",
+                padding: "6px 16px",
+                border: `1px solid ${C.border}`,
+                background: "transparent",
+                color: C.textSecondary,
+                cursor: "pointer",
+                borderRadius: 3,
+                transition: "all 0.15s",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.textPrimary; e.currentTarget.style.color = C.textPrimary; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.textSecondary; }}
+            >
+              RESET ALL FILTERS
+            </button>
           </div>
         ) : (
           <table
@@ -845,18 +1154,7 @@ export default function MoversPage() {
             {renderTableHeader()}
 
             <tbody>
-              {classTab === "ALL" && groupedRows
-                ? /* Grouped by asset class with section headers */
-                  CLASS_SECTION_ORDER.map((cls) => {
-                    const group = groupedRows[cls];
-                    if (!group || group.length === 0) return null;
-                    return [
-                      renderSectionHeader(cls, group.length),
-                      ...group.map((row, idx) => renderRow(row, idx)),
-                    ];
-                  })
-                : /* Flat list for specific class tab */
-                  rows.map((row, idx) => renderRow(row, idx))}
+              {rows.map((row, idx) => renderRow(row, idx))}
             </tbody>
           </table>
         )}
@@ -867,14 +1165,17 @@ export default function MoversPage() {
         className="flex items-center justify-between shrink-0"
         style={{
           padding: "6px 24px",
-          borderTop: `1px solid ${C.border}`,
+          borderTop: '1px solid rgba(255,255,255,0.5)',
+          background: 'rgba(255,255,255,0.4)',
+          backdropFilter: 'blur(30px) saturate(1.6)',
+          WebkitBackdropFilter: 'blur(30px) saturate(1.6)',
           fontSize: 9,
           letterSpacing: "0.06em",
           color: C.textDim,
         }}
       >
         <span>
-          QUARTERLY MODEL &middot; VS MIDPOINT &middot; SORTED BY{" "}
+          {model.toUpperCase()} MODEL &middot; VS MIDPOINT &middot; SORTED BY{" "}
           {sortKey.toUpperCase()} {sortDir.toUpperCase()}
           {isCached && " \u00b7 CACHED"}
           {computeMs != null && !isCached && ` \u00b7 ${(computeMs / 1000).toFixed(1)}s`}
@@ -883,6 +1184,138 @@ export default function MoversPage() {
           {rows.length} OF {stats.total} &middot; AUTO-REFRESH {Math.round(REFRESH_INTERVAL_MS / 1000)}s &middot;{" "}
           CLICK ROW TO CHART
         </span>
+      </div>
+
+      {/* Chart preview popup */}
+      {previewSymbol && <ChartPreview symbol={previewSymbol} model={model} pos={previewPos} onClose={() => setPreviewSymbol(null)} onOpen={() => router.push(`/terminal?symbol=${encodeURIComponent(previewSymbol)}`)} containerRef={previewRef} />}
+    </div>
+  );
+}
+
+/* ── Chart Preview Popup ──────────────────────────────── */
+
+function ChartPreview({ symbol, model, pos, onClose, onOpen, containerRef }: {
+  symbol: string;
+  model: ModelType;
+  pos: { x: number; y: number };
+  onClose: () => void;
+  onOpen: () => void;
+  containerRef: React.RefObject<HTMLDivElement | null>;
+}) {
+  const { theme } = useTheme();
+  const { bars, levels, loading } = useChartData(symbol, model === 'beta' ? 'pro' : model, 'live');
+  const MONO = "'SF Mono', 'JetBrains Mono', 'Fira Code', monospace";
+
+  // Draggable
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const isDragging = useRef(false);
+  const dragStart = useRef({ x: 0, y: 0 });
+  const dragStartOffset = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      if (!isDragging.current) return;
+      setDragOffset({
+        x: dragStartOffset.current.x + (e.clientX - dragStart.current.x),
+        y: dragStartOffset.current.y + (e.clientY - dragStart.current.y),
+      });
+    };
+    const onUp = () => { isDragging.current = false; document.body.style.cursor = ''; };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    return () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
+  }, []);
+
+  const handleHeaderMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true;
+    dragStart.current = { x: e.clientX, y: e.clientY };
+    dragStartOffset.current = { ...dragOffset };
+    document.body.style.cursor = 'grabbing';
+  };
+
+  // Show last ~500 bars (~2 years) but chart will auto-zoom to last 130 (2 quarters)
+  const trimmedBars = useMemo(() => {
+    if (bars.length <= 500) return bars;
+    return bars.slice(bars.length - 500);
+  }, [bars]);
+
+  // Position popup near cursor, clamped to viewport + drag offset
+  const W = 520, H = 360;
+  const vw = typeof window !== 'undefined' ? window.innerWidth : 1400;
+  const vh = typeof window !== 'undefined' ? window.innerHeight : 900;
+  let baseLeft = pos.x + 12;
+  let baseTop = pos.y - H / 2;
+  if (baseLeft + W > vw - 16) baseLeft = pos.x - W - 12;
+  if (baseTop < 16) baseTop = 16;
+  if (baseTop + H > vh - 16) baseTop = vh - H - 16;
+
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        position: 'fixed',
+        left: baseLeft + dragOffset.x,
+        top: baseTop + dragOffset.y,
+        width: W,
+        height: H,
+        zIndex: 200,
+        background: theme.frosted ? 'rgba(248,248,250,0.95)' : theme.bg,
+        border: theme.frosted ? '1px solid rgba(255,255,255,0.5)' : `1px solid ${theme.border}`,
+        borderRadius: 12,
+        boxShadow: theme.frosted
+          ? '0 16px 48px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.9)'
+          : '0 16px 48px rgba(0,0,0,0.15)',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      {/* Header */}
+      <div
+        onMouseDown={handleHeaderMouseDown}
+        style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '6px 12px',
+        borderBottom: theme.frosted ? '1px solid rgba(255,255,255,0.25)' : `1px solid ${theme.border}`,
+        background: theme.frosted ? 'rgba(245,245,248,0.9)' : theme.surface,
+        fontFamily: MONO,
+        cursor: 'grab',
+      }}>
+        <span style={{ fontSize: 12, fontWeight: 700, color: theme.text, letterSpacing: '0.04em' }}>{symbol}</span>
+        <div style={{ display: 'flex', gap: 6 }}>
+          <button
+            onClick={onOpen}
+            style={{
+              fontSize: 9, fontWeight: 600, fontFamily: MONO, letterSpacing: '0.06em',
+              padding: '3px 10px', border: `1px solid ${theme.accent}`, borderRadius: 3,
+              background: theme.accent, color: theme.badgeText, cursor: 'pointer',
+            }}
+          >
+            OPEN
+          </button>
+          <button
+            onClick={onClose}
+            style={{
+              fontSize: 9, fontWeight: 600, fontFamily: MONO,
+              padding: '3px 8px', border: theme.frosted ? '1px solid rgba(255,255,255,0.4)' : `1px solid ${theme.border}`, borderRadius: 3,
+              background: 'transparent', color: theme.textDim, cursor: 'pointer',
+            }}
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+      {/* Chart */}
+      <div style={{ flex: 1, minHeight: 0 }}>
+        {loading && !bars.length ? (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: theme.textDim, fontSize: 10, fontFamily: MONO }}>
+            Loading...
+          </div>
+        ) : (
+          <NativeChart bars={trimmedBars} levels={levels} model={model === 'overlay' ? 'pro' : model} defaultVisibleBars={130} />
+        )}
       </div>
     </div>
   );

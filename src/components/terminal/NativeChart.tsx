@@ -469,9 +469,10 @@ export interface NativeChartProps {
   levels: LevelLine[];
   model: string;
   outcome?: string;
-  loading: boolean;
-  error: string | null;
+  loading?: boolean;
+  error?: string | null;
   onPriceInfo?: (info: { close: number; change: number; changePct: number } | null) => void;
+  defaultVisibleBars?: number;
 }
 
 export default function NativeChart({
@@ -482,6 +483,7 @@ export default function NativeChart({
   loading,
   error,
   onPriceInfo,
+  defaultVisibleBars = 220,
 }: NativeChartProps) {
   const { theme } = useTheme();
   // Keep a ref so canvas render callbacks always see the latest theme
@@ -630,7 +632,7 @@ export default function NativeChart({
 
     // Set initial barSpacing to show ~220 bars
     const plot = getPlotArea();
-    const defaultVisible = 220;
+    const defaultVisible = defaultVisibleBars;
     const spacing = Math.max(1, plot.width / defaultVisible);
     viewRef.current = { barSpacing: spacing, rightOffset: 5 };
     yScaleRef.current = null; // reset to auto-fit on new data
@@ -682,14 +684,33 @@ export default function NativeChart({
     const xToIdx = (x: number) =>
       rightEdgeFloatIdx - (plot.right - x) / barSpacing;
 
-    const candleW = Math.max(1, Math.min(20, barSpacing * 0.7));
+    // Ported from lightweight-charts optimalCandlestickWidth
+    let candleW: number;
+    if (barSpacing >= 2.5 && barSpacing <= 4) {
+      // Special case: force minimum visible width at small sizes
+      candleW = Math.floor(3 * dpr) / dpr;
+    } else {
+      // Reducing coeff: 1.0 at small spacing, approaches 0.8 at large spacing
+      const reducingCoeff = 0.2;
+      const coeff = 1 - reducingCoeff * Math.atan(Math.max(4, barSpacing) - 4) / (Math.PI * 0.5);
+      const res = Math.floor(barSpacing * coeff * dpr) / dpr;
+      const scaledMax = Math.floor(barSpacing * dpr) / dpr;
+      candleW = Math.min(res, scaledMax);
+    }
+    // Ensure minimum 1 physical pixel, max reasonable size
+    candleW = Math.max(1 / dpr, Math.min(20, candleW));
+    // At very small sizes (< 1.5px), switch to line rendering
+    const useLineMode = candleW < 1.5;
     const halfCandle = candleW / 2;
 
     // ======================================================================
     // 1. BACKGROUND
     // ======================================================================
-    ctx.fillStyle = T.bg;
-    ctx.fillRect(0, 0, w, h);
+    ctx.clearRect(0, 0, w, h);
+    if (!T.frosted) {
+      ctx.fillStyle = T.bg;
+      ctx.fillRect(0, 0, w, h);
+    }
 
     // ======================================================================
     // 2. GRID
@@ -927,34 +948,44 @@ export default function NativeChart({
       const wickTop = priceToY(bar.high);
       const wickBot = priceToY(bar.low);
 
-      // Wick
-      ctx.strokeStyle = isUp ? T.candleUpWick : T.candleDownWick;
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(Math.round(x) + 0.5, wickTop);
-      ctx.lineTo(Math.round(x) + 0.5, wickBot);
-      ctx.stroke();
-
-      // Body
-      const bodyH = Math.max(1, bodyBot - bodyTop);
-      ctx.fillStyle = isUp ? T.candleUpBody : T.candleDownBody;
-      ctx.fillRect(
-        Math.round(x - halfCandle),
-        Math.round(bodyTop),
-        Math.round(candleW),
-        Math.round(bodyH)
-      );
-
-      // Body outline (only when candles are wide enough to be visible)
-      if (candleW >= 3) {
+      if (useLineMode) {
+        // Ultra-zoomed out: single vertical line from high to low, colored by direction
+        ctx.strokeStyle = isUp ? T.candleUpBody : T.candleDownBody;
+        ctx.lineWidth = Math.max(1, Math.round(candleW * dpr) / dpr);
+        ctx.beginPath();
+        ctx.moveTo(Math.round(x * dpr) / dpr, wickTop);
+        ctx.lineTo(Math.round(x * dpr) / dpr, wickBot);
+        ctx.stroke();
+      } else {
+        // Wick
         ctx.strokeStyle = isUp ? T.candleUpWick : T.candleDownWick;
         ctx.lineWidth = 1;
-        ctx.strokeRect(
-          Math.round(x - halfCandle) + 0.5,
-          Math.round(bodyTop) + 0.5,
-          Math.round(candleW) - 1,
-          Math.max(0, Math.round(bodyH) - 1)
+        ctx.beginPath();
+        ctx.moveTo(Math.round(x) + 0.5, wickTop);
+        ctx.lineTo(Math.round(x) + 0.5, wickBot);
+        ctx.stroke();
+
+        // Body
+        const bodyH = Math.max(1, bodyBot - bodyTop);
+        ctx.fillStyle = isUp ? T.candleUpBody : T.candleDownBody;
+        ctx.fillRect(
+          Math.round(x - halfCandle),
+          Math.round(bodyTop),
+          Math.round(candleW),
+          Math.round(bodyH)
         );
+
+        // Body outline (only when candles are wide enough)
+        if (candleW >= 3) {
+          ctx.strokeStyle = isUp ? T.candleUpWick : T.candleDownWick;
+          ctx.lineWidth = 1;
+          ctx.strokeRect(
+            Math.round(x - halfCandle) + 0.5,
+            Math.round(bodyTop) + 0.5,
+            Math.round(candleW) - 1,
+            Math.max(0, Math.round(bodyH) - 1)
+          );
+        }
       }
     }
 
@@ -1201,14 +1232,25 @@ export default function NativeChart({
 
       if (dragRef.current.active) {
         if (dragRef.current.mode === 'pan') {
+          // Horizontal pan
           const dx = e.clientX - dragRef.current.startX;
           const barShift = -dx / viewRef.current.barSpacing;
           viewRef.current.rightOffset = dragRef.current.startRightOffset + barShift;
           syncVisible();
+          // Vertical pan (only when Y is manually scaled)
+          if (dragRef.current.startYScale) {
+            const dy = e.clientY - dragRef.current.startY;
+            const priceRange = dragRef.current.startYScale.maxPrice - dragRef.current.startYScale.minPrice;
+            const priceDelta = (dy / plot.height) * priceRange;
+            yScaleRef.current = {
+              minPrice: dragRef.current.startYScale.minPrice + priceDelta,
+              maxPrice: dragRef.current.startYScale.maxPrice + priceDelta,
+            };
+          }
         } else if (dragRef.current.mode === 'y-axis') {
           // Drag Y-axis: scale price range vertically
           const dy = e.clientY - dragRef.current.startY;
-          const scaleFactor = 1 + dy * 0.005; // drag down = zoom out, drag up = zoom in
+          const scaleFactor = 1 + dy * 0.005;
           const baseRange = dragRef.current.startYScale || getPriceRange();
           const mid = (baseRange.minPrice + baseRange.maxPrice) / 2;
           const halfRange = (baseRange.maxPrice - baseRange.minPrice) / 2 * scaleFactor;
@@ -1266,7 +1308,7 @@ export default function NativeChart({
         startRightOffset: viewRef.current.rightOffset,
         mode,
         startBarSpacing: viewRef.current.barSpacing,
-        startYScale: yScaleRef.current || getPriceRange(),
+        startYScale: mode === 'pan' ? yScaleRef.current : (yScaleRef.current || getPriceRange()),
       };
     };
 
@@ -1382,13 +1424,52 @@ export default function NativeChart({
     <div
       ref={containerRef}
       className="relative w-full h-full"
-      style={{ background: theme.bg }}
+      style={{ background: theme.frosted ? 'transparent' : theme.bg }}
     >
       <canvas
         ref={canvasRef}
         className="absolute inset-0"
         style={{ display: 'block' }}
       />
+      {/* Reset view button */}
+      {bars.length > 0 && (
+        <button
+          onClick={() => {
+            yScaleRef.current = null;
+            const plot = getPlotArea();
+            const defaultVisible = defaultVisibleBars;
+            const spacing = Math.max(1, plot.width / defaultVisible);
+            viewRef.current = { barSpacing: spacing, rightOffset: 5 };
+            syncVisible();
+            dirtyRef.current = true;
+          }}
+          title="Reset view"
+          style={{
+            position: 'absolute',
+            top: 4,
+            right: MARGIN.right + 4,
+            zIndex: 5,
+            width: 20,
+            height: 20,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(255,255,255,0.5)',
+            border: `1px solid ${theme.border}`,
+            borderRadius: 4,
+            cursor: 'pointer',
+            color: theme.textDim,
+            fontSize: 11,
+            fontFamily: FONT,
+            padding: 0,
+            lineHeight: 1,
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = theme.text; e.currentTarget.style.background = 'rgba(255,255,255,0.8)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = theme.textDim; e.currentTarget.style.background = 'rgba(255,255,255,0.5)'; }}
+        >
+          ↺
+        </button>
+      )}
       {loading && !bars.length && (
         <div className="absolute inset-0 flex items-center justify-center">
           <span

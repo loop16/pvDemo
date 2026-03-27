@@ -91,12 +91,24 @@ function ChartPanelUnit({
   showClose: boolean;
 }) {
   const { theme } = useTheme();
-  const { bars, levels, loading, error } = useChartData(config.symbol, config.model, source);
+  const effectiveModel = config.model === 'overlay' ? 'pro' : config.model;
+  const chartData = useChartData(config.symbol, effectiveModel, source);
+  // When overlay: fetch levels from the overlay symbol instead
+  const overlayLevelsData = useChartData(
+    config.model === 'overlay' && config.overlaySymbol ? config.overlaySymbol : config.symbol,
+    'pro',
+    source,
+  );
+  const bars = chartData.bars;
+  const levels = config.model === 'overlay' && config.overlaySymbol ? overlayLevelsData.levels : chartData.levels;
+  const loading = chartData.loading || (config.model === 'overlay' && overlayLevelsData.loading);
+  const error = chartData.error;
   const [priceInfo, setPriceInfo] = useState<{
     close: number;
     change: number;
     changePct: number;
   } | null>(null);
+  const [overlayInput, setOverlayInput] = useState(config.overlaySymbol || '');
 
   const changeColor = priceInfo
     ? priceInfo.changePct >= 0
@@ -108,8 +120,11 @@ function ChartPanelUnit({
     <div
       className="flex flex-col min-w-0 min-h-0 overflow-hidden h-full relative"
       style={{
-        border: `1px solid ${theme.border}`,
-        background: theme.bg,
+        border: theme.frosted ? '1px solid rgba(200,200,210,0.4)' : `1px solid ${theme.border}`,
+        background: theme.frosted ? 'rgba(255,255,255,0.3)' : theme.bg,
+        borderRadius: 12,
+        overflow: 'hidden',
+        boxShadow: theme.frosted ? '0 4px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9)' : 'none',
       }}
       onClick={onActivate}
     >
@@ -127,8 +142,8 @@ function ChartPanelUnit({
         className="flex items-center gap-2 px-2 shrink-0"
         style={{
           height: 32,
-          borderBottom: `1px solid ${theme.border}`,
-          background: theme.bg,
+          borderBottom: theme.frosted ? '1px solid rgba(200,200,210,0.3)' : `1px solid ${theme.border}`,
+          background: theme.frosted ? 'rgba(255,255,255,0.5)' : theme.bg,
         }}
       >
         <SymbolSearch
@@ -140,6 +155,17 @@ function ChartPanelUnit({
           value={config.model}
           onChange={(m) => onConfigChange({ model: m as PanelConfig['model'] })}
         />
+        {/* Overlay symbol search */}
+        {config.model === 'overlay' && (
+          <div className="flex items-center gap-1" style={{ marginLeft: 4 }}>
+            <span style={{ fontSize: 9, color: theme.textDim, fontFamily: MONO, letterSpacing: '0.05em' }}>FROM</span>
+            <SymbolSearch
+              value={config.overlaySymbol || 'SPX'}
+              onChange={(sym) => onConfigChange({ overlaySymbol: sym })}
+              symbols={symbols}
+            />
+          </div>
+        )}
         <div className="flex-1" />
         {priceInfo && (
           <div
@@ -192,7 +218,7 @@ function ChartPanelUnit({
         <NativeChart
           bars={bars}
           levels={levels}
-          model={config.model}
+          model={config.model === 'overlay' ? 'pro' : config.model}
           loading={loading}
           error={error}
           onPriceInfo={setPriceInfo}
@@ -204,13 +230,13 @@ function ChartPanelUnit({
         className="flex items-center justify-between px-2 shrink-0"
         style={{
           height: 24,
-          borderTop: `1px solid ${theme.border}`,
-          background: theme.surface,
+          borderTop: theme.frosted ? '1px solid rgba(200,200,210,0.3)' : `1px solid ${theme.border}`,
+          background: theme.frosted ? 'rgba(255,255,255,0.5)' : theme.surface,
           fontFamily: MONO,
         }}
       >
         <span style={{ fontSize: 10, color: theme.textDim }}>
-          {config.symbol} &middot; DAILY &middot; {config.model.toUpperCase()}
+          {config.symbol} &middot; DAILY &middot; {config.model.toUpperCase()}{config.model === 'overlay' && config.overlaySymbol ? ` (${config.overlaySymbol})` : ''}
         </span>
         <span style={{ fontSize: 10, color: theme.borderLight === theme.border ? theme.textDim : theme.crosshair }}>
           {bars.length > 0 ? `${bars.length} bars` : ''}
@@ -283,7 +309,7 @@ const DEFAULT_PANELS: PanelConfig[] = [
   { id: '1', symbol: 'SPX', model: 'pro' },
   { id: '2', symbol: 'BTCUSD', model: 'pro' },
   { id: '3', symbol: 'GC', model: 'pro' },
-  { id: '4', symbol: 'NQ', model: 'pro' },
+  { id: '4', symbol: 'NQ1!', model: 'pro' },
 ];
 
 export interface PanelGridProps {
@@ -291,9 +317,10 @@ export interface PanelGridProps {
   symbols: SymbolEntry[];
   source?: 'demo' | 'live';
   initialSymbol?: string;
+  setActivePanelSymbol?: React.MutableRefObject<((symbol: string) => void) | null>;
 }
 
-export default function PanelGrid({ layout, symbols, source = 'live', initialSymbol }: PanelGridProps) {
+export default function PanelGrid({ layout, symbols, source = 'live', initialSymbol, setActivePanelSymbol }: PanelGridProps) {
   const { theme } = useTheme();
   const [panels, setPanels] = useState<PanelConfig[]>(() => {
     const base = [...DEFAULT_PANELS];
@@ -303,6 +330,15 @@ export default function PanelGrid({ layout, symbols, source = 'live', initialSym
     return base;
   });
   const [activePanel, setActivePanel] = useState('1');
+
+  // Expose a function to set the active panel's symbol from outside
+  useEffect(() => {
+    if (setActivePanelSymbol) {
+      setActivePanelSymbol.current = (symbol: string) => {
+        setPanels(prev => prev.map(p => p.id === activePanel ? { ...p, symbol } : p));
+      };
+    }
+  }, [activePanel, setActivePanelSymbol]);
 
   // Resizable split ratios
   const [colSplit, setColSplit] = useState(0.5);
@@ -359,7 +395,7 @@ export default function PanelGrid({ layout, symbols, source = 'live', initialSym
   );
 
   return (
-    <div ref={containerRef} className="w-full h-full overflow-hidden" style={{ background: theme.surface }}>
+    <div ref={containerRef} className="w-full h-full overflow-hidden" style={{ background: theme.frosted ? 'transparent' : theme.surface }}>
       {/* Single panel */}
       {layout === '1x1' && (
         <div className="w-full h-full">{renderPanel(activePanels[0])}</div>

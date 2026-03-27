@@ -43,10 +43,50 @@ export interface ChartTheme {
   hoverBg: string;
   // Badge inverse (for crosshair price badge text)
   badgeText: string;
+  // Whether this theme uses frosted glass + halftone background
+  frosted: boolean;
 }
 
 // ============================================================================
-// LIGHT (current default)
+// PRICEVAULT — frosted glass with halftone background, no grid lines
+// ============================================================================
+
+export const pricevaultTheme: ChartTheme = {
+  name: 'Pricevault',
+  bg: '#ffffff',
+  surface: '#fafafa',
+  panel: '#ffffff',
+  border: '#e5e7eb',
+  borderLight: '#f0f0f0',
+  text: '#111827',
+  textSecondary: '#6b7280',
+  textDim: '#9ca3af',
+  gridH: 'rgba(0,0,0,0.05)',
+  gridV: 'rgba(0,0,0,0.03)',
+  crosshair: '#d1d5db',
+  axisText: '#6b7280',
+  candleUpBody: '#16a34a',
+  candleUpWick: '#15803d',
+  candleDownBody: '#111111',
+  candleDownWick: '#111111',
+  levelBlue: '#2962ff',
+  levelPurple: '#9C27B0',
+  boxBlueFill: 'rgba(41,98,255,0.18)',
+  boxBlueStroke: 'rgba(41,98,255,0.30)',
+  boxPurpleFill: 'rgba(156,39,176,0.16)',
+  boxPurpleStroke: 'rgba(156,39,176,0.30)',
+  midBand: 'rgba(244,63,94,0.7)',
+  accent: '#003087',
+  positive: '#16a34a',
+  negative: '#dc2626',
+  activeNavBg: '#f0f4ff',
+  hoverBg: '#f8fafc',
+  badgeText: '#ffffff',
+  frosted: true,
+};
+
+// ============================================================================
+// LIGHT — clean white, no halftone, with grid lines
 // ============================================================================
 
 export const lightTheme: ChartTheme = {
@@ -80,6 +120,7 @@ export const lightTheme: ChartTheme = {
   activeNavBg: '#f0f4ff',
   hoverBg: '#f8fafc',
   badgeText: '#ffffff',
+  frosted: false,
 };
 
 // ============================================================================
@@ -117,6 +158,7 @@ export const darkTheme: ChartTheme = {
   activeNavBg: '#1e2a35',
   hoverBg: '#1e1e1e',
   badgeText: '#141414',
+  frosted: false,
 };
 
 // ============================================================================
@@ -154,6 +196,7 @@ export const bloombergTheme: ChartTheme = {
   activeNavBg: '#1a1200',
   hoverBg: '#0e0e0e',
   badgeText: '#000000',
+  frosted: false,
 };
 
 // ============================================================================
@@ -191,6 +234,7 @@ export const tosTheme: ChartTheme = {
   activeNavBg: '#3a3a3a',
   hoverBg: '#353535',
   badgeText: '#2b2b2b',
+  frosted: false,
 };
 
 // ============================================================================
@@ -228,6 +272,7 @@ export const ibkrTheme: ChartTheme = {
   activeNavBg: '#d0d8e8',
   hoverBg: '#e4e4e4',
   badgeText: '#f0f0f0',
+  frosted: false,
 };
 
 // ============================================================================
@@ -235,6 +280,7 @@ export const ibkrTheme: ChartTheme = {
 // ============================================================================
 
 export const THEMES: Record<string, ChartTheme> = {
+  pricevault: pricevaultTheme,
   light: lightTheme,
   dark: darkTheme,
   bloomberg: bloombergTheme,
