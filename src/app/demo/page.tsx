@@ -1,119 +1,90 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import ChartPanel from "@/components/ChartPanel";
-import { Toolbar } from "@/components/Toolbar";
-import { SidePanel } from "@/components/SidePanel";
-import { normalizeBars } from "@/utils/normalize";
+import { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import PanelGrid from '@/components/terminal/PanelGrid';
+import { useTheme } from '@/components/terminal/ThemeContext';
+import type { LayoutMode, SymbolEntry } from '@/components/terminal/types';
 
-type SimpleModel = "simple" | "pro";
-type Metrics = { price: number | null; changePct: number | null };
-
-const AVAILABLE_SYMBOLS = ["NQ", "BTCUSD", "CL", "GC", "SPX"] as const;
-
-export default function DemoPage() {
-  const [symbol, setSymbol] = useState("SPX");
-  const [bars, setBars] = useState<any[]>([]);
-  const [metrics, setMetrics] = useState<Metrics>({ price: null, changePct: null });
-  const [error, setError] = useState<string | null>(null);
-  const [selectedModel, setSelectedModel] = useState<SimpleModel>("simple");
-
-  async function fetchBars(sym: string) {
-    const res = await fetch(`/api/ohlcv?symbol=${encodeURIComponent(sym)}&range=max&source=demo`, { cache: "no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const raw = await res.json();
-    return normalizeBars(raw);
+function LayoutIcon({ mode, active, color }: { mode: LayoutMode; active: boolean; color: string }) {
+  const size = 16;
+  switch (mode) {
+    case '1x1':
+      return <svg width={size} height={size} viewBox="0 0 16 16"><rect x={1} y={1} width={14} height={14} fill="none" stroke={color} strokeWidth={1.5} /></svg>;
+    case '1x2':
+      return <svg width={size} height={size} viewBox="0 0 16 16"><rect x={1} y={1} width={6} height={14} fill="none" stroke={color} strokeWidth={1.5} /><rect x={9} y={1} width={6} height={14} fill="none" stroke={color} strokeWidth={1.5} /></svg>;
+    case '2x1':
+      return <svg width={size} height={size} viewBox="0 0 16 16"><rect x={1} y={1} width={14} height={6} fill="none" stroke={color} strokeWidth={1.5} /><rect x={1} y={9} width={14} height={6} fill="none" stroke={color} strokeWidth={1.5} /></svg>;
+    case '2x2':
+      return <svg width={size} height={size} viewBox="0 0 16 16"><rect x={1} y={1} width={6} height={6} fill="none" stroke={color} strokeWidth={1.5} /><rect x={9} y={1} width={6} height={6} fill="none" stroke={color} strokeWidth={1.5} /><rect x={1} y={9} width={6} height={6} fill="none" stroke={color} strokeWidth={1.5} /><rect x={9} y={9} width={6} height={6} fill="none" stroke={color} strokeWidth={1.5} /></svg>;
   }
+}
 
-  const handleLoad = async (input: string) => {
-    const next = input.trim().toUpperCase();
-    if (!AVAILABLE_SYMBOLS.includes(next as (typeof AVAILABLE_SYMBOLS)[number])) {
-      setError(`Symbol ${next} not available in demo. Choose from ${AVAILABLE_SYMBOLS.join(", ")}.`);
-      return;
-    }
+function DemoContent() {
+  const searchParams = useSearchParams();
+  const { theme } = useTheme();
+  const [layout, setLayout] = useState<LayoutMode>('1x1');
+  const [symbols, setSymbols] = useState<SymbolEntry[]>([
+    { id: 'SPX', label: 'SPX' },
+    { id: 'NQ', label: 'NQ' },
+    { id: 'BTCUSD', label: 'BTCUSD' },
+    { id: 'CL', label: 'CL' },
+    { id: 'GC', label: 'GC' },
+  ]);
 
-    setSymbol(next);
-    setError(null);
-
-    try {
-      const data = await fetchBars(next);
-      setBars(data);
-
-      if (data.length >= 2) {
-        const last = data[data.length - 1];
-        const prev = data[data.length - 2];
-        const price = +last.close;
-        const changePct = prev && prev.close ? +(((price - prev.close) / prev.close) * 100).toFixed(2) : 0;
-        setMetrics({ price, changePct });
-      } else {
-        setMetrics({ price: null, changePct: null });
-      }
-    } catch (err: any) {
-      setError(err?.message ?? "Failed to load data.");
-      setBars([]);
-      setMetrics({ price: null, changePct: null });
-    }
-  };
+  const initialSymbol = searchParams.get('symbol')?.toUpperCase() || 'SPX';
 
   useEffect(() => {
-    handleLoad("SPX");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetch('/api/symbols?source=demo')
+      .then((r) => r.json())
+      .then((data) => { if (Array.isArray(data)) setSymbols(data); })
+      .catch(() => {});
   }, []);
 
+  const layouts: LayoutMode[] = ['1x1', '1x2', '2x1', '2x2'];
+
   return (
-    <div className="app">
-      <header className="header">
-        <Toolbar onLoad={handleLoad} symbolsSource="demo" />
-      </header>
-
-      <main className="chart-area">
-        <div className="flex flex-col flex-1 min-h-0 min-w-0">
-          <ChartPanel
-            data={bars}
-            symbol={symbol}
-            selectedModel={selectedModel}
-            selectedOutcome={"AUTO" as any}
-            levelsSource="demo"
-          />
-          <div className="chart-status-bar">
-            <span>{symbol} {metrics.price != null ? `$${metrics.price.toLocaleString()}` : '--'}</span>
-            <span>{new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} &middot; EOD</span>
-          </div>
+    <div className="h-full w-full flex flex-col">
+      <div
+        className="flex items-center justify-center px-3 shrink-0"
+        style={{ height: 28, borderBottom: `1px solid ${theme.border}`, background: theme.bg }}
+      >
+        <div className="flex items-center gap-1">
+          {layouts.map((l) => (
+            <button
+              key={l}
+              onClick={() => setLayout(l)}
+              className="p-1 transition-colors"
+              style={{ background: layout === l ? theme.activeNavBg : 'transparent' }}
+              title={l}
+            >
+              <LayoutIcon mode={l} active={layout === l} color={layout === l ? theme.text : theme.textDim} />
+            </button>
+          ))}
         </div>
-        {error && <div className="error">{error}</div>}
-      </main>
-
-      <aside className="sidebar">
-        <SidePanel 
-          quarterLevels={null}
-          metrics={metrics}
-          selectedModel={selectedModel}
-          onModelChange={(model) => {
-            if (model === "overlay") return;
-            setSelectedModel(model as SimpleModel);
-          }}
-          selectedOutcome={"AUTO" as any}
-          onOutcomeChange={() => {}}
-          showOverlay={false}
-          showOutcome={false}
-          symbolsSource="demo"
+      </div>
+      <div className="flex-1 min-h-0">
+        <PanelGrid
+          layout={layout}
+          symbols={symbols}
+          source="demo"
+          initialSymbol={initialSymbol}
         />
-
-        <div className="card mt-4">
-          <div className="card-title">Demo</div>
-          <div className="text-sm text-gray-700 space-y-2">
-            <p>This demo has access to 5 assets:</p>
-            <ul className="list-disc ml-5">
-              <li>SPX</li>
-              <li>NQ</li>
-              <li>BTCUSD</li>
-              <li>CL</li>
-              <li>GC</li>
-            </ul>
-            <p>Data is limited to May 2025.</p>
-          </div>
-        </div>
-      </aside>
+      </div>
     </div>
+  );
+}
+
+export default function DemoPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="h-full w-full flex items-center justify-center" style={{ background: '#ffffff' }}>
+          <span className="text-[12px] text-[#9ca3af] animate-pulse">Loading demo...</span>
+        </div>
+      }
+    >
+      <DemoContent />
+    </Suspense>
   );
 }

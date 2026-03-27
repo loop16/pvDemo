@@ -1,30 +1,76 @@
 "use client";
-import Link from "next/link";
 
-export default function DemoLayout({ children }: { children: React.ReactNode }) {
+import Link from "next/link";
+import { useState } from "react";
+import { ThemeProvider, useTheme } from "@/components/terminal/ThemeContext";
+import SettingsPanel from "@/components/terminal/SettingsPanel";
+
+function DemoLayoutInner({ children }: { children: React.ReactNode }) {
+  const { theme } = useTheme();
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const isDark = theme.bg.startsWith('#0') || theme.bg.startsWith('#1') || theme.bg.startsWith('#2') || theme.bg === '#000000';
+
   return (
-    <div className="h-screen flex flex-col">
-      <div className="flex items-center justify-between px-5 py-3 border-b border-neutral-200">
-        <Link href="/" className="flex items-center gap-2">
-          <img src="/logo.svg" alt="Pricevault" width={22} height={22} />
-          <span className="mono text-[14px] font-semibold tracking-tight">Pricevault</span>
-          <span className="mono ml-1 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-neutral-400 border border-neutral-200">
+    <div className="flex flex-col" style={{ height: '100dvh', background: theme.bg }}>
+      <header
+        className="flex items-center justify-between shrink-0"
+        style={{ height: 44, padding: '0 20px', borderBottom: `1px solid ${theme.border}`, background: theme.surface }}
+      >
+        <Link href="/" className="flex items-center gap-2" style={{ textDecoration: 'none' }}>
+          <img
+            src="/logo.svg"
+            alt="Pricevault"
+            width={18}
+            height={18}
+            style={{ opacity: 0.9, filter: isDark ? 'invert(1) brightness(2)' : 'none' }}
+          />
+          <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: '-0.01em', color: theme.text, fontFamily: "'Instrument Serif', 'Georgia', serif" }}>
+            Pricevault
+          </span>
+          <span style={{ fontSize: 9, fontWeight: 600, letterSpacing: '0.1em', color: theme.textDim, border: `1px solid ${theme.border}`, padding: '2px 6px', marginLeft: 4, fontFamily: "'SF Mono', monospace", textTransform: 'uppercase' }}>
             Demo
           </span>
         </Link>
-        <nav className="flex items-center gap-1">
-          <Link href="/about" className="mono px-3 py-1.5 text-[11px] text-neutral-500 hover:text-neutral-900 transition-colors uppercase tracking-wider">
-            About
+
+        <nav className="flex items-center" style={{ gap: 2 }}>
+          <Link
+            href="/terminal"
+            style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', padding: '6px 14px', color: theme.textDim, textDecoration: 'none', fontFamily: "'SF Mono', monospace", transition: 'color 0.15s' }}
+          >
+            FULL APP
           </Link>
           <Link
             href="/login"
-            className="mono ml-2 border border-neutral-900 bg-neutral-900 text-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider hover:opacity-85 transition-opacity"
+            style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', padding: '6px 14px', color: theme.text, background: theme.activeNavBg, textDecoration: 'none', fontFamily: "'SF Mono', monospace" }}
           >
-            Sign up
+            SIGN UP
           </Link>
         </nav>
+
+        <button
+          onClick={() => setSettingsOpen(true)}
+          style={{ color: theme.textDim, cursor: 'pointer', background: 'none', border: 'none', padding: 4 }}
+          title="Settings"
+        >
+          <svg width={16} height={16} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.3}>
+            <circle cx={8} cy={8} r={2.5} /><path d="M8 1v2M8 13v2M1 8h2M13 8h2M2.9 2.9l1.4 1.4M11.7 11.7l1.4 1.4M2.9 13.1l1.4-1.4M11.7 4.3l1.4-1.4" />
+          </svg>
+        </button>
+      </header>
+
+      <div className="flex-1 overflow-hidden" style={{ minHeight: 0 }}>
+        {children}
       </div>
-      <div className="flex-1 overflow-hidden">{children}</div>
+
+      <SettingsPanel open={settingsOpen} onClose={() => setSettingsOpen(false)} />
     </div>
+  );
+}
+
+export default function DemoLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <ThemeProvider>
+      <DemoLayoutInner>{children}</DemoLayoutInner>
+    </ThemeProvider>
   );
 }
