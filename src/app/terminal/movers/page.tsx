@@ -896,15 +896,15 @@ export default function MoversPage() {
                     fontFamily: C.font,
                     letterSpacing: "0.08em",
                     padding: "3px 8px",
-                    border: `1px solid ${model === m ? "#d1d5db" : C.border}`,
-                    background: model === m ? "#f0f4ff" : "transparent",
+                    border: `1px solid ${model === m ? C.accent + '44' : C.border}`,
+                    background: model === m ? C.activeNavBg : "transparent",
                     color: model === m ? C.textPrimary : C.textDim,
                     cursor: "pointer",
                     transition: "all 0.15s",
                   }}
                   onMouseEnter={(e) => {
                     if (model !== m) {
-                      e.currentTarget.style.borderColor = "#d1d5db";
+                      e.currentTarget.style.borderColor = C.textDim;
                       e.currentTarget.style.color = C.textSecondary;
                     }
                   }}
@@ -1041,15 +1041,15 @@ export default function MoversPage() {
                   fontFamily: C.font,
                   letterSpacing: "0.08em",
                   padding: "4px 10px",
-                  border: `1px solid ${dirFilter === tab.key ? "#d1d5db" : C.border}`,
-                  background: dirFilter === tab.key ? "#f0f4ff" : "transparent",
+                  border: `1px solid ${dirFilter === tab.key ? C.accent + '44' : C.border}`,
+                  background: dirFilter === tab.key ? C.activeNavBg : "transparent",
                   color: dirFilter === tab.key ? C.textPrimary : C.textDim,
                   cursor: "pointer",
                   transition: "all 0.15s",
                 }}
                 onMouseEnter={(e) => {
                   if (dirFilter !== tab.key) {
-                    e.currentTarget.style.borderColor = "#d1d5db";
+                    e.currentTarget.style.borderColor = C.textDim;
                     e.currentTarget.style.color = C.textSecondary;
                   }
                 }}
