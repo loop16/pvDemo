@@ -7,8 +7,8 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="relative z-30" style={menuOpen ? { background: '#ffffff', position: 'relative', zIndex: 50 } : undefined}>
-      <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-between" style={{ paddingTop: '20px', paddingBottom: '20px', background: menuOpen ? '#ffffff' : undefined }}>
+    <header className="relative z-20">
+      <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-between" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
         <Link href="/" className="flex items-center gap-2.5">
           <img src="/logo.svg" alt="Pricevault" width={28} height={28} />
           <span className="serif text-[22px] tracking-tight">Pricevault</span>
@@ -34,11 +34,6 @@ export default function Header() {
           <span className={`block w-5 h-0.5 bg-neutral-800 transition-transform ${menuOpen ? '-rotate-45 -translate-y-[4px]' : ''}`} />
         </button>
       </div>
-
-      {/* Mobile overlay — blocks halftone completely */}
-      {menuOpen && (
-        <div className="md:hidden fixed inset-0 bg-white z-40" style={{ top: 0 }} />
-      )}
 
       {/* Mobile dropdown */}
       {menuOpen && (
