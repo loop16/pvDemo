@@ -1309,7 +1309,7 @@ function ChartPreview({ symbol, model, pos, onClose, onOpen, containerRef }: {
             Loading...
           </div>
         ) : (
-          <NativeChart bars={trimmedBars} levels={levels} model={model === 'overlay' ? 'pro' : model} defaultVisibleBars={130} />
+          <NativeChart bars={trimmedBars} levels={levels} model={model} defaultVisibleBars={130} />
         )}
       </div>
     </div>

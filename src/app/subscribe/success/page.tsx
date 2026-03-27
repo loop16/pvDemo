@@ -13,16 +13,17 @@ export const runtime = "nodejs";
 export default async function SubscribeSuccessPage({
   searchParams,
 }: {
-  searchParams: SearchParams;
+  searchParams: Promise<SearchParams>;
 }) {
   const session = await auth();
   if (!session?.user?.email) {
     redirect("/login");
   }
 
-  const sessionId = Array.isArray(searchParams?.session_id)
-    ? searchParams?.session_id[0]
-    : searchParams?.session_id;
+  const params = await searchParams;
+  const sessionId = Array.isArray(params?.session_id)
+    ? params?.session_id[0]
+    : params?.session_id;
   if (!sessionId) {
     redirect("/subscribe");
   }
@@ -35,7 +36,7 @@ export default async function SubscribeSuccessPage({
   const checkoutEmail =
     checkout.customer_details?.email ||
     checkout.customer_email ||
-    (typeof checkout.customer === "string" ? null : checkout.customer?.email);
+    (typeof checkout.customer === "string" ? null : (checkout.customer as any)?.email);
 
   if (checkoutEmail && checkoutEmail !== session.user.email) {
     redirect("/subscribe");
