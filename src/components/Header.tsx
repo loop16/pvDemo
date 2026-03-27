@@ -8,7 +8,7 @@ export default function Header() {
 
   return (
     <header className="relative z-20">
-      <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-between relative z-50" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
+      <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-between" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
         <Link href="/" className="flex items-center gap-2.5">
           <img src="/logo.svg" alt="Pricevault" width={28} height={28} />
           <span className="serif text-[22px] tracking-tight">Pricevault</span>
@@ -25,7 +25,7 @@ export default function Header() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden flex flex-col gap-1.5 p-2 relative z-50"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu"
         >
@@ -35,18 +35,27 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile dropdown — covers from top of page to block halftone */}
+      {/* Mobile dropdown — pushes content down, liquid glass style */}
       {menuOpen && (
-        <div className="md:hidden fixed top-0 left-0 right-0 bg-white z-40" style={{ height: 'auto', paddingTop: 70 }}>
-        <div className="px-6 py-4 flex flex-col gap-4 border-b border-neutral-200">
-          <Link href="/about" className="text-[15px] text-neutral-600" onClick={() => setMenuOpen(false)}>About</Link>
-          <Link href="/models" className="text-[15px] text-neutral-600" onClick={() => setMenuOpen(false)}>Models</Link>
-          <Link href="/pricing" className="text-[15px] text-neutral-600" onClick={() => setMenuOpen(false)}>Pricing</Link>
-          <div className="flex gap-3 pt-2">
-            <Link href="/demo" className="text-[14px] font-medium text-neutral-900 bg-white border border-neutral-300 px-5 py-2.5 flex-1 text-center" onClick={() => setMenuOpen(false)}>Try Demo</Link>
-            <Link href="/login" className="text-[14px] font-medium text-white bg-neutral-900 border border-neutral-900 px-5 py-2.5 flex-1 text-center" onClick={() => setMenuOpen(false)}>Login</Link>
+        <div
+          className="md:hidden"
+          style={{
+            background: 'rgba(255,255,255,0.85)',
+            backdropFilter: 'blur(30px) saturate(1.6)',
+            WebkitBackdropFilter: 'blur(30px) saturate(1.6)',
+            borderBottom: '1px solid rgba(255,255,255,0.6)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.06)',
+          }}
+        >
+          <div className="px-6 py-5 flex flex-col gap-5">
+            <Link href="/about" className="text-[16px] text-neutral-700" onClick={() => setMenuOpen(false)}>About</Link>
+            <Link href="/models" className="text-[16px] text-neutral-700" onClick={() => setMenuOpen(false)}>Models</Link>
+            <Link href="/pricing" className="text-[16px] text-neutral-700" onClick={() => setMenuOpen(false)}>Pricing</Link>
+            <div className="flex gap-3 pt-3">
+              <Link href="/demo" className="text-[14px] font-medium text-neutral-900 bg-white border border-neutral-300 px-5 py-3 flex-1 text-center" onClick={() => setMenuOpen(false)}>Try Demo</Link>
+              <Link href="/login" className="text-[14px] font-medium text-white bg-neutral-900 border border-neutral-900 px-5 py-3 flex-1 text-center" onClick={() => setMenuOpen(false)}>Login</Link>
+            </div>
           </div>
-        </div>
         </div>
       )}
     </header>
