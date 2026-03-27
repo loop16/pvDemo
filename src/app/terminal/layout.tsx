@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { SessionProvider, useSession } from "next-auth/react";
 import { ThemeProvider, useTheme } from "@/components/terminal/ThemeContext";
 import SettingsPanel from "@/components/terminal/SettingsPanel";
 import HalftoneCanvas from "@/components/HalftoneCanvasV1";
@@ -14,10 +15,26 @@ const NAV_ITEMS = [
 
 function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const { data: session, status } = useSession();
   const { theme } = useTheme();
   const [settingsOpen, setSettingsOpen] = useState(false);
   // Detect dark themes for logo inversion
   const isDark = theme.bg.startsWith('#0') || theme.bg.startsWith('#1') || theme.bg.startsWith('#2') || theme.bg === '#000000';
+
+  // Auth gate — redirect to login if not authenticated
+  if (status === "loading") {
+    return (
+      <div style={{ height: '100dvh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: theme.bg, fontFamily: "'SF Mono', monospace" }}>
+        <span style={{ fontSize: 12, color: theme.textDim }}>Loading...</span>
+      </div>
+    );
+  }
+
+  if (status === "unauthenticated") {
+    router.replace("/login");
+    return null;
+  }
 
   return (
     <div
@@ -177,8 +194,10 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
 
 export default function TerminalLayout({ children }: { children: React.ReactNode }) {
   return (
-    <ThemeProvider>
-      <TerminalLayoutInner>{children}</TerminalLayoutInner>
-    </ThemeProvider>
+    <SessionProvider>
+      <ThemeProvider>
+        <TerminalLayoutInner>{children}</TerminalLayoutInner>
+      </ThemeProvider>
+    </SessionProvider>
   );
 }
