@@ -1395,12 +1395,60 @@ export default function NativeChart({
       dirtyRef.current = true;
     };
 
+    // ── Touch handlers for mobile ──
+    let touchStartX = 0;
+    let touchStartOffset = 0;
+    let pinchStartDist = 0;
+    let pinchStartSpacing = 0;
+
+    const onTouchStart = (e: TouchEvent) => {
+      e.preventDefault();
+      if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartOffset = viewRef.current.rightOffset;
+      } else if (e.touches.length === 2) {
+        pinchStartDist = Math.hypot(
+          e.touches[1].clientX - e.touches[0].clientX,
+          e.touches[1].clientY - e.touches[0].clientY
+        );
+        pinchStartSpacing = viewRef.current.barSpacing;
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      if (e.touches.length === 1) {
+        const dx = e.touches[0].clientX - touchStartX;
+        const barShift = -dx / viewRef.current.barSpacing;
+        viewRef.current.rightOffset = touchStartOffset + barShift;
+        syncVisible();
+        dirtyRef.current = true;
+      } else if (e.touches.length === 2) {
+        const dist = Math.hypot(
+          e.touches[1].clientX - e.touches[0].clientX,
+          e.touches[1].clientY - e.touches[0].clientY
+        );
+        const scale = dist / pinchStartDist;
+        const newSpacing = Math.max(0.5, Math.min(plot.width * 0.5, pinchStartSpacing * scale));
+        viewRef.current.barSpacing = newSpacing;
+        syncVisible();
+        dirtyRef.current = true;
+      }
+    };
+
+    const onTouchEnd = () => {
+      dirtyRef.current = true;
+    };
+
     canvas.addEventListener('mousemove', onMouseMove);
     canvas.addEventListener('mousedown', onMouseDown);
     canvas.addEventListener('mouseup', onMouseUp);
     canvas.addEventListener('mouseleave', onMouseLeave);
     canvas.addEventListener('wheel', onWheel, { passive: false });
     canvas.addEventListener('dblclick', onDblClick);
+    canvas.addEventListener('touchstart', onTouchStart, { passive: false });
+    canvas.addEventListener('touchmove', onTouchMove, { passive: false });
+    canvas.addEventListener('touchend', onTouchEnd);
     window.addEventListener('mouseup', onMouseUp);
 
     canvas.style.cursor = 'crosshair';
@@ -1412,6 +1460,9 @@ export default function NativeChart({
       canvas.removeEventListener('mouseleave', onMouseLeave);
       canvas.removeEventListener('wheel', onWheel);
       canvas.removeEventListener('dblclick', onDblClick);
+      canvas.removeEventListener('touchstart', onTouchStart);
+      canvas.removeEventListener('touchmove', onTouchMove);
+      canvas.removeEventListener('touchend', onTouchEnd);
       window.removeEventListener('mouseup', onMouseUp);
     };
   }, [bars, getPlotArea, syncVisible, coordToFloatIdx]);

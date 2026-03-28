@@ -1,7 +1,23 @@
+"use client";
+
+import { useEffect } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import BrowserCard from "@/components/BrowserCard";
 export default function Home() {
+  // Lock body scroll on iOS
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.height = '100%';
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.height = '';
+    };
+  }, []);
   return (
     <div className="h-[100dvh] overflow-hidden relative">
       {/* Content */}
