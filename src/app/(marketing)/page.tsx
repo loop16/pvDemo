@@ -31,13 +31,13 @@ export default function Home() {
             <div className="mt-6 sm:mt-10 flex items-center gap-3">
               <Link
                 href="/demo"
-                className="text-[15px] font-medium text-white bg-neutral-900 border border-neutral-900 px-7 py-3 hover:opacity-85 transition-opacity"
+                className="text-[15px] font-medium text-white bg-neutral-900 border border-neutral-900 w-[130px] py-3 text-center hover:opacity-85 transition-opacity"
               >
                 See Demo
               </Link>
               <Link
                 href="/pricing"
-                className="text-[15px] font-medium text-neutral-500 border border-neutral-200 bg-white px-7 py-3 hover:border-neutral-400 hover:text-neutral-700 transition-all"
+                className="text-[15px] font-medium text-neutral-500 border border-neutral-200 bg-white w-[130px] py-3 text-center hover:border-neutral-400 hover:text-neutral-700 transition-all"
               >
                 Pricing
               </Link>
