@@ -1400,13 +1400,37 @@ export default function NativeChart({
     let touchStartOffset = 0;
     let pinchStartDist = 0;
     let pinchStartSpacing = 0;
+    const axisTouchOverlap = 10;
 
     const onTouchStart = (e: TouchEvent) => {
       if (e.cancelable) e.preventDefault();
       if (e.touches.length === 1) {
-        touchStartX = e.touches[0].clientX;
+        const touch = e.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        const x = touch.clientX - rect.left;
+        const y = touch.clientY - rect.top;
+        const plot = getPlotArea();
+        let mode: 'pan' | 'y-axis' | 'x-axis' = 'pan';
+        if (x > plot.right - axisTouchOverlap) {
+          mode = 'y-axis';
+        } else if (y > plot.bottom - axisTouchOverlap) {
+          mode = 'x-axis';
+        }
+
+        dragRef.current = {
+          active: true,
+          startX: touch.clientX,
+          startY: touch.clientY,
+          startRightOffset: viewRef.current.rightOffset,
+          mode,
+          startBarSpacing: viewRef.current.barSpacing,
+          startYScale: mode === 'pan' ? yScaleRef.current : (yScaleRef.current || getPriceRange()),
+        };
+
+        touchStartX = touch.clientX;
         touchStartOffset = viewRef.current.rightOffset;
       } else if (e.touches.length === 2) {
+        dragRef.current.active = false;
         pinchStartDist = Math.hypot(
           e.touches[1].clientX - e.touches[0].clientX,
           e.touches[1].clientY - e.touches[0].clientY
@@ -1418,10 +1442,39 @@ export default function NativeChart({
     const onTouchMove = (e: TouchEvent) => {
       if (e.cancelable) e.preventDefault();
       if (e.touches.length === 1) {
-        const dx = e.touches[0].clientX - touchStartX;
-        const barShift = -dx / viewRef.current.barSpacing;
-        viewRef.current.rightOffset = touchStartOffset + barShift;
-        syncVisible();
+        const touch = e.touches[0];
+        const plot = getPlotArea();
+        if (dragRef.current.mode === 'y-axis') {
+          const dy = touch.clientY - dragRef.current.startY;
+          const scaleFactor = 1 + dy * 0.005;
+          const baseRange = dragRef.current.startYScale || getPriceRange();
+          const mid = (baseRange.minPrice + baseRange.maxPrice) / 2;
+          const halfRange = (baseRange.maxPrice - baseRange.minPrice) / 2 * scaleFactor;
+          yScaleRef.current = { minPrice: mid - halfRange, maxPrice: mid + halfRange };
+        } else if (dragRef.current.mode === 'x-axis') {
+          const dx = touch.clientX - dragRef.current.startX;
+          const scaleFactor = 1 - dx * 0.003;
+          const newSpacing = Math.max(0.5, Math.min(plot.width * 0.5, dragRef.current.startBarSpacing * scaleFactor));
+          const idxAtCenter = coordToFloatIdx(plot.left + plot.width / 2);
+          viewRef.current.barSpacing = newSpacing;
+          const newIdxAtCenter = coordToFloatIdx(plot.left + plot.width / 2);
+          viewRef.current.rightOffset += (idxAtCenter - newIdxAtCenter);
+          syncVisible();
+        } else {
+          const dx = touch.clientX - touchStartX;
+          const barShift = -dx / viewRef.current.barSpacing;
+          viewRef.current.rightOffset = touchStartOffset + barShift;
+          syncVisible();
+          if (dragRef.current.startYScale) {
+            const dy = touch.clientY - dragRef.current.startY;
+            const priceRange = dragRef.current.startYScale.maxPrice - dragRef.current.startYScale.minPrice;
+            const priceDelta = (dy / plot.height) * priceRange;
+            yScaleRef.current = {
+              minPrice: dragRef.current.startYScale.minPrice + priceDelta,
+              maxPrice: dragRef.current.startYScale.maxPrice + priceDelta,
+            };
+          }
+        }
         dirtyRef.current = true;
       } else if (e.touches.length === 2) {
         const rect = canvas.getBoundingClientRect();
@@ -1447,8 +1500,18 @@ export default function NativeChart({
       if (e.touches.length === 1) {
         touchStartX = e.touches[0].clientX;
         touchStartOffset = viewRef.current.rightOffset;
+        dragRef.current = {
+          active: true,
+          startX: e.touches[0].clientX,
+          startY: e.touches[0].clientY,
+          startRightOffset: viewRef.current.rightOffset,
+          mode: 'pan',
+          startBarSpacing: viewRef.current.barSpacing,
+          startYScale: yScaleRef.current,
+        };
       } else if (e.touches.length < 2) {
         pinchStartDist = 0;
+        dragRef.current.active = false;
       }
       dirtyRef.current = true;
     };

@@ -25,13 +25,22 @@ export default function Header() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden flex items-center justify-center w-10 h-10"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu"
         >
-          <span className={`block w-5 h-0.5 bg-neutral-800 transition-transform ${menuOpen ? 'rotate-45 translate-y-[4px]' : ''}`} />
-          <span className={`block w-5 h-0.5 bg-neutral-800 transition-opacity ${menuOpen ? 'opacity-0' : ''}`} />
-          <span className={`block w-5 h-0.5 bg-neutral-800 transition-transform ${menuOpen ? '-rotate-45 -translate-y-[4px]' : ''}`} />
+          {menuOpen ? (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#262626" strokeWidth="1.9" strokeLinecap="round">
+              <path d="M6 6L18 18" />
+              <path d="M18 6L6 18" />
+            </svg>
+          ) : (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#262626" strokeWidth="1.9" strokeLinecap="round">
+              <path d="M4 7H20" />
+              <path d="M4 12H20" />
+              <path d="M4 17H20" />
+            </svg>
+          )}
         </button>
       </div>
 
