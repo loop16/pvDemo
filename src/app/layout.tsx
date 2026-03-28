@@ -21,7 +21,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={`antialiased min-h-screen overflow-x-hidden bg-white text-neutral-900`}>
+      <body className={`antialiased overflow-x-hidden bg-white text-neutral-900`} style={{ overscrollBehavior: 'none' }}>
         {children}
       </body>
     </html>

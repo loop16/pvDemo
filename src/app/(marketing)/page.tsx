@@ -1,45 +1,24 @@
-"use client";
-
-import { useEffect } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import BrowserCard from "@/components/BrowserCard";
+
 export default function Home() {
-  // Lock ALL scroll on iOS — body, html, and touch events
-  useEffect(() => {
-    const html = document.documentElement;
-    const body = document.body;
-    html.style.overflow = 'hidden';
-    html.style.position = 'fixed';
-    html.style.width = '100%';
-    html.style.height = '100%';
-    body.style.overflow = 'hidden';
-    body.style.position = 'fixed';
-    body.style.width = '100%';
-    body.style.height = '100%';
-    const preventScroll = (e: TouchEvent) => {
-      e.preventDefault();
-    };
-    document.addEventListener('touchmove', preventScroll, { passive: false });
-    return () => {
-      html.style.overflow = '';
-      html.style.position = '';
-      html.style.width = '';
-      html.style.height = '';
-      body.style.overflow = '';
-      body.style.position = '';
-      body.style.width = '';
-      body.style.height = '';
-      document.removeEventListener('touchmove', preventScroll);
-    };
-  }, []);
   return (
-    <div className="h-[100dvh] overflow-hidden relative">
+    <div
+      className="relative"
+      style={{
+        position: 'fixed',
+        inset: 0,
+        overflow: 'hidden',
+        touchAction: 'none',
+        overscrollBehavior: 'none',
+      }}
+    >
       {/* Content */}
-      <div className="relative z-20">
+      <div className="relative z-20 h-full flex flex-col">
         <Header />
 
-        <section className="max-w-[1280px] mx-auto px-6 mt-[2vh] md:mt-[6vh] grid grid-cols-1 items-start gap-6 md:gap-12 pt-0 pb-0 md:pb-12 md:grid-cols-12">
+        <section className="max-w-[1280px] mx-auto px-6 mt-[2vh] md:mt-[6vh] grid grid-cols-1 items-start gap-6 md:gap-12 pt-0 pb-0 md:pb-12 md:grid-cols-12 flex-1 min-h-0">
           <div className="md:col-span-6 max-w-[640px]">
             <h1 className="serif text-[36px] sm:text-[48px] md:text-[62px] leading-[1.08] text-neutral-900">
               Stop Levels that <span style={{ color: '#003087' }}><em>Matter</em></span>
