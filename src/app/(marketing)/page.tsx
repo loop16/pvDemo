@@ -25,7 +25,7 @@ export default function Home() {
             </h1>
 
             <p className="mt-4 sm:mt-6 max-w-[252px] sm:max-w-[500px] text-[14px] sm:text-[16px] leading-[1.7] text-neutral-500">
-              Place your stop in historically rich areas. 1,200+ assets across stocks, crypto, FX, and futures. Quarter models recomputed nightly. Probability levels surfaced every morning.
+              View 1,200+ assets across stocks, crypto, FX, and Futures.
             </p>
 
             <div className="mt-6 sm:mt-10 flex items-center gap-3">

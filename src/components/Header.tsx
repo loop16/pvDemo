@@ -66,8 +66,8 @@ export default function Header() {
             <Link href="/models" className="text-[16px] text-neutral-700 font-medium" onClick={() => setMenuOpen(false)}>Models</Link>
             <Link href="/pricing" className="text-[16px] text-neutral-700 font-medium" onClick={() => setMenuOpen(false)}>Pricing</Link>
             <div className="flex gap-3 pt-4">
-              <Link href="/demo" className="text-[14px] font-medium text-neutral-900 bg-white/80 border border-neutral-300 px-5 py-3 flex-1 text-center rounded" onClick={() => setMenuOpen(false)}>Try Demo</Link>
-              <Link href="/login" className="text-[14px] font-medium text-white bg-neutral-900 border border-neutral-900 px-5 py-3 flex-1 text-center rounded" onClick={() => setMenuOpen(false)}>Login</Link>
+              <Link href="/demo" className="text-[14px] font-medium text-neutral-900 bg-white/80 border border-neutral-300 px-5 py-3 flex-1 text-center" onClick={() => setMenuOpen(false)}>Try Demo</Link>
+              <Link href="/login" className="text-[14px] font-medium text-white bg-neutral-900 border border-neutral-900 px-5 py-3 flex-1 text-center" onClick={() => setMenuOpen(false)}>Login</Link>
             </div>
           </div>
         </div>
