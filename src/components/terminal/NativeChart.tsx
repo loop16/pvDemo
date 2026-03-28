@@ -1429,7 +1429,7 @@ export default function NativeChart({
       <canvas
         ref={canvasRef}
         className="absolute inset-0"
-        style={{ display: 'block' }}
+        style={{ display: 'block', touchAction: 'none' }}
       />
       {/* Reset view button */}
       {bars.length > 0 && (

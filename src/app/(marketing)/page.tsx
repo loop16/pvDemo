@@ -8,7 +8,7 @@ export default function Home() {
       <div className="relative z-20">
         <Header />
 
-        <section className="container-hero mt-[4vh] md:mt-[6vh] grid grid-cols-1 items-start gap-10 pt-0 pb-12 md:grid-cols-12 md:gap-12">
+        <section className="max-w-[1280px] mx-auto px-6 mt-[2vh] md:mt-[6vh] grid grid-cols-1 items-start gap-6 md:gap-12 pt-0 pb-0 md:pb-12 md:grid-cols-12">
           <div className="md:col-span-6 max-w-[640px]">
             <h1 className="serif text-[36px] sm:text-[48px] md:text-[62px] leading-[1.08] text-neutral-900">
               Stop Levels that <span style={{ color: '#003087' }}><em>Matter</em></span>

@@ -65,7 +65,7 @@ export default function PricingPage() {
         background: 'rgba(255,255,255,0.15)',
         backdropFilter: 'blur(20px) saturate(1.6)',
         WebkitBackdropFilter: 'blur(20px) saturate(1.6)',
-        borderRadius: '20px',
+        borderRadius: 0,
         border: '1px solid rgba(255,255,255,0.6)',
         boxShadow: '0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8)',
         marginTop: '24px',

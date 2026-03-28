@@ -38,10 +38,11 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className="flex flex-col relative overflow-hidden"
+      className="flex flex-col relative overflow-hidden fixed inset-0"
       style={{
         height: "100dvh",
         background: theme.bg,
+        touchAction: 'none',
         fontFamily: "'SF Mono', 'JetBrains Mono', 'Fira Code', monospace",
       }}
     >
