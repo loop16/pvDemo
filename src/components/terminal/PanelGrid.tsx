@@ -91,16 +91,18 @@ function ChartPanelUnit({
   showClose: boolean;
 }) {
   const { theme } = useTheme();
+  const defaultOverlaySymbol = config.symbol === 'SPX' ? 'NQ' : 'SPX';
+  const resolvedOverlaySymbol = config.model === 'overlay' ? (config.overlaySymbol || defaultOverlaySymbol) : undefined;
   const effectiveModel = config.model === 'overlay' ? 'pro' : config.model;
   const chartData = useChartData(config.symbol, effectiveModel, source);
   // When overlay: fetch levels from the overlay symbol instead
   const overlayLevelsData = useChartData(
-    config.model === 'overlay' && config.overlaySymbol ? config.overlaySymbol : config.symbol,
+    resolvedOverlaySymbol || config.symbol,
     'pro',
     source,
   );
   const bars = chartData.bars;
-  const levels = config.model === 'overlay' && config.overlaySymbol ? overlayLevelsData.levels : chartData.levels;
+  const levels = resolvedOverlaySymbol ? overlayLevelsData.levels : chartData.levels;
   const loading = chartData.loading || (config.model === 'overlay' && overlayLevelsData.loading);
   const error = chartData.error;
   const [priceInfo, setPriceInfo] = useState<{
@@ -153,14 +155,18 @@ function ChartPanelUnit({
         />
         <ModelSelector
           value={config.model}
-          onChange={(m) => onConfigChange({ model: m as PanelConfig['model'] })}
+          onChange={(m) => onConfigChange(
+            m === 'overlay'
+              ? { model: m as PanelConfig['model'], overlaySymbol: config.overlaySymbol || defaultOverlaySymbol }
+              : { model: m as PanelConfig['model'] }
+          )}
         />
         {/* Overlay symbol search */}
         {config.model === 'overlay' && (
           <div className="flex items-center gap-1" style={{ marginLeft: 4 }}>
             <span style={{ fontSize: 9, color: theme.textDim, fontFamily: MONO, letterSpacing: '0.05em' }}>FROM</span>
             <SymbolSearch
-              value={config.overlaySymbol || 'SPX'}
+              value={resolvedOverlaySymbol || defaultOverlaySymbol}
               onChange={(sym) => onConfigChange({ overlaySymbol: sym })}
               symbols={symbols}
             />
@@ -236,7 +242,7 @@ function ChartPanelUnit({
         }}
       >
         <span style={{ fontSize: 10, color: theme.textDim }}>
-          {config.symbol} &middot; DAILY &middot; {config.model.toUpperCase()}{config.model === 'overlay' && config.overlaySymbol ? ` (${config.overlaySymbol})` : ''}
+          {config.symbol} &middot; DAILY &middot; {config.model.toUpperCase()}{config.model === 'overlay' && resolvedOverlaySymbol ? ` (${resolvedOverlaySymbol})` : ''}
         </span>
         <span style={{ fontSize: 10, color: theme.borderLight === theme.border ? theme.textDim : theme.crosshair }}>
           {bars.length > 0 ? `${bars.length} bars` : ''}
