@@ -1402,7 +1402,7 @@ export default function NativeChart({
     let pinchStartSpacing = 0;
 
     const onTouchStart = (e: TouchEvent) => {
-      e.preventDefault();
+      if (e.cancelable) e.preventDefault();
       if (e.touches.length === 1) {
         touchStartX = e.touches[0].clientX;
         touchStartOffset = viewRef.current.rightOffset;
@@ -1416,7 +1416,7 @@ export default function NativeChart({
     };
 
     const onTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
+      if (e.cancelable) e.preventDefault();
       if (e.touches.length === 1) {
         const dx = e.touches[0].clientX - touchStartX;
         const barShift = -dx / viewRef.current.barSpacing;
@@ -1424,19 +1424,32 @@ export default function NativeChart({
         syncVisible();
         dirtyRef.current = true;
       } else if (e.touches.length === 2) {
+        const rect = canvas.getBoundingClientRect();
+        const pinchCenterX = ((e.touches[0].clientX + e.touches[1].clientX) / 2) - rect.left;
+        const idxAtPinch = coordToFloatIdx(pinchCenterX);
         const dist = Math.hypot(
           e.touches[1].clientX - e.touches[0].clientX,
           e.touches[1].clientY - e.touches[0].clientY
         );
+        if (pinchStartDist <= 0) return;
         const scale = dist / pinchStartDist;
+        const plot = getPlotArea();
         const newSpacing = Math.max(0.5, Math.min(plot.width * 0.5, pinchStartSpacing * scale));
         viewRef.current.barSpacing = newSpacing;
+        const newIdxAtPinch = coordToFloatIdx(pinchCenterX);
+        viewRef.current.rightOffset += (idxAtPinch - newIdxAtPinch);
         syncVisible();
         dirtyRef.current = true;
       }
     };
 
-    const onTouchEnd = () => {
+    const onTouchEnd = (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartOffset = viewRef.current.rightOffset;
+      } else if (e.touches.length < 2) {
+        pinchStartDist = 0;
+      }
       dirtyRef.current = true;
     };
 
@@ -1449,6 +1462,7 @@ export default function NativeChart({
     canvas.addEventListener('touchstart', onTouchStart, { passive: false });
     canvas.addEventListener('touchmove', onTouchMove, { passive: false });
     canvas.addEventListener('touchend', onTouchEnd);
+    canvas.addEventListener('touchcancel', onTouchEnd);
     window.addEventListener('mouseup', onMouseUp);
 
     canvas.style.cursor = 'crosshair';
@@ -1463,6 +1477,7 @@ export default function NativeChart({
       canvas.removeEventListener('touchstart', onTouchStart);
       canvas.removeEventListener('touchmove', onTouchMove);
       canvas.removeEventListener('touchend', onTouchEnd);
+      canvas.removeEventListener('touchcancel', onTouchEnd);
       window.removeEventListener('mouseup', onMouseUp);
     };
   }, [bars, getPlotArea, syncVisible, coordToFloatIdx]);
@@ -1497,11 +1512,11 @@ export default function NativeChart({
           title="Reset view"
           style={{
             position: 'absolute',
-            top: 4,
-            right: MARGIN.right + 4,
+            top: 6,
+            right: MARGIN.right + 6,
             zIndex: 5,
-            width: 20,
-            height: 20,
+            width: 28,
+            height: 28,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

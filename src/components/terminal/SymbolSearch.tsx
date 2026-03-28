@@ -94,13 +94,13 @@ export default function SymbolSearch({ value, onChange, symbols }: SymbolSearchP
   useEffect(() => { setSelectedIdx(0); }, [query]);
 
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
+    const handler = (e: PointerEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setOpen(false);
       }
     };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
+    document.addEventListener('pointerdown', handler);
+    return () => document.removeEventListener('pointerdown', handler);
   }, []);
 
   return (
@@ -113,7 +113,7 @@ export default function SymbolSearch({ value, onChange, symbols }: SymbolSearchP
         onFocus={() => { setQuery(''); setOpen(true); }}
         onKeyDown={handleKeyDown}
         placeholder="Symbol..."
-        className="w-[140px] h-[28px] px-2 text-[12px] outline-none"
+        className="w-[144px] h-[32px] px-2 text-[12px] outline-none"
         style={{
           fontFamily: MONO,
           background: theme.bg,
@@ -157,7 +157,7 @@ export default function SymbolSearch({ value, onChange, symbols }: SymbolSearchP
             filtered.map((s, i) => (
               <button
                 key={s.id}
-                onMouseDown={(e) => { e.preventDefault(); handleSelect(s.id); }}
+                onPointerDown={(e) => { e.preventDefault(); handleSelect(s.id); }}
                 onMouseEnter={() => setSelectedIdx(i)}
                 style={{
                   display: 'block',

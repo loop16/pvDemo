@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { SessionProvider, useSession } from "next-auth/react";
@@ -22,6 +22,38 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
   // Detect dark themes for logo inversion
   const isDark = theme.bg.startsWith('#0') || theme.bg.startsWith('#1') || theme.bg.startsWith('#2') || theme.bg === '#000000';
 
+  useEffect(() => {
+    const html = document.documentElement;
+    const body = document.body;
+    const prev = {
+      htmlOverflow: html.style.overflow,
+      htmlOverscroll: html.style.overscrollBehavior,
+      htmlHeight: html.style.height,
+      bodyOverflow: body.style.overflow,
+      bodyOverscroll: body.style.overscrollBehavior,
+      bodyHeight: body.style.height,
+      bodyTouchAction: body.style.touchAction,
+    };
+
+    html.style.overflow = "hidden";
+    html.style.overscrollBehavior = "none";
+    html.style.height = "100%";
+    body.style.overflow = "hidden";
+    body.style.overscrollBehavior = "none";
+    body.style.height = "100%";
+    body.style.touchAction = "manipulation";
+
+    return () => {
+      html.style.overflow = prev.htmlOverflow;
+      html.style.overscrollBehavior = prev.htmlOverscroll;
+      html.style.height = prev.htmlHeight;
+      body.style.overflow = prev.bodyOverflow;
+      body.style.overscrollBehavior = prev.bodyOverscroll;
+      body.style.height = prev.bodyHeight;
+      body.style.touchAction = prev.bodyTouchAction;
+    };
+  }, []);
+
   // Auth gate — redirect to login if not authenticated
   if (status === "loading") {
     return (
@@ -42,7 +74,7 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
       style={{
         height: "100dvh",
         background: theme.bg,
-        touchAction: 'none',
+        overscrollBehavior: 'none',
         fontFamily: "'SF Mono', 'JetBrains Mono', 'Fira Code', monospace",
       }}
     >
@@ -149,8 +181,8 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
             onClick={() => setSettingsOpen(true)}
             title="Settings"
             style={{
-              width: 28,
-              height: 28,
+              width: 34,
+              height: 34,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",

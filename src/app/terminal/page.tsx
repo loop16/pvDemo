@@ -68,7 +68,17 @@ const STATS_CLASS_LABELS: Record<AssetClass, string> = {
   equity: 'EQ', futures: 'FUT', crypto: 'CRY', fx: 'FX', index: 'IDX', etf: 'ETF',
 };
 
-function StatsPanel({ theme, onSymbolSelect }: { theme: ChartTheme; onSymbolSelect?: (symbol: string) => void }) {
+function StatsPanel({
+  theme,
+  onSymbolSelect,
+  mobile = false,
+  onClose,
+}: {
+  theme: ChartTheme;
+  onSymbolSelect?: (symbol: string) => void;
+  mobile?: boolean;
+  onClose?: () => void;
+}) {
   const router = useRouter();
   const [movers, setMovers] = useState<MoverRow[]>([]);
   const [loading, setLoading] = useState(true);
@@ -111,17 +121,18 @@ function StatsPanel({ theme, onSymbolSelect }: { theme: ChartTheme; onSymbolSele
   }, [panelWidth]);
 
   // Drag handlers
-  const handleDragStart = useCallback((e: React.MouseEvent) => {
+  const handleDragStart = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
     e.preventDefault();
     isDragging.current = true;
     dragStartX.current = e.clientX;
     dragStartWidth.current = panelRef.current?.offsetWidth ?? panelWidth ?? 300;
+    e.currentTarget.setPointerCapture?.(e.pointerId);
     document.body.style.cursor = 'col-resize';
     document.body.style.userSelect = 'none';
   }, [panelWidth]);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const handlePointerMove = (e: PointerEvent) => {
       if (!isDragging.current) return;
       const maxW = window.innerWidth * 0.5;
       // Panel is on the right, so dragging left increases width
@@ -129,18 +140,18 @@ function StatsPanel({ theme, onSymbolSelect }: { theme: ChartTheme; onSymbolSele
       const newW = Math.max(180, Math.min(maxW, dragStartWidth.current + delta));
       setPanelWidth(Math.round(newW));
     };
-    const handleMouseUp = () => {
+    const handlePointerUp = () => {
       if (isDragging.current) {
         isDragging.current = false;
         document.body.style.cursor = '';
         document.body.style.userSelect = '';
       }
     };
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', handlePointerUp);
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
     };
   }, []);
 
@@ -184,13 +195,13 @@ function StatsPanel({ theme, onSymbolSelect }: { theme: ChartTheme; onSymbolSele
 
   // Close column picker when clicking outside
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
+    const handler = (e: PointerEvent) => {
       if (showColumnPicker && columnPickerRef.current && !columnPickerRef.current.contains(e.target as Node)) {
         setShowColumnPicker(false);
       }
     };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
+    document.addEventListener('pointerdown', handler);
+    return () => document.removeEventListener('pointerdown', handler);
   }, [showColumnPicker]);
 
   const activeColumns = useMemo(() => {
@@ -209,9 +220,12 @@ function StatsPanel({ theme, onSymbolSelect }: { theme: ChartTheme; onSymbolSele
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [model]);
 
-  useEffect(() => { fetchData(); }, [fetchData]);
+  useEffect(() => {
+    setLoading(true);
+    fetchData();
+  }, [fetchData]);
 
   const handleSort = (key: StatsSortKey) => {
     if (sortKey === key) setSortAsc(a => !a);
@@ -384,30 +398,32 @@ function StatsPanel({ theme, onSymbolSelect }: { theme: ChartTheme; onSymbolSele
   return (
     <div
       ref={panelRef}
-      className="h-full flex shrink-0"
+      className={`h-full flex ${mobile ? 'w-full' : 'shrink-0'}`}
       style={{
-        width: effectiveWidth,
-        minWidth: 180,
-        maxWidth: '50vw',
+        width: mobile ? '100%' : effectiveWidth,
+        minWidth: mobile ? 0 : 180,
+        maxWidth: mobile ? '100%' : '50vw',
         position: 'relative',
       }}
     >
-      {/* Drag handle */}
-      <div
-        onMouseDown={handleDragStart}
-        style={{
-          width: 4,
-          cursor: 'col-resize',
-          background: 'transparent',
-          position: 'relative',
-          zIndex: 10,
-          flexShrink: 0,
-        }}
-        onMouseEnter={(e) => { e.currentTarget.style.background = theme.accent + '33'; }}
-        onMouseLeave={(e) => { if (!isDragging.current) e.currentTarget.style.background = 'transparent'; }}
-      >
-        <div style={{ position: 'absolute', top: '50%', left: 0, width: 4, height: 32, marginTop: -16, borderRadius: 2, background: theme.textDim + '44' }} />
-      </div>
+      {!mobile && (
+        <div
+          onPointerDown={handleDragStart}
+          style={{
+            width: 4,
+            cursor: 'col-resize',
+            background: 'transparent',
+            position: 'relative',
+            zIndex: 10,
+            flexShrink: 0,
+            touchAction: 'none',
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = theme.accent + '33'; }}
+          onMouseLeave={(e) => { if (!isDragging.current) e.currentTarget.style.background = 'transparent'; }}
+        >
+          <div style={{ position: 'absolute', top: '50%', left: 0, width: 4, height: 32, marginTop: -16, borderRadius: 2, background: theme.textDim + '44' }} />
+        </div>
+      )}
 
       {/* Panel content */}
       <div
@@ -425,6 +441,25 @@ function StatsPanel({ theme, onSymbolSelect }: { theme: ChartTheme; onSymbolSele
           <div className="flex items-center justify-between px-2" style={{ height: 22 }}>
             <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', color: theme.text }}>STATS</span>
             <div className="flex items-center" style={{ gap: 2 }}>
+              {mobile && onClose && (
+                <button
+                  onClick={onClose}
+                  style={{
+                    fontSize: 10,
+                    fontFamily: MONO,
+                    width: 24,
+                    height: 24,
+                    border: 'none',
+                    background: 'transparent',
+                    color: theme.textDim,
+                    cursor: 'pointer',
+                    borderRadius: 4,
+                  }}
+                  title="Close stats"
+                >
+                  &#10005;
+                </button>
+              )}
               <div className="flex">{dirFilters.map(f => <button key={f.key} onClick={() => setDirFilter(f.key)} style={pill(dirFilter === f.key)}>{f.label}</button>)}</div>
               {/* Column picker button */}
               <div ref={columnPickerRef} style={{ position: 'relative', marginLeft: 3 }}>
@@ -521,7 +556,7 @@ function StatsPanel({ theme, onSymbolSelect }: { theme: ChartTheme; onSymbolSele
           <div className="flex items-center px-2" style={{ height: 20, gap: 2 }}>
             <span style={{ fontSize: 8, color: theme.textDim, letterSpacing: '0.06em' }}>MODEL</span>
             {(['pro', 'simple', 'beta'] as ModelType[]).map(m => (
-              <button key={m} onClick={() => { setModel(m); setLoading(true); fetchData(); }} style={pill(model === m)}>{m.toUpperCase()}</button>
+              <button key={m} onClick={() => setModel(m)} style={pill(model === m)}>{m.toUpperCase()}</button>
             ))}
           </div>
         </div>
@@ -645,6 +680,7 @@ function TerminalContent() {
   const [layout, setLayoutState] = useState<LayoutMode>('1x1');
   const [showStats, setShowStats] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const setActivePanelSymbolRef = useRef<((symbol: string) => void) | null>(null);
 
   useEffect(() => {
@@ -653,6 +689,21 @@ function TerminalContent() {
       if (saved && ['1x1', '1x2', '2x1', '2x2'].includes(saved)) setLayoutState(saved as LayoutMode);
     } catch {}
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const media = window.matchMedia('(max-width: 900px)');
+    const sync = () => setIsMobile(media.matches);
+    sync();
+
+    if (typeof media.addEventListener === 'function') {
+      media.addEventListener('change', sync);
+      return () => media.removeEventListener('change', sync);
+    }
+
+    media.addListener(sync);
+    return () => media.removeListener(sync);
   }, []);
 
   const setLayout = (l: LayoutMode) => {
@@ -682,41 +733,66 @@ function TerminalContent() {
   }, []);
 
   const layouts: LayoutMode[] = ['1x1', '1x2', '2x1', '2x2'];
+  const effectiveLayout = isMobile ? '1x1' : layout;
 
   return (
     <div className="h-full w-full flex flex-col">
       {/* Layout toolbar */}
       <div
-        className="flex items-center justify-center px-3 shrink-0"
+        className="flex items-center px-3 shrink-0"
         style={{
-          height: 28,
+          height: isMobile ? 40 : 28,
           borderBottom: `1px solid ${theme.border}`,
           background: theme.surface,
+          justifyContent: isMobile ? 'space-between' : 'center',
         }}
       >
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1">
-            {layouts.map((l) => (
-              <button
-                key={l}
-                onClick={() => setLayout(l)}
-                className="p-1 transition-colors"
-                style={{
-                  background: layout === l ? theme.activeNavBg : 'transparent',
-                }}
-                title={l}
-              >
-                <LayoutIcon mode={l} active={layout === l} color={layout === l ? theme.text : theme.textDim} />
-              </button>
-            ))}
-          </div>
-          <div style={{ width: 1, height: 14, background: theme.border }} />
+          {!isMobile && (
+            <>
+              <div className="flex items-center gap-1">
+                {layouts.map((l) => (
+                  <button
+                    key={l}
+                    onClick={() => setLayout(l)}
+                    className="p-1 transition-colors"
+                    style={{
+                      background: layout === l ? theme.activeNavBg : 'transparent',
+                    }}
+                    title={l}
+                  >
+                    <LayoutIcon mode={l} active={layout === l} color={layout === l ? theme.text : theme.textDim} />
+                  </button>
+                ))}
+              </div>
+              <div style={{ width: 1, height: 14, background: theme.border }} />
+            </>
+          )}
+          {isMobile && (
+            <span
+              style={{
+                fontSize: 10,
+                fontWeight: 600,
+                letterSpacing: '0.08em',
+                color: theme.textDim,
+              }}
+            >
+              MOBILE MODE
+            </span>
+          )}
           <button
             onClick={() => setShowStats(s => !s)}
-            className="p-1 transition-colors"
+            className="transition-colors"
             style={{
               background: showStats ? theme.activeNavBg : 'transparent',
               borderRadius: 3,
+              minWidth: isMobile ? 70 : 0,
+              height: isMobile ? 30 : 'auto',
+              padding: isMobile ? '0 10px' : 4,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 6,
             }}
             title="Toggle stats panel"
           >
@@ -725,22 +801,49 @@ function TerminalContent() {
               <rect x={6} y={4} width={3} height={11} rx={0.5} />
               <rect x={11} y={1} width={3} height={14} rx={0.5} />
             </svg>
+            {isMobile && (
+              <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.06em', color: showStats ? theme.text : theme.textDim }}>
+                Stats
+              </span>
+            )}
           </button>
         </div>
       </div>
 
       {/* Panel area + optional stats sidebar */}
-      <div className="flex-1 min-h-0 flex">
-        <div className="flex-1 min-w-0">
-          <PanelGrid
-            layout={layout}
-            symbols={symbols}
-            source="live"
-            initialSymbol={initialSymbol}
-            setActivePanelSymbol={setActivePanelSymbolRef}
-          />
+      <div className="flex-1 min-h-0 relative">
+        <div className={`h-full min-h-0 ${isMobile ? 'block' : 'flex'}`}>
+          <div className="flex-1 min-w-0 h-full">
+            <PanelGrid
+              layout={effectiveLayout}
+              symbols={symbols}
+              source="live"
+              initialSymbol={initialSymbol}
+              setActivePanelSymbol={setActivePanelSymbolRef}
+            />
+          </div>
+          {!isMobile && showStats && <StatsPanel theme={theme} onSymbolSelect={(sym) => setActivePanelSymbolRef.current?.(sym)} />}
         </div>
-        {showStats && <StatsPanel theme={theme} onSymbolSelect={(sym) => setActivePanelSymbolRef.current?.(sym)} />}
+        {isMobile && showStats && (
+          <div
+            className="absolute inset-0 z-20 p-3"
+            style={{
+              background: 'rgba(255,255,255,0.18)',
+              backdropFilter: 'blur(18px)',
+              WebkitBackdropFilter: 'blur(18px)',
+            }}
+          >
+            <StatsPanel
+              theme={theme}
+              mobile
+              onClose={() => setShowStats(false)}
+              onSymbolSelect={(sym) => {
+                setActivePanelSymbolRef.current?.(sym);
+                setShowStats(false);
+              }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

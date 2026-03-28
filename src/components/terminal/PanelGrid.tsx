@@ -35,8 +35,8 @@ function ModelSelector({
           style={{
             fontFamily: MONO,
             marginLeft: m === models[0] ? 0 : -1,
-            padding: '0 8px',
-            height: 24,
+            padding: '0 10px',
+            height: 28,
             fontSize: 10,
             textTransform: 'uppercase',
             letterSpacing: '0.05em',
@@ -199,7 +199,7 @@ function ChartPanelUnit({
               e.stopPropagation();
               onClose();
             }}
-            className="ml-1 w-5 h-5 flex items-center justify-center transition-colors"
+            className="ml-1 w-7 h-7 flex items-center justify-center transition-colors"
             style={{ color: theme.crosshair }}
             title="Close panel"
             onMouseEnter={(e) => { e.currentTarget.style.color = theme.textSecondary; }}
@@ -260,32 +260,33 @@ function ResizeHandle({
   const { theme } = useTheme();
   const startRef = useRef(0);
 
-  const onMouseDown = useCallback(
-    (e: React.MouseEvent) => {
+  const onPointerDown = useCallback(
+    (e: React.PointerEvent<HTMLDivElement>) => {
       e.preventDefault();
       startRef.current = direction === 'horizontal' ? e.clientX : e.clientY;
+      e.currentTarget.setPointerCapture?.(e.pointerId);
 
-      const onMove = (me: MouseEvent) => {
-        const current = direction === 'horizontal' ? me.clientX : me.clientY;
+      const onMove = (pe: PointerEvent) => {
+        const current = direction === 'horizontal' ? pe.clientX : pe.clientY;
         const delta = current - startRef.current;
         startRef.current = current;
         onDrag(delta);
       };
 
       const onUp = () => {
-        window.removeEventListener('mousemove', onMove);
-        window.removeEventListener('mouseup', onUp);
+        window.removeEventListener('pointermove', onMove);
+        window.removeEventListener('pointerup', onUp);
       };
 
-      window.addEventListener('mousemove', onMove);
-      window.addEventListener('mouseup', onUp);
+      window.addEventListener('pointermove', onMove);
+      window.addEventListener('pointerup', onUp);
     },
     [direction, onDrag]
   );
 
   return (
     <div
-      onMouseDown={onMouseDown}
+      onPointerDown={onPointerDown}
       className={`flex-shrink-0 ${
         direction === 'horizontal'
           ? 'w-[4px] cursor-col-resize'
@@ -294,6 +295,7 @@ function ResizeHandle({
       style={{
         background: theme.borderLight,
         transition: 'background 0.15s',
+        touchAction: 'none',
       }}
       onMouseEnter={(e) => { e.currentTarget.style.background = theme.accent + '22'; }}
       onMouseLeave={(e) => { e.currentTarget.style.background = theme.borderLight; }}
