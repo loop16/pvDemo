@@ -5,17 +5,32 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import BrowserCard from "@/components/BrowserCard";
 export default function Home() {
-  // Lock body scroll on iOS
+  // Lock ALL scroll on iOS — body, html, and touch events
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-    document.body.style.width = '100%';
-    document.body.style.height = '100%';
+    const html = document.documentElement;
+    const body = document.body;
+    html.style.overflow = 'hidden';
+    html.style.position = 'fixed';
+    html.style.width = '100%';
+    html.style.height = '100%';
+    body.style.overflow = 'hidden';
+    body.style.position = 'fixed';
+    body.style.width = '100%';
+    body.style.height = '100%';
+    const preventScroll = (e: TouchEvent) => {
+      e.preventDefault();
+    };
+    document.addEventListener('touchmove', preventScroll, { passive: false });
     return () => {
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-      document.body.style.height = '';
+      html.style.overflow = '';
+      html.style.position = '';
+      html.style.width = '';
+      html.style.height = '';
+      body.style.overflow = '';
+      body.style.position = '';
+      body.style.width = '';
+      body.style.height = '';
+      document.removeEventListener('touchmove', preventScroll);
     };
   }, []);
   return (
