@@ -8,7 +8,7 @@ export default function Header() {
 
   return (
     <header className="relative z-20">
-      <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-between relative z-50" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
+      <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-between relative z-50" style={{ paddingTop: '24px', paddingBottom: '24px' }}>
         <Link href="/" className="flex items-center gap-2.5">
           <img src="/logo.svg" alt="Pricevault" width={28} height={28} />
           <span className="serif text-[22px] tracking-tight">Pricevault</span>

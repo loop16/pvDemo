@@ -18,13 +18,13 @@ export default function Home() {
       <div className="relative z-20 h-full flex flex-col">
         <Header />
 
-        <section className="w-full max-w-[1280px] mx-auto pl-6 pr-14 sm:px-6 mt-[2vh] md:mt-[6vh] grid grid-cols-1 items-start gap-6 md:gap-12 pt-0 pb-0 md:pb-12 md:grid-cols-12 flex-1 min-h-0">
-          <div className="md:col-span-6 max-w-[300px] sm:max-w-[640px]">
-            <h1 className="serif text-[36px] sm:text-[48px] md:text-[62px] leading-[1.08] text-neutral-900">
+        <section className="w-full max-w-[1280px] mx-auto pl-6 pr-14 sm:px-6 mt-[2vh] md:mt-8 grid grid-cols-1 items-start gap-6 md:gap-0 pt-0 pb-0 md:pb-12 md:grid-cols-[640px_minmax(0,1fr)] flex-1 min-h-0">
+          <div className="max-w-[300px] sm:max-w-[640px] md:w-[640px] md:max-w-[640px]">
+            <h1 className="serif max-w-[300px] sm:max-w-none text-[36px] sm:text-[48px] md:text-[60px] md:whitespace-nowrap leading-[1.08] text-neutral-900">
               Stop Levels that <span style={{ color: '#003087' }}><em>Matter</em></span>
             </h1>
 
-            <p className="mt-4 sm:mt-6 max-w-[252px] sm:max-w-[500px] text-[14px] sm:text-[16px] leading-[1.7] text-neutral-500">
+            <p className="mt-4 sm:mt-6 max-w-[252px] sm:max-w-[500px] md:max-w-[600px] text-[14px] sm:text-[16px] leading-[1.7] text-neutral-500">
               Place your stop in historically rich areas. View 1,200+ assets across stocks, crypto, FX, and Futures.
             </p>
 
@@ -44,8 +44,10 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="hidden md:block md:col-span-6 md:pt-2">
-            <BrowserCard />
+          <div className="hidden md:flex md:items-start md:justify-center md:pt-2">
+            <div className="w-full max-w-[592px]">
+              <BrowserCard />
+            </div>
           </div>
         </section>
       </div>
