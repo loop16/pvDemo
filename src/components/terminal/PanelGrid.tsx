@@ -68,6 +68,118 @@ function ModelSelector({
 }
 
 // ============================================================================
+// SCENARIO SELECTOR (pro/beta only)
+// ============================================================================
+
+const SCENARIOS = [
+  { value: 'AUTO', label: 'Auto' },
+  { value: 'LONG_TRUE', label: 'Strong Long' },
+  { value: 'LONG_FALSE', label: 'Weak Long' },
+  { value: 'SHORT_TRUE', label: 'Strong Short' },
+  { value: 'SHORT_FALSE', label: 'Weak Short' },
+] as const;
+
+function ScenarioSelector({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (scenario: string) => void;
+}) {
+  const { theme } = useTheme();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: PointerEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    window.addEventListener('pointerdown', handler);
+    return () => window.removeEventListener('pointerdown', handler);
+  }, [open]);
+
+  const current = SCENARIOS.find(s => s.value === value) || SCENARIOS[0];
+
+  return (
+    <div ref={ref} className="relative" style={{ marginLeft: 4 }}>
+      <button
+        onClick={() => setOpen(!open)}
+        style={{
+          fontFamily: MONO,
+          padding: '0 8px',
+          height: 28,
+          fontSize: 10,
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em',
+          fontWeight: 600,
+          border: `1px solid ${theme.border}`,
+          background: 'transparent',
+          color: theme.textDim,
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 4,
+        }}
+      >
+        {current.label}
+        <svg width={8} height={5} viewBox="0 0 8 5" fill="none" stroke="currentColor" strokeWidth={1.2}>
+          <path d={open ? 'M1 4L4 1L7 4' : 'M1 1L4 4L7 1'} />
+        </svg>
+      </button>
+      {open && (
+        <div
+          className="absolute left-0 z-50"
+          style={{
+            top: 30,
+            minWidth: 130,
+            border: `1px solid ${theme.border}`,
+            background: theme.bg,
+            boxShadow: '0 4px 12px rgba(0,0,0,0.12)',
+          }}
+        >
+          {SCENARIOS.map(s => (
+            <button
+              key={s.value}
+              onClick={() => { onChange(s.value); setOpen(false); }}
+              style={{
+                display: 'block',
+                width: '100%',
+                padding: '6px 10px',
+                fontSize: 10,
+                fontFamily: MONO,
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                fontWeight: 600,
+                textAlign: 'left',
+                border: 'none',
+                background: value === s.value ? theme.text : 'transparent',
+                color: value === s.value ? theme.bg : theme.textDim,
+                cursor: 'pointer',
+              }}
+              onMouseEnter={(e) => {
+                if (value !== s.value) {
+                  e.currentTarget.style.background = theme.surface;
+                  e.currentTarget.style.color = theme.text;
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (value !== s.value) {
+                  e.currentTarget.style.background = 'transparent';
+                  e.currentTarget.style.color = theme.textDim;
+                }
+              }}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================================
 // SINGLE PANEL (white theme)
 // ============================================================================
 
@@ -161,6 +273,13 @@ function ChartPanelUnit({
               : { model: m as PanelConfig['model'] }
           )}
         />
+        {/* Scenario control — pro/beta only */}
+        {(config.model === 'pro' || config.model === 'beta') && (
+          <ScenarioSelector
+            value={config.scenario || 'AUTO'}
+            onChange={(s) => onConfigChange({ scenario: s as PanelConfig['scenario'] })}
+          />
+        )}
         {/* Overlay symbol search */}
         {config.model === 'overlay' && (
           <div className="flex items-center gap-1" style={{ marginLeft: 4 }}>
@@ -225,6 +344,7 @@ function ChartPanelUnit({
           bars={bars}
           levels={levels}
           model={config.model === 'overlay' ? 'pro' : config.model}
+          outcome={config.scenario || 'AUTO'}
           loading={loading}
           error={error}
           onPriceInfo={setPriceInfo}

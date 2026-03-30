@@ -25,7 +25,8 @@ export default function Home() {
             </h1>
 
             <p className="mt-4 sm:mt-6 max-w-[252px] sm:max-w-[500px] md:max-w-[600px] text-[14px] sm:text-[16px] leading-[1.7] text-neutral-500">
-              Place your stop in historically rich areas. View 1,200+ assets across stocks, crypto, FX, and Futures.
+              Statistically-derived stop levels across 1,200+ assets.<br />
+              Your exit should be backed by data, not a feeling.
             </p>
 
             <div className="mt-6 sm:mt-10 flex items-center gap-3">

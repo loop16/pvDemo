@@ -512,8 +512,15 @@ function toEpochSeconds(time: string | number): number {
   return Math.floor(parsed.getTime() / 1000);
 }
 
+const DAY = 24 * 60 * 60;
+
+type OutcomeKey = "LONG_TRUE" | "LONG_FALSE" | "SHORT_TRUE" | "SHORT_FALSE" | "NONE";
+type ScenarioKey = Exclude<OutcomeKey, "NONE">;
+
 type QuarterRange = {
   qkey: string;
+  startTime: number;
+  endTime: number;
   high: number;      // first Friday range high
   low: number;       // first Friday range low
   mid: number;
@@ -521,6 +528,10 @@ type QuarterRange = {
   quarterLow: number;  // lowest traded price in the full quarter
   prevQLastClose?: number; // previous quarter's last bar close
   prevQMid?: number;       // previous quarter's mid (for zone classification)
+  prevQStartTime?: number;
+  prevQEndTime?: number;
+  prevQHigh?: number;
+  prevQLow?: number;
 };
 
 function findCurrentQuarterMid(bars: OhlcvBar[]): QuarterRange | null {
@@ -544,6 +555,15 @@ function findCurrentQuarterMid(bars: OhlcvBar[]): QuarterRange | null {
   const ranges: QuarterRange[] = [];
   for (const key of qkeys) {
     const idxs = byQ.get(key)!;
+    const thisPos = qkeys.indexOf(key);
+    const hasNext = thisPos < qkeys.length - 1;
+    let endTime = toEpochSeconds(bars[idxs[idxs.length - 1]].time) + DAY;
+    if (hasNext) {
+      const nextIdxs = byQ.get(qkeys[thisPos + 1])!;
+      const nextFriIdx = nextIdxs.find((i) => isFriday(toEpochSeconds(bars[i].time))) ?? nextIdxs[0];
+      endTime = toEpochSeconds(bars[nextFriIdx].time);
+    }
+
     const firstFriIdx = idxs.find((i) => isFriday(toEpochSeconds(bars[i].time)));
     if (firstFriIdx === undefined) {
       // No Friday found in this quarter - use first two bars as fallback
@@ -554,7 +574,16 @@ function findCurrentQuarterMid(bars: OhlcvBar[]): QuarterRange | null {
         if (mid !== 0) {
           let qH = -Infinity, qL = Infinity;
           for (const idx of idxs) { qH = Math.max(qH, bars[idx].high); qL = Math.min(qL, bars[idx].low); }
-          ranges.push({ qkey: key, high, low, mid, quarterHigh: qH, quarterLow: qL });
+          ranges.push({
+            qkey: key,
+            startTime: toEpochSeconds(bars[idxs[0]].time),
+            endTime,
+            high,
+            low,
+            mid,
+            quarterHigh: qH,
+            quarterLow: qL,
+          });
         }
       }
       continue;
@@ -574,7 +603,16 @@ function findCurrentQuarterMid(bars: OhlcvBar[]): QuarterRange | null {
     // Track full quarter high/low
     let qH = -Infinity, qL = Infinity;
     for (const idx of idxs) { qH = Math.max(qH, bars[idx].high); qL = Math.min(qL, bars[idx].low); }
-    ranges.push({ qkey: key, high, low, mid, quarterHigh: qH, quarterLow: qL });
+    ranges.push({
+      qkey: key,
+      startTime: friTs,
+      endTime,
+      high,
+      low,
+      mid,
+      quarterHigh: qH,
+      quarterLow: qL,
+    });
   }
 
   // Return the last (current) quarter range, with previous quarter's last close
@@ -591,6 +629,10 @@ function findCurrentQuarterMid(bars: OhlcvBar[]): QuarterRange | null {
       const lastIdxInPrevQ = prevIdxs[prevIdxs.length - 1];
       current.prevQLastClose = bars[lastIdxInPrevQ].close;
       current.prevQMid = prevRange.mid;
+      current.prevQStartTime = prevRange.startTime;
+      current.prevQEndTime = prevRange.endTime;
+      current.prevQHigh = prevRange.high;
+      current.prevQLow = prevRange.low;
     }
   }
 
@@ -599,86 +641,142 @@ function findCurrentQuarterMid(bars: OhlcvBar[]): QuarterRange | null {
 
 /* ── Zone classification ───────────────────────────────── */
 
-/**
- * Extract the 80%, 50%, 20% thresholds from level lines.
- * Supports both Pro model (Long_True) and Simple model (Long_High / Long_Low).
- * Returns { t80, t50, t20 } for the given direction, or null if no lines match.
- */
-function extractThresholds(
-  lines: LevelLineLike[],
-  direction: "above" | "below",
-): { t80: number; t50: number; t20: number } | null {
-  // Try Pro model: Long_True_* naming
-  const longTrue = lines
-    .filter((l) => l.name && /^Long_True_\d+$/i.test(l.name))
-    .map((l) => ({ name: l.name!, value: Number(l.value) }))
-    .filter((l) => Number.isFinite(l.value));
+function outcomeForRange(
+  range: { startTime: number; endTime: number; high: number; low: number },
+  bars: OhlcvBar[],
+): OutcomeKey {
+  let confirmed: "LONG_TRUE" | "SHORT_TRUE" | null = null;
 
-  if (longTrue.length > 0) {
-    if (direction === "above") {
-      const l7 = longTrue.find((l) => /Long_True_7/i.test(l.name));
-      const l8 = longTrue.find((l) => /Long_True_8/i.test(l.name));
-      const l9 = longTrue.find((l) => /Long_True_9/i.test(l.name));
-      return {
-        t80: l7 ? Math.abs(l7.value) : 5,
-        t50: l8 ? Math.abs(l8.value) : 15,
-        t20: l9 ? Math.abs(l9.value) : 30,
-      };
-    } else {
-      const l3 = longTrue.find((l) => /Long_True_3/i.test(l.name));
-      const l2 = longTrue.find((l) => /Long_True_2/i.test(l.name));
-      const l1 = longTrue.find((l) => /Long_True_1/i.test(l.name));
-      return {
-        t80: l3 ? Math.abs(l3.value) : 5,
-        t50: l2 ? Math.abs(l2.value) : 15,
-        t20: l1 ? Math.abs(l1.value) : 30,
-      };
+  for (const bar of bars) {
+    const ts = toEpochSeconds(bar.time);
+    if (ts < range.startTime || ts >= range.endTime) continue;
+
+    if (!confirmed) {
+      if (bar.close > range.high) confirmed = "LONG_TRUE";
+      else if (bar.close < range.low) confirmed = "SHORT_TRUE";
+      continue;
+    }
+
+    if (confirmed === "LONG_TRUE" && bar.close < range.low) return "LONG_FALSE";
+    if (confirmed === "SHORT_TRUE" && bar.close > range.high) return "SHORT_FALSE";
+  }
+
+  return confirmed ?? "NONE";
+}
+
+type ScenarioLine = { name: string; value: number; style?: string; color?: string };
+
+function groupScenarioLines(lines: LevelLineLike[]) {
+  const grouped: Record<ScenarioKey, ScenarioLine[]> = {
+    LONG_TRUE: [],
+    LONG_FALSE: [],
+    SHORT_TRUE: [],
+    SHORT_FALSE: [],
+  };
+
+  for (const line of lines) {
+    const value = Number(line.value);
+    const name = line.name || "";
+    if (!name || !Number.isFinite(value)) continue;
+
+    const upper = name.toUpperCase();
+    const normalized = { name, value, style: line.style, color: line.color };
+    if (upper.startsWith("LONG_TRUE")) grouped.LONG_TRUE.push(normalized);
+    else if (upper.startsWith("LONG_FALSE")) grouped.LONG_FALSE.push(normalized);
+    else if (upper.startsWith("SHORT_TRUE")) grouped.SHORT_TRUE.push(normalized);
+    else if (upper.startsWith("SHORT_FALSE")) grouped.SHORT_FALSE.push(normalized);
+    else if (upper.startsWith("LONG_")) grouped.LONG_TRUE.push(normalized);
+    else if (upper.startsWith("SHORT_")) grouped.SHORT_TRUE.push(normalized);
+  }
+
+  (Object.keys(grouped) as ScenarioKey[]).forEach((key) => {
+    grouped[key].sort((a, b) => {
+      const ai = Number(/_(\d+)$/.exec(a.name)?.[1] || 0);
+      const bi = Number(/_(\d+)$/.exec(b.name)?.[1] || 0);
+      return ai - bi;
+    });
+  });
+
+  return grouped;
+}
+
+function levelIndexMap(lines: ScenarioLine[]) {
+  const map: Record<number, number> = {};
+  for (const line of lines) {
+    const idx = Number(/_(\d+)$/.exec(line.name)?.[1] || NaN);
+    if (Number.isFinite(idx) && Number.isFinite(line.value)) {
+      map[idx] = line.value;
     }
   }
+  return map;
+}
 
-  // Try Simple model: Long_High_*/Long_Low_* naming
-  // Simple model uses Long_High_80, Long_High_50, Long_High_20 (upper)
-  // and Long_Low_80, Long_Low_50, Long_Low_20 (lower)
-  const prefix = direction === "above" ? "Long_High_" : "Long_Low_";
-  const simpleLines = lines
-    .filter((l) => l.name && l.name.startsWith(prefix))
-    .map((l) => ({ name: l.name!, value: Number(l.value) }))
-    .filter((l) => Number.isFinite(l.value));
+type Thresholds = { near: number; mid: number; far: number };
 
-  if (simpleLines.length > 0) {
-    const find = (pct: number) => simpleLines.find((l) => l.name === `${prefix}${pct}`);
-    const l80 = find(80);
-    const l50 = find(50);
-    const l20 = find(20);
-    return {
-      t80: l80 ? Math.abs(l80.value) : 5,
-      t50: l50 ? Math.abs(l50.value) : 15,
-      t20: l20 ? Math.abs(l20.value) : 30,
-    };
-  }
+function extractScenarioThresholds(
+  grouped: Record<ScenarioKey, ScenarioLine[]>,
+  outcome: OutcomeKey,
+  direction: "above" | "below",
+): Thresholds | null {
+  const scenarioKey: ScenarioKey = outcome === "NONE" ? "LONG_TRUE" : outcome;
+  const idxMap = levelIndexMap(grouped[scenarioKey] || []);
+  const raw = direction === "above"
+    ? [idxMap[7], idxMap[8], idxMap[9]]
+    : [idxMap[3], idxMap[2], idxMap[1]];
 
-  return null;
+  if (raw.some((value) => !Number.isFinite(value))) return null;
+  return { near: raw[0], mid: raw[1], far: raw[2] };
+}
+
+function extractSimpleThresholds(
+  lines: LevelLineLike[],
+  outcome: OutcomeKey,
+  direction: "above" | "below",
+): Thresholds | null {
+  const prefix = outcome.startsWith("SHORT") ? "Short" : "Long";
+  const side = direction === "above" ? "High" : "Low";
+  const findValue = (pct: number) =>
+    lines.find((line) => line.name === `${prefix}_${side}_${pct}`)?.value;
+
+  const near = Number(findValue(80));
+  const mid = Number(findValue(50));
+  const far = Number(findValue(20));
+  if (![near, mid, far].every(Number.isFinite)) return null;
+  return { near, mid, far };
 }
 
 function classifyZone(
   vsMidPct: number,
   lines: LevelLineLike[],
+  model: ModelType,
+  outcome: OutcomeKey,
+  grouped: Record<ScenarioKey, ScenarioLine[]> | null = null,
 ): { zone: string; direction: "above" | "below" } {
   const direction = vsMidPct >= 0 ? "above" : "below";
-  const absPct = Math.abs(vsMidPct);
   const dir = direction === "above" ? "UP" : "DN";
 
-  const thresholds = extractThresholds(lines, direction);
+  const thresholds = model === "simple"
+    ? extractSimpleThresholds(lines, outcome, direction)
+    : grouped
+      ? extractScenarioThresholds(grouped, outcome, direction)
+      : null;
+
   if (!thresholds) {
     return { zone: `NOT ENOUGH DATA`, direction };
   }
 
-  const { t80, t50, t20 } = thresholds;
+  if (direction === "above") {
+    const [near, mid, far] = [thresholds.near, thresholds.mid, thresholds.far].sort((a, b) => a - b);
+    if (vsMidPct < near) return { zone: `MID-80% ${dir}`, direction };
+    if (vsMidPct < mid) return { zone: `80-50% ${dir}`, direction };
+    if (vsMidPct < far) return { zone: `50-20% ${dir}`, direction };
+    return { zone: `BEYOND 20% ${dir}`, direction };
+  }
 
-  // Zones match chart labels: 80% closest to mid, 20% furthest
-  if (absPct < t80) return { zone: `WITHIN 80% ${dir}`, direction };
-  if (absPct < t50) return { zone: `50-80% ${dir}`, direction };
-  if (absPct < t20) return { zone: `50-20% ${dir}`, direction };
+  const [near, mid, far] = [thresholds.near, thresholds.mid, thresholds.far].sort((a, b) => b - a);
+  if (vsMidPct > near) return { zone: `MID-80% ${dir}`, direction };
+  if (vsMidPct > mid) return { zone: `80-50% ${dir}`, direction };
+  if (vsMidPct > far) return { zone: `50-20% ${dir}`, direction };
   return { zone: `BEYOND 20% ${dir}`, direction };
 }
 
@@ -822,19 +920,38 @@ async function processSymbol(
       }
     }
 
-    const { zone, direction } = classifyZone(vsMid, lines);
+    const groupedScenarioLines = model === "simple" ? null : groupScenarioLines(lines);
+    const currentOutcome = outcomeForRange(qr, bars);
+    const { zone, direction } = classifyZone(vsMid, lines, model, currentOutcome, groupedScenarioLines);
 
     // Compute zones for the quarter's actual traded high and low
     const actualHighVsMid = ((qr.quarterHigh - mid) / mid) * 100;
     const actualLowVsMid = ((qr.quarterLow - mid) / mid) * 100;
-    const highZone = classifyZone(actualHighVsMid, lines);
-    const lowZone = classifyZone(actualLowVsMid, lines);
+    const highZone = classifyZone(actualHighVsMid, lines, model, currentOutcome, groupedScenarioLines);
+    const lowZone = classifyZone(actualLowVsMid, lines, model, currentOutcome, groupedScenarioLines);
 
-    // Compute last quarter's close zone
+    // Compute last quarter's close zone relative to the PREVIOUS quarter's distribution.
     let lastQCloseZone: string | undefined;
-    if (qr.prevQLastClose != null && qr.prevQMid != null && qr.prevQMid !== 0) {
+    if (
+      qr.prevQLastClose != null &&
+      qr.prevQMid != null &&
+      qr.prevQMid !== 0 &&
+      qr.prevQStartTime != null &&
+      qr.prevQEndTime != null &&
+      qr.prevQHigh != null &&
+      qr.prevQLow != null
+    ) {
       const prevCloseVsMid = ((qr.prevQLastClose - qr.prevQMid) / qr.prevQMid) * 100;
-      const prevCloseResult = classifyZone(prevCloseVsMid, lines);
+      const prevOutcome = outcomeForRange(
+        {
+          startTime: qr.prevQStartTime,
+          endTime: qr.prevQEndTime,
+          high: qr.prevQHigh,
+          low: qr.prevQLow,
+        },
+        bars,
+      );
+      const prevCloseResult = classifyZone(prevCloseVsMid, lines, model, prevOutcome, groupedScenarioLines);
       lastQCloseZone = prevCloseResult.zone;
     }
 
@@ -1029,6 +1146,7 @@ export async function GET(req: NextRequest) {
 
   // Per-model cache key
   const cacheKey = safeModel;
+  const useCache = source !== "demo" && process.env.NODE_ENV === "production";
 
   try {
     const now = Date.now();
@@ -1037,7 +1155,7 @@ export async function GET(req: NextRequest) {
 
     // ── Serve from cache if fresh ──
     if (
-      source !== "demo" &&
+      useCache &&
       cached &&
       now - cached.timestamp < CACHE_TTL_MS
     ) {
@@ -1047,7 +1165,7 @@ export async function GET(req: NextRequest) {
 
     // ── Serve stale cache while recomputing in background ──
     if (
-      source !== "demo" &&
+      useCache &&
       cached &&
       now - cached.timestamp < STALE_SERVE_MS &&
       !recomputeInProgress
@@ -1077,7 +1195,7 @@ export async function GET(req: NextRequest) {
     const computeMs = performance.now() - t0;
 
     // Cache the full results (before filtering)
-    if (source !== "demo") {
+    if (useCache) {
       moversCacheByModel[cacheKey] = { movers: allMovers, timestamp: now };
     }
 

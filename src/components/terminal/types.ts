@@ -102,6 +102,7 @@ export type PanelConfig = {
   symbol: string;
   model: 'simple' | 'pro' | 'beta' | 'overlay';
   overlaySymbol?: string;
+  scenario?: 'AUTO' | 'LONG_TRUE' | 'LONG_FALSE' | 'SHORT_TRUE' | 'SHORT_FALSE';
 };
 
 /** Asset class for symbol classification */
