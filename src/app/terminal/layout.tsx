@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { SessionProvider, useSession } from "next-auth/react";
+import { SessionProvider, useSession, signOut } from "next-auth/react";
 import { ThemeProvider, useTheme } from "@/components/terminal/ThemeContext";
 import SettingsPanel from "@/components/terminal/SettingsPanel";
 import HalftoneCanvas from "@/components/HalftoneCanvasV1";
+import OnboardingPopup from "@/components/terminal/OnboardingPopup";
 
 const NAV_ITEMS = [
   { href: "/terminal", label: "CHARTS" },
@@ -175,8 +176,55 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
           })}
         </nav>
 
-        {/* Right: Settings gear */}
-        <div className="flex items-center" style={{ width: 80, justifyContent: "flex-end" }}>
+        {/* Right: Account + Settings */}
+        <div className="flex items-center gap-1" style={{ width: 80, justifyContent: "flex-end" }}>
+          <Link
+            href="/account"
+            title="Account"
+            style={{
+              width: 34,
+              height: 34,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: theme.textDim,
+              borderRadius: 4,
+              transition: "color 0.15s",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = theme.text; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = theme.textDim; }}
+          >
+            <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx={12} cy={7} r={4} />
+            </svg>
+          </Link>
+          <button
+            onClick={() => signOut({ callbackUrl: "/" })}
+            title="Sign out"
+            style={{
+              width: 34,
+              height: 34,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: theme.textDim,
+              cursor: "pointer",
+              background: "none",
+              border: "none",
+              padding: 0,
+              borderRadius: 4,
+              transition: "color 0.15s",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = theme.text; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = theme.textDim; }}
+          >
+            <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1={21} y1={12} x2={9} y2={12} />
+            </svg>
+          </button>
           <button
             onClick={() => setSettingsOpen(true)}
             title="Settings"
@@ -214,6 +262,35 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
+      {/* Email verification banner */}
+      {session?.user && !(session.user as any).isEmailVerified && (session.user as any).email !== "demo@example.com" && (
+        <div
+          className="shrink-0 relative z-10 flex items-center justify-center gap-3"
+          style={{
+            background: theme.frosted ? "rgba(255,200,0,0.12)" : "#fffbe6",
+            borderBottom: `1px solid ${theme.frosted ? "rgba(200,160,0,0.2)" : "#ffe58f"}`,
+            padding: "6px 16px",
+            fontSize: 11,
+            color: theme.text,
+            fontFamily: "'SF Mono', monospace",
+          }}
+        >
+          <span style={{ opacity: 0.7 }}>Verify your email to secure your account.</span>
+          <a
+            href="/verify-email"
+            style={{
+              color: theme.text,
+              fontWeight: 600,
+              textDecoration: "underline",
+              fontSize: 11,
+              letterSpacing: "0.05em",
+            }}
+          >
+            Resend link
+          </a>
+        </div>
+      )}
+
       {/* Content area fills remaining viewport height */}
       <div className="flex-1 overflow-hidden relative z-10" style={{ minHeight: 0 }}>
         {children}
@@ -221,6 +298,7 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
 
       {/* Settings panel */}
       <SettingsPanel open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <OnboardingPopup storageKey="pv-onboarding-terminal" />
     </div>
   );
 }

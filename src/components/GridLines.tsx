@@ -9,7 +9,7 @@ export default function GridLines() {
         </div>
       </div>
       {/* Horizontal line — scrolls with content */}
-      <div className="hidden md:block absolute left-0 right-0 top-[110px] z-10 pointer-events-none border-b border-neutral-200/50" />
+      <div className="hidden md:block absolute left-0 right-0 top-[92px] z-10 pointer-events-none border-b border-neutral-200/50" />
     </>
   );
 }

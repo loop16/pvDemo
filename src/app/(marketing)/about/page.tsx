@@ -93,6 +93,19 @@ export default function AboutPage() {
             <p><strong className="text-neutral-700">Limitation of Liability.</strong> To the fullest extent permitted by law, Pricevault, its owners, and affiliates disclaim any liability for direct, indirect, incidental, consequential, or special damages arising out of or in connection with the use of the site, data, models, or content.</p>
           </div>
         </section>
+
+        {/* Inline footer */}
+        <div className="mt-16 border-t border-neutral-200 pt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-[12px] text-neutral-400">
+            <Link href="/models" className="hover:text-neutral-700 transition-colors">Models</Link>
+            <Link href="/pricing" className="hover:text-neutral-700 transition-colors">Pricing</Link>
+            <Link href="/demo" className="hover:text-neutral-700 transition-colors">Demo</Link>
+            <Link href="/terms" className="hover:text-neutral-700 transition-colors">Terms</Link>
+            <Link href="/privacy" className="hover:text-neutral-700 transition-colors">Privacy</Link>
+            <a href="mailto:support@price-vault.com" className="hover:text-neutral-700 transition-colors">Contact</a>
+          </nav>
+          <p className="mono text-[11px] text-neutral-400">© 2026 Pricevault. Not financial advice.</p>
+        </div>
       </main>
     </>
   );

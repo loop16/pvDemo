@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getStripe } from "@/lib/stripe";
 import { updateUserByStripeCustomerId } from "@/lib/user-store";
+import { sendWelcomeEmail, sendPaymentFailedEmail, sendCancellationEmail } from "@/lib/email";
 
 export const runtime = "nodejs";
 
@@ -32,12 +33,21 @@ export async function POST(req: Request) {
     case "checkout.session.completed": {
       const session = event.data.object as Stripe.Checkout.Session;
       const customerId = normalizeCustomerId(session.customer);
+      const tvField = session.custom_fields?.find((f) => f.key === "tradingview_username");
+      const tradingViewUsername = tvField?.text?.value?.trim() || undefined;
       if (customerId) {
         await updateUserByStripeCustomerId(customerId, {
           stripePaid: true,
           stripeSubscriptionStatus: session.mode === "subscription" ? "active" : "paid",
           stripeCheckoutSessionId: session.id,
+          ...(tradingViewUsername ? { tradingViewUsername } : {}),
         });
+      }
+      const email = session.customer_details?.email ?? session.customer_email;
+      if (email) {
+        sendWelcomeEmail(email).catch((err) =>
+          console.error("[webhook] Failed to send welcome email:", err),
+        );
       }
       break;
     }
@@ -69,10 +79,30 @@ export async function POST(req: Request) {
       const subscription = event.data.object as Stripe.Subscription;
       const customerId = normalizeCustomerId(subscription.customer);
       if (customerId) {
-        await updateUserByStripeCustomerId(customerId, {
+        const updated = await updateUserByStripeCustomerId(customerId, {
           stripePaid: false,
           stripeSubscriptionStatus: "canceled",
         });
+        if (updated?.email) {
+          sendCancellationEmail(updated.email).catch((err) =>
+            console.error("[webhook] Failed to send cancellation email:", err),
+          );
+        }
+      }
+      break;
+    }
+    case "invoice.payment_failed": {
+      const invoice = event.data.object as Stripe.Invoice;
+      const customerId = normalizeCustomerId(invoice.customer);
+      if (customerId) {
+        const user = await updateUserByStripeCustomerId(customerId, {
+          stripeSubscriptionStatus: "past_due",
+        });
+        if (user?.email) {
+          sendPaymentFailedEmail(user.email).catch((err) =>
+            console.error("[webhook] Failed to send payment failed email:", err),
+          );
+        }
       }
       break;
     }

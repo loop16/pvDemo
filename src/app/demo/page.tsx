@@ -46,8 +46,8 @@ function DemoContent() {
   return (
     <div className="h-full w-full flex flex-col">
       <div
-        className="flex items-center justify-center px-3 shrink-0"
-        style={{ height: 28, borderBottom: `1px solid ${theme.border}`, background: theme.bg }}
+        className="flex items-center justify-between px-3 shrink-0"
+        style={{ height: 36, borderBottom: `1px solid ${theme.border}`, background: theme.bg }}
       >
         <div className="flex items-center gap-1">
           {layouts.map((l) => (
@@ -61,6 +61,28 @@ function DemoContent() {
               <LayoutIcon mode={l} active={layout === l} color={layout === l ? theme.text : theme.textDim} />
             </button>
           ))}
+        </div>
+        <div className="flex items-center gap-3">
+          <span style={{ fontSize: 10, color: theme.textDim, fontFamily: "'SF Mono', monospace", letterSpacing: '0.05em' }}>
+            DEMO — 5 symbols
+          </span>
+          <a
+            href="/signup"
+            style={{
+              fontSize: 10,
+              fontWeight: 700,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: theme.bg,
+              background: theme.text,
+              padding: '3px 10px',
+              textDecoration: 'none',
+              fontFamily: "'SF Mono', monospace",
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Get full access →
+          </a>
         </div>
       </div>
       <div className="flex-1 min-h-0">

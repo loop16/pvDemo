@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <header className="relative z-20">
@@ -20,7 +22,14 @@ export default function Header() {
           <Link href="/models" className="text-[15px] text-neutral-400 hover:text-neutral-900 transition-colors">Models</Link>
           <Link href="/pricing" className="text-[15px] text-neutral-400 hover:text-neutral-900 transition-colors">Pricing</Link>
           <Link href="/demo" className="text-[14px] font-medium text-neutral-900 bg-white border border-neutral-300 w-[100px] py-2 text-center hover:bg-neutral-50 transition-colors">Try Demo</Link>
-          <Link href="/login" className="text-[14px] font-medium text-white bg-neutral-900 border border-neutral-900 w-[100px] py-2 text-center hover:opacity-85 transition-opacity">Login</Link>
+          {session ? (
+            <>
+              <Link href="/account" className="text-[14px] font-medium text-neutral-900 bg-white border border-neutral-300 w-[100px] py-2 text-center hover:bg-neutral-50 transition-colors">Account</Link>
+              <button onClick={() => signOut({ callbackUrl: "/" })} className="text-[14px] font-medium text-white bg-neutral-900 border border-neutral-900 w-[100px] py-2 text-center hover:opacity-85 transition-opacity">Sign out</button>
+            </>
+          ) : (
+            <Link href="/login" className="text-[14px] font-medium text-white bg-neutral-900 border border-neutral-900 w-[100px] py-2 text-center hover:opacity-85 transition-opacity">Login</Link>
+          )}
         </nav>
 
         {/* Mobile hamburger */}
@@ -67,7 +76,11 @@ export default function Header() {
             <Link href="/pricing" className="text-[16px] text-neutral-700 font-medium" onClick={() => setMenuOpen(false)}>Pricing</Link>
             <div className="flex gap-3 pt-4">
               <Link href="/demo" className="text-[14px] font-medium text-neutral-900 bg-white/80 border border-neutral-300 px-5 py-3 flex-1 text-center" onClick={() => setMenuOpen(false)}>Try Demo</Link>
-              <Link href="/login" className="text-[14px] font-medium text-white bg-neutral-900 border border-neutral-900 px-5 py-3 flex-1 text-center" onClick={() => setMenuOpen(false)}>Login</Link>
+              {session ? (
+                <Link href="/account" className="text-[14px] font-medium text-white bg-neutral-900 border border-neutral-900 px-5 py-3 flex-1 text-center" onClick={() => setMenuOpen(false)}>Account</Link>
+              ) : (
+                <Link href="/login" className="text-[14px] font-medium text-white bg-neutral-900 border border-neutral-900 px-5 py-3 flex-1 text-center" onClick={() => setMenuOpen(false)}>Login</Link>
+              )}
             </div>
           </div>
         </div>

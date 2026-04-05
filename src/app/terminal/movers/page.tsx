@@ -31,9 +31,12 @@ type MoverRow = {
   magnitude: number;
   direction: "above" | "below";
   assetClass: AssetClass;
+  scenario: string;
+  daysSinceChange: number | null;
 };
 
-type SortKey = "symbol" | "assetClass" | "price" | "changePct" | "vsMid" | "zone" | "magnitude" | "highZone" | "lowZone" | "lastQCloseZone";
+type SortKey = "symbol" | "assetClass" | "price" | "changePct" | "vsMid" | "zone" | "magnitude" | "highZone" | "lowZone" | "lastQCloseZone" | "scenario" | "daysSinceChange";
+type ScenarioFilter = "ALL" | "LONG_TRUE" | "LONG_FALSE" | "SHORT_TRUE" | "SHORT_FALSE" | "NONE";
 type SortDir = "asc" | "desc";
 type ClassTab = "ALL" | "EQUITIES" | "FUTURES" | "CRYPTO" | "FX" | "INDICES" | "ETFS";
 type DirectionFilter = "ALL" | "ABOVE" | "BELOW" | "EXTREMES";
@@ -70,6 +73,17 @@ function buildC(theme: ChartTheme) {
 }
 
 const REFRESH_INTERVAL_MS = 60_000;
+const ORDERED_ZONE_OPTIONS = [
+  "MID-80% DN",
+  "MID-80% UP",
+  "80-50% DN",
+  "80-50% UP",
+  "50-20% DN",
+  "50-20% UP",
+  "BEYOND 20% DN",
+  "BEYOND 20% UP",
+  "NOT ENOUGH DATA",
+];
 
 /* -- Asset class config -------------------------------------------- */
 
@@ -170,6 +184,8 @@ export default function MoversPage() {
   const [lowZoneFilter, setLowZoneFilter] = useState<string>("ALL");
   const [closeZoneFilter, setCloseZoneFilter] = useState<string>("ALL");
   const [lastQZoneFilter, setLastQZoneFilter] = useState<string>("ALL");
+  const [scenarioFilter, setScenarioFilter] = useState<ScenarioFilter>("ALL");
+  const [daysFilter, setDaysFilter] = useState<string>("ALL");
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
   const [countdown, setCountdown] = useState(REFRESH_INTERVAL_MS / 1000);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -281,6 +297,25 @@ export default function MoversPage() {
       filtered = filtered.filter((m) => m.lastQCloseZone === lastQZoneFilter);
     }
 
+    // Scenario filter
+    if (scenarioFilter !== "ALL") {
+      filtered = filtered.filter((m) => m.scenario === scenarioFilter);
+    }
+
+    // Days since change filter
+    if (daysFilter !== "ALL") {
+      filtered = filtered.filter((m) => {
+        if (m.daysSinceChange == null) return daysFilter === "NONE";
+        switch (daysFilter) {
+          case "1-5": return m.daysSinceChange >= 1 && m.daysSinceChange <= 5;
+          case "6-15": return m.daysSinceChange >= 6 && m.daysSinceChange <= 15;
+          case "16-30": return m.daysSinceChange >= 16 && m.daysSinceChange <= 30;
+          case "31+": return m.daysSinceChange >= 31;
+          default: return true;
+        }
+      });
+    }
+
     filtered.sort((a, b) => {
       let cmp = 0;
       switch (sortKey) {
@@ -314,12 +349,18 @@ export default function MoversPage() {
         case "lastQCloseZone":
           cmp = (a.lastQCloseZone || "").localeCompare(b.lastQCloseZone || "");
           break;
+        case "scenario":
+          cmp = a.scenario.localeCompare(b.scenario);
+          break;
+        case "daysSinceChange":
+          cmp = (a.daysSinceChange ?? -1) - (b.daysSinceChange ?? -1);
+          break;
       }
       return sortDir === "asc" ? cmp : -cmp;
     });
 
     return filtered;
-  }, [movers, classTab, dirFilter, sortKey, sortDir, highZoneFilter, lowZoneFilter, closeZoneFilter, lastQZoneFilter]);
+  }, [movers, classTab, dirFilter, sortKey, sortDir, highZoneFilter, lowZoneFilter, closeZoneFilter, lastQZoneFilter, scenarioFilter, daysFilter]);
 
   /* -- Stats -- */
   const stats = useMemo(() => {
@@ -408,18 +449,12 @@ export default function MoversPage() {
 
   /* -- Unique zone values for filter dropdowns -- */
   const uniqueZones = useMemo(() => {
-    const highSet = new Set<string>();
-    const lowSet = new Set<string>();
-    const closeSet = new Set<string>();
-    const lastQSet = new Set<string>();
-    for (const m of movers) {
-      if (m.highZone) highSet.add(m.highZone);
-      if (m.lowZone) lowSet.add(m.lowZone);
-      if (m.zone) closeSet.add(m.zone);
-      if (m.lastQCloseZone) lastQSet.add(m.lastQCloseZone);
-    }
-    const sort = (s: Set<string>) => Array.from(s).sort();
-    return { high: sort(highSet), low: sort(lowSet), close: sort(closeSet), lastQ: sort(lastQSet) };
+    return {
+      high: ORDERED_ZONE_OPTIONS,
+      low: ORDERED_ZONE_OPTIONS,
+      close: ORDERED_ZONE_OPTIONS,
+      lastQ: ORDERED_ZONE_OPTIONS,
+    };
   }, [movers]);
 
   /* -- Column headers -- */
@@ -430,6 +465,8 @@ export default function MoversPage() {
     { key: "highZone", label: "HIGH ZONE", align: "left", flex: 1.1 },
     { key: "lowZone", label: "LOW ZONE", align: "left", flex: 1.1 },
     { key: "zone", label: "CURRENT ZONE", align: "left", flex: 1.2 },
+    { key: "scenario", label: "SCENARIO", align: "left", flex: 1.1 },
+    { key: "daysSinceChange", label: "SWAP DAYS", align: "right", flex: 0.6 },
     { key: "changePct", label: "CHG %", align: "right", flex: 0.7 },
     { key: "magnitude", label: "MAGNITUDE", align: "right", flex: 1 },
   ];
@@ -585,6 +622,40 @@ export default function MoversPage() {
           {row.zone || "—"}
         </td>
 
+        {/* SCENARIO */}
+        <td
+          style={{
+            padding: "8px 12px",
+            fontSize: 10,
+            fontWeight: 500,
+            letterSpacing: "0.04em",
+            color: row.scenario === "NONE" ? C.textDim
+              : row.scenario.includes("TRUE") ? C.green
+              : C.amber,
+          }}
+        >
+          {row.scenario === "LONG_TRUE" ? "STRONG LONG"
+            : row.scenario === "LONG_FALSE" ? "WEAK LONG"
+            : row.scenario === "SHORT_TRUE" ? "STRONG SHORT"
+            : row.scenario === "SHORT_FALSE" ? "WEAK SHORT"
+            : row.scenario === "NONE" ? "NONE"
+            : row.scenario}
+        </td>
+
+        {/* DAYS SINCE CHANGE */}
+        <td
+          style={{
+            padding: "8px 12px",
+            fontSize: 11,
+            fontWeight: 500,
+            textAlign: "right",
+            color: row.daysSinceChange != null && row.daysSinceChange <= 5 ? C.amber : C.textDim,
+            fontVariantNumeric: "tabular-nums",
+          }}
+        >
+          {row.daysSinceChange != null ? row.daysSinceChange : "\u2014"}
+        </td>
+
         {/* CHG % */}
         <td
           style={{
@@ -690,11 +761,23 @@ export default function MoversPage() {
   }, [openFilterCol]);
 
   /* -- Zone filter config -- */
-  const zoneFilterConfig: Record<string, { value: string; setter: (v: string) => void; options: string[] }> = {
+  const SCENARIO_OPTIONS = ["LONG_TRUE", "LONG_FALSE", "SHORT_TRUE", "SHORT_FALSE", "NONE"];
+  const SCENARIO_LABELS: Record<string, string> = {
+    LONG_TRUE: "STRONG LONG",
+    LONG_FALSE: "WEAK LONG",
+    SHORT_TRUE: "STRONG SHORT",
+    SHORT_FALSE: "WEAK SHORT",
+    NONE: "NONE",
+  };
+  const DAYS_OPTIONS = ["1-5", "6-15", "16-30", "31+", "NONE"];
+
+  const zoneFilterConfig: Record<string, { value: string; setter: (v: string) => void; options: string[]; labels?: Record<string, string> }> = {
     lastQCloseZone: { value: lastQZoneFilter, setter: setLastQZoneFilter, options: uniqueZones.lastQ },
     highZone: { value: highZoneFilter, setter: setHighZoneFilter, options: uniqueZones.high },
     lowZone: { value: lowZoneFilter, setter: setLowZoneFilter, options: uniqueZones.low },
     zone: { value: closeZoneFilter, setter: setCloseZoneFilter, options: uniqueZones.close },
+    scenario: { value: scenarioFilter, setter: setScenarioFilter as (v: string) => void, options: SCENARIO_OPTIONS, labels: SCENARIO_LABELS },
+    daysSinceChange: { value: daysFilter, setter: setDaysFilter, options: DAYS_OPTIONS },
   };
 
   /* -- Render table header -- */
@@ -816,7 +899,7 @@ export default function MoversPage() {
                             onMouseEnter={(e) => { if (zf.value !== z) e.currentTarget.style.background = C.hoverBg; }}
                             onMouseLeave={(e) => { if (zf.value !== z) e.currentTarget.style.background = "transparent"; }}
                           >
-                            {z}
+                            {zf.labels?.[z] || z}
                           </button>
                         ))}
                       </div>

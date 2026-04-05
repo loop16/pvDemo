@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import path from "path";
 import { promises as fs } from "fs";
+import { isAllowed, getClientIp } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -33,6 +34,11 @@ function normalizeEmail(email: string) {
 }
 
 export async function POST(req: NextRequest) {
+  // 3 newsletter signups per IP per hour
+  if (!isAllowed(`notify:${getClientIp(req)}`, 3, 60 * 60 * 1000)) {
+    return Response.json({ error: "Too many requests, please try again later." }, { status: 429 });
+  }
+
   try {
     const body = await req.json().catch(() => ({}));
     const emailRaw = typeof body?.email === "string" ? body.email : "";

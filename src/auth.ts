@@ -4,6 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import { z } from "zod";
 import { createUser, getUser, upsertUserByEmail, verifyPassword } from "@/lib/user-store";
+import { isAllowed } from "@/lib/rate-limit";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
@@ -17,11 +18,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 const parsed = z
                     .object({
                         email: z.string(),
-                        password: z.string().min(4),
+                        password: z.string().min(1),
                     })
                     .safeParse(credentials);
 
                 if (!parsed.success) return null;
+
+                // Rate limit: 10 login attempts per email per 15 minutes
+                if (!isAllowed(`login:${parsed.data.email.toLowerCase()}`, 10, 15 * 60 * 1000)) {
+                    throw new Error("Too many login attempts. Please try again in 15 minutes.");
+                }
 
                 const { email, password } = parsed.data;
 
@@ -65,9 +71,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 });
                 token.paid = stored.stripePaid ?? false;
                 token.email = stored.email;
+                token.isEmailVerified = stored.emailVerified ?? false;
             } else if (token.email) {
                 const stored = await getUser(token.email as string);
-                if (stored) token.paid = stored.stripePaid ?? false;
+                if (stored) {
+                    token.paid = stored.stripePaid ?? false;
+                    token.isEmailVerified = stored.emailVerified ?? false;
+                }
             }
 
             // If user logs in with Google, we might want to store them in our JSON db too
@@ -82,6 +92,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }
             if (session.user) {
                 session.user.paid = (token.paid as boolean) ?? false;
+                session.user.isEmailVerified = (token.isEmailVerified as boolean) ?? false;
             }
             return session;
         },

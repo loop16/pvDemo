@@ -57,12 +57,20 @@ type MoverRow = {
   direction: "above" | "below";
   assetClass: AssetClass;
   lastQCloseZone?: string;
+  scenario: string;
+  daysSinceChange: number | null;
   [key: string]: unknown;
 };
 
 type CachedResult = {
   movers: MoverRow[];
   timestamp: number;
+};
+
+type SymbolWithClass = {
+  symbol: string;
+  assetClass: AssetClass;
+  filePath?: string; // resolved file path for live mode
 };
 
 const BENCHMARK_SYMBOL = "SPX";
@@ -72,7 +80,7 @@ const BETA_CLAMP = 5;
 /* ── Config ────────────────────────────────────────────── */
 
 const DEMO_SYMBOLS = ["SPX", "NQ", "BTCUSD", "CL", "GC"];
-const BATCH_SIZE = 200; // Higher parallelism for I/O-bound reads
+const BATCH_SIZE = 500; // Higher parallelism for I/O-bound reads
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes — data updates nightly
 const STALE_SERVE_MS = 60 * 60 * 1000; // Serve stale cache up to 1 hour while recomputing
 const TAIL_BYTES = 32_768; // Read last 32 KB of each CSV (~400 rows, covers 1.5+ years for reliable quarter detection)
@@ -97,6 +105,15 @@ const OHLCV_ALIASES: Record<string, string> = {
 
 const moversCacheByModel: Record<string, CachedResult | null> = {};
 const recomputeInProgressByModel: Record<string, boolean> = {};
+
+/* ── In-memory cache: levels data (expensive Wasabi/disk load) ── */
+type LevelsCacheEntry = { data: Record<string, LevelsEntry>; timestamp: number };
+const levelsCacheByModel: Record<string, LevelsCacheEntry> = {};
+
+/* ── In-memory cache: accessible symbols (1000+ fs.access calls) ── */
+type AccessibleSymbolsCacheEntry = { symbols: SymbolWithClass[]; timestamp: number };
+let accessibleSymbolsCache: AccessibleSymbolsCacheEntry | null = null;
+const ACCESSIBLE_SYMBOLS_TTL_MS = 10 * 60 * 1000; // 10 minutes
 
 /* ── Asset classification ──────────────────────────────── */
 
@@ -199,6 +216,28 @@ async function readWasabiJson<T>(pathParts: string): Promise<T> {
   const resp = await client.send(new GetObjectCommand({ Bucket: bucket, Key: key }));
   const raw = await streamToString(resp.Body);
   return JSON.parse(raw) as T;
+}
+
+async function writeWasabiJson(pathParts: string, data: unknown): Promise<void> {
+  const { S3Client, PutObjectCommand } = await import("@aws-sdk/client-s3");
+  const bucket = process.env.WASABI_BUCKET || "";
+  const accessKeyId = process.env.WASABI_ACCESS_KEY_ID || "";
+  const secretAccessKey = process.env.WASABI_SECRET_ACCESS_KEY || "";
+  const endpoint = process.env.WASABI_ENDPOINT || "https://s3.us-east-1.wasabisys.com";
+  const region = process.env.WASABI_REGION || "us-east-1";
+
+  const key = buildWasabiKey(pathParts);
+  const client = new S3Client({
+    region,
+    endpoint,
+    credentials: { accessKeyId, secretAccessKey },
+  });
+  await client.send(new PutObjectCommand({
+    Bucket: bucket,
+    Key: key,
+    Body: JSON.stringify(data),
+    ContentType: "application/json",
+  }));
 }
 
 /* ── Data loaders ──────────────────────────────────────── */
@@ -371,6 +410,12 @@ async function loadOhlcvFast(symbol: string, source: string, resolvedFilePath?: 
 }
 
 async function loadLevelsData(source: string, model: ModelType = "pro"): Promise<Record<string, LevelsEntry>> {
+  // Return in-memory cache if fresh (same TTL as movers cache — data only changes nightly)
+  const cached = levelsCacheByModel[model];
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+    return cached.data;
+  }
+
   // Determine which file to use based on model
   const consolidatedFileName = model === "simple" ? "basic_levels.json" : "levels.json";
   const perSymbolFileOrder = model === "simple"
@@ -416,6 +461,9 @@ async function loadLevelsData(source: string, model: ModelType = "pro"): Promise
       }
     }));
   } catch {}
+
+  // Store in in-memory cache
+  levelsCacheByModel[model] = { data: consolidated, timestamp: Date.now() };
 
   return consolidated;
 }
@@ -641,27 +689,54 @@ function findCurrentQuarterMid(bars: OhlcvBar[]): QuarterRange | null {
 
 /* ── Zone classification ───────────────────────────────── */
 
+type OutcomeResult = {
+  outcome: OutcomeKey;
+  daysSinceChange: number | null; // trading days since last scenario transition
+};
+
 function outcomeForRange(
   range: { startTime: number; endTime: number; high: number; low: number },
   bars: OhlcvBar[],
 ): OutcomeKey {
-  let confirmed: "LONG_TRUE" | "SHORT_TRUE" | null = null;
+  return outcomeForRangeDetailed(range, bars).outcome;
+}
 
-  for (const bar of bars) {
-    const ts = toEpochSeconds(bar.time);
+function outcomeForRangeDetailed(
+  range: { startTime: number; endTime: number; high: number; low: number },
+  bars: OhlcvBar[],
+): OutcomeResult {
+  let confirmed: "LONG_TRUE" | "SHORT_TRUE" | null = null;
+  let swapIdx: number | null = null;
+  let lastIdx = bars.length - 1;
+
+  for (let i = 0; i < bars.length; i++) {
+    const ts = toEpochSeconds(bars[i].time);
     if (ts < range.startTime || ts >= range.endTime) continue;
 
     if (!confirmed) {
-      if (bar.close > range.high) confirmed = "LONG_TRUE";
-      else if (bar.close < range.low) confirmed = "SHORT_TRUE";
+      if (bars[i].close > range.high) confirmed = "LONG_TRUE";
+      else if (bars[i].close < range.low) confirmed = "SHORT_TRUE";
       continue;
     }
 
-    if (confirmed === "LONG_TRUE" && bar.close < range.low) return "LONG_FALSE";
-    if (confirmed === "SHORT_TRUE" && bar.close > range.high) return "SHORT_FALSE";
+    if (confirmed === "LONG_TRUE" && bars[i].close < range.low) {
+      swapIdx = i;
+      // Days ago = distance from swap bar to the last bar in the dataset
+      return {
+        outcome: "LONG_FALSE",
+        daysSinceChange: lastIdx - swapIdx,
+      };
+    }
+    if (confirmed === "SHORT_TRUE" && bars[i].close > range.high) {
+      swapIdx = i;
+      return {
+        outcome: "SHORT_FALSE",
+        daysSinceChange: lastIdx - swapIdx,
+      };
+    }
   }
 
-  return confirmed ?? "NONE";
+  return { outcome: confirmed ?? "NONE", daysSinceChange: null };
 }
 
 type ScenarioLine = { name: string; value: number; style?: string; color?: string };
@@ -782,12 +857,6 @@ function classifyZone(
 
 /* ── Build full symbol list with asset classes ─────────── */
 
-type SymbolWithClass = {
-  symbol: string;
-  assetClass: AssetClass;
-  filePath?: string; // resolved file path for live mode
-};
-
 const DEMO_SYMBOL_CLASSES: Record<string, AssetClass> = {
   SPX: "index",
   NQ: "futures",
@@ -848,6 +917,11 @@ async function loadSymbolsWithClasses(source: string): Promise<SymbolWithClass[]
  * Uses parallel fs.access checks (very fast).
  */
 async function filterAccessibleSymbols(symbols: SymbolWithClass[]): Promise<SymbolWithClass[]> {
+  // Cache the file-access check result — the set of available files only changes nightly
+  if (accessibleSymbolsCache && Date.now() - accessibleSymbolsCache.timestamp < ACCESSIBLE_SYMBOLS_TTL_MS) {
+    return accessibleSymbolsCache.symbols;
+  }
+
   const checks = await Promise.allSettled(
     symbols.map(async (sym) => {
       if (!sym.filePath) return null;
@@ -862,6 +936,8 @@ async function filterAccessibleSymbols(symbols: SymbolWithClass[]): Promise<Symb
       accessible.push(result.value);
     }
   }
+
+  accessibleSymbolsCache = { symbols: accessible, timestamp: Date.now() };
   return accessible;
 }
 
@@ -921,7 +997,8 @@ async function processSymbol(
     }
 
     const groupedScenarioLines = model === "simple" ? null : groupScenarioLines(lines);
-    const currentOutcome = outcomeForRange(qr, bars);
+    const outcomeDetail = outcomeForRangeDetailed(qr, bars);
+    const currentOutcome = outcomeDetail.outcome;
     const { zone, direction } = classifyZone(vsMid, lines, model, currentOutcome, groupedScenarioLines);
 
     // Compute zones for the quarter's actual traded high and low
@@ -971,6 +1048,8 @@ async function processSymbol(
       magnitude: Number(magnitude.toFixed(2)),
       direction,
       assetClass: sym.assetClass,
+      scenario: currentOutcome,
+      daysSinceChange: outcomeDetail.daysSinceChange,
     };
   } catch {
     // Silent failure for individual symbols — expected for some files
@@ -1150,58 +1229,75 @@ export async function GET(req: NextRequest) {
 
   try {
     const now = Date.now();
-    const cached = moversCacheByModel[cacheKey] ?? null;
     const recomputeInProgress = recomputeInProgressByModel[cacheKey] ?? false;
 
-    // ── Serve from cache if fresh ──
-    if (
-      useCache &&
-      cached &&
-      now - cached.timestamp < CACHE_TTL_MS
-    ) {
-      const movers = applyFilters([...cached.movers], classFilter, directionFilter);
-      return buildResponse(movers, cached.movers.length, source, true, cached.timestamp);
+    // ── 1. In-memory cache (same instance, fastest path) ──
+    const memCached = moversCacheByModel[cacheKey] ?? null;
+    if (useCache && memCached && now - memCached.timestamp < CACHE_TTL_MS) {
+      const movers = applyFilters([...memCached.movers], classFilter, directionFilter);
+      return buildResponse(movers, memCached.movers.length, source, true, memCached.timestamp);
     }
 
-    // ── Serve stale cache while recomputing in background ──
-    if (
-      useCache &&
-      cached &&
-      now - cached.timestamp < STALE_SERVE_MS &&
-      !recomputeInProgress
-    ) {
-      // Trigger background recomputation (fire-and-forget)
-      recomputeInProgressByModel[cacheKey] = true;
-      recomputeMovers(source, safeModel)
-        .then((allMovers) => {
-          moversCacheByModel[cacheKey] = { movers: allMovers, timestamp: Date.now() };
-          console.log(`[movers] Background recompute complete (model=${safeModel}): ${allMovers.length} symbols`);
-        })
-        .catch((err) => {
-          console.error(`[movers] Background recompute failed (model=${safeModel}):`, err);
-        })
-        .finally(() => {
-          recomputeInProgressByModel[cacheKey] = false;
-        });
+    // ── 2. Wasabi shared cache (works across all serverless instances) ──
+    if (useCache) {
+      try {
+        const wasabiCached = await readWasabiJson<CachedResult>(`cache/movers_${cacheKey}.json`);
+        if (wasabiCached?.movers && wasabiCached.timestamp) {
+          // Populate in-memory cache for this instance
+          moversCacheByModel[cacheKey] = wasabiCached;
 
-      // Serve stale data immediately
-      const movers = applyFilters([...cached.movers], classFilter, directionFilter);
-      return buildResponse(movers, cached.movers.length, source, true, cached.timestamp);
+          if (now - wasabiCached.timestamp < CACHE_TTL_MS) {
+            // Fresh — serve immediately
+            const movers = applyFilters([...wasabiCached.movers], classFilter, directionFilter);
+            return buildResponse(movers, wasabiCached.movers.length, source, true, wasabiCached.timestamp);
+          }
+
+          if (now - wasabiCached.timestamp < STALE_SERVE_MS && !recomputeInProgress) {
+            // Stale but usable — background recompute + write back to Wasabi
+            recomputeInProgressByModel[cacheKey] = true;
+            recomputeMovers(source, safeModel)
+              .then((allMovers) => {
+                const newCache: CachedResult = { movers: allMovers, timestamp: Date.now() };
+                moversCacheByModel[cacheKey] = newCache;
+                return writeWasabiJson(`cache/movers_${cacheKey}.json`, newCache);
+              })
+              .then(() => console.log(`[movers] Background recompute + Wasabi write done (model=${safeModel})`))
+              .catch((err) => console.error(`[movers] Background recompute failed (model=${safeModel}):`, err))
+              .finally(() => { recomputeInProgressByModel[cacheKey] = false; });
+
+            const movers = applyFilters([...wasabiCached.movers], classFilter, directionFilter);
+            return buildResponse(movers, wasabiCached.movers.length, source, true, wasabiCached.timestamp);
+          }
+        }
+      } catch {
+        // No Wasabi cache yet — fall through to compute
+      }
     }
 
-    // ── First request or cache expired: compute synchronously ──
+    // ── 3. No cache anywhere — compute synchronously, then write to Wasabi ──
     const t0 = performance.now();
-    const allMovers = await recomputeMovers(source, safeModel);
+    const computeTimeout = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error("movers_timeout")), 55_000),
+    );
+    const allMovers = await Promise.race([recomputeMovers(source, safeModel), computeTimeout]);
     const computeMs = performance.now() - t0;
 
-    // Cache the full results (before filtering)
     if (useCache) {
-      moversCacheByModel[cacheKey] = { movers: allMovers, timestamp: now };
+      const newCache: CachedResult = { movers: allMovers, timestamp: now };
+      moversCacheByModel[cacheKey] = newCache;
+      // Write to Wasabi non-blocking so the response isn't delayed
+      writeWasabiJson(`cache/movers_${cacheKey}.json`, newCache)
+        .then(() => console.log(`[movers] Wasabi cache written (model=${safeModel})`))
+        .catch((err) => console.error(`[movers] Failed to write Wasabi cache (model=${safeModel}):`, err));
     }
 
     const movers = applyFilters([...allMovers], classFilter, directionFilter);
     return buildResponse(movers, allMovers.length, source, false, now, computeMs);
-  } catch (err) {
+  } catch (err: any) {
+    if (err?.message === "movers_timeout") {
+      console.error(`[movers] Computation timed out after 55s (model=${safeModel})`);
+      return Response.json({ error: "Computation timed out — cache warming in progress, try again shortly.", movers: [] }, { status: 503 });
+    }
     console.error("[movers] Fatal error:", err);
     return Response.json({ error: "Failed to compute movers", movers: [] }, { status: 500 });
   }

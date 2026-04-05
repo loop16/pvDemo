@@ -137,6 +137,19 @@ export default function ModelsPage() {
             Explore pricing
           </Link>
         </section>
+
+        {/* Inline footer */}
+        <div className="mt-16 border-t border-neutral-200 pt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-[12px] text-neutral-400">
+            <Link href="/about" className="hover:text-neutral-700 transition-colors">About</Link>
+            <Link href="/pricing" className="hover:text-neutral-700 transition-colors">Pricing</Link>
+            <Link href="/demo" className="hover:text-neutral-700 transition-colors">Demo</Link>
+            <Link href="/terms" className="hover:text-neutral-700 transition-colors">Terms</Link>
+            <Link href="/privacy" className="hover:text-neutral-700 transition-colors">Privacy</Link>
+            <a href="mailto:support@price-vault.com" className="hover:text-neutral-700 transition-colors">Contact</a>
+          </nav>
+          <p className="mono text-[11px] text-neutral-400">© 2026 Pricevault. Not financial advice.</p>
+        </div>
       </main>
     </>
   );

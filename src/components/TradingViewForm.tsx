@@ -38,10 +38,11 @@ export default function TradingViewForm({ initialValue, planLabel }: Props) {
   };
 
   return (
-    <div className="mt-6 rounded-lg border border-neutral-200 p-5">
-      <h2 className="text-sm font-semibold text-neutral-900">TradingView</h2>
+    <div className="mt-6 border border-neutral-200 p-5" style={{ background: 'rgba(255,255,255,0.4)' }}>
+      <div className="label mb-1">TradingView</div>
+      <p className="text-sm font-semibold text-neutral-900 mono">Connect your account</p>
       <p className="mt-1 text-xs text-neutral-500">
-        Required for the {planLabel} plan. Enter your TradingView username so we can enable access.
+        Required for the {planLabel} plan. Enter your TradingView username so we can enable indicator access.
       </p>
 
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3 md:flex-row md:items-center">
@@ -54,17 +55,17 @@ export default function TradingViewForm({ initialValue, planLabel }: Props) {
         <button
           type="submit"
           disabled={status === "loading"}
-          className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50"
+          className="mono bg-neutral-900 px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-white hover:opacity-85 transition-opacity disabled:opacity-50"
         >
           {status === "loading" ? "Saving..." : "Save"}
         </button>
       </form>
 
       {status === "error" && (
-        <p className="mt-2 text-xs text-red-600">{message}</p>
+        <p className="mt-2 text-xs text-red-600 mono">{message}</p>
       )}
       {status === "success" && (
-        <p className="mt-2 text-xs text-emerald-600">{message}</p>
+        <p className="mt-2 text-xs text-emerald-600 mono">{message}</p>
       )}
     </div>
   );

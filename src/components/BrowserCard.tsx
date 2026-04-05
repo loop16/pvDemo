@@ -11,7 +11,7 @@ export default function BrowserCard() {
         </div>
         <span className="mono text-[10px] text-neutral-400 tracking-wider">pricevault.app</span>
       </div>
-      <div className="relative aspect-[4/3] md:aspect-[3/2] w-full overflow-hidden">
+      <div className="relative aspect-[4/3] md:aspect-[8/5] w-full overflow-hidden">
         <Image src="/hero-demo.png" alt="Overlay preview" fill priority className="object-cover" />
       </div>
     </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Providers from "./providers";
 
 export const metadata: Metadata = {
   title: "Price-Vault",
@@ -22,7 +23,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`antialiased overflow-x-hidden bg-white text-neutral-900`} style={{ overscrollBehavior: 'none' }}>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

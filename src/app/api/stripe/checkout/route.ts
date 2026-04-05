@@ -66,6 +66,8 @@ export async function POST(req: Request) {
   const origin =
     req.headers.get("origin") || process.env.NEXTAUTH_URL || "http://localhost:3000";
 
+  const isCoreTv = priceId === process.env.STRIPE_PRICE_ID_CORE_TV;
+
   const checkout = await stripe.checkout.sessions.create({
     mode,
     customer: customerId,
@@ -73,6 +75,16 @@ export async function POST(req: Request) {
     allow_promotion_codes: true,
     success_url: `${origin}/subscribe/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/subscribe`,
+    ...(isCoreTv && {
+      custom_fields: [
+        {
+          key: "tradingview_username",
+          label: { type: "custom", custom: "TradingView Username" },
+          type: "text",
+          optional: true,
+        },
+      ],
+    }),
   });
 
   await upsertUserByEmail(email, { stripeCheckoutSessionId: checkout.id, stripePriceId: priceId });

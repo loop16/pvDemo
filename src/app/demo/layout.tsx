@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ThemeProvider, useTheme } from "@/components/terminal/ThemeContext";
 import HalftoneCanvas from "@/components/HalftoneCanvasV1";
 import SettingsPanel from "@/components/terminal/SettingsPanel";
+import OnboardingPopup from "@/components/terminal/OnboardingPopup";
 
 function DemoLayoutInner({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
@@ -61,6 +62,7 @@ function DemoLayoutInner({ children }: { children: React.ReactNode }) {
       </div>
 
       <SettingsPanel open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <OnboardingPopup storageKey="pv-onboarding-demo" alwaysShow variant="demo" />
     </div>
   );
 }

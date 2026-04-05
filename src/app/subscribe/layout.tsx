@@ -1,6 +1,8 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { getUser } from "@/lib/user-store";
+import HalftoneCanvas from "@/components/HalftoneCanvasV1";
+import GridLines from "@/components/GridLines";
 
 export default async function SubscribeLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
@@ -13,5 +15,13 @@ export default async function SubscribeLayout({ children }: { children: React.Re
     redirect("/app");
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <div className="fixed inset-0 z-0">
+        <HalftoneCanvas />
+      </div>
+      <GridLines />
+      {children}
+    </>
+  );
 }

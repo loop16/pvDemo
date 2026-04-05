@@ -65,13 +65,12 @@ export default function AccountActions({ isActive, plans, isCorePlan }: Props) {
                     type="button"
                     onClick={handlePortal}
                     disabled={status === "loading"}
-                    className="w-full rounded-md border border-neutral-300 bg-white px-4 py-3 text-left text-sm font-semibold text-neutral-900 hover:bg-neutral-50 disabled:opacity-50"
+                    className="w-full border border-neutral-200 p-4 text-left transition-colors hover:border-neutral-400 disabled:opacity-50"
+                    style={{ background: 'rgba(255,255,255,0.4)' }}
                 >
-                    <div className="text-xs uppercase tracking-wide text-neutral-500">
-                        Billing
-                    </div>
-                    <div className="text-base">Manage subscription</div>
-                    <div className="text-xs font-normal text-neutral-500">
+                    <div className="label mb-1">Billing</div>
+                    <div className="mono text-[14px] font-semibold text-neutral-900">Manage subscription</div>
+                    <div className="mt-1 text-xs text-neutral-500">
                         Update payment method, cancel, or view invoices.
                     </div>
                 </button>
@@ -86,17 +85,15 @@ export default function AccountActions({ isActive, plans, isCorePlan }: Props) {
                                 type="button"
                                 onClick={() => handleCheckout(plan.key)}
                                 disabled={status === "loading"}
-                                className="w-full rounded-md bg-black px-4 py-3 text-left text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50"
+                                className="w-full bg-neutral-900 p-4 text-left transition-opacity hover:opacity-85 disabled:opacity-50"
                             >
-                                <div className="text-xs uppercase tracking-wide text-white/70">
-                                    {plan.name}
-                                </div>
-                                <div className="text-base">{plan.price}</div>
-                                <div className="text-xs font-normal text-white/80">
+                                <div className="mono text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">{plan.name}</div>
+                                <div className="mono text-[14px] font-semibold text-white">{plan.price}</div>
+                                <div className="mt-1 text-xs text-neutral-400">
                                     {plan.description}
                                 </div>
-                                <div className="mt-3 text-xs font-semibold uppercase tracking-wide text-white/80">
-                                    {ctaLabel}
+                                <div className="mt-3 mono text-[11px] font-semibold uppercase tracking-wider text-white/70">
+                                    {ctaLabel} →
                                 </div>
                             </button>
                         ))}
@@ -105,7 +102,7 @@ export default function AccountActions({ isActive, plans, isCorePlan }: Props) {
             </div>
 
             {status === "error" && (
-                <div className="rounded-md border border-red-100 bg-red-50 p-3 text-sm text-red-600">
+                <div className="mono border border-red-200 bg-red-50 p-3 text-xs text-red-600">
                     {errorMessage}
                 </div>
             )}

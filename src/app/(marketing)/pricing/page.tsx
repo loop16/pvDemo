@@ -37,7 +37,7 @@ const TIERS = [
     period: "",
     description: "Contact us with your request and we'll tailor a plan for your team.",
     bullets: [],
-    cta: { label: "Contact us", href: "/signup?plan=custom" },
+    cta: { label: "Contact us", href: "mailto:support@price-vault.com?subject=Enterprise%20Plan%20Inquiry" },
     featured: false,
   },
 ] as const;
@@ -187,6 +187,19 @@ export default function PricingPage() {
         <p className="mono mt-10 text-[11px] text-neutral-700 text-center tracking-wide">
           Prices in USD. Cancel anytime. TradingView indicators require an active TradingView account.
         </p>
+
+        {/* Inline footer */}
+        <div className="mt-10 border-t border-neutral-200 pt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-[12px] text-neutral-400">
+            <Link href="/about" className="hover:text-neutral-700 transition-colors">About</Link>
+            <Link href="/models" className="hover:text-neutral-700 transition-colors">Models</Link>
+            <Link href="/demo" className="hover:text-neutral-700 transition-colors">Demo</Link>
+            <Link href="/terms" className="hover:text-neutral-700 transition-colors">Terms</Link>
+            <Link href="/privacy" className="hover:text-neutral-700 transition-colors">Privacy</Link>
+            <a href="mailto:support@price-vault.com" className="hover:text-neutral-700 transition-colors">Contact</a>
+          </nav>
+          <p className="mono text-[11px] text-neutral-400">© 2026 Pricevault. Not financial advice.</p>
+        </div>
       </main>
     </>
   );

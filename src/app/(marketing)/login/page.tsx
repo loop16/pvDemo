@@ -31,9 +31,11 @@ function LoginForm() {
             if (res?.error) {
                 setStatus("error");
                 setErrorMessage(
-                    res.error === "CredentialsSignin"
-                        ? "Invalid credentials."
-                        : "Something went wrong."
+                    res.error.includes("Too many")
+                        ? res.error
+                        : res.error === "CredentialsSignin"
+                            ? "Invalid credentials."
+                            : "Something went wrong."
                 );
             } else {
                 router.refresh();
@@ -153,6 +155,11 @@ function LoginForm() {
                 New here?{" "}
                 <a href="/signup" className="mono font-medium text-neutral-900 hover:opacity-70 transition-opacity text-[12px] uppercase tracking-wider">
                     Create account
+                </a>
+            </div>
+            <div className="mt-3 text-center">
+                <a href="/reset-password" className="mono text-[11px] text-neutral-400 hover:text-neutral-700 uppercase tracking-wider transition-colors">
+                    Forgot password?
                 </a>
             </div>
         </div>

@@ -17,7 +17,7 @@ export async function GET(req: Request) {
     }
 
     if (user?.stripePaid) {
-        return NextResponse.redirect(new URL("/app", req.url));
+        return NextResponse.redirect(new URL("/terminal", req.url));
     }
 
     return NextResponse.redirect(new URL("/account", req.url));

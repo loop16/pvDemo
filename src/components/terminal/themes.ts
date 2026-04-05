@@ -276,12 +276,90 @@ export const ibkrTheme: ChartTheme = {
 };
 
 // ============================================================================
+// CODEX — dark terminal, green phosphor, classic CRT hacker aesthetic
+// ============================================================================
+
+export const codexTheme: ChartTheme = {
+  name: 'Codex',
+  bg: '#1a1b26',
+  surface: '#1f2133',
+  panel: '#1c1d2e',
+  border: '#2e3047',
+  borderLight: '#262840',
+  text: '#c8e6e4',
+  textSecondary: '#6bbab5',
+  textDim: '#3d6e6b',
+  gridH: '#222338',
+  gridV: '#202132',
+  crosshair: '#3a3c55',
+  axisText: '#6bbab5',
+  candleUpBody: '#5bc4be',
+  candleUpWick: '#4aa8a3',
+  candleDownBody: '#e05565',
+  candleDownWick: '#c04555',
+  levelBlue: '#5bc4be',
+  levelPurple: '#7a8acd',
+  boxBlueFill: 'rgba(91,196,190,0.16)',
+  boxBlueStroke: 'rgba(91,196,190,0.32)',
+  boxPurpleFill: 'rgba(122,138,205,0.14)',
+  boxPurpleStroke: 'rgba(122,138,205,0.28)',
+  midBand: 'rgba(91,196,190,0.55)',
+  accent: '#5bc4be',
+  positive: '#5bc4be',
+  negative: '#e05565',
+  activeNavBg: '#242640',
+  hoverBg: '#222338',
+  badgeText: '#1a1b26',
+  frosted: false,
+};
+
+// ============================================================================
+// CLAUDE — warm cream background, terracotta accents, earthy tones
+// ============================================================================
+
+export const claudeTheme: ChartTheme = {
+  name: 'Claude',
+  bg: '#faf6f1',
+  surface: '#f3ede5',
+  panel: '#faf6f1',
+  border: '#e0d5c7',
+  borderLight: '#ebe3d8',
+  text: '#3d2e1f',
+  textSecondary: '#7a6651',
+  textDim: '#b09e8a',
+  gridH: '#ede5da',
+  gridV: '#f0e9e0',
+  crosshair: '#c8b9a6',
+  axisText: '#7a6651',
+  candleUpBody: '#d97757',
+  candleUpWick: '#c0623f',
+  candleDownBody: '#3d2e1f',
+  candleDownWick: '#3d2e1f',
+  levelBlue: '#d97757',
+  levelPurple: '#8b5e3c',
+  boxBlueFill: 'rgba(217,119,87,0.18)',
+  boxBlueStroke: 'rgba(217,119,87,0.35)',
+  boxPurpleFill: 'rgba(139,94,60,0.15)',
+  boxPurpleStroke: 'rgba(139,94,60,0.30)',
+  midBand: 'rgba(217,119,87,0.6)',
+  accent: '#d97757',
+  positive: '#d97757',
+  negative: '#3d2e1f',
+  activeNavBg: '#f0e4d6',
+  hoverBg: '#f5ede3',
+  badgeText: '#faf6f1',
+  frosted: false,
+};
+
+// ============================================================================
 // THEME REGISTRY
 // ============================================================================
 
 export const THEMES: Record<string, ChartTheme> = {
   pricevault: pricevaultTheme,
   light: lightTheme,
+  claude: claudeTheme,
+  codex: codexTheme,
   dark: darkTheme,
   bloomberg: bloombergTheme,
   thinkorswim: tosTheme,

@@ -69,15 +69,23 @@ export default function SignupPage() {
   return (
     <>
       <Header />
-      <main className="container-hero flex items-center justify-center h-[calc(100vh-80px)] -mt-36 overflow-hidden">
-        <div className="card auth-card">
-          <h1 className="text-2xl font-bold mb-2">Create your account</h1>
-          <p className="text-sm text-neutral-600 mb-6">
+      <main className="relative z-20 container-hero flex items-center justify-center h-[calc(100vh-80px)] -mt-36 overflow-hidden">
+        <div className="w-full max-w-sm mx-auto p-8" style={{
+          background: 'rgba(255,255,255,0.15)',
+          backdropFilter: 'blur(20px) saturate(1.6)',
+          WebkitBackdropFilter: 'blur(20px) saturate(1.6)',
+          borderRadius: '20px',
+          border: '1px solid rgba(255,255,255,0.6)',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8)',
+        }}>
+          <div className="label mb-4">Get Started</div>
+          <h1 className="mono text-xl font-bold mb-2">Create your account</h1>
+          <p className="text-sm text-neutral-500 mb-6">
             Set up your credentials to get started.
           </p>
 
           {status === "error" && (
-            <div className="mb-4 p-3 bg-red-50 text-red-600 text-sm rounded border border-red-100">
+            <div className="mono mb-4 p-3 bg-red-50 text-red-600 text-xs border border-red-200">
               {errorMessage}
             </div>
           )}
@@ -87,7 +95,7 @@ export default function SignupPage() {
               <button
                 onClick={handleGoogleSignup}
                 type="button"
-                className="w-full flex items-center justify-center gap-2 bg-white border border-neutral-300 text-neutral-700 hover:bg-neutral-50 font-medium py-2.5 px-4 rounded-md transition-colors"
+                className="w-full flex items-center justify-center gap-2 bg-white border border-neutral-300 text-neutral-700 hover:border-neutral-900 font-medium py-2.5 px-4 transition-colors text-sm"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -102,8 +110,10 @@ export default function SignupPage() {
                 <div className="absolute inset-0 flex items-center">
                   <span className="w-full border-t border-neutral-200" />
                 </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-white px-2 text-neutral-500">Or continue with</span>
+                <div className="relative flex justify-center">
+                  <span className="mono px-3 text-[10px] text-neutral-400 uppercase tracking-widest" style={{ background: 'rgba(255,255,255,0.3)' }}>
+                    Or continue with
+                  </span>
                 </div>
               </div>
             </>
@@ -111,7 +121,7 @@ export default function SignupPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-1">
+              <label htmlFor="email" className="label block mb-1.5">
                 Email
               </label>
               <input
@@ -121,19 +131,19 @@ export default function SignupPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="symbol-input w-full"
-                placeholder="you@company.com"
+                placeholder="you@example.com"
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-neutral-700 mb-1">
+              <label htmlFor="password" className="label block mb-1.5">
                 Password
               </label>
               <input
                 id="password"
                 type="password"
                 required
-                minLength={4}
+                minLength={8}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="symbol-input w-full"
@@ -144,15 +154,15 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="w-full bg-black text-white py-2.5 px-4 rounded-md font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+              className="mono w-full bg-neutral-900 text-white py-2.5 px-4 text-[12px] font-semibold uppercase tracking-wider hover:opacity-85 transition-opacity disabled:opacity-50"
             >
               {status === "loading" ? "Creating..." : "Create account"}
             </button>
           </form>
 
-          <div className="mt-4 text-center text-sm text-neutral-600">
+          <div className="mt-5 text-center text-sm text-neutral-500">
             Already have an account?{" "}
-            <a href="/login" className="font-medium text-neutral-900 underline underline-offset-4">
+            <a href="/login" className="mono font-medium text-neutral-900 hover:opacity-70 transition-opacity text-[12px] uppercase tracking-wider">
               Sign in
             </a>
           </div>
