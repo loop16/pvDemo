@@ -79,6 +79,7 @@ export default function ModelsPage() {
           <p className="text-[15px] text-neutral-500 leading-relaxed max-w-3xl">
             Four distinct models for analyzing price levels. Select one below.
           </p>
+          <p className="mono text-[11px] text-neutral-400 uppercase tracking-widest">Data updates daily after market close</p>
         </section>
 
         {/* Tab bar */}

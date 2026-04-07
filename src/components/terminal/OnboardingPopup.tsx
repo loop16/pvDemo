@@ -50,6 +50,7 @@ const TERMINAL_STEPS: Step[] = [
     title: 'Getting Started',
     body: [
       'Use the search bar to find any asset. Switch models with the tabs in the panel header. Open up to 4 charts at once with the layout selector.',
+      'Data updates daily after market close.',
     ],
   },
 ];
