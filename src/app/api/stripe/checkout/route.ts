@@ -48,7 +48,19 @@ export async function POST(req: Request) {
     user = await upsertUserByEmail(email, { name: session.user.name ?? undefined });
   }
 
-  let customerId = user.stripeCustomerId;
+  let customerId = user.stripeCustomerId ?? null;
+
+  // Verify the stored customer ID is valid in the current Stripe mode.
+  // If it's stale (e.g. test-mode ID with live key), create a fresh one.
+  if (customerId) {
+    try {
+      await stripe.customers.retrieve(customerId);
+    } catch {
+      customerId = null;
+      await upsertUserByEmail(email, { stripeCustomerId: null as any });
+    }
+  }
+
   if (!customerId) {
     const customer = await stripe.customers.create({
       email,
@@ -68,26 +80,30 @@ export async function POST(req: Request) {
 
   const isCoreTv = priceId === process.env.STRIPE_PRICE_ID_CORE_TV;
 
-  const checkout = await stripe.checkout.sessions.create({
-    mode,
-    customer: customerId,
-    line_items: [{ price: priceId, quantity: 1 }],
-    allow_promotion_codes: true,
-    success_url: `${origin}/subscribe/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${origin}/subscribe`,
-    ...(isCoreTv && {
-      custom_fields: [
-        {
-          key: "tradingview_username",
-          label: { type: "custom", custom: "TradingView Username" },
-          type: "text",
-          optional: true,
-        },
-      ],
-    }),
-  });
+  try {
+    const checkout = await stripe.checkout.sessions.create({
+      mode,
+      customer: customerId,
+      line_items: [{ price: priceId, quantity: 1 }],
+      allow_promotion_codes: true,
+      success_url: `${origin}/subscribe/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/subscribe`,
+      ...(isCoreTv && {
+        custom_fields: [
+          {
+            key: "tradingview_username",
+            label: { type: "custom", custom: "TradingView Username" },
+            type: "text",
+            optional: true,
+          },
+        ],
+      }),
+    });
 
-  await upsertUserByEmail(email, { stripeCheckoutSessionId: checkout.id, stripePriceId: priceId });
-
-  return NextResponse.json({ url: checkout.url });
+    await upsertUserByEmail(email, { stripeCheckoutSessionId: checkout.id, stripePriceId: priceId });
+    return NextResponse.json({ url: checkout.url });
+  } catch (err: any) {
+    console.error("[checkout] Stripe error:", err?.message);
+    return NextResponse.json({ error: err?.message || "Unable to start checkout." }, { status: 500 });
+  }
 }
