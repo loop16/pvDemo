@@ -39,7 +39,7 @@ function LoginForm() {
                 );
             } else {
                 router.refresh();
-                router.push("/app");
+                router.push("/post-login");
             }
         } catch (err) {
             console.error(err);
@@ -55,7 +55,7 @@ function LoginForm() {
     }, []);
 
     const handleGoogleLogin = () => {
-        signIn("google", { callbackUrl: "/app" });
+        signIn("google", { callbackUrl: "/post-login" });
     };
 
     return (
