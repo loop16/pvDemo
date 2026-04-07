@@ -21,7 +21,11 @@ export default function Header() {
           <Link href="/about" className="text-[15px] text-neutral-400 hover:text-neutral-900 transition-colors">About</Link>
           <Link href="/models" className="text-[15px] text-neutral-400 hover:text-neutral-900 transition-colors">Models</Link>
           <Link href="/pricing" className="text-[15px] text-neutral-400 hover:text-neutral-900 transition-colors">Pricing</Link>
-          <Link href="/demo" className="text-[14px] font-medium text-neutral-900 bg-white border border-neutral-300 w-[100px] py-2 text-center hover:bg-neutral-50 transition-colors">Try Demo</Link>
+          {session?.user?.paid ? (
+            <Link href="/terminal" className="text-[14px] font-medium text-neutral-900 bg-white border border-neutral-300 w-[100px] py-2 text-center hover:bg-neutral-50 transition-colors">Terminal</Link>
+          ) : (
+            <Link href="/demo" className="text-[14px] font-medium text-neutral-900 bg-white border border-neutral-300 w-[100px] py-2 text-center hover:bg-neutral-50 transition-colors">Try Demo</Link>
+          )}
           {session ? (
             <>
               <Link href="/account" className="text-[14px] font-medium text-neutral-900 bg-white border border-neutral-300 w-[100px] py-2 text-center hover:bg-neutral-50 transition-colors">Account</Link>
@@ -75,7 +79,11 @@ export default function Header() {
             <Link href="/models" className="text-[16px] text-neutral-700 font-medium" onClick={() => setMenuOpen(false)}>Models</Link>
             <Link href="/pricing" className="text-[16px] text-neutral-700 font-medium" onClick={() => setMenuOpen(false)}>Pricing</Link>
             <div className="flex gap-3 pt-4">
-              <Link href="/demo" className="text-[14px] font-medium text-neutral-900 bg-white/80 border border-neutral-300 px-5 py-3 flex-1 text-center" onClick={() => setMenuOpen(false)}>Try Demo</Link>
+              {session?.user?.paid ? (
+                <Link href="/terminal" className="text-[14px] font-medium text-neutral-900 bg-white/80 border border-neutral-300 px-5 py-3 flex-1 text-center" onClick={() => setMenuOpen(false)}>Terminal</Link>
+              ) : (
+                <Link href="/demo" className="text-[14px] font-medium text-neutral-900 bg-white/80 border border-neutral-300 px-5 py-3 flex-1 text-center" onClick={() => setMenuOpen(false)}>Try Demo</Link>
+              )}
               {session ? (
                 <Link href="/account" className="text-[14px] font-medium text-white bg-neutral-900 border border-neutral-900 px-5 py-3 flex-1 text-center" onClick={() => setMenuOpen(false)}>Account</Link>
               ) : (
