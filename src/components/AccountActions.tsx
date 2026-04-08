@@ -55,12 +55,39 @@ export default function AccountActions({ isActive, plans, isCorePlan }: Props) {
         }
     };
 
-    const showPlans = !isActive || isCorePlan;
-    const ctaLabel = !isActive ? "Start subscription" : "Upgrade plan";
+    // Plans to show: inactive = both, active Core = upgrade only, active Core+TV = none
+    const visiblePlans = !isActive
+        ? plans
+        : isCorePlan
+            ? plans.filter((p) => p.key === "core_tv")
+            : [];
 
     return (
         <div className="mt-6 space-y-3">
-            <div className="grid gap-3 md:grid-cols-2">
+            {/* Plan cards — shown when not subscribed or when upgrade is available */}
+            {visiblePlans.length > 0 && (
+                <div className={`grid gap-3 ${visiblePlans.length > 1 ? "md:grid-cols-2" : ""}`}>
+                    {visiblePlans.map((plan) => (
+                        <button
+                            key={plan.key}
+                            type="button"
+                            onClick={() => handleCheckout(plan.key)}
+                            disabled={status === "loading"}
+                            className="w-full bg-neutral-900 p-4 text-left transition-opacity hover:opacity-85 disabled:opacity-50"
+                        >
+                            <div className="mono text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">{plan.name}</div>
+                            <div className="mono text-[14px] font-semibold text-white">{plan.price}</div>
+                            <div className="mt-1 text-xs text-neutral-400">{plan.description}</div>
+                            <div className="mt-3 mono text-[11px] font-semibold uppercase tracking-wider text-white/70">
+                                {!isActive ? "Start subscription" : "Upgrade plan"} →
+                            </div>
+                        </button>
+                    ))}
+                </div>
+            )}
+
+            {/* Manage subscription — only shown when actively subscribed */}
+            {isActive && (
                 <button
                     type="button"
                     onClick={handlePortal}
@@ -74,32 +101,7 @@ export default function AccountActions({ isActive, plans, isCorePlan }: Props) {
                         Update payment method, cancel, or view invoices.
                     </div>
                 </button>
-
-                {showPlans && plans.length > 0 && (
-                    <>
-                        {plans
-                            .filter((plan) => !isActive || (isCorePlan && plan.key === "core_tv"))
-                            .map((plan) => (
-                            <button
-                                key={plan.key}
-                                type="button"
-                                onClick={() => handleCheckout(plan.key)}
-                                disabled={status === "loading"}
-                                className="w-full bg-neutral-900 p-4 text-left transition-opacity hover:opacity-85 disabled:opacity-50"
-                            >
-                                <div className="mono text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">{plan.name}</div>
-                                <div className="mono text-[14px] font-semibold text-white">{plan.price}</div>
-                                <div className="mt-1 text-xs text-neutral-400">
-                                    {plan.description}
-                                </div>
-                                <div className="mt-3 mono text-[11px] font-semibold uppercase tracking-wider text-white/70">
-                                    {ctaLabel} →
-                                </div>
-                            </button>
-                        ))}
-                    </>
-                )}
-            </div>
+            )}
 
             {status === "error" && (
                 <div className="mono border border-red-200 bg-red-50 p-3 text-xs text-red-600">
