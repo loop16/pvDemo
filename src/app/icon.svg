@@ -2,9 +2,9 @@
   <!-- Dark triangle background -->
   <path fill="#0b0f17" d="M128 16 244 220H12Z"/>
   <!-- Outer white V -->
-  <path fill="#ffffff" d="M128 60 196 188h-22L128 98l-46 90H60Z"/>
-  <!-- Blue inner V -->
-  <path fill="#2563eb" d="M128 98 166 175h-18L128 130l-20 45h-18Z"/>
-  <!-- White center V -->
-  <path fill="#ffffff" d="M128 130 148 173h-14L128 152l-6 21H108Z"/>
+  <path fill="#ffffff" d="M128 52 210 200H182L128 88 74 200H46Z"/>
+  <!-- Blue middle V -->
+  <path fill="#2563eb" d="M128 88 172 180H150L128 128 106 180H84Z"/>
+  <!-- White center pip -->
+  <path fill="#ffffff" d="M128 128 146 170H132L128 158 124 170H110Z"/>
 </svg>

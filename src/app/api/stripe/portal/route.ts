@@ -19,7 +19,17 @@ export async function POST(req: Request) {
         user = await upsertUserByEmail(email, { name: session.user.name ?? undefined });
     }
 
-    let customerId = user.stripeCustomerId;
+    let customerId = user.stripeCustomerId ?? null;
+
+    if (customerId) {
+        try {
+            await stripe.customers.retrieve(customerId);
+        } catch {
+            customerId = null;
+            await upsertUserByEmail(email, { stripeCustomerId: null as any });
+        }
+    }
+
     if (!customerId) {
         const customer = await stripe.customers.create({
             email,
@@ -32,10 +42,14 @@ export async function POST(req: Request) {
     const origin =
         req.headers.get("origin") || process.env.NEXTAUTH_URL || "http://localhost:3000";
 
-    const portal = await stripe.billingPortal.sessions.create({
-        customer: customerId,
-        return_url: `${origin}/account`,
-    });
-
-    return NextResponse.json({ url: portal.url });
+    try {
+        const portal = await stripe.billingPortal.sessions.create({
+            customer: customerId,
+            return_url: `${origin}/account`,
+        });
+        return NextResponse.json({ url: portal.url });
+    } catch (err: any) {
+        console.error("[portal] Stripe error:", err?.message);
+        return NextResponse.json({ error: err?.message || "Unable to open billing portal." }, { status: 500 });
+    }
 }
