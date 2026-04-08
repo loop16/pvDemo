@@ -88,7 +88,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ url: checkout.url });
 
   } catch (err: any) {
-    console.error("[checkout] error:", err?.message);
-    return NextResponse.json({ error: err?.message || "Unable to start checkout." }, { status: 500 });
+    console.error("[checkout] error type:", err?.type, "code:", err?.code, "message:", err?.message);
+    return NextResponse.json({ error: err?.message || "Unable to start checkout.", type: err?.type, code: err?.code }, { status: 500 });
   }
 }
