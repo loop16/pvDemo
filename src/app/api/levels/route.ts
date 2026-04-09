@@ -422,12 +422,11 @@ export async function GET(req: NextRequest) {
   const source = (searchParams.get("source") || DEFAULT_LEVELS_SOURCE).toLowerCase();
   
   // Map symbols to the consolidated levels file
-  const symbolMap: Record<string, string> = {
-    BTCUSD: "BTC",
-    CL: "CL1!",
-    GC: "GC1!",
-    SPX: "SPX",
-  };
+  // Demo mock data uses original names (CL, GC, NDX); Wasabi uses aliased names (CL1!, GC1!)
+  const isDemo = source === "demo" || !shouldUseWasabi(source);
+  const symbolMap: Record<string, string> = isDemo
+    ? { BTCUSD: "BTC", NQ: "NDX" }
+    : { BTCUSD: "BTC", CL: "CL1!", GC: "GC1!", SPX: "SPX" };
 
   if (model === "beta") {
     try {

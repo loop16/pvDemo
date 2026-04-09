@@ -130,7 +130,7 @@ export async function GET(req: NextRequest) {
   const rawSymbol = (searchParams.get("symbol") || "SPY").toUpperCase();
   const source = (searchParams.get("source") || DEFAULT_OHLCV_SOURCE).toLowerCase();
 
-  const symbol = SYMBOL_ALIASES[rawSymbol] || rawSymbol;
+  const symbol = source === "demo" ? rawSymbol : (SYMBOL_ALIASES[rawSymbol] || rawSymbol);
 
   try {
     if (source === "demo") {
