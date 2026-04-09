@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { SessionProvider, useSession, signOut } from "next-auth/react";
 import { ThemeProvider, useTheme } from "@/components/terminal/ThemeContext";
 import SettingsPanel from "@/components/terminal/SettingsPanel";
@@ -17,7 +17,6 @@ const NAV_ITEMS = [
 
 function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const router = useRouter();
   const { data: session, status } = useSession();
   const { theme } = useTheme();
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -56,18 +55,12 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // Auth gate — redirect to login if not authenticated
   if (status === "loading") {
     return (
       <div style={{ height: '100dvh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: theme.bg, fontFamily: "'SF Mono', monospace" }}>
         <span style={{ fontSize: 12, color: theme.textDim }}>Loading...</span>
       </div>
     );
-  }
-
-  if (status === "unauthenticated") {
-    router.replace("/login");
-    return null;
   }
 
   return (
@@ -264,34 +257,6 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      {/* Email verification banner */}
-      {session?.user && !(session.user as any).isEmailVerified && (session.user as any).email !== "demo@example.com" && (
-        <div
-          className="shrink-0 relative z-10 flex items-center justify-center gap-3"
-          style={{
-            background: theme.frosted ? "rgba(255,200,0,0.12)" : "#fffbe6",
-            borderBottom: `1px solid ${theme.frosted ? "rgba(200,160,0,0.2)" : "#ffe58f"}`,
-            padding: "6px 16px",
-            fontSize: 11,
-            color: theme.text,
-            fontFamily: "'SF Mono', monospace",
-          }}
-        >
-          <span style={{ opacity: 0.7 }}>Verify your email to secure your account.</span>
-          <a
-            href="/verify-email"
-            style={{
-              color: theme.text,
-              fontWeight: 600,
-              textDecoration: "underline",
-              fontSize: 11,
-              letterSpacing: "0.05em",
-            }}
-          >
-            Resend link
-          </a>
-        </div>
-      )}
 
       {/* Content area fills remaining viewport height */}
       <div className="flex-1 overflow-hidden relative z-10" style={{ minHeight: 0 }}>
