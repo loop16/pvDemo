@@ -94,6 +94,8 @@ const DEFAULT_LEVELS_SOURCE = (process.env.QPP_LEVELS_SOURCE || "wasabi").toLowe
 const DEFAULT_OHLCV_SOURCE = (process.env.QPP_OHLCV_SOURCE || "live").toLowerCase();
 const WASABI_PREFIX = (process.env.WASABI_PREFIX || "levels").replace(/^\/+|\/+$/g, "");
 
+const WASABI_OHLCV_DIR = "ohlcv/symbols";
+
 const OHLCV_ALIASES: Record<string, string> = {
   BTCUSD: "BTC",
   CL: "CL1!",
