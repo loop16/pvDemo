@@ -49,6 +49,96 @@ function interpAt(arr: number[], nx: number) {
   return arr[lo] * (1 - t) + arr[hi] * t;
 }
 
+// Module-level bitmap cache — persists across component mount/unmount (page navigation)
+// Key: "WxHxDPRxINVERTED" — same viewport size reuses the same bitmap instantly
+const _bitmapCache = new Map<string, ImageBitmap>();
+
+function renderToOffscreen(w: number, h: number, dpr: number, inverted: boolean): HTMLCanvasElement {
+  const GRID = 5;
+  const MAX_R = 2.4;
+  const priceMin = 95;
+  const priceMax = 110;
+
+  function priceToScreenY(p: number, height: number) {
+    return (1 - (p - priceMin) / (priceMax - priceMin)) * height + height * 0.05;
+  }
+
+  const offscreen = document.createElement("canvas");
+  const offCtx = offscreen.getContext("2d")!;
+  offscreen.width = w * dpr;
+  offscreen.height = h * dpr;
+  offCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  offCtx.clearRect(0, 0, w, h);
+
+  if (inverted) {
+    offCtx.fillStyle = "#000";
+    offCtx.fillRect(0, 0, w, h);
+    offCtx.fillStyle = "#fff";
+  } else {
+    offCtx.fillStyle = "#000";
+  }
+
+  const cols = Math.ceil(w / GRID) + 1;
+  const rows = Math.ceil(h / GRID) + 1;
+
+  for (let row = 0; row < rows; row++) {
+    const cy = row * GRID;
+    const ny = cy / h;
+    for (let col = 0; col < cols; col++) {
+      const cx = col * GRID;
+      const nx = cx / w;
+      let intensity = 0;
+      for (let li = 0; li < LAYERS.length; li++) {
+        const [arr, scale, off, peak, fadeH] = LAYERS[li];
+        const price = interpAt(arr, nx) * scale + off;
+        const ridgeY = priceToScreenY(price, h);
+        const depth = cy - ridgeY;
+        if (depth > 0) {
+          const t = Math.min(depth / fadeH, 1);
+          intensity += peak * (1 - t * 0.6);
+        }
+      }
+      if (nx < 0.25) {
+        const leftFade = 1 - nx / 0.25;
+        const leftPrice = interpAt(LEFT_DARK_PRICES, nx);
+        const leftY = priceToScreenY(leftPrice * 0.95 + 6, h);
+        if (cy > leftY) intensity += leftFade * 0.5;
+      }
+      if (ny > 0.82) {
+        const bottomRamp = (ny - 0.82) / 0.18;
+        intensity = intensity + (1 - intensity) * bottomRamp;
+      }
+      const edgeDist = Math.min(nx, 1 - nx);
+      if (edgeDist < 0.05) {
+        intensity = Math.max(intensity, (1 - edgeDist / 0.05) * ny * 0.7);
+      }
+      intensity = Math.max(0, Math.min(1, intensity));
+      if (intensity < 0.02) continue;
+      const r = intensity * MAX_R;
+      if (r < 0.25) continue;
+      offCtx.beginPath();
+      offCtx.arc(cx, cy, r, 0, Math.PI * 2);
+      offCtx.fill();
+    }
+  }
+
+  // EMA50 layer
+  const EMA50_SQ = 3;
+  const EMA50_OFFSET = -2.35;
+  for (let y = 0; y < h; y += EMA50_SQ) {
+    for (let x = 0; x < w; x += EMA50_SQ) {
+      const nx = x / w;
+      if (nx > 0.63) continue;
+      const price = interpAt(EMA50, nx) + EMA50_OFFSET;
+      const ridgeY = priceToScreenY(price, h);
+      if (y < ridgeY) continue;
+      offCtx.fillRect(x, y, EMA50_SQ, EMA50_SQ);
+    }
+  }
+
+  return offscreen;
+}
+
 export default function HalftoneCanvas({ inverted = false }: { inverted?: boolean } = {}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -58,106 +148,6 @@ export default function HalftoneCanvas({ inverted = false }: { inverted?: boolea
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const GRID = 5;
-    const MAX_R = 2.4;
-    const priceMin = 95;
-    const priceMax = 110;
-
-    function priceToScreenY(p: number, h: number) {
-      return (1 - (p - priceMin) / (priceMax - priceMin)) * h + h * 0.05;
-    }
-
-    // Offscreen canvas for static halftone dots
-    const offscreen = document.createElement("canvas");
-    const offCtx = offscreen.getContext("2d")!;
-    let lastW = 0, lastH = 0;
-
-    function renderHalftone(w: number, h: number, dpr: number) {
-      offscreen.width = w * dpr;
-      offscreen.height = h * dpr;
-      offCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      offCtx.clearRect(0, 0, w, h);
-      if (inverted) {
-        offCtx.fillStyle = "#000";
-        offCtx.fillRect(0, 0, w, h);
-        offCtx.fillStyle = "#fff";
-      } else {
-        offCtx.fillStyle = "#000";
-      }
-
-      const cols = Math.ceil(w / GRID) + 1;
-      const rows = Math.ceil(h / GRID) + 1;
-
-      for (let row = 0; row < rows; row++) {
-        const cy = row * GRID;
-        const ny = cy / h;
-
-        for (let col = 0; col < cols; col++) {
-          const cx = col * GRID;
-          const nx = cx / w;
-
-          let intensity = 0;
-
-          for (let li = 0; li < LAYERS.length; li++) {
-            const [arr, scale, off, peak, fadeH] = LAYERS[li];
-            const price = interpAt(arr, nx) * scale + off;
-            const ridgeY = priceToScreenY(price, h);
-            const depth = cy - ridgeY;
-            if (depth > 0) {
-              const t = Math.min(depth / fadeH, 1);
-              intensity += peak * (1 - t * 0.6);
-            }
-          }
-
-          if (nx < 0.25) {
-            const leftFade = 1 - nx / 0.25;
-            const leftPrice = interpAt(LEFT_DARK_PRICES, nx);
-            const leftY = priceToScreenY(leftPrice * 0.95 + 6, h);
-            if (cy > leftY) intensity += leftFade * 0.5;
-          }
-
-          if (ny > 0.82) {
-            const bottomRamp = (ny - 0.82) / 0.18;
-            intensity = intensity + (1 - intensity) * bottomRamp;
-          }
-
-          const edgeDist = Math.min(nx, 1 - nx);
-          if (edgeDist < 0.05) {
-            intensity = Math.max(intensity, (1 - edgeDist / 0.05) * ny * 0.7);
-          }
-
-          intensity = Math.max(0, Math.min(1, intensity));
-          if (intensity < 0.02) continue;
-
-          const r = intensity * MAX_R;
-          if (r < 0.25) continue;
-
-          offCtx.beginPath();
-          offCtx.arc(cx, cy, r, 0, Math.PI * 2);
-          offCtx.fill();
-        }
-      }
-
-      // ─── Separate EMA50 layer ───
-      // Pure black squares below the ridge, hard border at the EMA50 curve
-      // Cuts off at 2/3 viewport width
-      const EMA50_SQ = 3;          // square size
-      const EMA50_OFFSET = -2.35;  // price offset
-
-      for (let y = 0; y < h; y += EMA50_SQ) {
-        for (let x = 0; x < w; x += EMA50_SQ) {
-          const nx = x / w;
-          if (nx > 0.63) continue;
-
-          const price = interpAt(EMA50, nx) + EMA50_OFFSET;
-          const ridgeY = priceToScreenY(price, h);
-          if (y < ridgeY) continue;
-
-          offCtx.fillRect(x, y, EMA50_SQ, EMA50_SQ);
-        }
-      }
-    }
-
     function render() {
       const w = window.innerWidth;
       const h = window.innerHeight;
@@ -166,16 +156,43 @@ export default function HalftoneCanvas({ inverted = false }: { inverted?: boolea
       canvas!.height = h * dpr;
       canvas!.style.width = w + "px";
       canvas!.style.height = h + "px";
-      renderHalftone(w, h, dpr);
       ctx!.setTransform(1, 0, 0, 1, 0, 0);
-      ctx!.drawImage(offscreen, 0, 0);
+
+      const key = `${w}x${h}x${dpr}x${inverted ? 1 : 0}`;
+      const cached = _bitmapCache.get(key);
+      if (cached) {
+        ctx!.drawImage(cached, 0, 0);
+        return;
+      }
+
+      // Not cached — render in idle time so it doesn't block interaction
+      const draw = () => {
+        const offscreen = renderToOffscreen(w, h, dpr, inverted);
+        ctx!.drawImage(offscreen, 0, 0);
+        createImageBitmap(offscreen).then((bitmap) => {
+          _bitmapCache.set(key, bitmap);
+        });
+      };
+
+      if (typeof requestIdleCallback !== "undefined") {
+        requestIdleCallback(draw, { timeout: 300 });
+      } else {
+        requestAnimationFrame(draw);
+      }
     }
 
     render();
-    const onResize = () => render();
+    const onResize = () => {
+      // Clear cache for old size on resize
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      _bitmapCache.delete(`${w}x${h}x${dpr}x${inverted ? 1 : 0}`);
+      render();
+    };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  }, []);
+  }, [inverted]);
 
   return (
     <canvas
