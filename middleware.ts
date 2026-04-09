@@ -24,6 +24,12 @@ export default async function middleware(req: NextRequest) {
     // Always allow demo requests through
     if (isDemoApiRequest(req)) return NextResponse.next();
 
+    // Allow admin secret to bypass auth (used for cache warming from scripts)
+    const adminSecret = process.env.ADMIN_SECRET;
+    if (adminSecret && req.headers.get("x-admin-secret") === adminSecret) {
+        return NextResponse.next();
+    }
+
     const token = await getToken({ req, secret: process.env.AUTH_SECRET });
 
     // No token — unauthenticated
