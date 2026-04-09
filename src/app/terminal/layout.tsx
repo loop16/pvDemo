@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { SessionProvider, useSession, signOut } from "next-auth/react";
 import { ThemeProvider, useTheme } from "@/components/terminal/ThemeContext";
@@ -114,11 +115,12 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
           className="flex items-center gap-2"
           style={{ textDecoration: "none" }}
         >
-          <img
+          <Image
             src="/logo.svg"
             alt="Pricevault"
             width={18}
             height={18}
+            priority
             style={{
               opacity: 0.9,
               filter: isDark ? 'invert(1) brightness(2)' : 'none',

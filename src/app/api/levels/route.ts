@@ -102,7 +102,15 @@ function buildWasabiKey(pathParts: string) {
   return WASABI_PREFIX ? `${WASABI_PREFIX}/${pathParts}` : pathParts;
 }
 
+// Server-side in-memory cache — avoids repeated Wasabi round trips within the same instance
+const _s3Cache = new Map<string, { data: unknown; ts: number }>();
+const S3_CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+
 async function readWasabiJson<T>(pathParts: string): Promise<T> {
+  const now = Date.now();
+  const hit = _s3Cache.get(pathParts);
+  if (hit && now - hit.ts < S3_CACHE_TTL) return hit.data as T;
+
   const { S3Client, GetObjectCommand } = await import("@aws-sdk/client-s3");
   const bucket = process.env.WASABI_BUCKET || "";
   const accessKeyId = process.env.WASABI_ACCESS_KEY_ID || "";
@@ -118,7 +126,9 @@ async function readWasabiJson<T>(pathParts: string): Promise<T> {
   });
   const resp = await client.send(new GetObjectCommand({ Bucket: bucket, Key: key }));
   const raw = await streamToString(resp.Body);
-  return JSON.parse(raw) as T;
+  const data = JSON.parse(raw) as T;
+  _s3Cache.set(pathParts, { data, ts: now });
+  return data;
 }
 
 async function loadLevelsData(model: string, source: string): Promise<Record<string, LevelsEntry>> {

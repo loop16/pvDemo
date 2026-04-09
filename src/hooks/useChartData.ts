@@ -10,7 +10,7 @@ import type { Bar, LevelLine, LevelsResponse } from '@/components/terminal/types
 type CacheEntry<T> = { data: T; ts: number };
 const cache = new Map<string, CacheEntry<unknown>>();
 const inflight = new Map<string, Promise<unknown>>();
-const CACHE_TTL = 60_000; // 1 minute
+const CACHE_TTL = 5 * 60_000; // 5 minutes
 
 async function cachedFetch<T>(url: string): Promise<T> {
   const now = Date.now();

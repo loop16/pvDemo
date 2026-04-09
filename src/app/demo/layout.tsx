@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { ThemeProvider, useTheme } from "@/components/terminal/ThemeContext";
 import HalftoneCanvas from "@/components/HalftoneCanvasV1";
@@ -22,11 +23,12 @@ function DemoLayoutInner({ children }: { children: React.ReactNode }) {
         style={{ height: 44, padding: '0 20px', borderBottom: '1px solid rgba(255,255,255,0.5)', background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(30px) saturate(1.6)', WebkitBackdropFilter: 'blur(30px) saturate(1.6)' }}
       >
         <Link href="/" className="flex items-center gap-2" style={{ textDecoration: 'none' }}>
-          <img
+          <Image
             src="/logo.svg"
             alt="Pricevault"
             width={18}
             height={18}
+            priority
             style={{ opacity: 0.9, filter: isDark ? 'invert(1) brightness(2)' : 'none' }}
           />
           <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: '-0.01em', color: theme.text, fontFamily: "'Instrument Serif', 'Georgia', serif" }}>
