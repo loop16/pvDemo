@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import Header from "@/components/Header";
@@ -6,13 +7,16 @@ import AccountActions from "@/components/AccountActions";
 import Link from "next/link";
 import TradingViewForm from "@/components/TradingViewForm";
 
+// Deduplicate the DB call if auth() and getUser() are both called in the same render
+const getCachedUser = cache(getUser);
+
 export default async function AccountPage() {
     const session = await auth();
     if (!session?.user?.email) {
         redirect("/login");
     }
 
-    const user = await getUser(session.user.email);
+    const user = await getCachedUser(session.user.email);
     const status = user?.stripeSubscriptionStatus ?? "none";
     const isActive = !!user?.stripePaid;
 

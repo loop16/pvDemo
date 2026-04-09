@@ -398,12 +398,19 @@ async function loadOhlcvFast(symbol: string, source: string, resolvedFilePath?: 
 
   // Live mode: use tail-read for CSV files
   if (resolvedFilePath) {
-    const csv = await readCsvTail(resolvedFilePath);
-    const rows = parseCsvOhlcv(csv);
-    if (rows.length > 0) {
-      // CSV files are already in chronological order, but tail-read data should be sorted
-      return sortBars(rows);
-    }
+    try {
+      const csv = await readCsvTail(resolvedFilePath);
+      const rows = parseCsvOhlcv(csv);
+      if (rows.length > 0) return sortBars(rows);
+    } catch {}
+  }
+
+  // Wasabi fallback — used when local CSV files aren't deployed (e.g. Vercel)
+  if (process.env.WASABI_BUCKET && process.env.WASABI_ACCESS_KEY_ID && process.env.WASABI_SECRET_ACCESS_KEY) {
+    try {
+      const rows = await readWasabiJson<RawOhlcvRow[]>(`${WASABI_OHLCV_DIR}/${mapped}.json`);
+      if (Array.isArray(rows) && rows.length > 0) return sortBars(parseJsonOhlcv(rows));
+    } catch {}
   }
 
   throw new Error(`No OHLCV data available for ${symbol}`);
@@ -1107,8 +1114,10 @@ async function recomputeMovers(source: string, model: ModelType = "pro"): Promis
 
   const t1 = performance.now();
 
-  // Pre-filter: only keep symbols with accessible CSV files
-  const symbols = source === "demo"
+  // Pre-filter: only keep symbols with accessible CSV files.
+  // Skip filter if no symbols have file paths — they'll use Wasabi OHLCV fallback instead.
+  const allHaveNoPath = allSymbols.length > 0 && allSymbols.every((s) => !s.filePath);
+  const symbols = (source === "demo" || allHaveNoPath)
     ? allSymbols
     : await filterAccessibleSymbols(allSymbols);
 
