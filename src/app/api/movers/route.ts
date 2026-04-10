@@ -77,8 +77,6 @@ const BENCHMARK_SYMBOL = "SPX";
 const BETA_LOOKBACK = 1250;
 const BETA_CLAMP = 5;
 
-// Temporary debug collector — cleared per bust request
-let _bustDebug: string[] = [];
 
 /* ── Config ────────────────────────────────────────────── */
 
@@ -975,8 +973,7 @@ async function processSymbol(
 ): Promise<MoverRow | null> {
   try {
     const bars = await loadOhlcvFast(sym.symbol, source, sym.filePath);
-    console.log(`[movers-debug] ${sym.symbol} bars=${bars.length} lastTime=${bars[bars.length-1]?.time}`);
-    if (bars.length < 10) { console.log(`[movers-debug] ${sym.symbol} skip: bars<10`); return null; }
+    if (bars.length < 10) return null;
 
     // Get the last two bars for daily change
     const lastBar = bars[bars.length - 1];
@@ -990,7 +987,7 @@ async function processSymbol(
 
     // Compute quarterly midpoint
     const qr = findCurrentQuarterMid(bars);
-    if (!qr || !Number.isFinite(qr.mid) || qr.mid === 0) { console.log(`[movers-debug] ${sym.symbol} skip: qr=${JSON.stringify(qr)}`); return null; }
+    if (!qr || !Number.isFinite(qr.mid) || qr.mid === 0) return null;
 
     const mid = qr.mid;
     const vsMid = ((price - mid) / mid) * 100;
@@ -1074,11 +1071,8 @@ async function processSymbol(
       scenario: currentOutcome,
       daysSinceChange: outcomeDetail.daysSinceChange,
     };
-  } catch (err) {
+  } catch {
     // Silent failure for individual symbols — expected for some files
-    const msg = `${sym.symbol}: ${err instanceof Error ? err.message : String(err)}`;
-    console.log(`[movers-debug] threw: ${msg}`);
-    _bustDebug.push(msg);
     return null;
   }
 }
@@ -1120,8 +1114,6 @@ async function processInBatches(
 async function recomputeMovers(source: string, model: ModelType = "pro"): Promise<MoverRow[]> {
   const t0 = performance.now();
 
-  console.log(`[movers-debug] recomputeMovers start source=${source} model=${model} WASABI_BUCKET=${!!process.env.WASABI_BUCKET} cwd=${process.cwd()}`);
-
   // Load symbols and levels data in parallel
   // For beta model, load pro levels (will use SPX's for scaling)
   const levelsModel = model === "beta" ? "pro" : model;
@@ -1134,14 +1126,22 @@ async function recomputeMovers(source: string, model: ModelType = "pro"): Promis
   ]);
 
   const t1 = performance.now();
-  console.log(`[movers-debug] symbols loaded: ${allSymbols.length} symbols=${allSymbols.map(s=>s.symbol).join(',')}`);
 
   // Pre-filter: only keep symbols with accessible CSV files.
   // Skip filter if no symbols have file paths — they'll use Wasabi OHLCV fallback instead.
   const allHaveNoPath = allSymbols.length > 0 && allSymbols.every((s) => !s.filePath);
-  const symbols = (source === "demo" || allHaveNoPath)
-    ? allSymbols
-    : await filterAccessibleSymbols(allSymbols);
+  let symbols: SymbolWithClass[];
+  if (source === "demo" || allHaveNoPath) {
+    symbols = allSymbols;
+  } else {
+    symbols = await filterAccessibleSymbols(allSymbols);
+    if (symbols.length === 0 && allSymbols.length > 0) {
+      // No CSV files accessible (e.g. Vercel serverless) — strip local paths so
+      // loadOhlcvFast falls through to Wasabi OHLCV for each symbol instead.
+      console.log("[movers] No accessible CSV files — switching to Wasabi OHLCV mode");
+      symbols = allSymbols.map((s) => ({ ...s, filePath: undefined }));
+    }
+  }
 
   const t2 = performance.now();
 
@@ -1260,8 +1260,6 @@ export async function GET(req: NextRequest) {
   const isBust = adminSecret && req.headers.get("x-admin-secret") === adminSecret;
   const useCache = !isBust && source !== "demo" && process.env.NODE_ENV === "production";
 
-  if (isBust) _bustDebug = [];
-
   try {
     const now = Date.now();
     const recomputeInProgress = recomputeInProgressByModel[cacheKey] ?? false;
@@ -1327,12 +1325,7 @@ export async function GET(req: NextRequest) {
     }
 
     const movers = applyFilters([...allMovers], classFilter, directionFilter);
-    const resp = buildResponse(movers, allMovers.length, source, false, now, computeMs);
-    if (isBust && _bustDebug.length > 0) {
-      const body = await resp.json();
-      return Response.json({ ...body, _debug: _bustDebug });
-    }
-    return resp;
+    return buildResponse(movers, allMovers.length, source, false, now, computeMs);
   } catch (err: any) {
     if (err?.message === "movers_timeout") {
       console.error(`[movers] Computation timed out after 55s (model=${safeModel})`);
