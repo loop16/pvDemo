@@ -77,6 +77,9 @@ const BENCHMARK_SYMBOL = "SPX";
 const BETA_LOOKBACK = 1250;
 const BETA_CLAMP = 5;
 
+// Temporary debug collector — cleared per bust request
+let _bustDebug: string[] = [];
+
 /* ── Config ────────────────────────────────────────────── */
 
 const DEMO_SYMBOLS = ["SPX", "NQ", "BTCUSD", "CL", "GC"];
@@ -1073,7 +1076,9 @@ async function processSymbol(
     };
   } catch (err) {
     // Silent failure for individual symbols — expected for some files
-    console.log(`[movers-debug] ${sym.symbol} threw: ${err instanceof Error ? err.message : String(err)}`);
+    const msg = `${sym.symbol}: ${err instanceof Error ? err.message : String(err)}`;
+    console.log(`[movers-debug] threw: ${msg}`);
+    _bustDebug.push(msg);
     return null;
   }
 }
@@ -1255,6 +1260,8 @@ export async function GET(req: NextRequest) {
   const isBust = adminSecret && req.headers.get("x-admin-secret") === adminSecret;
   const useCache = !isBust && source !== "demo" && process.env.NODE_ENV === "production";
 
+  if (isBust) _bustDebug = [];
+
   try {
     const now = Date.now();
     const recomputeInProgress = recomputeInProgressByModel[cacheKey] ?? false;
@@ -1320,7 +1327,12 @@ export async function GET(req: NextRequest) {
     }
 
     const movers = applyFilters([...allMovers], classFilter, directionFilter);
-    return buildResponse(movers, allMovers.length, source, false, now, computeMs);
+    const resp = buildResponse(movers, allMovers.length, source, false, now, computeMs);
+    if (isBust && _bustDebug.length > 0) {
+      const body = await resp.json();
+      return Response.json({ ...body, _debug: _bustDebug });
+    }
+    return resp;
   } catch (err: any) {
     if (err?.message === "movers_timeout") {
       console.error(`[movers] Computation timed out after 55s (model=${safeModel})`);
