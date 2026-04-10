@@ -189,7 +189,7 @@ async function streamToString(stream: unknown): Promise<string> {
 }
 
 function shouldUseWasabi(source: string) {
-  if (source === "demo" || source === "local" || source === "live") return false;
+  if (source === "demo" || source === "local") return false;
   if (DEFAULT_LEVELS_SOURCE === "local" && DEFAULT_OHLCV_SOURCE === "local") return false;
   return Boolean(
     process.env.WASABI_BUCKET &&
