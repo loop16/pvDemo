@@ -972,7 +972,8 @@ async function processSymbol(
 ): Promise<MoverRow | null> {
   try {
     const bars = await loadOhlcvFast(sym.symbol, source, sym.filePath);
-    if (bars.length < 10) return null;
+    console.log(`[movers-debug] ${sym.symbol} bars=${bars.length} lastTime=${bars[bars.length-1]?.time}`);
+    if (bars.length < 10) { console.log(`[movers-debug] ${sym.symbol} skip: bars<10`); return null; }
 
     // Get the last two bars for daily change
     const lastBar = bars[bars.length - 1];
@@ -986,7 +987,7 @@ async function processSymbol(
 
     // Compute quarterly midpoint
     const qr = findCurrentQuarterMid(bars);
-    if (!qr || !Number.isFinite(qr.mid) || qr.mid === 0) return null;
+    if (!qr || !Number.isFinite(qr.mid) || qr.mid === 0) { console.log(`[movers-debug] ${sym.symbol} skip: qr=${JSON.stringify(qr)}`); return null; }
 
     const mid = qr.mid;
     const vsMid = ((price - mid) / mid) * 100;
@@ -1070,8 +1071,9 @@ async function processSymbol(
       scenario: currentOutcome,
       daysSinceChange: outcomeDetail.daysSinceChange,
     };
-  } catch {
+  } catch (err) {
     // Silent failure for individual symbols — expected for some files
+    console.log(`[movers-debug] ${sym.symbol} threw: ${err instanceof Error ? err.message : String(err)}`);
     return null;
   }
 }
@@ -1113,6 +1115,8 @@ async function processInBatches(
 async function recomputeMovers(source: string, model: ModelType = "pro"): Promise<MoverRow[]> {
   const t0 = performance.now();
 
+  console.log(`[movers-debug] recomputeMovers start source=${source} model=${model} WASABI_BUCKET=${!!process.env.WASABI_BUCKET} cwd=${process.cwd()}`);
+
   // Load symbols and levels data in parallel
   // For beta model, load pro levels (will use SPX's for scaling)
   const levelsModel = model === "beta" ? "pro" : model;
@@ -1125,6 +1129,7 @@ async function recomputeMovers(source: string, model: ModelType = "pro"): Promis
   ]);
 
   const t1 = performance.now();
+  console.log(`[movers-debug] symbols loaded: ${allSymbols.length} symbols=${allSymbols.map(s=>s.symbol).join(',')}`);
 
   // Pre-filter: only keep symbols with accessible CSV files.
   // Skip filter if no symbols have file paths — they'll use Wasabi OHLCV fallback instead.
