@@ -232,6 +232,14 @@
     "tv_exchange": "ICEUS"
   },
   {
+    "asset_name": "DXY",
+    "file_path": "../Daily data csv/INDEX_DXY, 1D.csv",
+    "tv_symbol": "DXY",
+    "tv_exchange": [
+      "TVC"
+    ]
+  },
+  {
     "asset_name": "ETHUSDT",
     "file_path": "../Daily data csv/CRYPTO_ETHUSDT, 1D.csv",
     "tv_symbol": "ETHUSDT",
