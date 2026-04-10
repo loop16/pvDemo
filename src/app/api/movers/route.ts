@@ -1236,7 +1236,9 @@ export async function GET(req: NextRequest) {
 
   // Per-model cache key
   const cacheKey = safeModel;
-  const useCache = source !== "demo" && process.env.NODE_ENV === "production";
+  const adminSecret = process.env.ADMIN_SECRET;
+  const isBust = adminSecret && req.headers.get("x-admin-secret") === adminSecret;
+  const useCache = !isBust && source !== "demo" && process.env.NODE_ENV === "production";
 
   try {
     const now = Date.now();
