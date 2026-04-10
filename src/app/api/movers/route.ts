@@ -407,13 +407,23 @@ async function loadOhlcvFast(symbol: string, source: string, resolvedFilePath?: 
     } catch {}
   }
 
-  // Wasabi fallback — used when local CSV files aren't deployed (e.g. Vercel)
+  // Wasabi fallback — try both mapped name and original symbol name
   if (process.env.WASABI_BUCKET && process.env.WASABI_ACCESS_KEY_ID && process.env.WASABI_SECRET_ACCESS_KEY) {
-    try {
-      const rows = await readWasabiJson<RawOhlcvRow[]>(`${WASABI_OHLCV_DIR}/${mapped}.json`);
-      if (Array.isArray(rows) && rows.length > 0) return sortBars(parseJsonOhlcv(rows));
-    } catch {}
+    const namesToTry = Array.from(new Set([mapped, symbol]));
+    for (const name of namesToTry) {
+      try {
+        const rows = await readWasabiJson<RawOhlcvRow[]>(`${WASABI_OHLCV_DIR}/${name}.json`);
+        if (Array.isArray(rows) && rows.length > 0) return sortBars(parseJsonOhlcv(rows));
+      } catch {}
+    }
   }
+
+  // Last resort: demo mock OHLCV (covers SPX, NQ, BTCUSD, CL, GC)
+  try {
+    const demoFile = path.join(DEMO_OHLCV_DIR, `${symbol}.json`);
+    const rows = await readJsonFile<RawOhlcvRow[]>(demoFile);
+    if (Array.isArray(rows) && rows.length > 0) return sortBars(parseJsonOhlcv(rows));
+  } catch {}
 
   throw new Error(`No OHLCV data available for ${symbol}`);
 }
