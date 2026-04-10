@@ -1237,7 +1237,7 @@ function buildResponse(
     {
       headers: {
         "content-type": "application/json",
-        "cache-control": "public, max-age=120, s-maxage=120",
+        "cache-control": "public, max-age=60, s-maxage=1800, stale-while-revalidate=86400",
       },
     },
   );
