@@ -1259,6 +1259,8 @@ export async function GET(req: NextRequest) {
   const adminSecret = process.env.ADMIN_SECRET;
   const isBust = adminSecret && req.headers.get("x-admin-secret") === adminSecret;
   const useCache = !isBust && source !== "demo" && process.env.NODE_ENV === "production";
+  // Admin bust requests skip reading cache but still write it, so users get instant loads after warming
+  const writeCache = source !== "demo" && process.env.NODE_ENV === "production";
 
   try {
     const now = Date.now();
@@ -1315,7 +1317,7 @@ export async function GET(req: NextRequest) {
     const allMovers = await Promise.race([recomputeMovers(source, safeModel), computeTimeout]);
     const computeMs = performance.now() - t0;
 
-    if (useCache) {
+    if (writeCache) {
       const newCache: CachedResult = { movers: allMovers, timestamp: now };
       moversCacheByModel[cacheKey] = newCache;
       // Write to Wasabi non-blocking so the response isn't delayed
