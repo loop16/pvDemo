@@ -88,6 +88,7 @@ function StatsPanel({
   const [sortKey, setSortKey] = useState<StatsSortKey>('magnitude');
   const [sortAsc, setSortAsc] = useState(false);
   const [showColumnPicker, setShowColumnPicker] = useState(false);
+  const [symbolSearch, setSymbolSearch] = useState('');
   const columnPickerRef = useRef<HTMLDivElement>(null);
 
   // -- Resizable width --
@@ -242,6 +243,7 @@ function StatsPanel({
       return true;
     })
     .filter(m => classFilter === 'all' || m.assetClass === classFilter)
+    .filter(m => !symbolSearch || m.symbol.toUpperCase().includes(symbolSearch.toUpperCase()))
     .sort((a, b) => {
       let cmp = 0;
       switch (sortKey) {
@@ -258,7 +260,7 @@ function StatsPanel({
       }
       return sortAsc ? cmp : -cmp;
     })
-    .slice(0, 150), [movers, dirFilter, classFilter, sortKey, sortAsc]);
+    .slice(0, 150), [movers, dirFilter, classFilter, symbolSearch, sortKey, sortAsc]);
 
   const dirFilters: { key: DirFilter; label: string }[] = [
     { key: 'all', label: 'ALL' },
@@ -558,6 +560,32 @@ function StatsPanel({
             {(['pro', 'simple', 'beta'] as ModelType[]).map(m => (
               <button key={m} onClick={() => setModel(m)} style={pill(model === m)}>{m.toUpperCase()}</button>
             ))}
+          </div>
+          <div className="flex items-center px-2" style={{ height: 22, borderTop: `1px solid ${theme.border}` }}>
+            <input
+              type="text"
+              placeholder="Search symbol…"
+              value={symbolSearch}
+              onChange={e => setSymbolSearch(e.target.value)}
+              style={{
+                flex: 1,
+                fontFamily: MONO,
+                fontSize: 9,
+                fontWeight: 500,
+                letterSpacing: '0.04em',
+                background: 'transparent',
+                border: 'none',
+                outline: 'none',
+                color: theme.text,
+                caretColor: theme.accent,
+              }}
+            />
+            {symbolSearch && (
+              <button
+                onClick={() => setSymbolSearch('')}
+                style={{ fontFamily: MONO, fontSize: 9, color: theme.textDim, background: 'none', border: 'none', cursor: 'pointer', padding: '0 2px' }}
+              >✕</button>
+            )}
           </div>
         </div>
 

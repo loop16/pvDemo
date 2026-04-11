@@ -186,6 +186,7 @@ export default function MoversPage() {
   const [lastQZoneFilter, setLastQZoneFilter] = useState<string>("ALL");
   const [scenarioFilter, setScenarioFilter] = useState<ScenarioFilter>("ALL");
   const [daysFilter, setDaysFilter] = useState<string>("ALL");
+  const [symbolSearch, setSymbolSearch] = useState("");
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
   const [countdown, setCountdown] = useState(REFRESH_INTERVAL_MS / 1000);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -302,6 +303,11 @@ export default function MoversPage() {
       filtered = filtered.filter((m) => m.scenario === scenarioFilter);
     }
 
+    // Symbol search filter
+    if (symbolSearch) {
+      filtered = filtered.filter((m) => m.symbol.toUpperCase().includes(symbolSearch.toUpperCase()));
+    }
+
     // Days since change filter
     if (daysFilter !== "ALL") {
       filtered = filtered.filter((m) => {
@@ -360,7 +366,7 @@ export default function MoversPage() {
     });
 
     return filtered;
-  }, [movers, classTab, dirFilter, sortKey, sortDir, highZoneFilter, lowZoneFilter, closeZoneFilter, lastQZoneFilter, scenarioFilter, daysFilter]);
+  }, [movers, classTab, dirFilter, sortKey, sortDir, highZoneFilter, lowZoneFilter, closeZoneFilter, lastQZoneFilter, scenarioFilter, daysFilter, symbolSearch]);
 
   /* -- Stats -- */
   const stats = useMemo(() => {
@@ -1097,6 +1103,49 @@ export default function MoversPage() {
                 {tab.label}
               </button>
             ))}
+          </div>
+        </div>
+
+        {/* Symbol search */}
+        <div className="flex items-center" style={{ gap: 6 }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            border: `1px solid ${C.border}`,
+            borderRadius: 4,
+            padding: '4px 10px',
+            background: 'transparent',
+            minWidth: 160,
+          }}>
+            <svg width={11} height={11} viewBox="0 0 16 16" fill="none" stroke={C.textDim} strokeWidth={1.8} strokeLinecap="round">
+              <circle cx={6.5} cy={6.5} r={4.5} />
+              <path d="M10.5 10.5l3 3" />
+            </svg>
+            <input
+              type="text"
+              placeholder="Search symbol…"
+              value={symbolSearch}
+              onChange={e => setSymbolSearch(e.target.value)}
+              style={{
+                fontFamily: C.font,
+                fontSize: 10,
+                fontWeight: 600,
+                letterSpacing: '0.06em',
+                background: 'transparent',
+                border: 'none',
+                outline: 'none',
+                color: C.textPrimary,
+                caretColor: C.accent,
+                width: 110,
+              }}
+            />
+            {symbolSearch && (
+              <button
+                onClick={() => setSymbolSearch('')}
+                style={{ fontFamily: C.font, fontSize: 10, color: C.textDim, background: 'none', border: 'none', cursor: 'pointer', padding: 0, lineHeight: 1 }}
+              >✕</button>
+            )}
           </div>
         </div>
 

@@ -640,7 +640,7 @@ export default function NativeChart({
     const plot = getPlotArea();
     const defaultVisible = defaultVisibleBars;
     const spacing = Math.max(1, plot.width / defaultVisible);
-    viewRef.current = { barSpacing: spacing, rightOffset: 5 };
+    viewRef.current = { barSpacing: spacing, rightOffset: 20 };
     yScaleRef.current = null; // reset to auto-fit on new data
     syncVisible();
     dirtyRef.current = true;
@@ -1394,7 +1394,7 @@ export default function NativeChart({
         yScaleRef.current = null;
       } else {
         // Double-click chart: fit all data
-        viewRef.current = { barSpacing: Math.max(1, plot.width / bars.length), rightOffset: 5 };
+        viewRef.current = { barSpacing: Math.max(1, plot.width / bars.length), rightOffset: 20 };
         yScaleRef.current = null;
         syncVisible();
       }
