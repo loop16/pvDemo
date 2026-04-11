@@ -594,7 +594,8 @@ type QuarterRange = {
   mid: number;
   quarterHigh: number; // highest traded price in the full quarter
   quarterLow: number;  // lowest traded price in the full quarter
-  prevQLastClose?: number; // previous quarter's last bar close
+  fridayIdx?: number;  // bar index of the first Friday (range anchor)
+  prevQLastClose?: number; // previous quarter's last bar close (2 bars before current fridayIdx)
   prevQMid?: number;       // previous quarter's mid (for zone classification)
   prevQStartTime?: number;
   prevQEndTime?: number;
@@ -680,6 +681,7 @@ function findCurrentQuarterMid(bars: OhlcvBar[]): QuarterRange | null {
       mid,
       quarterHigh: qH,
       quarterLow: qL,
+      fridayIdx: firstFriIdx,
     });
   }
 
@@ -688,14 +690,16 @@ function findCurrentQuarterMid(bars: OhlcvBar[]): QuarterRange | null {
 
   const current = ranges[ranges.length - 1];
 
-  // Find previous quarter's last close
+  // Find previous quarter's last close.
+  // The current quarter's range is anchored on the first Friday (fridayIdx) and the day before it (prevIdx = fridayIdx - 1).
+  // Both of those bars belong to the new quarter's reference range, so the true last close of the
+  // prior quarter is 2 bars before the first Friday (fridayIdx - 2).
   if (ranges.length >= 2) {
     const prevRange = ranges[ranges.length - 2];
-    const prevQKey = prevRange.qkey;
-    const prevIdxs = byQ.get(prevQKey);
-    if (prevIdxs && prevIdxs.length > 0) {
-      const lastIdxInPrevQ = prevIdxs[prevIdxs.length - 1];
-      current.prevQLastClose = bars[lastIdxInPrevQ].close;
+    const curFriIdx = current.fridayIdx;
+    const lastCloseBarIdx = curFriIdx != null && curFriIdx >= 2 ? curFriIdx - 2 : null;
+    if (lastCloseBarIdx != null) {
+      current.prevQLastClose = bars[lastCloseBarIdx].close;
       current.prevQMid = prevRange.mid;
       current.prevQStartTime = prevRange.startTime;
       current.prevQEndTime = prevRange.endTime;
