@@ -31,6 +31,9 @@ const LABELS_BY_INDEX: Record<number, string> = {
   1: '20 %', 2: '50 %', 3: '80 %', 7: '80 %', 8: '50 %', 9: '20 %',
 };
 
+// How many bars past the last real candle to extend the current quarter's levels
+const LATEST_QUARTER_EXTEND_BARS = 15;
+
 // Layout
 const MARGIN = { top: 10, right: 65, bottom: 28, left: 0 };
 const MIN_VISIBLE = 10;
@@ -332,6 +335,7 @@ function buildLevelOverlays(
             lineWidth: width,
             dashed: style === 'dashed',
             style,
+            ...(isLatestQuarter ? { floatEndIdx: bars.length - 1 + LATEST_QUARTER_EXTEND_BARS } : {}),
           });
 
           // Label
@@ -370,6 +374,7 @@ function buildLevelOverlays(
             priceHigh: Math.max(pLow, pHigh),
             fill: c.fill,
             stroke: c.stroke,
+            ...(isLatestQuarter ? { floatEndIdx: bars.length - 1 + LATEST_QUARTER_EXTEND_BARS } : {}),
           });
         }
 
@@ -403,6 +408,7 @@ function buildLevelOverlays(
         t1: bars[i1].time,
         t2: bars[i2].time,
         price: midPrice,
+        ...(isLatestQuarter ? { floatEndIdx: bars.length - 1 + LATEST_QUARTER_EXTEND_BARS } : {}),
       });
     }
   }
@@ -766,7 +772,7 @@ export default function NativeChart({
     // --- Probability boxes ---
     for (const box of boxes) {
       const bi1 = timeToBarIdx(box.t1);
-      const bi2 = timeToBarIdx(box.t2);
+      const bi2 = box.floatEndIdx !== undefined ? box.floatEndIdx : timeToBarIdx(box.t2);
       if (bi2 < fromIdx || bi1 > toIdx) continue;
 
       const x1 = idxToX(Math.max(bi1, fromIdx));
@@ -805,7 +811,7 @@ export default function NativeChart({
     // --- Level line segments (simple model) ---
     for (const seg of segments) {
       const si1 = timeToBarIdx(seg.t1);
-      const si2 = timeToBarIdx(seg.t2);
+      const si2 = seg.floatEndIdx !== undefined ? seg.floatEndIdx : timeToBarIdx(seg.t2);
       if (si2 < fromIdx || si1 > toIdx) continue;
 
       const x1 = idxToX(Math.max(si1, fromIdx));
@@ -831,7 +837,7 @@ export default function NativeChart({
     // --- Mid bands (pro/beta) ---
     for (const mb of midBands) {
       const mi1 = timeToBarIdx(mb.t1);
-      const mi2 = timeToBarIdx(mb.t2);
+      const mi2 = mb.floatEndIdx !== undefined ? mb.floatEndIdx : timeToBarIdx(mb.t2);
       if (mi2 < fromIdx || mi1 > toIdx) continue;
 
       const x1 = idxToX(Math.max(mi1, fromIdx));

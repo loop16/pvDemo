@@ -22,7 +22,8 @@ const SHARED_STEPS: Step[] = [
     title: 'Reading the Chart',
     body: [
       'The colored boxes on the chart are probability zones built from the quarterly range midpoint.',
-      'Blue boxes sit above the midpoint. Purple boxes sit below. Each zone is labeled with a probability — 80% is closest to mid, 20% is the extreme.',
+      'Blue boxes sit above the midpoint. Purple boxes sit below.',
+      'The number on each level is the probability you will get stopped out there — 80% means 8 in 10 quarters reached that level, 20% means only 2 in 10 did.',
       'The red dashed line marks the quarter midpoint itself.',
     ],
   },

@@ -1019,7 +1019,10 @@ async function processSymbol(
     const groupedScenarioLines = model === "simple" ? null : groupScenarioLines(lines);
     const outcomeDetail = outcomeForRangeDetailed(qr, bars);
     const currentOutcome = outcomeDetail.outcome;
-    const { zone, direction } = classifyZone(vsMid, lines, model, currentOutcome, groupedScenarioLines);
+    const direction: "above" | "below" = vsMid >= 0 ? "above" : "below";
+    const zone = currentOutcome === "NONE"
+      ? "Developing"
+      : classifyZone(vsMid, lines, model, currentOutcome, groupedScenarioLines).zone;
 
     // Compute zones for the quarter's actual traded high and low
     const actualHighVsMid = ((qr.quarterHigh - mid) / mid) * 100;

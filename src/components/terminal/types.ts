@@ -55,6 +55,7 @@ export type LevelSegment = {
   dashed: boolean;
   style?: 'solid' | 'dotted' | 'dashed';
   label?: string;      // e.g. "20 %", "50 %"
+  floatEndIdx?: number; // override end bar index (may extend beyond last real bar)
 };
 
 /** A probability box (filled rectangle between two price levels) */
@@ -65,6 +66,7 @@ export type ProbabilityBox = {
   priceHigh: number;
   fill: string;
   stroke: string;
+  floatEndIdx?: number;
 };
 
 /** A mid-band marker */
@@ -72,6 +74,7 @@ export type MidBand = {
   t1: number;
   t2: number;
   price: number;
+  floatEndIdx?: number;
 };
 
 /** A text label to render on the chart */
