@@ -116,18 +116,19 @@ export default function SymbolSearch({ value, onChange, symbols }: SymbolSearchP
         className="outline-none"
         style={{
           fontFamily: MONO,
-          fontSize: 11,
-          fontWeight: 600,
-          letterSpacing: '0.04em',
-          width: 80,
-          height: 28,
-          padding: '0 8px',
-          background: 'transparent',
-          border: `1px solid ${theme.border}`,
-          borderRadius: 0,
+          fontSize: 12,
+          fontWeight: 700,
+          letterSpacing: '0.03em',
+          width: 88,
+          height: 26,
+          padding: '0 12px',
+          background: theme.activeNavBg,
+          border: 'none',
+          borderRadius: 999,
           color: theme.text,
           position: 'relative',
           zIndex: 51,
+          cursor: 'pointer',
         }}
         spellCheck={false}
         autoComplete="off"

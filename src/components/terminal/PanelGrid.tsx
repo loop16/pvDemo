@@ -34,7 +34,7 @@ function ModelSelector({
           onClick={() => onChange(m)}
           style={{
             fontFamily: MONO,
-            marginLeft: -1,
+            marginLeft: m === models[0] ? 0 : -1,
             padding: '0 10px',
             height: 28,
             fontSize: 10,
