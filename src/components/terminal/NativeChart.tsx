@@ -709,6 +709,10 @@ export default function NativeChart({
     const useLineMode = candleW < 1.5;
     const halfCandle = candleW / 2;
 
+    // Round a CSS-pixel value to the nearest device-pixel boundary.
+    // This is the key to crisp, consistent candles on all DPR displays.
+    const snap = (v: number) => Math.round(v * dpr) / dpr;
+
     // ======================================================================
     // 1. BACKGROUND
     // ======================================================================
@@ -955,28 +959,35 @@ export default function NativeChart({
       const wickBot = priceToY(bar.low);
 
       if (useLineMode) {
-        // Ultra-zoomed out: single vertical line from high to low, colored by direction
-        const lx = Math.round(x - halfCandle) + Math.round(candleW) / 2;
+        // Ultra-zoomed out: single line from high to low
+        const cx = snap(x);
         ctx.strokeStyle = isUp ? T.candleUpBody : T.candleDownBody;
-        ctx.lineWidth = Math.max(1, Math.round(candleW * dpr) / dpr);
+        ctx.lineWidth = Math.max(1 / dpr, snap(x + halfCandle) - snap(x - halfCandle));
         ctx.beginPath();
-        ctx.moveTo(lx, wickTop);
-        ctx.lineTo(lx, wickBot);
+        ctx.moveTo(cx, snap(wickTop));
+        ctx.lineTo(cx, snap(wickBot));
         ctx.stroke();
       } else {
-        // Pixel-snap body rect first — wick is derived from body center so they always align
-        const bLeft = Math.round(x - halfCandle);
-        const bWidth = Math.round(candleW);
-        const bTop = Math.round(bodyTop);
-        const bH = Math.max(1, Math.round(bodyBot) - bTop);
-        const cx = bLeft + bWidth / 2; // exact center of body rect
+        // Snap left and right edges independently to device-pixel grid,
+        // then derive width from those — this is how lightweight-charts does it.
+        // Independent Math.round(candleW) can produce different widths for adjacent
+        // bars at the same zoom level; this approach guarantees consistency.
+        const bLeft  = snap(x - halfCandle);
+        const bRight = snap(x + halfCandle);
+        const bWidth = Math.max(1 / dpr, bRight - bLeft);
+        const bTop   = snap(bodyTop);
+        const bH     = Math.max(1 / dpr, snap(bodyBot) - bTop);
+
+        // Wick: centered on the snapped bar position, not the body midpoint,
+        // so it never drifts regardless of even/odd pixel widths.
+        const cx = snap(x);
 
         // Wick
         ctx.strokeStyle = isUp ? T.candleUpWick : T.candleDownWick;
         ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.moveTo(cx, wickTop);
-        ctx.lineTo(cx, wickBot);
+        ctx.moveTo(cx, snap(wickTop));
+        ctx.lineTo(cx, snap(wickBot));
         ctx.stroke();
 
         // Body
@@ -985,9 +996,10 @@ export default function NativeChart({
 
         // Body outline (only when candles are wide enough)
         if (candleW >= 3) {
+          const hp = 0.5 / dpr; // half device pixel
           ctx.strokeStyle = isUp ? T.candleUpWick : T.candleDownWick;
-          ctx.lineWidth = 1;
-          ctx.strokeRect(bLeft + 0.5, bTop + 0.5, bWidth - 1, Math.max(0, bH - 1));
+          ctx.lineWidth = 1 / dpr;
+          ctx.strokeRect(bLeft + hp, bTop + hp, bWidth - 2 * hp, Math.max(0, bH - 2 * hp));
         }
       }
     }
