@@ -561,31 +561,37 @@ function StatsPanel({
               <button key={m} onClick={() => setModel(m)} style={pill(model === m)}>{m.toUpperCase()}</button>
             ))}
           </div>
-          <div className="flex items-center px-2" style={{ height: 22, borderTop: `1px solid ${theme.border}` }}>
-            <input
-              type="text"
-              placeholder="Search symbol…"
-              value={symbolSearch}
-              onChange={e => setSymbolSearch(e.target.value)}
-              style={{
-                flex: 1,
-                fontFamily: MONO,
-                fontSize: 9,
-                fontWeight: 500,
-                letterSpacing: '0.04em',
-                background: 'transparent',
-                border: 'none',
-                outline: 'none',
-                color: theme.text,
-                caretColor: theme.accent,
-              }}
-            />
-            {symbolSearch && (
-              <button
-                onClick={() => setSymbolSearch('')}
-                style={{ fontFamily: MONO, fontSize: 9, color: theme.textDim, background: 'none', border: 'none', cursor: 'pointer', padding: '0 2px' }}
-              >✕</button>
-            )}
+          <div style={{ padding: '3px 6px', borderTop: `1px solid ${theme.border}` }}>
+            <div className="flex items-center" style={{ background: theme.frosted ? 'rgba(0,0,0,0.06)' : theme.bg, border: `1px solid ${theme.border}`, borderRadius: 3, padding: '0 4px', height: 18 }}>
+              <svg width="8" height="8" viewBox="0 0 10 10" fill="none" style={{ flexShrink: 0, marginRight: 3, opacity: 0.4 }}>
+                <circle cx="4" cy="4" r="3" stroke="currentColor" strokeWidth="1.5"/>
+                <line x1="6.5" y1="6.5" x2="9" y2="9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+              <input
+                type="text"
+                placeholder="Symbol…"
+                value={symbolSearch}
+                onChange={e => setSymbolSearch(e.target.value)}
+                style={{
+                  flex: 1,
+                  fontFamily: MONO,
+                  fontSize: 9,
+                  fontWeight: 500,
+                  letterSpacing: '0.04em',
+                  background: 'transparent',
+                  border: 'none',
+                  outline: 'none',
+                  color: theme.text,
+                  caretColor: theme.accent,
+                }}
+              />
+              {symbolSearch && (
+                <button
+                  onClick={() => setSymbolSearch('')}
+                  style={{ fontFamily: MONO, fontSize: 9, color: theme.textDim, background: 'none', border: 'none', cursor: 'pointer', padding: '0 2px', lineHeight: 1 }}
+                >✕</button>
+              )}
+            </div>
           </div>
         </div>
 

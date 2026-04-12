@@ -603,7 +603,7 @@ export default function NativeChart({
     const fromIdx = toIdx - barsInView + 1;
     visibleRef.current = {
       fromIdx: Math.max(0, fromIdx),
-      toIdx: Math.min(bars.length - 1, Math.max(0, toIdx)),
+      toIdx: Math.max(0, toIdx), // allow toIdx beyond last bar so level extensions render
     };
   }, [bars, getPlotArea]);
 
