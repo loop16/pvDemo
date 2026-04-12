@@ -435,7 +435,7 @@ function StatsPanel({
           background: theme.frosted ? 'rgba(255,255,255,0.4)' : theme.bg,
           fontFamily: MONO,
           overflow: 'hidden',
-          borderRadius: 12,
+          borderRadius: 8,
         }}
       >
         {/* Header: title + direction filters + column picker */}
