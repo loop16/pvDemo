@@ -34,7 +34,7 @@ function ModelSelector({
           onClick={() => onChange(m)}
           style={{
             fontFamily: MONO,
-            marginLeft: m === models[0] ? 0 : -1,
+            marginLeft: -1,
             padding: '0 10px',
             height: 28,
             fontSize: 10,
@@ -253,9 +253,10 @@ function ChartPanelUnit({
       )}
       {/* Panel header — 32px */}
       <div
-        className="flex items-center gap-2 px-2 shrink-0"
+        className="flex items-center px-2 shrink-0"
         style={{
           height: 32,
+          gap: 4,
           borderBottom: theme.frosted ? '1px solid rgba(200,200,210,0.3)' : `1px solid ${theme.border}`,
           background: theme.frosted ? 'rgba(255,255,255,0.5)' : theme.bg,
         }}

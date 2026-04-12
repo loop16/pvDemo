@@ -113,13 +113,19 @@ export default function SymbolSearch({ value, onChange, symbols }: SymbolSearchP
         onFocus={() => { setQuery(''); setOpen(true); }}
         onKeyDown={handleKeyDown}
         placeholder="Symbol..."
-        className="w-[144px] h-[32px] px-2 text-[12px] outline-none"
+        className="outline-none"
         style={{
           fontFamily: MONO,
-          background: theme.bg,
+          fontSize: 11,
+          fontWeight: 600,
+          letterSpacing: '0.04em',
+          width: 80,
+          height: 28,
+          padding: '0 8px',
+          background: 'transparent',
           border: `1px solid ${theme.border}`,
+          borderRadius: 0,
           color: theme.text,
-          borderRadius: 4,
           position: 'relative',
           zIndex: 51,
         }}
