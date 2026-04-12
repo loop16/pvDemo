@@ -124,7 +124,7 @@ export default function SymbolSearch({ value, onChange, symbols }: SymbolSearchP
           padding: '0 12px',
           background: theme.activeNavBg,
           border: 'none',
-          borderRadius: 8,
+          borderRadius: 999,
           color: theme.text,
           position: 'relative',
           zIndex: 51,
