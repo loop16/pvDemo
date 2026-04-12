@@ -226,7 +226,7 @@ function ChartPanelUnit({
       style={{
         border: theme.frosted ? '1px solid rgba(200,200,210,0.4)' : `1px solid ${theme.border}`,
         background: theme.frosted ? 'rgba(255,255,255,0.3)' : theme.bg,
-        borderRadius: 8,
+        borderRadius: '20px 20px 12px 12px',
         overflow: 'hidden',
         boxShadow: theme.frosted ? '0 4px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9)' : 'none',
       }}
