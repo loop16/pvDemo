@@ -14,8 +14,11 @@ import type { LayoutMode, PanelConfig, SymbolEntry } from './types';
 const MONO = "'SF Mono', 'JetBrains Mono', 'Fira Code', ui-monospace, monospace";
 
 // ============================================================================
-// MODEL SELECTOR (white theme)
+// MODEL SELECTOR — sliding pill
 // ============================================================================
+
+const MODEL_ITEMS = ['pro', 'simple', 'beta', 'overlay'] as const;
+const MODEL_W = 46; // px per segment
 
 function ModelSelector({
   value,
@@ -25,39 +28,57 @@ function ModelSelector({
   onChange: (model: string) => void;
 }) {
   const { theme } = useTheme();
-  const models = ['pro', 'simple', 'beta', 'overlay'] as const;
+  const activeIdx = Math.max(0, MODEL_ITEMS.indexOf(value as typeof MODEL_ITEMS[number]));
+
   return (
-    <div className="flex items-center gap-0">
-      {models.map((m) => (
+    <div
+      style={{
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        background: theme.activeNavBg,
+        borderRadius: 999,
+        padding: '2px',
+        height: 24,
+        flexShrink: 0,
+      }}
+    >
+      {/* Sliding pill */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 2,
+          left: 2,
+          width: MODEL_W,
+          height: 20,
+          borderRadius: 999,
+          background: theme.text,
+          transform: `translateX(${activeIdx * MODEL_W}px)`,
+          transition: 'transform 0.18s cubic-bezier(0.4, 0, 0.2, 1)',
+          pointerEvents: 'none',
+        }}
+      />
+      {MODEL_ITEMS.map((m, i) => (
         <button
           key={m}
           onClick={() => onChange(m)}
           style={{
+            position: 'relative',
+            zIndex: 1,
+            width: MODEL_W,
+            height: 20,
+            fontSize: 9,
             fontFamily: MONO,
-            marginLeft: m === models[0] ? 0 : -1,
-            padding: '0 10px',
-            height: 28,
-            fontSize: 10,
+            fontWeight: 700,
+            letterSpacing: '0.06em',
             textTransform: 'uppercase',
-            letterSpacing: '0.05em',
-            fontWeight: 600,
-            border: `1px solid ${value === m ? theme.text : theme.border}`,
-            background: value === m ? theme.text : 'transparent',
+            border: 'none',
+            background: 'transparent',
             color: value === m ? theme.bg : theme.textDim,
             cursor: 'pointer',
-            transition: 'color 0.15s, border-color 0.15s, background 0.15s',
-          }}
-          onMouseEnter={(e) => {
-            if (value !== m) {
-              e.currentTarget.style.color = theme.textSecondary;
-              e.currentTarget.style.borderColor = theme.crosshair;
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (value !== m) {
-              e.currentTarget.style.color = theme.textDim;
-              e.currentTarget.style.borderColor = theme.border;
-            }
+            transition: 'color 0.18s',
+            padding: 0,
+            flexShrink: 0,
           }}
         >
           {m}
@@ -253,10 +274,12 @@ function ChartPanelUnit({
       )}
       {/* Panel header — 32px */}
       <div
-        className="flex items-center px-2 shrink-0"
+        className="flex items-center shrink-0"
         style={{
           height: 32,
-          gap: 4,
+          gap: 6,
+          paddingLeft: 6,
+          paddingRight: 8,
           borderBottom: theme.frosted ? '1px solid rgba(200,200,210,0.3)' : `1px solid ${theme.border}`,
           background: theme.frosted ? 'rgba(255,255,255,0.5)' : theme.bg,
         }}
