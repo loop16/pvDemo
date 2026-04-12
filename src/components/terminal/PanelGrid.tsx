@@ -89,16 +89,18 @@ function ModelSelector({
 }
 
 // ============================================================================
-// SCENARIO SELECTOR (pro/beta only)
+// SCENARIO SELECTOR — sliding pill
 // ============================================================================
 
-const SCENARIOS = [
-  { value: 'AUTO', label: 'Auto' },
-  { value: 'LONG_TRUE', label: 'Strong Long' },
-  { value: 'LONG_FALSE', label: 'Weak Long' },
-  { value: 'SHORT_TRUE', label: 'Strong Short' },
-  { value: 'SHORT_FALSE', label: 'Weak Short' },
+const SCENARIO_ITEMS = [
+  { value: 'AUTO',       label: 'AUTO' },
+  { value: 'LONG_TRUE',  label: 'L+'   },
+  { value: 'LONG_FALSE', label: 'L−'   },
+  { value: 'SHORT_TRUE', label: 'S+'   },
+  { value: 'SHORT_FALSE',label: 'S−'   },
 ] as const;
+
+const SCENARIO_W = 36; // px per segment
 
 function ScenarioSelector({
   value,
@@ -108,94 +110,61 @@ function ScenarioSelector({
   onChange: (scenario: string) => void;
 }) {
   const { theme } = useTheme();
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    const handler = (e: PointerEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    };
-    window.addEventListener('pointerdown', handler);
-    return () => window.removeEventListener('pointerdown', handler);
-  }, [open]);
-
-  const current = SCENARIOS.find(s => s.value === value) || SCENARIOS[0];
+  const activeIdx = Math.max(0, SCENARIO_ITEMS.findIndex(s => s.value === value));
 
   return (
-    <div ref={ref} className="relative" style={{ marginLeft: 4 }}>
-      <button
-        onClick={() => setOpen(!open)}
+    <div
+      style={{
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        background: theme.activeNavBg,
+        borderRadius: 999,
+        padding: '2px',
+        height: 24,
+        flexShrink: 0,
+      }}
+    >
+      {/* Sliding pill */}
+      <div
         style={{
-          fontFamily: MONO,
-          padding: '0 8px',
-          height: 28,
-          fontSize: 10,
-          textTransform: 'uppercase',
-          letterSpacing: '0.05em',
-          fontWeight: 600,
-          border: `1px solid ${theme.border}`,
-          background: 'transparent',
-          color: theme.textDim,
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 4,
+          position: 'absolute',
+          top: 2,
+          left: 2,
+          width: SCENARIO_W,
+          height: 20,
+          borderRadius: 999,
+          background: theme.text,
+          transform: `translateX(${activeIdx * SCENARIO_W}px)`,
+          transition: 'transform 0.18s cubic-bezier(0.4, 0, 0.2, 1)',
+          pointerEvents: 'none',
         }}
-      >
-        {current.label}
-        <svg width={8} height={5} viewBox="0 0 8 5" fill="none" stroke="currentColor" strokeWidth={1.2}>
-          <path d={open ? 'M1 4L4 1L7 4' : 'M1 1L4 4L7 1'} />
-        </svg>
-      </button>
-      {open && (
-        <div
-          className="absolute left-0 z-50"
+      />
+      {SCENARIO_ITEMS.map((s) => (
+        <button
+          key={s.value}
+          onClick={() => onChange(s.value)}
           style={{
-            top: 30,
-            minWidth: 130,
-            border: `1px solid ${theme.border}`,
-            background: theme.bg,
-            boxShadow: '0 4px 12px rgba(0,0,0,0.12)',
+            position: 'relative',
+            zIndex: 1,
+            width: SCENARIO_W,
+            height: 20,
+            fontSize: 9,
+            fontFamily: MONO,
+            fontWeight: 700,
+            letterSpacing: '0.06em',
+            border: 'none',
+            background: 'transparent',
+            color: value === s.value ? theme.bg : theme.textDim,
+            cursor: 'pointer',
+            transition: 'color 0.18s',
+            padding: 0,
+            flexShrink: 0,
           }}
         >
-          {SCENARIOS.map(s => (
-            <button
-              key={s.value}
-              onClick={() => { onChange(s.value); setOpen(false); }}
-              style={{
-                display: 'block',
-                width: '100%',
-                padding: '6px 10px',
-                fontSize: 10,
-                fontFamily: MONO,
-                textTransform: 'uppercase',
-                letterSpacing: '0.05em',
-                fontWeight: 600,
-                textAlign: 'left',
-                border: 'none',
-                background: value === s.value ? theme.text : 'transparent',
-                color: value === s.value ? theme.bg : theme.textDim,
-                cursor: 'pointer',
-              }}
-              onMouseEnter={(e) => {
-                if (value !== s.value) {
-                  e.currentTarget.style.background = theme.surface;
-                  e.currentTarget.style.color = theme.text;
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (value !== s.value) {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.color = theme.textDim;
-                }
-              }}
-            >
-              {s.label}
-            </button>
-          ))}
-        </div>
-      )}
+          {s.label}
+        </button>
+      ))}
     </div>
   );
 }
@@ -272,14 +241,14 @@ function ChartPanelUnit({
           <polygon points="0,0 12,0 12,12" fill={theme.accent} />
         </svg>
       )}
-      {/* Panel header — 32px */}
+      {/* Panel header */}
       <div
         className="flex items-center shrink-0"
         style={{
-          height: 32,
+          height: 38,
           gap: 6,
           paddingLeft: 6,
-          paddingRight: 8,
+          paddingRight: 6,
           borderBottom: theme.frosted ? '1px solid rgba(200,200,210,0.3)' : `1px solid ${theme.border}`,
           background: theme.frosted ? 'rgba(255,255,255,0.5)' : theme.bg,
         }}
