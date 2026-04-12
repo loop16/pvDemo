@@ -956,41 +956,38 @@ export default function NativeChart({
 
       if (useLineMode) {
         // Ultra-zoomed out: single vertical line from high to low, colored by direction
+        const lx = Math.round(x - halfCandle) + Math.round(candleW) / 2;
         ctx.strokeStyle = isUp ? T.candleUpBody : T.candleDownBody;
         ctx.lineWidth = Math.max(1, Math.round(candleW * dpr) / dpr);
         ctx.beginPath();
-        ctx.moveTo(Math.round(x * dpr) / dpr, wickTop);
-        ctx.lineTo(Math.round(x * dpr) / dpr, wickBot);
+        ctx.moveTo(lx, wickTop);
+        ctx.lineTo(lx, wickBot);
         ctx.stroke();
       } else {
+        // Pixel-snap body rect first — wick is derived from body center so they always align
+        const bLeft = Math.round(x - halfCandle);
+        const bWidth = Math.round(candleW);
+        const bTop = Math.round(bodyTop);
+        const bH = Math.max(1, Math.round(bodyBot) - bTop);
+        const cx = bLeft + bWidth / 2; // exact center of body rect
+
         // Wick
         ctx.strokeStyle = isUp ? T.candleUpWick : T.candleDownWick;
         ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.moveTo(Math.round(x) + 0.5, wickTop);
-        ctx.lineTo(Math.round(x) + 0.5, wickBot);
+        ctx.moveTo(cx, wickTop);
+        ctx.lineTo(cx, wickBot);
         ctx.stroke();
 
         // Body
-        const bodyH = Math.max(1, bodyBot - bodyTop);
         ctx.fillStyle = isUp ? T.candleUpBody : T.candleDownBody;
-        ctx.fillRect(
-          Math.round(x - halfCandle),
-          Math.round(bodyTop),
-          Math.round(candleW),
-          Math.round(bodyH)
-        );
+        ctx.fillRect(bLeft, bTop, bWidth, bH);
 
         // Body outline (only when candles are wide enough)
         if (candleW >= 3) {
           ctx.strokeStyle = isUp ? T.candleUpWick : T.candleDownWick;
           ctx.lineWidth = 1;
-          ctx.strokeRect(
-            Math.round(x - halfCandle) + 0.5,
-            Math.round(bodyTop) + 0.5,
-            Math.round(candleW) - 1,
-            Math.max(0, Math.round(bodyH) - 1)
-          );
+          ctx.strokeRect(bLeft + 0.5, bTop + 0.5, bWidth - 1, Math.max(0, bH - 1));
         }
       }
     }
