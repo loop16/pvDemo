@@ -70,10 +70,12 @@ const DEMO_STEPS: Step[] = [
 interface OnboardingPopupProps {
   storageKey: string;
   alwaysShow?: boolean;
+  forceOpen?: boolean;
+  onClose?: () => void;
   variant?: 'demo' | 'terminal';
 }
 
-export default function OnboardingPopup({ storageKey, alwaysShow, variant = 'terminal' }: OnboardingPopupProps) {
+export default function OnboardingPopup({ storageKey, alwaysShow, forceOpen, onClose, variant = 'terminal' }: OnboardingPopupProps) {
   const steps = variant === 'demo' ? DEMO_STEPS : TERMINAL_STEPS;
   const [visible, setVisible] = useState(alwaysShow ?? false);
   const [step, setStep] = useState(0);
@@ -87,6 +89,13 @@ export default function OnboardingPopup({ storageKey, alwaysShow, variant = 'ter
     if (!dismissed) setVisible(true);
   }, [storageKey, alwaysShow]);
 
+  useEffect(() => {
+    if (forceOpen) {
+      setStep(0);
+      setVisible(true);
+    }
+  }, [forceOpen]);
+
   if (!visible) return null;
 
   const current = steps[step];
@@ -96,6 +105,7 @@ export default function OnboardingPopup({ storageKey, alwaysShow, variant = 'ter
   const dismiss = () => {
     localStorage.setItem(storageKey, '1');
     setVisible(false);
+    onClose?.();
   };
 
   return (

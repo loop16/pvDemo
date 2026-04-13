@@ -20,6 +20,8 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
   const { theme } = useTheme();
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
+  const onboardingKey = `pv-onboarding-terminal${session?.user?.email ? `-${session.user.email}` : ''}`;
   // Detect dark themes for logo inversion
   const isDark = theme.bg.startsWith('#0') || theme.bg.startsWith('#1') || theme.bg.startsWith('#2') || theme.bg === '#000000';
 
@@ -177,7 +179,33 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
         </nav>
 
         {/* Right: Account + Settings */}
-        <div className="flex items-center gap-1" style={{ width: 80, justifyContent: "flex-end" }}>
+        <div className="flex items-center gap-1" style={{ width: 116, justifyContent: "flex-end" }}>
+          <button
+            onClick={() => setHelpOpen(true)}
+            title="Help"
+            style={{
+              width: 34,
+              height: 34,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: theme.textDim,
+              cursor: "pointer",
+              background: "none",
+              border: "none",
+              padding: 0,
+              borderRadius: 4,
+              transition: "color 0.15s",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = theme.text; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = theme.textDim; }}
+          >
+            <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+              <circle cx={12} cy={12} r={10} />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+              <line x1={12} y1={17} x2={12.01} y2={17} />
+            </svg>
+          </button>
           <Link
             href="/account"
             title="Account"
@@ -270,7 +298,7 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
 
       {/* Settings panel */}
       <SettingsPanel open={settingsOpen} onClose={() => setSettingsOpen(false)} />
-      <OnboardingPopup storageKey="pv-onboarding-terminal" />
+      <OnboardingPopup storageKey={onboardingKey} forceOpen={helpOpen} onClose={() => setHelpOpen(false)} />
     </div>
   );
 }
