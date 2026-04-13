@@ -11,35 +11,35 @@ const NativeChart = dynamic(() => import("@/components/terminal/NativeChart"), {
 
 /* -- Pill slider --------------------------------------------------- */
 
-const MODEL_ITEMS: ModelType[] = ["pro", "simple", "beta"];
-const MODEL_W = 52;
-
-function ModelPill({ value, onChange, activeNavBg, text, bg }: {
-  value: ModelType;
-  onChange: (m: ModelType) => void;
+function PillSlider<T extends string>({ value, onChange, items, itemW, activeNavBg, text, bg, fontSize = 10 }: {
+  value: T;
+  onChange: (v: T) => void;
+  items: { key: T; label: string }[];
+  itemW: number;
   activeNavBg: string;
   text: string;
   bg: string;
+  fontSize?: number;
 }) {
-  const activeIdx = MODEL_ITEMS.indexOf(value);
+  const activeIdx = Math.max(0, items.findIndex((i) => i.key === value));
   return (
     <div style={{ position: "relative", display: "flex", alignItems: "center", background: activeNavBg, borderRadius: 999, padding: 2, height: 26, flexShrink: 0 }}>
       <div style={{
-        position: "absolute", top: 2, left: 2, width: MODEL_W, height: 22, borderRadius: 999,
+        position: "absolute", top: 2, left: 2, width: itemW, height: 22, borderRadius: 999,
         background: text,
-        transform: `translateX(${activeIdx * MODEL_W}px)`,
+        transform: `translateX(${activeIdx * itemW}px)`,
         transition: "transform 0.18s cubic-bezier(0.4,0,0.2,1)",
         pointerEvents: "none",
       }} />
-      {MODEL_ITEMS.map((m) => (
-        <button key={m} onClick={() => onChange(m)} style={{
-          position: "relative", zIndex: 1, width: MODEL_W, height: 22,
-          fontSize: 10, fontFamily: FONT, fontWeight: 700, letterSpacing: "0.06em",
+      {items.map((item) => (
+        <button key={item.key} onClick={() => onChange(item.key)} style={{
+          position: "relative", zIndex: 1, width: itemW, height: 22,
+          fontSize, fontFamily: FONT, fontWeight: 700, letterSpacing: "0.06em",
           textTransform: "uppercase", border: "none", background: "transparent",
-          color: value === m ? bg : text + "66",
+          color: value === item.key ? bg : text + "88",
           cursor: "pointer", transition: "color 0.18s", padding: 0, flexShrink: 0,
         }}>
-          {m}
+          {item.label}
         </button>
       ))}
     </div>
@@ -1164,53 +1164,16 @@ export default function MoversPage() {
         </div>
 
         {/* Direction filter */}
-        <div className="flex items-center" style={{ gap: 8 }}>
-          <span
-            style={{
-              fontSize: 10,
-              fontWeight: 600,
-              letterSpacing: "0.06em",
-              color: C.textDim,
-              marginRight: 4,
-            }}
-          >
-            DIRECTION
-          </span>
-          <div className="flex" style={{ gap: 2 }}>
-            {dirTabs.map((tab) => (
-              <button
-                key={tab.key}
-                onClick={() => setDirFilter(tab.key)}
-                style={{
-                  fontSize: 10,
-                  fontWeight: 600,
-                  fontFamily: C.font,
-                  letterSpacing: "0.08em",
-                  padding: "4px 10px",
-                  border: `1px solid ${dirFilter === tab.key ? C.accent + '44' : C.border}`,
-                  background: dirFilter === tab.key ? C.activeNavBg : "transparent",
-                  color: dirFilter === tab.key ? C.textPrimary : C.textDim,
-                  cursor: "pointer",
-                  transition: "all 0.15s",
-                }}
-                onMouseEnter={(e) => {
-                  if (dirFilter !== tab.key) {
-                    e.currentTarget.style.borderColor = C.textDim;
-                    e.currentTarget.style.color = C.textSecondary;
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (dirFilter !== tab.key) {
-                    e.currentTarget.style.borderColor = C.border;
-                    e.currentTarget.style.color = C.textDim;
-                  }
-                }}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-        </div>
+        <PillSlider
+          value={dirFilter}
+          onChange={(v) => setDirFilter(v as DirectionFilter)}
+          items={dirTabs}
+          itemW={72}
+          activeNavBg={C.activeNavBg}
+          text={C.textPrimary}
+          bg={C.bg}
+          fontSize={9}
+        />
       </div>
 
       {/* -- Content -- */}

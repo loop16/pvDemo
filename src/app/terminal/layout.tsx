@@ -24,6 +24,11 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
   const isDark = theme.bg.startsWith('#0') || theme.bg.startsWith('#1') || theme.bg.startsWith('#2') || theme.bg === '#000000';
 
   useEffect(() => {
+    // Warm the movers cache so the Stats page loads instantly
+    fetch('/api/movers?model=pro', { priority: 'low' } as RequestInit).catch(() => {});
+  }, []);
+
+  useEffect(() => {
     const html = document.documentElement;
     const body = document.body;
     const prev = {
