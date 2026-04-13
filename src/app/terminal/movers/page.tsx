@@ -9,6 +9,43 @@ import { useChartData } from "@/hooks/useChartData";
 
 const NativeChart = dynamic(() => import("@/components/terminal/NativeChart"), { ssr: false });
 
+/* -- Pill slider --------------------------------------------------- */
+
+const MODEL_ITEMS: ModelType[] = ["pro", "simple", "beta"];
+const MODEL_W = 52;
+
+function ModelPill({ value, onChange, activeNavBg, text, bg }: {
+  value: ModelType;
+  onChange: (m: ModelType) => void;
+  activeNavBg: string;
+  text: string;
+  bg: string;
+}) {
+  const activeIdx = MODEL_ITEMS.indexOf(value);
+  return (
+    <div style={{ position: "relative", display: "flex", alignItems: "center", background: activeNavBg, borderRadius: 999, padding: 2, height: 26, flexShrink: 0 }}>
+      <div style={{
+        position: "absolute", top: 2, left: 2, width: MODEL_W, height: 22, borderRadius: 999,
+        background: text,
+        transform: `translateX(${activeIdx * MODEL_W}px)`,
+        transition: "transform 0.18s cubic-bezier(0.4,0,0.2,1)",
+        pointerEvents: "none",
+      }} />
+      {MODEL_ITEMS.map((m) => (
+        <button key={m} onClick={() => onChange(m)} style={{
+          position: "relative", zIndex: 1, width: MODEL_W, height: 22,
+          fontSize: 10, fontFamily: FONT, fontWeight: 700, letterSpacing: "0.06em",
+          textTransform: "uppercase", border: "none", background: "transparent",
+          color: value === m ? bg : text + "66",
+          cursor: "pointer", transition: "color 0.18s", padding: 0, flexShrink: 0,
+        }}>
+          {m}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 /* -- Types --------------------------------------------------------- */
 
 type AssetClass = "equity" | "futures" | "crypto" | "fx" | "index" | "etf";
@@ -976,52 +1013,15 @@ export default function MoversPage() {
             <span style={{ color: C.amber, fontWeight: 600 }}>{stats.extremes}</span> at extremes
           </span>
 
-          {/* Model selector */}
-          <div style={{ marginLeft: 8, borderLeft: `1px solid ${C.border}`, paddingLeft: 12, display: "flex", alignItems: "center", gap: 6 }}>
-            <span
-              style={{
-                fontSize: 10,
-                fontWeight: 600,
-                letterSpacing: "0.06em",
-                color: C.textDim,
-              }}
-            >
-              MODEL
-            </span>
-            <div className="flex" style={{ gap: 2 }}>
-              {(["pro", "simple", "beta"] as ModelType[]).map((m) => (
-                <button
-                  key={m}
-                  onClick={() => handleModelChange(m)}
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 600,
-                    fontFamily: C.font,
-                    letterSpacing: "0.08em",
-                    padding: "3px 8px",
-                    border: `1px solid ${model === m ? C.accent + '44' : C.border}`,
-                    background: model === m ? C.activeNavBg : "transparent",
-                    color: model === m ? C.textPrimary : C.textDim,
-                    cursor: "pointer",
-                    transition: "all 0.15s",
-                  }}
-                  onMouseEnter={(e) => {
-                    if (model !== m) {
-                      e.currentTarget.style.borderColor = C.textDim;
-                      e.currentTarget.style.color = C.textSecondary;
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (model !== m) {
-                      e.currentTarget.style.borderColor = C.border;
-                      e.currentTarget.style.color = C.textDim;
-                    }
-                  }}
-                >
-                  {m.toUpperCase()}
-                </button>
-              ))}
-            </div>
+          {/* Model selector — pill slider */}
+          <div style={{ marginLeft: 8, borderLeft: `1px solid ${C.border}`, paddingLeft: 12 }}>
+            <ModelPill
+              value={model}
+              onChange={handleModelChange}
+              activeNavBg={C.activeNavBg}
+              text={C.textPrimary}
+              bg={C.bg}
+            />
           </div>
         </div>
         <div className="flex items-center" style={{ gap: 12 }}>
