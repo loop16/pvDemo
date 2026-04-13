@@ -66,6 +66,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     callbacks: {
         async jwt({ token, user, account }) {
             if (user?.email) {
+                // Demo user gets full access without a DB lookup
+                if ((user as any).id === "demo-user") {
+                    token.paid = true;
+                    token.email = user.email;
+                    token.isEmailVerified = true;
+                    return token;
+                }
                 const stored = await upsertUserByEmail(user.email, {
                     name: user.name ?? undefined,
                 });
