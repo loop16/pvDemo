@@ -18,7 +18,7 @@ const MONO = "'SF Mono', 'JetBrains Mono', 'Fira Code', ui-monospace, monospace"
 // ============================================================================
 
 const MODEL_ITEMS = ['pro', 'simple', 'beta', 'overlay'] as const;
-const MODEL_W = 46; // px per segment
+const MODEL_W = 54; // px per segment
 
 function ModelSelector({
   value,
