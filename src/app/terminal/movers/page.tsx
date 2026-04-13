@@ -1015,9 +1015,15 @@ export default function MoversPage() {
 
           {/* Model selector — pill slider */}
           <div style={{ marginLeft: 8, borderLeft: `1px solid ${C.border}`, paddingLeft: 12 }}>
-            <ModelPill
+            <PillSlider
               value={model}
-              onChange={handleModelChange}
+              onChange={(v) => handleModelChange(v as ModelType)}
+              items={[
+                { key: "pro" as ModelType, label: "PRO" },
+                { key: "simple" as ModelType, label: "SIMPLE" },
+                { key: "beta" as ModelType, label: "BETA" },
+              ]}
+              itemW={52}
               activeNavBg={C.activeNavBg}
               text={C.textPrimary}
               bg={C.bg}
