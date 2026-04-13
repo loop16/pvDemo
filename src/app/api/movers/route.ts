@@ -4,6 +4,7 @@ import { promises as fs } from "fs";
 import { Readable } from "stream";
 
 export const runtime = "nodejs";
+export const maxDuration = 60; // seconds — needed for beta cold-start recomputation
 
 /* ── Types ─────────────────────────────────────────────── */
 
@@ -827,21 +828,47 @@ function extractScenarioThresholds(
   return { near: raw[0], mid: raw[1], far: raw[2] };
 }
 
-function extractSimpleThresholds(
+// Simple model: full 9-level zone classification (10th–90th percentile)
+function classifySimpleZoneGranular(
+  vsMidPct: number,
   lines: LevelLineLike[],
   outcome: OutcomeKey,
-  direction: "above" | "below",
-): Thresholds | null {
+): { zone: string; direction: "above" | "below" } {
+  const direction = vsMidPct >= 0 ? "above" : "below";
+  const dir = direction === "above" ? "UP" : "DN";
   const prefix = outcome.startsWith("SHORT") ? "Short" : "Long";
   const side = direction === "above" ? "High" : "Low";
-  const findValue = (pct: number) =>
-    lines.find((line) => line.name === `${prefix}_${side}_${pct}`)?.value;
 
-  const near = Number(findValue(80));
-  const mid = Number(findValue(50));
-  const far = Number(findValue(20));
-  if (![near, mid, far].every(Number.isFinite)) return null;
-  return { near, mid, far };
+  const PCTS = [10, 20, 30, 40, 50, 60, 70, 80, 90] as const;
+  const levels: { pct: number; value: number }[] = [];
+  for (const p of PCTS) {
+    const val = Number(lines.find((l) => l.name === `${prefix}_${side}_${p}`)?.value);
+    if (Number.isFinite(val)) levels.push({ pct: p, value: val });
+  }
+
+  if (levels.length < 2) return { zone: "NOT ENOUGH DATA", direction };
+
+  if (direction === "above") {
+    // Sort ascending by value: 90th pct (smallest / closest to mid) → 10th pct (largest / furthest)
+    levels.sort((a, b) => a.value - b.value);
+    if (vsMidPct < levels[0].value) return { zone: `MID-${levels[0].pct}% ${dir}`, direction };
+    for (let i = 0; i < levels.length - 1; i++) {
+      if (vsMidPct < levels[i + 1].value) {
+        return { zone: `${levels[i].pct}-${levels[i + 1].pct}% ${dir}`, direction };
+      }
+    }
+    return { zone: `BEYOND ${levels[levels.length - 1].pct}% ${dir}`, direction };
+  } else {
+    // Sort descending by value: 90th pct (closest to 0 / closest to mid) → 10th pct (most negative / furthest)
+    levels.sort((a, b) => b.value - a.value);
+    if (vsMidPct > levels[0].value) return { zone: `MID-${levels[0].pct}% ${dir}`, direction };
+    for (let i = 0; i < levels.length - 1; i++) {
+      if (vsMidPct > levels[i + 1].value) {
+        return { zone: `${levels[i].pct}-${levels[i + 1].pct}% ${dir}`, direction };
+      }
+    }
+    return { zone: `BEYOND ${levels[levels.length - 1].pct}% ${dir}`, direction };
+  }
 }
 
 function classifyZone(
@@ -851,17 +878,20 @@ function classifyZone(
   outcome: OutcomeKey,
   grouped: Record<ScenarioKey, ScenarioLine[]> | null = null,
 ): { zone: string; direction: "above" | "below" } {
+  // Simple model uses full 9-level granular classification
+  if (model === "simple") {
+    return classifySimpleZoneGranular(vsMidPct, lines, outcome);
+  }
+
   const direction = vsMidPct >= 0 ? "above" : "below";
   const dir = direction === "above" ? "UP" : "DN";
 
-  const thresholds = model === "simple"
-    ? extractSimpleThresholds(lines, outcome, direction)
-    : grouped
-      ? extractScenarioThresholds(grouped, outcome, direction)
-      : null;
+  const thresholds = grouped
+    ? extractScenarioThresholds(grouped, outcome, direction)
+    : null;
 
   if (!thresholds) {
-    return { zone: `NOT ENOUGH DATA`, direction };
+    return { zone: "NOT ENOUGH DATA", direction };
   }
 
   if (direction === "above") {

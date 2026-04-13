@@ -239,7 +239,7 @@ function StatsPanel({
     .filter(m => {
       if (dirFilter === 'above') return m.direction === 'above';
       if (dirFilter === 'below') return m.direction === 'below';
-      if (dirFilter === 'extremes') return m.zone.includes('BEYOND') || m.zone.includes('80-90%');
+      if (dirFilter === 'extremes') return m.zone.includes('BEYOND');
       return true;
     })
     .filter(m => classFilter === 'all' || m.assetClass === classFilter)
@@ -299,7 +299,7 @@ function StatsPanel({
     return p.toFixed(4);
   };
 
-  const isExtreme = (m: MoverRow) => m.zone.includes('BEYOND') || m.zone.includes('80-90%');
+  const isExtreme = (m: MoverRow) => m.zone.includes('BEYOND');
 
   // -- Render cell --
   const renderCell = (col: typeof ALL_STATS_COLUMNS[number], m: MoverRow) => {

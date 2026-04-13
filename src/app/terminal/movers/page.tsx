@@ -73,17 +73,27 @@ function buildC(theme: ChartTheme) {
 }
 
 const REFRESH_INTERVAL_MS = 60_000;
-const ORDERED_ZONE_OPTIONS = [
-  "MID-80% DN",
-  "MID-80% UP",
-  "80-50% DN",
-  "80-50% UP",
-  "50-20% DN",
-  "50-20% UP",
-  "BEYOND 20% DN",
-  "BEYOND 20% UP",
-  "NOT ENOUGH DATA",
+// Pro/beta zone order
+const PRO_ZONE_ORDER = [
+  "MID-80% DN", "MID-80% UP",
+  "80-50% DN", "80-50% UP",
+  "50-20% DN", "50-20% UP",
+  "BEYOND 20% DN", "BEYOND 20% UP",
 ];
+// Simple model granular zone order (10th–90th percentile)
+const SIMPLE_ZONE_ORDER = [
+  "MID-90% DN", "MID-90% UP",
+  "90-80% DN", "90-80% UP",
+  "80-70% DN", "80-70% UP",
+  "70-60% DN", "70-60% UP",
+  "60-50% DN", "60-50% UP",
+  "50-40% DN", "50-40% UP",
+  "40-30% DN", "40-30% UP",
+  "30-20% DN", "30-20% UP",
+  "20-10% DN", "20-10% UP",
+  "BEYOND 10% DN", "BEYOND 10% UP",
+];
+const ORDERED_ZONE_OPTIONS = [...PRO_ZONE_ORDER, ...SIMPLE_ZONE_ORDER, "Developing", "NOT ENOUGH DATA"];
 
 /* -- Asset class config -------------------------------------------- */
 
@@ -160,7 +170,8 @@ function getZoneColor(row: MoverRow, c: ReturnType<typeof buildC>): string {
 }
 
 function isExtreme(row: MoverRow): boolean {
-  return row.zone.includes("BEYOND") || row.zone.includes("80-90%");
+  // Pro/beta: BEYOND 20%; Simple: BEYOND 10% (rarest level)
+  return row.zone.includes("BEYOND");
 }
 
 /* -- Component ----------------------------------------------------- */
@@ -453,14 +464,17 @@ export default function MoversPage() {
     return () => document.removeEventListener("mousedown", handler);
   }, [previewSymbol]);
 
-  /* -- Unique zone values for filter dropdowns -- */
+  /* -- Unique zone values for filter dropdowns (only zones present in data) -- */
   const uniqueZones = useMemo(() => {
-    return {
-      high: ORDERED_ZONE_OPTIONS,
-      low: ORDERED_ZONE_OPTIONS,
-      close: ORDERED_ZONE_OPTIONS,
-      lastQ: ORDERED_ZONE_OPTIONS,
-    };
+    const present = new Set<string>();
+    for (const m of movers) {
+      if (m.highZone) present.add(m.highZone);
+      if (m.lowZone) present.add(m.lowZone);
+      if (m.zone) present.add(m.zone);
+      if (m.lastQCloseZone) present.add(m.lastQCloseZone);
+    }
+    const ordered = ORDERED_ZONE_OPTIONS.filter((z) => present.has(z));
+    return { high: ordered, low: ordered, close: ordered, lastQ: ordered };
   }, [movers]);
 
   /* -- Column headers -- */
