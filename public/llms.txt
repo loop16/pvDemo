@@ -1,0 +1,35 @@
+# Pricevault
+
+> Statistically-derived stop levels and quarterly probability zones across 1,200+ global assets.
+
+Pricevault is a web-based trading tool that provides discretionary traders with data-driven stop loss levels and probability zones based on historical quarterly price range distributions. It covers stocks, futures, crypto, and FX.
+
+## What Pricevault does
+
+- Computes quarterly high/low/mid probability zones for each asset using historical data
+- Classifies where the current price sits within those zones (e.g. "60–70% UP", "BEYOND 90% DN")
+- Offers three analysis models: Pro (scenario-based), Simple (directional lines), and Beta (volatility-adjusted)
+- Updates levels daily after market close
+- Surfaces a Stats dashboard showing all 1,200+ assets ranked by their zone position
+
+## Analysis Models
+
+- **Pro model**: Uses four quarterly scenarios (strong/weak long, strong/weak short) auto-detected from current price action. Shows probability boxes above and below the quarter midpoint.
+- **Simple model**: Directional stop levels without scenario distinction. Shows individual lines at each decile (10%–90%) above and below mid.
+- **Beta model**: Scales another asset's Pro levels by the volatility ratio. Useful for individual stocks and instruments with limited history.
+
+## Pricing
+
+$25/month. Full access to all 1,200+ assets, all models, and the Stats dashboard. No contracts.
+
+## Key pages
+
+- Homepage: https://price-vault.com
+- Pricing: https://price-vault.com/pricing
+- Models explained: https://price-vault.com/models
+- About: https://price-vault.com/about
+- Live demo: https://price-vault.com/demo
+
+## Contact
+
+support@price-vault.com

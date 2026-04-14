@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Learn how Pricevault delivers statistically-derived stop levels and quarterly probability zones to discretionary traders across 1,200+ global assets.",
+  alternates: { canonical: "https://price-vault.com/about" },
+};
 export default function AboutPage() {
   return (
     <>

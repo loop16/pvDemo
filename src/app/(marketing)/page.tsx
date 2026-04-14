@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import BrowserCard from "@/components/BrowserCard";
+
+export const metadata: Metadata = {
+  title: "Pricevault — Stop Levels That Matter",
+  description:
+    "Statistically-derived stop levels across 1,200+ assets. Quarterly probability zones for stocks, futures, crypto, and FX. Your exit should be backed by data, not a feeling.",
+  alternates: { canonical: "https://price-vault.com" },
+};
 
 export default function Home() {
   return (
