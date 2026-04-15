@@ -111,6 +111,49 @@ function ScenarioSelector({
 }) {
   const { theme } = useTheme();
   const activeIdx = Math.max(0, SCENARIO_ITEMS.findIndex(s => s.value === value));
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 640px)');
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  if (isMobile) {
+    return (
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        style={{
+          fontFamily: MONO,
+          fontSize: 9,
+          fontWeight: 700,
+          letterSpacing: '0.06em',
+          height: 24,
+          padding: '0 6px',
+          background: theme.activeNavBg,
+          color: theme.text,
+          border: 'none',
+          borderRadius: 999,
+          cursor: 'pointer',
+          outline: 'none',
+          flexShrink: 0,
+          appearance: 'none',
+          WebkitAppearance: 'none',
+          paddingRight: 18,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='${encodeURIComponent(theme.textDim)}'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'right 6px center',
+        }}
+      >
+        {SCENARIO_ITEMS.map((s) => (
+          <option key={s.value} value={s.value}>{s.label}</option>
+        ))}
+      </select>
+    );
+  }
 
   return (
     <div
