@@ -236,6 +236,15 @@ export default function MoversPage() {
   const [daysFilter, setDaysFilter] = useState<string>("ALL");
   const [symbolSearch, setSymbolSearch] = useState("");
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 640px)');
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
   const [countdown, setCountdown] = useState(REFRESH_INTERVAL_MS / 1000);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -527,6 +536,50 @@ export default function MoversPage() {
     { key: "changePct", label: "CHG %", align: "right", flex: 0.7 },
     { key: "magnitude", label: "MAGNITUDE", align: "right", flex: 1 },
   ];
+
+  /* -- Mobile columns (reduced set) -- */
+  const mobileColumns: { key: SortKey; label: string; align: "left" | "right"; flex: number }[] = [
+    { key: "symbol", label: "SYMBOL", align: "left", flex: 1.2 },
+    { key: "zone", label: "ZONE", align: "left", flex: 1.6 },
+    { key: "changePct", label: "CHG%", align: "right", flex: 0.7 },
+    { key: "magnitude", label: "MAG", align: "right", flex: 0.8 },
+  ];
+
+  /* -- Mobile row renderer -- */
+  const renderMobileRow = (row: MoverRow, idx: number) => {
+    const barWidth = (row.magnitude / maxMagnitude) * 100;
+    const barColor = isExtreme(row) ? "rgba(217,119,6,0.12)" : row.direction === "above" ? "rgba(41,98,255,0.12)" : "rgba(156,39,176,0.12)";
+    const isExtremeRow = isExtreme(row);
+    return (
+      <tr
+        key={`m-${row.assetClass}-${row.symbol}`}
+        onClick={() => router.push(`/terminal?symbol=${encodeURIComponent(row.symbol)}`)}
+        style={{
+          cursor: "pointer",
+          background: idx % 2 === 0 ? (theme.frosted ? 'rgba(255,255,255,0.4)' : C.bg) : (theme.frosted ? 'rgba(255,255,255,0.3)' : C.surface),
+          borderBottom: theme.frosted ? '1px solid rgba(255,255,255,0.35)' : `1px solid ${C.borderLight}`,
+        }}
+      >
+        {/* SYMBOL */}
+        <td style={{ padding: "12px 12px", fontSize: 13, fontWeight: isExtremeRow ? 700 : 600, letterSpacing: "0.04em", color: isExtremeRow ? C.amber : C.textPrimary, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: 0, left: 0, bottom: 0, width: `${barWidth}%`, background: barColor, pointerEvents: "none" }} />
+          <span style={{ position: "relative", zIndex: 1 }}>{row.symbol}</span>
+        </td>
+        {/* ZONE */}
+        <td style={{ padding: "12px 8px", fontSize: 10, fontWeight: isExtremeRow ? 700 : 500, letterSpacing: "0.04em", color: getZoneColor(row, C) }}>
+          {row.zone || "—"}
+        </td>
+        {/* CHG % */}
+        <td style={{ padding: "12px 8px", fontSize: 11, fontWeight: 600, textAlign: "right", color: getChangeColor(row.changePct, C), fontVariantNumeric: "tabular-nums" }}>
+          {formatPct(row.changePct)}
+        </td>
+        {/* MAGNITUDE */}
+        <td style={{ padding: "12px 12px", fontSize: 11, fontWeight: 600, textAlign: "right", color: isExtremeRow ? C.amber : C.textDim, fontVariantNumeric: "tabular-nums" }}>
+          {row.magnitude.toFixed(2)}%
+        </td>
+      </tr>
+    );
+  };
 
   /* -- Class tabs -- */
   const classTabs: { key: ClassTab; label: string }[] = [
@@ -984,206 +1037,181 @@ export default function MoversPage() {
     >
       {/* -- Stats summary bar -- */}
       <div
-        className="flex items-center justify-between shrink-0"
+        className="shrink-0"
         style={{
-          padding: "10px 24px",
+          padding: isMobile ? "8px 12px" : "10px 24px",
           borderBottom: theme.frosted ? '1px solid rgba(255,255,255,0.5)' : `1px solid ${C.border}`,
           background: theme.frosted ? 'rgba(255,255,255,0.4)' : C.surface,
           ...(theme.frosted ? { backdropFilter: 'blur(30px) saturate(1.6)', WebkitBackdropFilter: 'blur(30px) saturate(1.6)' } : {}),
         }}
       >
-        <div className="flex items-center" style={{ gap: 16 }}>
-          <span
-            style={{
-              fontSize: 10,
-              fontWeight: 700,
-              letterSpacing: "0.08em",
-              color: C.textPrimary,
-            }}
-          >
-            {stats.total} SYMBOLS
-          </span>
-          <span style={{ fontSize: 10, color: C.textDim, letterSpacing: "0.04em" }}>
-            <span style={{ color: C.blue, fontWeight: 600 }}>{stats.above}</span> above mid
-          </span>
-          <span style={{ fontSize: 10, color: C.textDim, letterSpacing: "0.04em" }}>
-            <span style={{ color: C.purple, fontWeight: 600 }}>{stats.below}</span> below mid
-          </span>
-          <span style={{ fontSize: 10, color: C.textDim, letterSpacing: "0.04em" }}>
-            <span style={{ color: C.amber, fontWeight: 600 }}>{stats.extremes}</span> at extremes
-          </span>
-
-          {/* Model selector — pill slider */}
-          <div style={{ marginLeft: 8, borderLeft: `1px solid ${C.border}`, paddingLeft: 12 }}>
-            <PillSlider
-              value={model}
-              onChange={(v) => handleModelChange(v as ModelType)}
-              items={[
-                { key: "pro" as ModelType, label: "PRO" },
-                { key: "simple" as ModelType, label: "SIMPLE" },
-                { key: "beta" as ModelType, label: "BETA" },
-              ]}
-              itemW={52}
-              activeNavBg={C.activeNavBg}
-              text={C.textPrimary}
-              bg={C.bg}
-            />
-          </div>
-        </div>
-        <div className="flex items-center" style={{ gap: 12 }}>
-          {lastUpdate && (
-            <span style={{ fontSize: 10, color: C.textDim, letterSpacing: "0.04em" }}>
-              Updated{" "}
-              {lastUpdate.toLocaleTimeString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-              })}
-            </span>
-          )}
-          <div className="flex items-center" style={{ gap: 4 }}>
-            <div
-              style={{
-                width: 24,
-                height: 3,
-                background: C.borderLight,
-                borderRadius: 2,
-                overflow: "hidden",
-              }}
-            >
-              <div
-                style={{
-                  height: "100%",
-                  width: `${(countdown / (REFRESH_INTERVAL_MS / 1000)) * 100}%`,
-                  background: C.textDim,
-                  borderRadius: 2,
-                  transition: "width 1s linear",
-                }}
+        {isMobile ? (
+          /* Mobile: two compact rows */
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: C.textPrimary }}>{stats.total} SYMBOLS</span>
+              <PillSlider
+                value={model}
+                onChange={(v) => handleModelChange(v as ModelType)}
+                items={[
+                  { key: "pro" as ModelType, label: "PRO" },
+                  { key: "simple" as ModelType, label: "SIMPLE" },
+                  { key: "beta" as ModelType, label: "BETA" },
+                ]}
+                itemW={52}
+                activeNavBg={C.activeNavBg}
+                text={C.textPrimary}
+                bg={C.bg}
               />
             </div>
-            <span style={{ fontSize: 9, color: C.textDim, fontVariantNumeric: "tabular-nums" }}>
-              {countdown}s
-            </span>
+            <div style={{ display: "flex", gap: 12 }}>
+              <span style={{ fontSize: 10, color: C.textDim }}><span style={{ color: C.blue, fontWeight: 600 }}>{stats.above}</span> up</span>
+              <span style={{ fontSize: 10, color: C.textDim }}><span style={{ color: C.purple, fontWeight: 600 }}>{stats.below}</span> dn</span>
+              <span style={{ fontSize: 10, color: C.textDim }}><span style={{ color: C.amber, fontWeight: 600 }}>{stats.extremes}</span> extreme</span>
+            </div>
           </div>
-        </div>
+        ) : (
+          /* Desktop: single row */
+          <div className="flex items-center justify-between">
+            <div className="flex items-center" style={{ gap: 16 }}>
+              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: C.textPrimary }}>{stats.total} SYMBOLS</span>
+              <span style={{ fontSize: 10, color: C.textDim, letterSpacing: "0.04em" }}><span style={{ color: C.blue, fontWeight: 600 }}>{stats.above}</span> above mid</span>
+              <span style={{ fontSize: 10, color: C.textDim, letterSpacing: "0.04em" }}><span style={{ color: C.purple, fontWeight: 600 }}>{stats.below}</span> below mid</span>
+              <span style={{ fontSize: 10, color: C.textDim, letterSpacing: "0.04em" }}><span style={{ color: C.amber, fontWeight: 600 }}>{stats.extremes}</span> at extremes</span>
+              <div style={{ marginLeft: 8, borderLeft: `1px solid ${C.border}`, paddingLeft: 12 }}>
+                <PillSlider
+                  value={model}
+                  onChange={(v) => handleModelChange(v as ModelType)}
+                  items={[
+                    { key: "pro" as ModelType, label: "PRO" },
+                    { key: "simple" as ModelType, label: "SIMPLE" },
+                    { key: "beta" as ModelType, label: "BETA" },
+                  ]}
+                  itemW={52}
+                  activeNavBg={C.activeNavBg}
+                  text={C.textPrimary}
+                  bg={C.bg}
+                />
+              </div>
+            </div>
+            <div className="flex items-center" style={{ gap: 12 }}>
+              {lastUpdate && (
+                <span style={{ fontSize: 10, color: C.textDim, letterSpacing: "0.04em" }}>
+                  Updated {lastUpdate.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+                </span>
+              )}
+              <div className="flex items-center" style={{ gap: 4 }}>
+                <div style={{ width: 24, height: 3, background: C.borderLight, borderRadius: 2, overflow: "hidden" }}>
+                  <div style={{ height: "100%", width: `${(countdown / (REFRESH_INTERVAL_MS / 1000)) * 100}%`, background: C.textDim, borderRadius: 2, transition: "width 1s linear" }} />
+                </div>
+                <span style={{ fontSize: 9, color: C.textDim, fontVariantNumeric: "tabular-nums" }}>{countdown}s</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* -- Filter bars -- */}
       <div
-        className="flex items-center justify-between shrink-0"
+        className="shrink-0"
         style={{
-          padding: "10px 24px",
+          padding: isMobile ? "8px 12px" : "10px 24px",
           borderBottom: theme.frosted ? '1px solid rgba(255,255,255,0.5)' : `1px solid ${C.border}`,
           background: theme.frosted ? 'rgba(255,255,255,0.5)' : C.surface,
           ...(theme.frosted ? { backdropFilter: 'blur(30px) saturate(1.6)', WebkitBackdropFilter: 'blur(30px) saturate(1.6)' } : {}),
         }}
       >
-        {/* Asset class tabs */}
-        <div className="flex items-center" style={{ gap: 12 }}>
-          <span
-            style={{
-              fontSize: 10,
-              fontWeight: 600,
-              letterSpacing: "0.06em",
-              color: C.textDim,
-              marginRight: 4,
-            }}
-          >
-            CLASS
-          </span>
-          <div className="flex" style={{ gap: 2 }}>
-            {classTabs.map((tab) => (
-              <button
-                key={tab.key}
-                onClick={() => setClassTab(tab.key)}
-                style={{
-                  fontSize: 10,
-                  fontWeight: 600,
-                  fontFamily: C.font,
-                  letterSpacing: "0.08em",
-                  padding: "4px 10px",
-                  border: "none",
-                  borderBottom: classTab === tab.key ? `2px solid ${C.textPrimary}` : "2px solid transparent",
-                  background: "transparent",
-                  color: classTab === tab.key ? C.textPrimary : C.textDim,
-                  cursor: "pointer",
-                  transition: "all 0.15s",
-                }}
-                onMouseEnter={(e) => {
-                  if (classTab !== tab.key) {
-                    e.currentTarget.style.color = C.textSecondary;
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (classTab !== tab.key) {
-                    e.currentTarget.style.color = C.textDim;
-                  }
-                }}
+        {isMobile ? (
+          /* Mobile filters: stacked */
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {/* Row 1: search full-width */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, border: `1px solid ${C.border}`, borderRadius: 6, padding: '6px 10px', background: 'transparent' }}>
+              <svg width={11} height={11} viewBox="0 0 16 16" fill="none" stroke={C.textDim} strokeWidth={1.8} strokeLinecap="round">
+                <circle cx={6.5} cy={6.5} r={4.5} /><path d="M10.5 10.5l3 3" />
+              </svg>
+              <input
+                type="text"
+                placeholder="Search symbol…"
+                value={symbolSearch}
+                onChange={e => setSymbolSearch(e.target.value)}
+                style={{ flex: 1, fontFamily: C.font, fontSize: 12, background: 'transparent', border: 'none', outline: 'none', color: C.textPrimary, caretColor: C.accent }}
+              />
+              {symbolSearch && <button onClick={() => setSymbolSearch('')} style={{ fontFamily: C.font, fontSize: 11, color: C.textDim, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>✕</button>}
+            </div>
+            {/* Row 2: CLASS + DIRECTION selects */}
+            <div style={{ display: "flex", gap: 8 }}>
+              <select
+                value={classTab}
+                onChange={e => setClassTab(e.target.value as ClassTab)}
+                style={{ flex: 1, fontFamily: C.font, fontSize: 11, fontWeight: 600, letterSpacing: '0.04em', height: 34, padding: '0 8px', background: C.activeNavBg, color: C.textPrimary, border: 'none', borderRadius: 6, outline: 'none', cursor: 'pointer' }}
               >
-                {tab.label}
-              </button>
-            ))}
+                {classTabs.map(t => <option key={t.key} value={t.key}>{t.label}</option>)}
+              </select>
+              <select
+                value={dirFilter}
+                onChange={e => setDirFilter(e.target.value as DirectionFilter)}
+                style={{ flex: 1, fontFamily: C.font, fontSize: 11, fontWeight: 600, letterSpacing: '0.04em', height: 34, padding: '0 8px', background: C.activeNavBg, color: C.textPrimary, border: 'none', borderRadius: 6, outline: 'none', cursor: 'pointer' }}
+              >
+                {dirTabs.map(t => <option key={t.key} value={t.key}>{t.label}</option>)}
+              </select>
+            </div>
           </div>
-        </div>
-
-        {/* Symbol search */}
-        <div className="flex items-center" style={{ gap: 6 }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6,
-            border: `1px solid ${C.border}`,
-            borderRadius: 4,
-            padding: '4px 10px',
-            background: 'transparent',
-            minWidth: 160,
-          }}>
-            <svg width={11} height={11} viewBox="0 0 16 16" fill="none" stroke={C.textDim} strokeWidth={1.8} strokeLinecap="round">
-              <circle cx={6.5} cy={6.5} r={4.5} />
-              <path d="M10.5 10.5l3 3" />
-            </svg>
-            <input
-              type="text"
-              placeholder="Search symbol…"
-              value={symbolSearch}
-              onChange={e => setSymbolSearch(e.target.value)}
-              style={{
-                fontFamily: C.font,
-                fontSize: 10,
-                fontWeight: 600,
-                letterSpacing: '0.06em',
-                background: 'transparent',
-                border: 'none',
-                outline: 'none',
-                color: C.textPrimary,
-                caretColor: C.accent,
-                width: 110,
-              }}
+        ) : (
+          /* Desktop filters: single row */
+          <div className="flex items-center justify-between">
+            {/* Asset class tabs */}
+            <div className="flex items-center" style={{ gap: 12 }}>
+              <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.06em", color: C.textDim, marginRight: 4 }}>CLASS</span>
+              <div className="flex" style={{ gap: 2 }}>
+                {classTabs.map((tab) => (
+                  <button
+                    key={tab.key}
+                    onClick={() => setClassTab(tab.key)}
+                    style={{
+                      fontSize: 10, fontWeight: 600, fontFamily: C.font, letterSpacing: "0.08em",
+                      padding: "4px 10px", border: "none",
+                      borderBottom: classTab === tab.key ? `2px solid ${C.textPrimary}` : "2px solid transparent",
+                      background: "transparent",
+                      color: classTab === tab.key ? C.textPrimary : C.textDim,
+                      cursor: "pointer", transition: "all 0.15s",
+                    }}
+                    onMouseEnter={(e) => { if (classTab !== tab.key) e.currentTarget.style.color = C.textSecondary; }}
+                    onMouseLeave={(e) => { if (classTab !== tab.key) e.currentTarget.style.color = C.textDim; }}
+                  >{tab.label}</button>
+                ))}
+              </div>
+            </div>
+            {/* Symbol search */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, border: `1px solid ${C.border}`, borderRadius: 4, padding: '4px 10px', background: 'transparent', minWidth: 160 }}>
+              <svg width={11} height={11} viewBox="0 0 16 16" fill="none" stroke={C.textDim} strokeWidth={1.8} strokeLinecap="round">
+                <circle cx={6.5} cy={6.5} r={4.5} /><path d="M10.5 10.5l3 3" />
+              </svg>
+              <input
+                type="text"
+                placeholder="Search symbol…"
+                value={symbolSearch}
+                onChange={e => setSymbolSearch(e.target.value)}
+                style={{ fontFamily: C.font, fontSize: 10, fontWeight: 600, letterSpacing: '0.06em', background: 'transparent', border: 'none', outline: 'none', color: C.textPrimary, caretColor: C.accent, width: 110 }}
+              />
+              {symbolSearch && <button onClick={() => setSymbolSearch('')} style={{ fontFamily: C.font, fontSize: 10, color: C.textDim, background: 'none', border: 'none', cursor: 'pointer', padding: 0, lineHeight: 1 }}>✕</button>}
+            </div>
+            {/* Direction filter */}
+            <PillSlider
+              value={dirFilter}
+              onChange={(v) => setDirFilter(v as DirectionFilter)}
+              items={dirTabs}
+              itemW={72}
+              activeNavBg={C.activeNavBg}
+              text={C.textPrimary}
+              bg={C.bg}
+              fontSize={9}
             />
-            {symbolSearch && (
-              <button
-                onClick={() => setSymbolSearch('')}
-                style={{ fontFamily: C.font, fontSize: 10, color: C.textDim, background: 'none', border: 'none', cursor: 'pointer', padding: 0, lineHeight: 1 }}
-              >✕</button>
-            )}
           </div>
-        </div>
-
-        {/* Direction filter */}
-        <PillSlider
-          value={dirFilter}
-          onChange={(v) => setDirFilter(v as DirectionFilter)}
-          items={dirTabs}
-          itemW={72}
-          activeNavBg={C.activeNavBg}
-          text={C.textPrimary}
-          bg={C.bg}
-          fontSize={9}
-        />
+        )}
       </div>
 
       {/* -- Content -- */}
-      <div className="flex-1 overflow-auto" style={{ padding: "0 24px", backdropFilter: 'blur(40px) saturate(1.8)', WebkitBackdropFilter: 'blur(40px) saturate(1.8)' }}>
+      <div className="flex-1 overflow-auto" style={{ padding: isMobile ? "0" : "0 24px", backdropFilter: 'blur(40px) saturate(1.8)', WebkitBackdropFilter: 'blur(40px) saturate(1.8)' }}>
         {loading ? (
           <div
             className="flex flex-col items-center justify-center"
@@ -1261,10 +1289,33 @@ export default function MoversPage() {
               tableLayout: "fixed",
             }}
           >
-            {renderTableHeader()}
+            {isMobile ? (
+              <thead>
+                <tr>
+                  {mobileColumns.map((col) => {
+                    const totalFlex = mobileColumns.reduce((s, c) => s + c.flex, 0);
+                    return (
+                      <th key={col.key} onClick={() => handleSort(col.key)} style={{
+                        position: "sticky", top: 0, zIndex: 10,
+                        background: theme.frosted ? 'rgba(255,255,255,0.7)' : C.bg,
+                        ...(theme.frosted ? { backdropFilter: 'blur(30px)', WebkitBackdropFilter: 'blur(30px)' } : {}),
+                        padding: "8px 12px", fontSize: 9, fontWeight: 600, letterSpacing: "0.12em",
+                        color: sortKey === col.key ? C.textPrimary : C.textDim,
+                        textAlign: col.align, borderBottom: `1px solid ${C.border}`, cursor: "pointer",
+                        width: `${(col.flex / totalFlex) * 100}%`,
+                      }}>
+                        {col.label}{sortKey === col.key && <span style={{ marginLeft: 3, fontSize: 7, opacity: 0.6 }}>{sortDir === "asc" ? "▲" : "▼"}</span>}
+                      </th>
+                    );
+                  })}
+                </tr>
+              </thead>
+            ) : renderTableHeader()}
 
             <tbody>
-              {rows.map((row, idx) => renderRow(row, idx))}
+              {isMobile
+                ? rows.map((row, idx) => renderMobileRow(row, idx))
+                : rows.map((row, idx) => renderRow(row, idx))}
             </tbody>
           </table>
         )}
@@ -1274,7 +1325,7 @@ export default function MoversPage() {
       <div
         className="flex items-center justify-between shrink-0"
         style={{
-          padding: "6px 24px",
+          padding: isMobile ? "6px 12px" : "6px 24px",
           borderTop: theme.frosted ? '1px solid rgba(255,255,255,0.5)' : `1px solid ${C.border}`,
           background: theme.frosted ? 'rgba(255,255,255,0.4)' : C.surface,
           backdropFilter: 'blur(30px) saturate(1.6)',
@@ -1296,8 +1347,8 @@ export default function MoversPage() {
         </span>
       </div>
 
-      {/* Chart preview popup */}
-      {previewSymbol && <ChartPreview symbol={previewSymbol} model={model} pos={previewPos} onClose={() => setPreviewSymbol(null)} onOpen={() => router.push(`/terminal?symbol=${encodeURIComponent(previewSymbol)}`)} containerRef={previewRef} />}
+      {/* Chart preview popup — desktop only */}
+      {!isMobile && previewSymbol && <ChartPreview symbol={previewSymbol} model={model} pos={previewPos} onClose={() => setPreviewSymbol(null)} onOpen={() => router.push(`/terminal?symbol=${encodeURIComponent(previewSymbol)}`)} containerRef={previewRef} />}
     </div>
   );
 }
