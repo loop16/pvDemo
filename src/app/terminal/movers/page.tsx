@@ -1211,7 +1211,7 @@ export default function MoversPage() {
       </div>
 
       {/* -- Content -- */}
-      <div className="flex-1 overflow-auto" style={{ padding: isMobile ? "0" : "0 24px", backdropFilter: 'blur(40px) saturate(1.8)', WebkitBackdropFilter: 'blur(40px) saturate(1.8)' }}>
+      <div className="flex-1 overflow-auto hide-scrollbar" style={{ padding: isMobile ? "0" : "0 24px", backdropFilter: 'blur(40px) saturate(1.8)', WebkitBackdropFilter: 'blur(40px) saturate(1.8)' }}>
         {loading ? (
           <div
             className="flex flex-col items-center justify-center"

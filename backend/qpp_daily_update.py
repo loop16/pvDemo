@@ -193,7 +193,7 @@ def update_daily_csvs(config_path, n_bars, cooldown, only_missing=False, resume_
                     n_bars=item_bars,
                     use_cache=True,
                 )
-            except Exception as exc:
+            except (Exception, KeyboardInterrupt) as exc:
                 print(f"   -> Error fetching {tv_symbol} via {ex}: {exc}")
                 df_new, used_exch = None, None
             if df_new is not None and not df_new.empty:
