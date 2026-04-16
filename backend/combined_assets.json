@@ -5062,5 +5062,13 @@
   {
     "asset_name": "D500.DE",
     "file_path": "../Daily data csv/ETF_D500.DE, 1D.csv"
+  },
+  {
+    "asset_name": "TNX",
+    "file_path": "../Daily data csv/TVC_TNX, 1D.csv"
+  },
+  {
+    "asset_name": "TYX",
+    "file_path": "../Daily data csv/TVC_TYX, 1D.csv"
   }
 ]

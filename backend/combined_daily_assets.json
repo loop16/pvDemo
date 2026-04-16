@@ -15676,5 +15676,21 @@
       "CBOE",
       "BATS"
     ]
+  },
+  {
+    "asset_name": "TNX",
+    "file_path": "../Daily data csv/TVC_TNX, 1D.csv",
+    "tv_symbol": "TNX",
+    "tv_exchange": [
+      "TVC"
+    ]
+  },
+  {
+    "asset_name": "TYX",
+    "file_path": "../Daily data csv/TVC_TYX, 1D.csv",
+    "tv_symbol": "TYX",
+    "tv_exchange": [
+      "TVC"
+    ]
   }
 ]

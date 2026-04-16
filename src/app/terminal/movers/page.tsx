@@ -1158,9 +1158,9 @@ export default function MoversPage() {
           </div>
         ) : (
           /* Desktop filters: single row */
-          <div className="flex items-center justify-between">
+          <div className="flex items-center">
             {/* Asset class tabs */}
-            <div className="flex items-center" style={{ gap: 12 }}>
+            <div className="flex items-center flex-1" style={{ gap: 12 }}>
               <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.06em", color: C.textDim, marginRight: 4 }}>CLASS</span>
               <div className="flex" style={{ gap: 2 }}>
                 {classTabs.map((tab) => (
@@ -1196,16 +1196,18 @@ export default function MoversPage() {
               {symbolSearch && <button onClick={() => setSymbolSearch('')} style={{ fontFamily: C.font, fontSize: 10, color: C.textDim, background: 'none', border: 'none', cursor: 'pointer', padding: 0, lineHeight: 1 }}>✕</button>}
             </div>
             {/* Direction filter */}
-            <PillSlider
-              value={dirFilter}
-              onChange={(v) => setDirFilter(v as DirectionFilter)}
-              items={dirTabs}
-              itemW={72}
-              activeNavBg={C.activeNavBg}
-              text={C.textPrimary}
-              bg={C.bg}
-              fontSize={9}
-            />
+            <div className="flex flex-1 justify-end">
+              <PillSlider
+                value={dirFilter}
+                onChange={(v) => setDirFilter(v as DirectionFilter)}
+                items={dirTabs}
+                itemW={72}
+                activeNavBg={C.activeNavBg}
+                text={C.textPrimary}
+                bg={C.bg}
+                fontSize={9}
+              />
+            </div>
           </div>
         )}
       </div>

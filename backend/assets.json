@@ -2350,5 +2350,13 @@
   {
     "asset_name": "ZTS",
     "file_path": "../Daily data csv/SP500_ZTS, 1D.csv"
+  },
+  {
+    "asset_name": "TNX",
+    "file_path": "../Daily data csv/TVC_TNX, 1D.csv"
+  },
+  {
+    "asset_name": "TYX",
+    "file_path": "../Daily data csv/TVC_TYX, 1D.csv"
   }
 ]
