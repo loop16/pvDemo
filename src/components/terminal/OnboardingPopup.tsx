@@ -51,7 +51,7 @@ const TERMINAL_STEPS: Step[] = [
     title: 'Getting Started',
     body: [
       'Use the search bar to find any asset. Switch models with the tabs in the panel header. Open up to 4 charts at once with the layout selector.',
-      'Data updates daily after market close.',
+      'Data is end-of-day. Levels are recomputed and published every day by 5:00 PM ET — check back after close for updated zones.',
     ],
   },
 ];
@@ -63,6 +63,7 @@ const DEMO_STEPS: Step[] = [
     body: [
       'The demo includes 5 assets to explore — SPX, NQ, BTCUSD, CL, and GC.',
       'The full Stats dashboard is only available with a subscription. Sign up to access 1,200+ assets and all filtering tools.',
+      'Data is end-of-day. Levels update every day by 5:00 PM ET.',
     ],
   },
 ];
