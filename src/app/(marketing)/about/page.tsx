@@ -37,7 +37,7 @@ export default function AboutPage() {
             <ul className="space-y-2 text-sm text-neutral-600">
               <li className="flex items-start gap-2"><span className="mono text-neutral-400 mt-0.5 text-xs select-none">&mdash;</span><span><strong className="text-neutral-900">Quarter models</strong> &mdash; simple + pro scenarios refreshed at every EOD close.</span></li>
               <li className="flex items-start gap-2"><span className="mono text-neutral-400 mt-0.5 text-xs select-none">&mdash;</span><span><strong className="text-neutral-900">Full instrument library</strong> &mdash; equities, futures, FX, and crypto back to 1960 where available.</span></li>
-              <li className="flex items-start gap-2"><span className="mono text-neutral-400 mt-0.5 text-xs select-none">&mdash;</span><span><strong className="text-neutral-900">Indicators package</strong> &mdash; TradingView overlays for EURUSD, SPX, BTC, ETH, NDX, GC, CL, TNX.</span></li>
+              <li className="flex items-start gap-2"><span className="mono text-neutral-400 mt-0.5 text-xs select-none">&mdash;</span><span><strong className="text-neutral-900">Indicators package</strong> &mdash; TradingView overlays for EURUSD, SPX, BTC, ETH, NDX, GC, CL, TNX. <span className="text-neutral-400">Access is granted manually&mdash;allow up to 24&nbsp;hours after subscribing.</span></span></li>
               <li className="flex items-start gap-2"><span className="mono text-neutral-400 mt-0.5 text-xs select-none">&mdash;</span><span><strong className="text-neutral-900">Workflow friendly</strong> &mdash; export snapshots, add notes, and share setups with your team.</span></li>
             </ul>
           </article>
@@ -57,7 +57,7 @@ export default function AboutPage() {
           <h2 className="mono text-[15px] font-semibold">What we&apos;re not</h2>
           <ul className="space-y-2 text-sm text-neutral-600">
             <li className="flex items-start gap-2"><span className="mono text-red-400 mt-0.5 text-xs select-none">&times;</span><span>We are not a signal room or copy-trading platform.</span></li>
-            <li className="flex items-start gap-2"><span className="mono text-red-400 mt-0.5 text-xs select-none">&times;</span><span>We do not redistribute real-time exchange data&mdash;Pricevault operates on delayed/EOD feeds.</span></li>
+            <li className="flex items-start gap-2"><span className="mono text-red-400 mt-0.5 text-xs select-none">&times;</span><span>We do not redistribute real-time exchange data&mdash;Pricevault operates on end-of-day feeds. Levels are recomputed and published daily by 5:00&nbsp;PM&nbsp;ET.</span></li>
             <li className="flex items-start gap-2"><span className="mono text-red-400 mt-0.5 text-xs select-none">&times;</span><span>This is not investment advice. We surface probabilities; you execute the plan.</span></li>
           </ul>
         </section>

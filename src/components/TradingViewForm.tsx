@@ -44,6 +44,9 @@ export default function TradingViewForm({ initialValue, planLabel }: Props) {
       <p className="mt-1 text-xs text-neutral-500">
         Required for the {planLabel} plan. Enter your TradingView username so we can enable indicator access.
       </p>
+      <p className="mt-1 text-xs text-neutral-400">
+        Access is granted manually&mdash;allow up to 24&nbsp;hours after submitting your username. If you&apos;ve been waiting longer, contact <a href="mailto:support@price-vault.com" className="underline hover:text-neutral-600">support@price-vault.com</a>.
+      </p>
 
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3 md:flex-row md:items-center">
         <input

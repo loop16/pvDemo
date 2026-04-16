@@ -106,6 +106,10 @@ export default async function AccountPage() {
                     </div>
                 </div>
 
+                <p className="mt-4 text-xs text-neutral-400 mono">
+                    Data is end-of-day. Levels are recomputed and published daily by 5:00&nbsp;PM&nbsp;ET.
+                </p>
+
                 <AccountActions isActive={isActive} plans={plans} isCorePlan={isCorePlan} />
 
                 {needsTradingView && (
