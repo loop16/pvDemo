@@ -110,10 +110,11 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
         }}
       >
         {/* Left: Pricevault branding */}
+        <div style={{ flex: 1 }}>
         <Link
           href="/"
           className="flex items-center gap-2"
-          style={{ textDecoration: "none", flex: 1 }}
+          style={{ textDecoration: "none", display: "inline-flex" }}
         >
           <Image
             src="/logo.svg"
@@ -138,6 +139,7 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
             Pricevault
           </span>
         </Link>
+        </div>
 
         {/* Center: Navigation links */}
         <nav className="flex items-center" style={{ gap: 2 }}>
@@ -154,7 +156,9 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
                   fontSize: 11,
                   fontWeight: 600,
                   letterSpacing: "0.1em",
-                  padding: "6px 14px",
+                  padding: "6px 0",
+                  width: 80,
+                  textAlign: "center",
                   color: isActive ? theme.text : theme.textDim,
                   background: isActive ? theme.activeNavBg : "transparent",
                   textDecoration: "none",
