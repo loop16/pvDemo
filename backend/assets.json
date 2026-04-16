@@ -2352,6 +2352,2718 @@
     "file_path": "../Daily data csv/SP500_ZTS, 1D.csv"
   },
   {
+    "asset_name": "BRK-B",
+    "file_path": "../Daily data csv/TOP1000_BRK-B, 1D.csv"
+  },
+  {
+    "asset_name": "APP",
+    "file_path": "../Daily data csv/TOP1000_APP, 1D.csv"
+  },
+  {
+    "asset_name": "SCCO",
+    "file_path": "../Daily data csv/TOP1000_SCCO, 1D.csv"
+  },
+  {
+    "asset_name": "IBKR",
+    "file_path": "../Daily data csv/TOP1000_IBKR, 1D.csv"
+  },
+  {
+    "asset_name": "CVNA",
+    "file_path": "../Daily data csv/TOP1000_CVNA, 1D.csv"
+  },
+  {
+    "asset_name": "HOOD",
+    "file_path": "../Daily data csv/TOP1000_HOOD, 1D.csv"
+  },
+  {
+    "asset_name": "SNDK",
+    "file_path": "../Daily data csv/TOP1000_SNDK, 1D.csv"
+  },
+  {
+    "asset_name": "VRT",
+    "file_path": "../Daily data csv/TOP1000_VRT, 1D.csv"
+  },
+  {
+    "asset_name": "EPD",
+    "file_path": "../Daily data csv/TOP1000_EPD, 1D.csv"
+  },
+  {
+    "asset_name": "MRVL",
+    "file_path": "../Daily data csv/TOP1000_MRVL, 1D.csv"
+  },
+  {
+    "asset_name": "CL",
+    "file_path": "../Daily data csv/SP500_CL, 1D.csv"
+  },
+  {
+    "asset_name": "SNOW",
+    "file_path": "../Daily data csv/TOP1000_SNOW, 1D.csv"
+  },
+  {
+    "asset_name": "PCAR",
+    "file_path": "../Daily data csv/TOP1000_PCAR, 1D.csv"
+  },
+  {
+    "asset_name": "ET",
+    "file_path": "../Daily data csv/TOP1000_ET, 1D.csv"
+  },
+  {
+    "asset_name": "NET",
+    "file_path": "../Daily data csv/TOP1000_NET, 1D.csv"
+  },
+  {
+    "asset_name": "RKT",
+    "file_path": "../Daily data csv/TOP1000_RKT, 1D.csv"
+  },
+  {
+    "asset_name": "MPLX",
+    "file_path": "../Daily data csv/TOP1000_MPLX, 1D.csv"
+  },
+  {
+    "asset_name": "RBLX",
+    "file_path": "../Daily data csv/TOP1000_RBLX, 1D.csv"
+  },
+  {
+    "asset_name": "CRWV",
+    "file_path": "../Daily data csv/TOP1000_CRWV, 1D.csv"
+  },
+  {
+    "asset_name": "ARES",
+    "file_path": "../Daily data csv/TOP1000_ARES, 1D.csv"
+  },
+  {
+    "asset_name": "LNG",
+    "file_path": "../Daily data csv/TOP1000_LNG, 1D.csv"
+  },
+  {
+    "asset_name": "WDAY",
+    "file_path": "../Daily data csv/TOP1000_WDAY, 1D.csv"
+  },
+  {
+    "asset_name": "HEI",
+    "file_path": "../Daily data csv/TOP1000_HEI, 1D.csv"
+  },
+  {
+    "asset_name": "ALNY",
+    "file_path": "../Daily data csv/TOP1000_ALNY, 1D.csv"
+  },
+  {
+    "asset_name": "RKLB",
+    "file_path": "../Daily data csv/TOP1000_RKLB, 1D.csv"
+  },
+  {
+    "asset_name": "GBTC",
+    "file_path": "../Daily data csv/TOP1000_GBTC, 1D.csv"
+  },
+  {
+    "asset_name": "ASTS",
+    "file_path": "../Daily data csv/TOP1000_ASTS, 1D.csv"
+  },
+  {
+    "asset_name": "WCN",
+    "file_path": "../Daily data csv/TOP1000_WCN, 1D.csv"
+  },
+  {
+    "asset_name": "MSTR",
+    "file_path": "../Daily data csv/TOP1000_MSTR, 1D.csv"
+  },
+  {
+    "asset_name": "FIX",
+    "file_path": "../Daily data csv/TOP1000_FIX, 1D.csv"
+  },
+  {
+    "asset_name": "ONC",
+    "file_path": "../Daily data csv/TOP1000_ONC, 1D.csv"
+  },
+  {
+    "asset_name": "XYZ",
+    "file_path": "../Daily data csv/TOP1000_XYZ, 1D.csv"
+  },
+  {
+    "asset_name": "BE",
+    "file_path": "../Daily data csv/TOP1000_BE, 1D.csv"
+  },
+  {
+    "asset_name": "PAYX",
+    "file_path": "../Daily data csv/TOP1000_PAYX, 1D.csv"
+  },
+  {
+    "asset_name": "CPNG",
+    "file_path": "../Daily data csv/TOP1000_CPNG, 1D.csv"
+  },
+  {
+    "asset_name": "MDLN",
+    "file_path": "../Daily data csv/TOP1000_MDLN, 1D.csv"
+  },
+  {
+    "asset_name": "RDDT",
+    "file_path": "../Daily data csv/TOP1000_RDDT, 1D.csv"
+  },
+  {
+    "asset_name": "CIEN",
+    "file_path": "../Daily data csv/TOP1000_CIEN, 1D.csv"
+  },
+  {
+    "asset_name": "VEEV",
+    "file_path": "../Daily data csv/TOP1000_VEEV, 1D.csv"
+  },
+  {
+    "asset_name": "UI",
+    "file_path": "../Daily data csv/TOP1000_UI, 1D.csv"
+  },
+  {
+    "asset_name": "COHR",
+    "file_path": "../Daily data csv/TOP1000_COHR, 1D.csv"
+  },
+  {
+    "asset_name": "INSM",
+    "file_path": "../Daily data csv/TOP1000_INSM, 1D.csv"
+  },
+  {
+    "asset_name": "SYM",
+    "file_path": "../Daily data csv/TOP1000_SYM, 1D.csv"
+  },
+  {
+    "asset_name": "EME",
+    "file_path": "../Daily data csv/TOP1000_EME, 1D.csv"
+  },
+  {
+    "asset_name": "SATS",
+    "file_path": "../Daily data csv/TOP1000_SATS, 1D.csv"
+  },
+  {
+    "asset_name": "NTRA",
+    "file_path": "../Daily data csv/TOP1000_NTRA, 1D.csv"
+  },
+  {
+    "asset_name": "ZS",
+    "file_path": "../Daily data csv/TOP1000_ZS, 1D.csv"
+  },
+  {
+    "asset_name": "SOFI",
+    "file_path": "../Daily data csv/TOP1000_SOFI, 1D.csv"
+  },
+  {
+    "asset_name": "MDB",
+    "file_path": "../Daily data csv/TOP1000_MDB, 1D.csv"
+  },
+  {
+    "asset_name": "LPLA",
+    "file_path": "../Daily data csv/TOP1000_LPLA, 1D.csv"
+  },
+  {
+    "asset_name": "FTAI",
+    "file_path": "../Daily data csv/TOP1000_FTAI, 1D.csv"
+  },
+  {
+    "asset_name": "CQP",
+    "file_path": "../Daily data csv/TOP1000_CQP, 1D.csv"
+  },
+  {
+    "asset_name": "ZM",
+    "file_path": "../Daily data csv/TOP1000_ZM, 1D.csv"
+  },
+  {
+    "asset_name": "ALAB",
+    "file_path": "../Daily data csv/TOP1000_ALAB, 1D.csv"
+  },
+  {
+    "asset_name": "LITE",
+    "file_path": "../Daily data csv/TOP1000_LITE, 1D.csv"
+  },
+  {
+    "asset_name": "MKL",
+    "file_path": "../Daily data csv/TOP1000_MKL, 1D.csv"
+  },
+  {
+    "asset_name": "CW",
+    "file_path": "../Daily data csv/TOP1000_CW, 1D.csv"
+  },
+  {
+    "asset_name": "FCNCA",
+    "file_path": "../Daily data csv/TOP1000_FCNCA, 1D.csv"
+  },
+  {
+    "asset_name": "GFS",
+    "file_path": "../Daily data csv/TOP1000_GFS, 1D.csv"
+  },
+  {
+    "asset_name": "RGLD",
+    "file_path": "../Daily data csv/TOP1000_RGLD, 1D.csv"
+  },
+  {
+    "asset_name": "WSM",
+    "file_path": "../Daily data csv/TOP1000_WSM, 1D.csv"
+  },
+  {
+    "asset_name": "TPL",
+    "file_path": "../Daily data csv/TOP1000_TPL, 1D.csv"
+  },
+  {
+    "asset_name": "PSTG",
+    "file_path": "../Daily data csv/TOP1000_PSTG, 1D.csv"
+  },
+  {
+    "asset_name": "VG",
+    "file_path": "../Daily data csv/TOP1000_VG, 1D.csv"
+  },
+  {
+    "asset_name": "CRDO",
+    "file_path": "../Daily data csv/TOP1000_CRDO, 1D.csv"
+  },
+  {
+    "asset_name": "ILMN",
+    "file_path": "../Daily data csv/TOP1000_ILMN, 1D.csv"
+  },
+  {
+    "asset_name": "CASY",
+    "file_path": "../Daily data csv/TOP1000_CASY, 1D.csv"
+  },
+  {
+    "asset_name": "TPG",
+    "file_path": "../Daily data csv/TOP1000_TPG, 1D.csv"
+  },
+  {
+    "asset_name": "TW",
+    "file_path": "../Daily data csv/TOP1000_TW, 1D.csv"
+  },
+  {
+    "asset_name": "OWL",
+    "file_path": "../Daily data csv/TOP1000_OWL, 1D.csv"
+  },
+  {
+    "asset_name": "FWONK",
+    "file_path": "../Daily data csv/TOP1000_FWONK, 1D.csv"
+  },
+  {
+    "asset_name": "CG",
+    "file_path": "../Daily data csv/TOP1000_CG, 1D.csv"
+  },
+  {
+    "asset_name": "UTHR",
+    "file_path": "../Daily data csv/TOP1000_UTHR, 1D.csv"
+  },
+  {
+    "asset_name": "Q",
+    "file_path": "../Daily data csv/TOP1000_Q, 1D.csv"
+  },
+  {
+    "asset_name": "AFRM",
+    "file_path": "../Daily data csv/TOP1000_AFRM, 1D.csv"
+  },
+  {
+    "asset_name": "SSNC",
+    "file_path": "../Daily data csv/TOP1000_SSNC, 1D.csv"
+  },
+  {
+    "asset_name": "EXAS",
+    "file_path": "../Daily data csv/TOP1000_EXAS, 1D.csv"
+  },
+  {
+    "asset_name": "MTZ",
+    "file_path": "../Daily data csv/TOP1000_MTZ, 1D.csv"
+  },
+  {
+    "asset_name": "BWXT",
+    "file_path": "../Daily data csv/TOP1000_BWXT, 1D.csv"
+  },
+  {
+    "asset_name": "WWD",
+    "file_path": "../Daily data csv/TOP1000_WWD, 1D.csv"
+  },
+  {
+    "asset_name": "RVMD",
+    "file_path": "../Daily data csv/TOP1000_RVMD, 1D.csv"
+  },
+  {
+    "asset_name": "TWLO",
+    "file_path": "../Daily data csv/TOP1000_TWLO, 1D.csv"
+  },
+  {
+    "asset_name": "USFD",
+    "file_path": "../Daily data csv/TOP1000_USFD, 1D.csv"
+  },
+  {
+    "asset_name": "SGI",
+    "file_path": "../Daily data csv/TOP1000_SGI, 1D.csv"
+  },
+  {
+    "asset_name": "ENTG",
+    "file_path": "../Daily data csv/TOP1000_ENTG, 1D.csv"
+  },
+  {
+    "asset_name": "RIVN",
+    "file_path": "../Daily data csv/TOP1000_RIVN, 1D.csv"
+  },
+  {
+    "asset_name": "DKS",
+    "file_path": "../Daily data csv/TOP1000_DKS, 1D.csv"
+  },
+  {
+    "asset_name": "BURL",
+    "file_path": "../Daily data csv/TOP1000_BURL, 1D.csv"
+  },
+  {
+    "asset_name": "NXT",
+    "file_path": "../Daily data csv/TOP1000_NXT, 1D.csv"
+  },
+  {
+    "asset_name": "TOST",
+    "file_path": "../Daily data csv/TOP1000_TOST, 1D.csv"
+  },
+  {
+    "asset_name": "KTOS",
+    "file_path": "../Daily data csv/TOP1000_KTOS, 1D.csv"
+  },
+  {
+    "asset_name": "APG",
+    "file_path": "../Daily data csv/TOP1000_APG, 1D.csv"
+  },
+  {
+    "asset_name": "XPO",
+    "file_path": "../Daily data csv/TOP1000_XPO, 1D.csv"
+  },
+  {
+    "asset_name": "HL",
+    "file_path": "../Daily data csv/TOP1000_HL, 1D.csv"
+  },
+  {
+    "asset_name": "RS",
+    "file_path": "../Daily data csv/TOP1000_RS, 1D.csv"
+  },
+  {
+    "asset_name": "CRCL",
+    "file_path": "../Daily data csv/TOP1000_CRCL, 1D.csv"
+  },
+  {
+    "asset_name": "MTSI",
+    "file_path": "../Daily data csv/TOP1000_MTSI, 1D.csv"
+  },
+  {
+    "asset_name": "WES",
+    "file_path": "../Daily data csv/TOP1000_WES, 1D.csv"
+  },
+  {
+    "asset_name": "JLL",
+    "file_path": "../Daily data csv/TOP1000_JLL, 1D.csv"
+  },
+  {
+    "asset_name": "SN",
+    "file_path": "../Daily data csv/TOP1000_SN, 1D.csv"
+  },
+  {
+    "asset_name": "IOT",
+    "file_path": "../Daily data csv/TOP1000_IOT, 1D.csv"
+  },
+  {
+    "asset_name": "ATI",
+    "file_path": "../Daily data csv/TOP1000_ATI, 1D.csv"
+  },
+  {
+    "asset_name": "THC",
+    "file_path": "../Daily data csv/TOP1000_THC, 1D.csv"
+  },
+  {
+    "asset_name": "MEDP",
+    "file_path": "../Daily data csv/TOP1000_MEDP, 1D.csv"
+  },
+  {
+    "asset_name": "TLN",
+    "file_path": "../Daily data csv/TOP1000_TLN, 1D.csv"
+  },
+  {
+    "asset_name": "TKO",
+    "file_path": "../Daily data csv/TOP1000_TKO, 1D.csv"
+  },
+  {
+    "asset_name": "U",
+    "file_path": "../Daily data csv/TOP1000_U, 1D.csv"
+  },
+  {
+    "asset_name": "NLY",
+    "file_path": "../Daily data csv/TOP1000_NLY, 1D.csv"
+  },
+  {
+    "asset_name": "MKSI",
+    "file_path": "../Daily data csv/TOP1000_MKSI, 1D.csv"
+  },
+  {
+    "asset_name": "SUI",
+    "file_path": "../Daily data csv/TOP1000_SUI, 1D.csv"
+  },
+  {
+    "asset_name": "RBC",
+    "file_path": "../Daily data csv/TOP1000_RBC, 1D.csv"
+  },
+  {
+    "asset_name": "QXO",
+    "file_path": "../Daily data csv/TOP1000_QXO, 1D.csv"
+  },
+  {
+    "asset_name": "Z",
+    "file_path": "../Daily data csv/TOP1000_Z, 1D.csv"
+  },
+  {
+    "asset_name": "ITT",
+    "file_path": "../Daily data csv/TOP1000_ITT, 1D.csv"
+  },
+  {
+    "asset_name": "CDE",
+    "file_path": "../Daily data csv/TOP1000_CDE, 1D.csv"
+  },
+  {
+    "asset_name": "EWBC",
+    "file_path": "../Daily data csv/TOP1000_EWBC, 1D.csv"
+  },
+  {
+    "asset_name": "TRU",
+    "file_path": "../Daily data csv/TOP1000_TRU, 1D.csv"
+  },
+  {
+    "asset_name": "AA",
+    "file_path": "../Daily data csv/TOP1000_AA, 1D.csv"
+  },
+  {
+    "asset_name": "CRBG",
+    "file_path": "../Daily data csv/TOP1000_CRBG, 1D.csv"
+  },
+  {
+    "asset_name": "WMG",
+    "file_path": "../Daily data csv/TOP1000_WMG, 1D.csv"
+  },
+  {
+    "asset_name": "WSO",
+    "file_path": "../Daily data csv/TOP1000_WSO, 1D.csv"
+  },
+  {
+    "asset_name": "CRS",
+    "file_path": "../Daily data csv/TOP1000_CRS, 1D.csv"
+  },
+  {
+    "asset_name": "PFGC",
+    "file_path": "../Daily data csv/TOP1000_PFGC, 1D.csv"
+  },
+  {
+    "asset_name": "IONQ",
+    "file_path": "../Daily data csv/TOP1000_IONQ, 1D.csv"
+  },
+  {
+    "asset_name": "TTD",
+    "file_path": "../Daily data csv/TOP1000_TTD, 1D.csv"
+  },
+  {
+    "asset_name": "MLI",
+    "file_path": "../Daily data csv/TOP1000_MLI, 1D.csv"
+  },
+  {
+    "asset_name": "H",
+    "file_path": "../Daily data csv/TOP1000_H, 1D.csv"
+  },
+  {
+    "asset_name": "PINS",
+    "file_path": "../Daily data csv/TOP1000_PINS, 1D.csv"
+  },
+  {
+    "asset_name": "OKTA",
+    "file_path": "../Daily data csv/TOP1000_OKTA, 1D.csv"
+  },
+  {
+    "asset_name": "WPC",
+    "file_path": "../Daily data csv/TOP1000_WPC, 1D.csv"
+  },
+  {
+    "asset_name": "BBIO",
+    "file_path": "../Daily data csv/TOP1000_BBIO, 1D.csv"
+  },
+  {
+    "asset_name": "DKNG",
+    "file_path": "../Daily data csv/TOP1000_DKNG, 1D.csv"
+  },
+  {
+    "asset_name": "ROKU",
+    "file_path": "../Daily data csv/TOP1000_ROKU, 1D.csv"
+  },
+  {
+    "asset_name": "HUBS",
+    "file_path": "../Daily data csv/TOP1000_HUBS, 1D.csv"
+  },
+  {
+    "asset_name": "FNF",
+    "file_path": "../Daily data csv/TOP1000_FNF, 1D.csv"
+  },
+  {
+    "asset_name": "LECO",
+    "file_path": "../Daily data csv/TOP1000_LECO, 1D.csv"
+  },
+  {
+    "asset_name": "AVAV",
+    "file_path": "../Daily data csv/TOP1000_AVAV, 1D.csv"
+  },
+  {
+    "asset_name": "CSL",
+    "file_path": "../Daily data csv/TOP1000_CSL, 1D.csv"
+  },
+  {
+    "asset_name": "GGG",
+    "file_path": "../Daily data csv/TOP1000_GGG, 1D.csv"
+  },
+  {
+    "asset_name": "ARCC",
+    "file_path": "../Daily data csv/TOP1000_ARCC, 1D.csv"
+  },
+  {
+    "asset_name": "GH",
+    "file_path": "../Daily data csv/TOP1000_GH, 1D.csv"
+  },
+  {
+    "asset_name": "ULS",
+    "file_path": "../Daily data csv/TOP1000_ULS, 1D.csv"
+  },
+  {
+    "asset_name": "PNFP",
+    "file_path": "../Daily data csv/TOP1000_PNFP, 1D.csv"
+  },
+  {
+    "asset_name": "WCC",
+    "file_path": "../Daily data csv/TOP1000_WCC, 1D.csv"
+  },
+  {
+    "asset_name": "TOL",
+    "file_path": "../Daily data csv/TOP1000_TOL, 1D.csv"
+  },
+  {
+    "asset_name": "W",
+    "file_path": "../Daily data csv/TOP1000_W, 1D.csv"
+  },
+  {
+    "asset_name": "PEN",
+    "file_path": "../Daily data csv/TOP1000_PEN, 1D.csv"
+  },
+  {
+    "asset_name": "PAA",
+    "file_path": "../Daily data csv/TOP1000_PAA, 1D.csv"
+  },
+  {
+    "asset_name": "CLH",
+    "file_path": "../Daily data csv/TOP1000_CLH, 1D.csv"
+  },
+  {
+    "asset_name": "RPM",
+    "file_path": "../Daily data csv/TOP1000_RPM, 1D.csv"
+  },
+  {
+    "asset_name": "EQH",
+    "file_path": "../Daily data csv/TOP1000_EQH, 1D.csv"
+  },
+  {
+    "asset_name": "EVR",
+    "file_path": "../Daily data csv/TOP1000_EVR, 1D.csv"
+  },
+  {
+    "asset_name": "CACI",
+    "file_path": "../Daily data csv/TOP1000_CACI, 1D.csv"
+  },
+  {
+    "asset_name": "CELH",
+    "file_path": "../Daily data csv/TOP1000_CELH, 1D.csv"
+  },
+  {
+    "asset_name": "NBIX",
+    "file_path": "../Daily data csv/TOP1000_NBIX, 1D.csv"
+  },
+  {
+    "asset_name": "VNOM",
+    "file_path": "../Daily data csv/TOP1000_VNOM, 1D.csv"
+  },
+  {
+    "asset_name": "IONS",
+    "file_path": "../Daily data csv/TOP1000_IONS, 1D.csv"
+  },
+  {
+    "asset_name": "BLD",
+    "file_path": "../Daily data csv/TOP1000_BLD, 1D.csv"
+  },
+  {
+    "asset_name": "OZON.ME",
+    "file_path": "../Daily data csv/TOP1000_OZON.ME, 1D.csv"
+  },
+  {
+    "asset_name": "OKLO",
+    "file_path": "../Daily data csv/TOP1000_OKLO, 1D.csv"
+  },
+  {
+    "asset_name": "FIG",
+    "file_path": "../Daily data csv/TOP1000_FIG, 1D.csv"
+  },
+  {
+    "asset_name": "PSHZF",
+    "file_path": "../Daily data csv/TOP1000_PSHZF, 1D.csv"
+  },
+  {
+    "asset_name": "AGNC",
+    "file_path": "../Daily data csv/TOP1000_AGNC, 1D.csv"
+  },
+  {
+    "asset_name": "ALLY",
+    "file_path": "../Daily data csv/TOP1000_ALLY, 1D.csv"
+  },
+  {
+    "asset_name": "OHI",
+    "file_path": "../Daily data csv/TOP1000_OHI, 1D.csv"
+  },
+  {
+    "asset_name": "RGA",
+    "file_path": "../Daily data csv/TOP1000_RGA, 1D.csv"
+  },
+  {
+    "asset_name": "SNX",
+    "file_path": "../Daily data csv/TOP1000_SNX, 1D.csv"
+  },
+  {
+    "asset_name": "RMBS",
+    "file_path": "../Daily data csv/TOP1000_RMBS, 1D.csv"
+  },
+  {
+    "asset_name": "AMH",
+    "file_path": "../Daily data csv/TOP1000_AMH, 1D.csv"
+  },
+  {
+    "asset_name": "UNM",
+    "file_path": "../Daily data csv/TOP1000_UNM, 1D.csv"
+  },
+  {
+    "asset_name": "LAMR",
+    "file_path": "../Daily data csv/TOP1000_LAMR, 1D.csv"
+  },
+  {
+    "asset_name": "CNA",
+    "file_path": "../Daily data csv/TOP1000_CNA, 1D.csv"
+  },
+  {
+    "asset_name": "ACM",
+    "file_path": "../Daily data csv/TOP1000_ACM, 1D.csv"
+  },
+  {
+    "asset_name": "GLPI",
+    "file_path": "../Daily data csv/TOP1000_GLPI, 1D.csv"
+  },
+  {
+    "asset_name": "DTM",
+    "file_path": "../Daily data csv/TOP1000_DTM, 1D.csv"
+  },
+  {
+    "asset_name": "ELS",
+    "file_path": "../Daily data csv/TOP1000_ELS, 1D.csv"
+  },
+  {
+    "asset_name": "SF",
+    "file_path": "../Daily data csv/TOP1000_SF, 1D.csv"
+  },
+  {
+    "asset_name": "BF-A",
+    "file_path": "../Daily data csv/TOP1000_BF-A, 1D.csv"
+  },
+  {
+    "asset_name": "JEF",
+    "file_path": "../Daily data csv/TOP1000_JEF, 1D.csv"
+  },
+  {
+    "asset_name": "GWRE",
+    "file_path": "../Daily data csv/TOP1000_GWRE, 1D.csv"
+  },
+  {
+    "asset_name": "CHWY",
+    "file_path": "../Daily data csv/TOP1000_CHWY, 1D.csv"
+  },
+  {
+    "asset_name": "RYAN",
+    "file_path": "../Daily data csv/TOP1000_RYAN, 1D.csv"
+  },
+  {
+    "asset_name": "SNAP",
+    "file_path": "../Daily data csv/TOP1000_SNAP, 1D.csv"
+  },
+  {
+    "asset_name": "PSKY",
+    "file_path": "../Daily data csv/TOP1000_PSKY, 1D.csv"
+  },
+  {
+    "asset_name": "AMKR",
+    "file_path": "../Daily data csv/TOP1000_AMKR, 1D.csv"
+  },
+  {
+    "asset_name": "TXRH",
+    "file_path": "../Daily data csv/TOP1000_TXRH, 1D.csv"
+  },
+  {
+    "asset_name": "GMED",
+    "file_path": "../Daily data csv/TOP1000_GMED, 1D.csv"
+  },
+  {
+    "asset_name": "BMNR",
+    "file_path": "../Daily data csv/TOP1000_BMNR, 1D.csv"
+  },
+  {
+    "asset_name": "CCK",
+    "file_path": "../Daily data csv/TOP1000_CCK, 1D.csv"
+  },
+  {
+    "asset_name": "FHN",
+    "file_path": "../Daily data csv/TOP1000_FHN, 1D.csv"
+  },
+  {
+    "asset_name": "ELAN",
+    "file_path": "../Daily data csv/TOP1000_ELAN, 1D.csv"
+  },
+  {
+    "asset_name": "DCI",
+    "file_path": "../Daily data csv/TOP1000_DCI, 1D.csv"
+  },
+  {
+    "asset_name": "PR",
+    "file_path": "../Daily data csv/TOP1000_PR, 1D.csv"
+  },
+  {
+    "asset_name": "NYT",
+    "file_path": "../Daily data csv/TOP1000_NYT, 1D.csv"
+  },
+  {
+    "asset_name": "WMS",
+    "file_path": "../Daily data csv/TOP1000_WMS, 1D.csv"
+  },
+  {
+    "asset_name": "BJ",
+    "file_path": "../Daily data csv/TOP1000_BJ, 1D.csv"
+  },
+  {
+    "asset_name": "CMA",
+    "file_path": "../Daily data csv/TOP1000_CMA, 1D.csv"
+  },
+  {
+    "asset_name": "HLI",
+    "file_path": "../Daily data csv/TOP1000_HLI, 1D.csv"
+  },
+  {
+    "asset_name": "STRL",
+    "file_path": "../Daily data csv/TOP1000_STRL, 1D.csv"
+  },
+  {
+    "asset_name": "RBRK",
+    "file_path": "../Daily data csv/TOP1000_RBRK, 1D.csv"
+  },
+  {
+    "asset_name": "DT",
+    "file_path": "../Daily data csv/TOP1000_DT, 1D.csv"
+  },
+  {
+    "asset_name": "LSCC",
+    "file_path": "../Daily data csv/TOP1000_LSCC, 1D.csv"
+  },
+  {
+    "asset_name": "EXEL",
+    "file_path": "../Daily data csv/TOP1000_EXEL, 1D.csv"
+  },
+  {
+    "asset_name": "TEM",
+    "file_path": "../Daily data csv/TOP1000_TEM, 1D.csv"
+  },
+  {
+    "asset_name": "MDGL",
+    "file_path": "../Daily data csv/TOP1000_MDGL, 1D.csv"
+  },
+  {
+    "asset_name": "SCI",
+    "file_path": "../Daily data csv/TOP1000_SCI, 1D.csv"
+  },
+  {
+    "asset_name": "SUN",
+    "file_path": "../Daily data csv/TOP1000_SUN, 1D.csv"
+  },
+  {
+    "asset_name": "MP",
+    "file_path": "../Daily data csv/TOP1000_MP, 1D.csv"
+  },
+  {
+    "asset_name": "OVV",
+    "file_path": "../Daily data csv/TOP1000_OVV, 1D.csv"
+  },
+  {
+    "asset_name": "DRS",
+    "file_path": "../Daily data csv/TOP1000_DRS, 1D.csv"
+  },
+  {
+    "asset_name": "WTRG",
+    "file_path": "../Daily data csv/TOP1000_WTRG, 1D.csv"
+  },
+  {
+    "asset_name": "DY",
+    "file_path": "../Daily data csv/TOP1000_DY, 1D.csv"
+  },
+  {
+    "asset_name": "BMRN",
+    "file_path": "../Daily data csv/TOP1000_BMRN, 1D.csv"
+  },
+  {
+    "asset_name": "RNA",
+    "file_path": "../Daily data csv/TOP1000_RNA, 1D.csv"
+  },
+  {
+    "asset_name": "AR",
+    "file_path": "../Daily data csv/TOP1000_AR, 1D.csv"
+  },
+  {
+    "asset_name": "SEIC",
+    "file_path": "../Daily data csv/TOP1000_SEIC, 1D.csv"
+  },
+  {
+    "asset_name": "UHAL",
+    "file_path": "../Daily data csv/TOP1000_UHAL, 1D.csv"
+  },
+  {
+    "asset_name": "CFLT",
+    "file_path": "../Daily data csv/TOP1000_CFLT, 1D.csv"
+  },
+  {
+    "asset_name": "DOCU",
+    "file_path": "../Daily data csv/TOP1000_DOCU, 1D.csv"
+  },
+  {
+    "asset_name": "RRX",
+    "file_path": "../Daily data csv/TOP1000_RRX, 1D.csv"
+  },
+  {
+    "asset_name": "AFG",
+    "file_path": "../Daily data csv/TOP1000_AFG, 1D.csv"
+  },
+  {
+    "asset_name": "BAH",
+    "file_path": "../Daily data csv/TOP1000_BAH, 1D.csv"
+  },
+  {
+    "asset_name": "CNM",
+    "file_path": "../Daily data csv/TOP1000_CNM, 1D.csv"
+  },
+  {
+    "asset_name": "NTNX",
+    "file_path": "../Daily data csv/TOP1000_NTNX, 1D.csv"
+  },
+  {
+    "asset_name": "BSY",
+    "file_path": "../Daily data csv/TOP1000_BSY, 1D.csv"
+  },
+  {
+    "asset_name": "APLD",
+    "file_path": "../Daily data csv/TOP1000_APLD, 1D.csv"
+  },
+  {
+    "asset_name": "BWA",
+    "file_path": "../Daily data csv/TOP1000_BWA, 1D.csv"
+  },
+  {
+    "asset_name": "WBS",
+    "file_path": "../Daily data csv/TOP1000_WBS, 1D.csv"
+  },
+  {
+    "asset_name": "ONTO",
+    "file_path": "../Daily data csv/TOP1000_ONTO, 1D.csv"
+  },
+  {
+    "asset_name": "SPXC",
+    "file_path": "../Daily data csv/TOP1000_SPXC, 1D.csv"
+  },
+  {
+    "asset_name": "WLK",
+    "file_path": "../Daily data csv/TOP1000_WLK, 1D.csv"
+  },
+  {
+    "asset_name": "SARO",
+    "file_path": "../Daily data csv/TOP1000_SARO, 1D.csv"
+  },
+  {
+    "asset_name": "FIVE",
+    "file_path": "../Daily data csv/TOP1000_FIVE, 1D.csv"
+  },
+  {
+    "asset_name": "PAG",
+    "file_path": "../Daily data csv/TOP1000_PAG, 1D.csv"
+  },
+  {
+    "asset_name": "CR",
+    "file_path": "../Daily data csv/TOP1000_CR, 1D.csv"
+  },
+  {
+    "asset_name": "SSB",
+    "file_path": "../Daily data csv/TOP1000_SSB, 1D.csv"
+  },
+  {
+    "asset_name": "PPC",
+    "file_path": "../Daily data csv/TOP1000_PPC, 1D.csv"
+  },
+  {
+    "asset_name": "GAP",
+    "file_path": "../Daily data csv/TOP1000_GAP, 1D.csv"
+  },
+  {
+    "asset_name": "FLS",
+    "file_path": "../Daily data csv/TOP1000_FLS, 1D.csv"
+  },
+  {
+    "asset_name": "GME",
+    "file_path": "../Daily data csv/TOP1000_GME, 1D.csv"
+  },
+  {
+    "asset_name": "AEIS",
+    "file_path": "../Daily data csv/TOP1000_AEIS, 1D.csv"
+  },
+  {
+    "asset_name": "JOBY",
+    "file_path": "../Daily data csv/TOP1000_JOBY, 1D.csv"
+  },
+  {
+    "asset_name": "ARMK",
+    "file_path": "../Daily data csv/TOP1000_ARMK, 1D.csv"
+  },
+  {
+    "asset_name": "SOLS",
+    "file_path": "../Daily data csv/TOP1000_SOLS, 1D.csv"
+  },
+  {
+    "asset_name": "OC",
+    "file_path": "../Daily data csv/TOP1000_OC, 1D.csv"
+  },
+  {
+    "asset_name": "TTEK",
+    "file_path": "../Daily data csv/TOP1000_TTEK, 1D.csv"
+  },
+  {
+    "asset_name": "TTMI",
+    "file_path": "../Daily data csv/TOP1000_TTMI, 1D.csv"
+  },
+  {
+    "asset_name": "COKE",
+    "file_path": "../Daily data csv/TOP1000_COKE, 1D.csv"
+  },
+  {
+    "asset_name": "WAL",
+    "file_path": "../Daily data csv/TOP1000_WAL, 1D.csv"
+  },
+  {
+    "asset_name": "WTS",
+    "file_path": "../Daily data csv/TOP1000_WTS, 1D.csv"
+  },
+  {
+    "asset_name": "WTFC",
+    "file_path": "../Daily data csv/TOP1000_WTFC, 1D.csv"
+  },
+  {
+    "asset_name": "ENSG",
+    "file_path": "../Daily data csv/TOP1000_ENSG, 1D.csv"
+  },
+  {
+    "asset_name": "REXR",
+    "file_path": "../Daily data csv/TOP1000_REXR, 1D.csv"
+  },
+  {
+    "asset_name": "AIT",
+    "file_path": "../Daily data csv/TOP1000_AIT, 1D.csv"
+  },
+  {
+    "asset_name": "CART",
+    "file_path": "../Daily data csv/TOP1000_CART, 1D.csv"
+  },
+  {
+    "asset_name": "ARWR",
+    "file_path": "../Daily data csv/TOP1000_ARWR, 1D.csv"
+  },
+  {
+    "asset_name": "ORI",
+    "file_path": "../Daily data csv/TOP1000_ORI, 1D.csv"
+  },
+  {
+    "asset_name": "EGP",
+    "file_path": "../Daily data csv/TOP1000_EGP, 1D.csv"
+  },
+  {
+    "asset_name": "FNMA",
+    "file_path": "../Daily data csv/TOP1000_FNMA, 1D.csv"
+  },
+  {
+    "asset_name": "UMBF",
+    "file_path": "../Daily data csv/TOP1000_UMBF, 1D.csv"
+  },
+  {
+    "asset_name": "FYBR",
+    "file_path": "../Daily data csv/TOP1000_FYBR, 1D.csv"
+  },
+  {
+    "asset_name": "AYI",
+    "file_path": "../Daily data csv/TOP1000_AYI, 1D.csv"
+  },
+  {
+    "asset_name": "DINO",
+    "file_path": "../Daily data csv/TOP1000_DINO, 1D.csv"
+  },
+  {
+    "asset_name": "SITM",
+    "file_path": "../Daily data csv/TOP1000_SITM, 1D.csv"
+  },
+  {
+    "asset_name": "ONB",
+    "file_path": "../Daily data csv/TOP1000_ONB, 1D.csv"
+  },
+  {
+    "asset_name": "EHC",
+    "file_path": "../Daily data csv/TOP1000_EHC, 1D.csv"
+  },
+  {
+    "asset_name": "DDS",
+    "file_path": "../Daily data csv/TOP1000_DDS, 1D.csv"
+  },
+  {
+    "asset_name": "BROS",
+    "file_path": "../Daily data csv/TOP1000_BROS, 1D.csv"
+  },
+  {
+    "asset_name": "IESC",
+    "file_path": "../Daily data csv/TOP1000_IESC, 1D.csv"
+  },
+  {
+    "asset_name": "MANH",
+    "file_path": "../Daily data csv/TOP1000_MANH, 1D.csv"
+  },
+  {
+    "asset_name": "AXSM",
+    "file_path": "../Daily data csv/TOP1000_AXSM, 1D.csv"
+  },
+  {
+    "asset_name": "SFD",
+    "file_path": "../Daily data csv/TOP1000_SFD, 1D.csv"
+  },
+  {
+    "asset_name": "ALSN",
+    "file_path": "../Daily data csv/TOP1000_ALSN, 1D.csv"
+  },
+  {
+    "asset_name": "CHYM",
+    "file_path": "../Daily data csv/TOP1000_CHYM, 1D.csv"
+  },
+  {
+    "asset_name": "GTLS",
+    "file_path": "../Daily data csv/TOP1000_GTLS, 1D.csv"
+  },
+  {
+    "asset_name": "MOD",
+    "file_path": "../Daily data csv/TOP1000_MOD, 1D.csv"
+  },
+  {
+    "asset_name": "OSK",
+    "file_path": "../Daily data csv/TOP1000_OSK, 1D.csv"
+  },
+  {
+    "asset_name": "KNSL",
+    "file_path": "../Daily data csv/TOP1000_KNSL, 1D.csv"
+  },
+  {
+    "asset_name": "UWMC",
+    "file_path": "../Daily data csv/TOP1000_UWMC, 1D.csv"
+  },
+  {
+    "asset_name": "LUMN",
+    "file_path": "../Daily data csv/TOP1000_LUMN, 1D.csv"
+  },
+  {
+    "asset_name": "ACI",
+    "file_path": "../Daily data csv/TOP1000_ACI, 1D.csv"
+  },
+  {
+    "asset_name": "SAIA",
+    "file_path": "../Daily data csv/TOP1000_SAIA, 1D.csv"
+  },
+  {
+    "asset_name": "KNX",
+    "file_path": "../Daily data csv/TOP1000_KNX, 1D.csv"
+  },
+  {
+    "asset_name": "AMTM",
+    "file_path": "../Daily data csv/TOP1000_AMTM, 1D.csv"
+  },
+  {
+    "asset_name": "SAIL",
+    "file_path": "../Daily data csv/TOP1000_SAIL, 1D.csv"
+  },
+  {
+    "asset_name": "UEC",
+    "file_path": "../Daily data csv/TOP1000_UEC, 1D.csv"
+  },
+  {
+    "asset_name": "LINE",
+    "file_path": "../Daily data csv/TOP1000_LINE, 1D.csv"
+  },
+  {
+    "asset_name": "TTC",
+    "file_path": "../Daily data csv/TOP1000_TTC, 1D.csv"
+  },
+  {
+    "asset_name": "OGE",
+    "file_path": "../Daily data csv/TOP1000_OGE, 1D.csv"
+  },
+  {
+    "asset_name": "AM",
+    "file_path": "../Daily data csv/TOP1000_AM, 1D.csv"
+  },
+  {
+    "asset_name": "CFR",
+    "file_path": "../Daily data csv/TOP1000_CFR, 1D.csv"
+  },
+  {
+    "asset_name": "AAL",
+    "file_path": "../Daily data csv/TOP1000_AAL, 1D.csv"
+  },
+  {
+    "asset_name": "RRC",
+    "file_path": "../Daily data csv/TOP1000_RRC, 1D.csv"
+  },
+  {
+    "asset_name": "DOX",
+    "file_path": "../Daily data csv/TOP1000_DOX, 1D.csv"
+  },
+  {
+    "asset_name": "AMG",
+    "file_path": "../Daily data csv/TOP1000_AMG, 1D.csv"
+  },
+  {
+    "asset_name": "BPOP",
+    "file_path": "../Daily data csv/TOP1000_BPOP, 1D.csv"
+  },
+  {
+    "asset_name": "STEP",
+    "file_path": "../Daily data csv/TOP1000_STEP, 1D.csv"
+  },
+  {
+    "asset_name": "VMI",
+    "file_path": "../Daily data csv/TOP1000_VMI, 1D.csv"
+  },
+  {
+    "asset_name": "PL",
+    "file_path": "../Daily data csv/TOP1000_PL, 1D.csv"
+  },
+  {
+    "asset_name": "PCOR",
+    "file_path": "../Daily data csv/TOP1000_PCOR, 1D.csv"
+  },
+  {
+    "asset_name": "RGEN",
+    "file_path": "../Daily data csv/TOP1000_RGEN, 1D.csv"
+  },
+  {
+    "asset_name": "AHR",
+    "file_path": "../Daily data csv/TOP1000_AHR, 1D.csv"
+  },
+  {
+    "asset_name": "ZION",
+    "file_path": "../Daily data csv/TOP1000_ZION, 1D.csv"
+  },
+  {
+    "asset_name": "AUR",
+    "file_path": "../Daily data csv/TOP1000_AUR, 1D.csv"
+  },
+  {
+    "asset_name": "UGI",
+    "file_path": "../Daily data csv/TOP1000_UGI, 1D.csv"
+  },
+  {
+    "asset_name": "PRAX",
+    "file_path": "../Daily data csv/TOP1000_PRAX, 1D.csv"
+  },
+  {
+    "asset_name": "COLB",
+    "file_path": "../Daily data csv/TOP1000_COLB, 1D.csv"
+  },
+  {
+    "asset_name": "VIRT",
+    "file_path": "../Daily data csv/TOP1000_VIRT, 1D.csv"
+  },
+  {
+    "asset_name": "CMC",
+    "file_path": "../Daily data csv/TOP1000_CMC, 1D.csv"
+  },
+  {
+    "asset_name": "HALO",
+    "file_path": "../Daily data csv/TOP1000_HALO, 1D.csv"
+  },
+  {
+    "asset_name": "CUBE",
+    "file_path": "../Daily data csv/TOP1000_CUBE, 1D.csv"
+  },
+  {
+    "asset_name": "IDCC",
+    "file_path": "../Daily data csv/TOP1000_IDCC, 1D.csv"
+  },
+  {
+    "asset_name": "AGCO",
+    "file_path": "../Daily data csv/TOP1000_AGCO, 1D.csv"
+  },
+  {
+    "asset_name": "MORN",
+    "file_path": "../Daily data csv/TOP1000_MORN, 1D.csv"
+  },
+  {
+    "asset_name": "PRI",
+    "file_path": "../Daily data csv/TOP1000_PRI, 1D.csv"
+  },
+  {
+    "asset_name": "SANM",
+    "file_path": "../Daily data csv/TOP1000_SANM, 1D.csv"
+  },
+  {
+    "asset_name": "ADC",
+    "file_path": "../Daily data csv/TOP1000_ADC, 1D.csv"
+  },
+  {
+    "asset_name": "CTRE",
+    "file_path": "../Daily data csv/TOP1000_CTRE, 1D.csv"
+  },
+  {
+    "asset_name": "BOKF",
+    "file_path": "../Daily data csv/TOP1000_BOKF, 1D.csv"
+  },
+  {
+    "asset_name": "JBTM",
+    "file_path": "../Daily data csv/TOP1000_JBTM, 1D.csv"
+  },
+  {
+    "asset_name": "PRIM",
+    "file_path": "../Daily data csv/TOP1000_PRIM, 1D.csv"
+  },
+  {
+    "asset_name": "JXN",
+    "file_path": "../Daily data csv/TOP1000_JXN, 1D.csv"
+  },
+  {
+    "asset_name": "GSAT",
+    "file_path": "../Daily data csv/TOP1000_GSAT, 1D.csv"
+  },
+  {
+    "asset_name": "ATR",
+    "file_path": "../Daily data csv/TOP1000_ATR, 1D.csv"
+  },
+  {
+    "asset_name": "LFUS",
+    "file_path": "../Daily data csv/TOP1000_LFUS, 1D.csv"
+  },
+  {
+    "asset_name": "LEVI",
+    "file_path": "../Daily data csv/TOP1000_LEVI, 1D.csv"
+  },
+  {
+    "asset_name": "KRYS",
+    "file_path": "../Daily data csv/TOP1000_KRYS, 1D.csv"
+  },
+  {
+    "asset_name": "CLF",
+    "file_path": "../Daily data csv/TOP1000_CLF, 1D.csv"
+  },
+  {
+    "asset_name": "MUSA",
+    "file_path": "../Daily data csv/TOP1000_MUSA, 1D.csv"
+  },
+  {
+    "asset_name": "BRX",
+    "file_path": "../Daily data csv/TOP1000_BRX, 1D.csv"
+  },
+  {
+    "asset_name": "CYTK",
+    "file_path": "../Daily data csv/TOP1000_CYTK, 1D.csv"
+  },
+  {
+    "asset_name": "HLNE",
+    "file_path": "../Daily data csv/TOP1000_HLNE, 1D.csv"
+  },
+  {
+    "asset_name": "NFG",
+    "file_path": "../Daily data csv/TOP1000_NFG, 1D.csv"
+  },
+  {
+    "asset_name": "CADE",
+    "file_path": "../Daily data csv/TOP1000_CADE, 1D.csv"
+  },
+  {
+    "asset_name": "AWI",
+    "file_path": "../Daily data csv/TOP1000_AWI, 1D.csv"
+  },
+  {
+    "asset_name": "BIO",
+    "file_path": "../Daily data csv/TOP1000_BIO, 1D.csv"
+  },
+  {
+    "asset_name": "NUVL",
+    "file_path": "../Daily data csv/TOP1000_NUVL, 1D.csv"
+  },
+  {
+    "asset_name": "NNN",
+    "file_path": "../Daily data csv/TOP1000_NNN, 1D.csv"
+  },
+  {
+    "asset_name": "FR",
+    "file_path": "../Daily data csv/TOP1000_FR, 1D.csv"
+  },
+  {
+    "asset_name": "LAD",
+    "file_path": "../Daily data csv/TOP1000_LAD, 1D.csv"
+  },
+  {
+    "asset_name": "LNC",
+    "file_path": "../Daily data csv/TOP1000_LNC, 1D.csv"
+  },
+  {
+    "asset_name": "IBP",
+    "file_path": "../Daily data csv/TOP1000_IBP, 1D.csv"
+  },
+  {
+    "asset_name": "7LX.F",
+    "file_path": "../Daily data csv/TOP1000_7LX.F, 1D.csv"
+  },
+  {
+    "asset_name": "VFC",
+    "file_path": "../Daily data csv/TOP1000_VFC, 1D.csv"
+  },
+  {
+    "asset_name": "OMF",
+    "file_path": "../Daily data csv/TOP1000_OMF, 1D.csv"
+  },
+  {
+    "asset_name": "R",
+    "file_path": "../Daily data csv/TOP1000_R, 1D.csv"
+  },
+  {
+    "asset_name": "ZWS",
+    "file_path": "../Daily data csv/TOP1000_ZWS, 1D.csv"
+  },
+  {
+    "asset_name": "CBSH",
+    "file_path": "../Daily data csv/TOP1000_CBSH, 1D.csv"
+  },
+  {
+    "asset_name": "ORA",
+    "file_path": "../Daily data csv/TOP1000_ORA, 1D.csv"
+  },
+  {
+    "asset_name": "PFSI",
+    "file_path": "../Daily data csv/TOP1000_PFSI, 1D.csv"
+  },
+  {
+    "asset_name": "PLNT",
+    "file_path": "../Daily data csv/TOP1000_PLNT, 1D.csv"
+  },
+  {
+    "asset_name": "VICR",
+    "file_path": "../Daily data csv/TOP1000_VICR, 1D.csv"
+  },
+  {
+    "asset_name": "LLYVA",
+    "file_path": "../Daily data csv/TOP1000_LLYVA, 1D.csv"
+  },
+  {
+    "asset_name": "INFA",
+    "file_path": "../Daily data csv/TOP1000_INFA, 1D.csv"
+  },
+  {
+    "asset_name": "PEGA",
+    "file_path": "../Daily data csv/TOP1000_PEGA, 1D.csv"
+  },
+  {
+    "asset_name": "AAON",
+    "file_path": "../Daily data csv/TOP1000_AAON, 1D.csv"
+  },
+  {
+    "asset_name": "WING",
+    "file_path": "../Daily data csv/TOP1000_WING, 1D.csv"
+  },
+  {
+    "asset_name": "MIDD",
+    "file_path": "../Daily data csv/TOP1000_MIDD, 1D.csv"
+  },
+  {
+    "asset_name": "FLR",
+    "file_path": "../Daily data csv/TOP1000_FLR, 1D.csv"
+  },
+  {
+    "asset_name": "TTAN",
+    "file_path": "../Daily data csv/TOP1000_TTAN, 1D.csv"
+  },
+  {
+    "asset_name": "SMTC",
+    "file_path": "../Daily data csv/TOP1000_SMTC, 1D.csv"
+  },
+  {
+    "asset_name": "FCFS",
+    "file_path": "../Daily data csv/TOP1000_FCFS, 1D.csv"
+  },
+  {
+    "asset_name": "PSN",
+    "file_path": "../Daily data csv/TOP1000_PSN, 1D.csv"
+  },
+  {
+    "asset_name": "HESM",
+    "file_path": "../Daily data csv/TOP1000_HESM, 1D.csv"
+  },
+  {
+    "asset_name": "PAYC",
+    "file_path": "../Daily data csv/TOP1000_PAYC, 1D.csv"
+  },
+  {
+    "asset_name": "AN",
+    "file_path": "../Daily data csv/TOP1000_AN, 1D.csv"
+  },
+  {
+    "asset_name": "INGR",
+    "file_path": "../Daily data csv/TOP1000_INGR, 1D.csv"
+  },
+  {
+    "asset_name": "APPF",
+    "file_path": "../Daily data csv/TOP1000_APPF, 1D.csv"
+  },
+  {
+    "asset_name": "SSD",
+    "file_path": "../Daily data csv/TOP1000_SSD, 1D.csv"
+  },
+  {
+    "asset_name": "CWEN",
+    "file_path": "../Daily data csv/TOP1000_CWEN, 1D.csv"
+  },
+  {
+    "asset_name": "VOYA",
+    "file_path": "../Daily data csv/TOP1000_VOYA, 1D.csv"
+  },
+  {
+    "asset_name": "AVTR",
+    "file_path": "../Daily data csv/TOP1000_AVTR, 1D.csv"
+  },
+  {
+    "asset_name": "FND",
+    "file_path": "../Daily data csv/TOP1000_FND, 1D.csv"
+  },
+  {
+    "asset_name": "COMP",
+    "file_path": "../Daily data csv/TOP1000_COMP, 1D.csv"
+  },
+  {
+    "asset_name": "MASI",
+    "file_path": "../Daily data csv/TOP1000_MASI, 1D.csv"
+  },
+  {
+    "asset_name": "CAVA",
+    "file_path": "../Daily data csv/TOP1000_CAVA, 1D.csv"
+  },
+  {
+    "asset_name": "PCTY",
+    "file_path": "../Daily data csv/TOP1000_PCTY, 1D.csv"
+  },
+  {
+    "asset_name": "CMPO",
+    "file_path": "../Daily data csv/TOP1000_CMPO, 1D.csv"
+  },
+  {
+    "asset_name": "AXTA",
+    "file_path": "../Daily data csv/TOP1000_AXTA, 1D.csv"
+  },
+  {
+    "asset_name": "DOCS",
+    "file_path": "../Daily data csv/TOP1000_DOCS, 1D.csv"
+  },
+  {
+    "asset_name": "ESAB",
+    "file_path": "../Daily data csv/TOP1000_ESAB, 1D.csv"
+  },
+  {
+    "asset_name": "DAR",
+    "file_path": "../Daily data csv/TOP1000_DAR, 1D.csv"
+  },
+  {
+    "asset_name": "HQY",
+    "file_path": "../Daily data csv/TOP1000_HQY, 1D.csv"
+  },
+  {
+    "asset_name": "LYFT",
+    "file_path": "../Daily data csv/TOP1000_LYFT, 1D.csv"
+  },
+  {
+    "asset_name": "ESI",
+    "file_path": "../Daily data csv/TOP1000_ESI, 1D.csv"
+  },
+  {
+    "asset_name": "AL",
+    "file_path": "../Daily data csv/TOP1000_AL, 1D.csv"
+  },
+  {
+    "asset_name": "ESTC",
+    "file_path": "../Daily data csv/TOP1000_ESTC, 1D.csv"
+  },
+  {
+    "asset_name": "BTSG",
+    "file_path": "../Daily data csv/TOP1000_BTSG, 1D.csv"
+  },
+  {
+    "asset_name": "CWAN",
+    "file_path": "../Daily data csv/TOP1000_CWAN, 1D.csv"
+  },
+  {
+    "asset_name": "IDA",
+    "file_path": "../Daily data csv/TOP1000_IDA, 1D.csv"
+  },
+  {
+    "asset_name": "EAT",
+    "file_path": "../Daily data csv/TOP1000_EAT, 1D.csv"
+  },
+  {
+    "asset_name": "STAG",
+    "file_path": "../Daily data csv/TOP1000_STAG, 1D.csv"
+  },
+  {
+    "asset_name": "CAI",
+    "file_path": "../Daily data csv/TOP1000_CAI, 1D.csv"
+  },
+  {
+    "asset_name": "VLY",
+    "file_path": "../Daily data csv/TOP1000_VLY, 1D.csv"
+  },
+  {
+    "asset_name": "PATH",
+    "file_path": "../Daily data csv/TOP1000_PATH, 1D.csv"
+  },
+  {
+    "asset_name": "BEPC",
+    "file_path": "../Daily data csv/TOP1000_BEPC, 1D.csv"
+  },
+  {
+    "asset_name": "ALGM",
+    "file_path": "../Daily data csv/TOP1000_ALGM, 1D.csv"
+  },
+  {
+    "asset_name": "LNW",
+    "file_path": "../Daily data csv/TOP1000_LNW, 1D.csv"
+  },
+  {
+    "asset_name": "PRMB",
+    "file_path": "../Daily data csv/TOP1000_PRMB, 1D.csv"
+  },
+  {
+    "asset_name": "CIFR",
+    "file_path": "../Daily data csv/TOP1000_CIFR, 1D.csv"
+  },
+  {
+    "asset_name": "MSA",
+    "file_path": "../Daily data csv/TOP1000_MSA, 1D.csv"
+  },
+  {
+    "asset_name": "SNV",
+    "file_path": "../Daily data csv/TOP1000_SNV, 1D.csv"
+  },
+  {
+    "asset_name": "PJT",
+    "file_path": "../Daily data csv/TOP1000_PJT, 1D.csv"
+  },
+  {
+    "asset_name": "ENS",
+    "file_path": "../Daily data csv/TOP1000_ENS, 1D.csv"
+  },
+  {
+    "asset_name": "RYTM",
+    "file_path": "../Daily data csv/TOP1000_RYTM, 1D.csv"
+  },
+  {
+    "asset_name": "PCVX",
+    "file_path": "../Daily data csv/TOP1000_PCVX, 1D.csv"
+  },
+  {
+    "asset_name": "NOV",
+    "file_path": "../Daily data csv/TOP1000_NOV, 1D.csv"
+  },
+  {
+    "asset_name": "STWD",
+    "file_path": "../Daily data csv/TOP1000_STWD, 1D.csv"
+  },
+  {
+    "asset_name": "SFM",
+    "file_path": "../Daily data csv/TOP1000_SFM, 1D.csv"
+  },
+  {
+    "asset_name": "EXP",
+    "file_path": "../Daily data csv/TOP1000_EXP, 1D.csv"
+  },
+  {
+    "asset_name": "MSGS",
+    "file_path": "../Daily data csv/TOP1000_MSGS, 1D.csv"
+  },
+  {
+    "asset_name": "CHDN",
+    "file_path": "../Daily data csv/TOP1000_CHDN, 1D.csv"
+  },
+  {
+    "asset_name": "ARW",
+    "file_path": "../Daily data csv/TOP1000_ARW, 1D.csv"
+  },
+  {
+    "asset_name": "CRK",
+    "file_path": "../Daily data csv/TOP1000_CRK, 1D.csv"
+  },
+  {
+    "asset_name": "GKOS",
+    "file_path": "../Daily data csv/TOP1000_GKOS, 1D.csv"
+  },
+  {
+    "asset_name": "LMND",
+    "file_path": "../Daily data csv/TOP1000_LMND, 1D.csv"
+  },
+  {
+    "asset_name": "KEX",
+    "file_path": "../Daily data csv/TOP1000_KEX, 1D.csv"
+  },
+  {
+    "asset_name": "HIMS",
+    "file_path": "../Daily data csv/TOP1000_HIMS, 1D.csv"
+  },
+  {
+    "asset_name": "WFRD",
+    "file_path": "../Daily data csv/TOP1000_WFRD, 1D.csv"
+  },
+  {
+    "asset_name": "DBX",
+    "file_path": "../Daily data csv/TOP1000_DBX, 1D.csv"
+  },
+  {
+    "asset_name": "SIRI",
+    "file_path": "../Daily data csv/TOP1000_SIRI, 1D.csv"
+  },
+  {
+    "asset_name": "BYD",
+    "file_path": "../Daily data csv/TOP1000_BYD, 1D.csv"
+  },
+  {
+    "asset_name": "KVYO",
+    "file_path": "../Daily data csv/TOP1000_KVYO, 1D.csv"
+  },
+  {
+    "asset_name": "HXL",
+    "file_path": "../Daily data csv/TOP1000_HXL, 1D.csv"
+  },
+  {
+    "asset_name": "BRKR",
+    "file_path": "../Daily data csv/TOP1000_BRKR, 1D.csv"
+  },
+  {
+    "asset_name": "MAT",
+    "file_path": "../Daily data csv/TOP1000_MAT, 1D.csv"
+  },
+  {
+    "asset_name": "CRUS",
+    "file_path": "../Daily data csv/TOP1000_CRUS, 1D.csv"
+  },
+  {
+    "asset_name": "PB",
+    "file_path": "../Daily data csv/TOP1000_PB, 1D.csv"
+  },
+  {
+    "asset_name": "VNO",
+    "file_path": "../Daily data csv/TOP1000_VNO, 1D.csv"
+  },
+  {
+    "asset_name": "GXO",
+    "file_path": "../Daily data csv/TOP1000_GXO, 1D.csv"
+  },
+  {
+    "asset_name": "ADT",
+    "file_path": "../Daily data csv/TOP1000_ADT, 1D.csv"
+  },
+  {
+    "asset_name": "FBIN",
+    "file_path": "../Daily data csv/TOP1000_FBIN, 1D.csv"
+  },
+  {
+    "asset_name": "RITM",
+    "file_path": "../Daily data csv/TOP1000_RITM, 1D.csv"
+  },
+  {
+    "asset_name": "FSS",
+    "file_path": "../Daily data csv/TOP1000_FSS, 1D.csv"
+  },
+  {
+    "asset_name": "OLLI",
+    "file_path": "../Daily data csv/TOP1000_OLLI, 1D.csv"
+  },
+  {
+    "asset_name": "CWST",
+    "file_path": "../Daily data csv/TOP1000_CWST, 1D.csv"
+  },
+  {
+    "asset_name": "FROG",
+    "file_path": "../Daily data csv/TOP1000_FROG, 1D.csv"
+  },
+  {
+    "asset_name": "TKR",
+    "file_path": "../Daily data csv/TOP1000_TKR, 1D.csv"
+  },
+  {
+    "asset_name": "CGNX",
+    "file_path": "../Daily data csv/TOP1000_CGNX, 1D.csv"
+  },
+  {
+    "asset_name": "RGTI",
+    "file_path": "../Daily data csv/TOP1000_RGTI, 1D.csv"
+  },
+  {
+    "asset_name": "FAF",
+    "file_path": "../Daily data csv/TOP1000_FAF, 1D.csv"
+  },
+  {
+    "asset_name": "LOAR",
+    "file_path": "../Daily data csv/TOP1000_LOAR, 1D.csv"
+  },
+  {
+    "asset_name": "GBCI",
+    "file_path": "../Daily data csv/TOP1000_GBCI, 1D.csv"
+  },
+  {
+    "asset_name": "GATX",
+    "file_path": "../Daily data csv/TOP1000_GATX, 1D.csv"
+  },
+  {
+    "asset_name": "LTH",
+    "file_path": "../Daily data csv/TOP1000_LTH, 1D.csv"
+  },
+  {
+    "asset_name": "TXNM",
+    "file_path": "../Daily data csv/TOP1000_TXNM, 1D.csv"
+  },
+  {
+    "asset_name": "DUOL",
+    "file_path": "../Daily data csv/TOP1000_DUOL, 1D.csv"
+  },
+  {
+    "asset_name": "RRR",
+    "file_path": "../Daily data csv/TOP1000_RRR, 1D.csv"
+  },
+  {
+    "asset_name": "LBRDA",
+    "file_path": "../Daily data csv/TOP1000_LBRDA, 1D.csv"
+  },
+  {
+    "asset_name": "LEA",
+    "file_path": "../Daily data csv/TOP1000_LEA, 1D.csv"
+  },
+  {
+    "asset_name": "SITE",
+    "file_path": "../Daily data csv/TOP1000_SITE, 1D.csv"
+  },
+  {
+    "asset_name": "ROAD",
+    "file_path": "../Daily data csv/TOP1000_ROAD, 1D.csv"
+  },
+  {
+    "asset_name": "TRNO",
+    "file_path": "../Daily data csv/TOP1000_TRNO, 1D.csv"
+  },
+  {
+    "asset_name": "BLTE",
+    "file_path": "../Daily data csv/TOP1000_BLTE, 1D.csv"
+  },
+  {
+    "asset_name": "RIOT",
+    "file_path": "../Daily data csv/TOP1000_RIOT, 1D.csv"
+  },
+  {
+    "asset_name": "FNB",
+    "file_path": "../Daily data csv/TOP1000_FNB, 1D.csv"
+  },
+  {
+    "asset_name": "NXST",
+    "file_path": "../Daily data csv/TOP1000_NXST, 1D.csv"
+  },
+  {
+    "asset_name": "URBN",
+    "file_path": "../Daily data csv/TOP1000_URBN, 1D.csv"
+  },
+  {
+    "asset_name": "CHE",
+    "file_path": "../Daily data csv/TOP1000_CHE, 1D.csv"
+  },
+  {
+    "asset_name": "VSAT",
+    "file_path": "../Daily data csv/TOP1000_VSAT, 1D.csv"
+  },
+  {
+    "asset_name": "NEU",
+    "file_path": "../Daily data csv/TOP1000_NEU, 1D.csv"
+  },
+  {
+    "asset_name": "EXLS",
+    "file_path": "../Daily data csv/TOP1000_EXLS, 1D.csv"
+  },
+  {
+    "asset_name": "MTG",
+    "file_path": "../Daily data csv/TOP1000_MTG, 1D.csv"
+  },
+  {
+    "asset_name": "THG",
+    "file_path": "../Daily data csv/TOP1000_THG, 1D.csv"
+  },
+  {
+    "asset_name": "OBDC",
+    "file_path": "../Daily data csv/TOP1000_OBDC, 1D.csv"
+  },
+  {
+    "asset_name": "ALK",
+    "file_path": "../Daily data csv/TOP1000_ALK, 1D.csv"
+  },
+  {
+    "asset_name": "MIR",
+    "file_path": "../Daily data csv/TOP1000_MIR, 1D.csv"
+  },
+  {
+    "asset_name": "SEE",
+    "file_path": "../Daily data csv/TOP1000_SEE, 1D.csv"
+  },
+  {
+    "asset_name": "MIRM",
+    "file_path": "../Daily data csv/TOP1000_MIRM, 1D.csv"
+  },
+  {
+    "asset_name": "GPCR",
+    "file_path": "../Daily data csv/TOP1000_GPCR, 1D.csv"
+  },
+  {
+    "asset_name": "PTCT",
+    "file_path": "../Daily data csv/TOP1000_PTCT, 1D.csv"
+  },
+  {
+    "asset_name": "WULF",
+    "file_path": "../Daily data csv/TOP1000_WULF, 1D.csv"
+  },
+  {
+    "asset_name": "GTES",
+    "file_path": "../Daily data csv/TOP1000_GTES, 1D.csv"
+  },
+  {
+    "asset_name": "NTSK",
+    "file_path": "../Daily data csv/TOP1000_NTSK, 1D.csv"
+  },
+  {
+    "asset_name": "LPX",
+    "file_path": "../Daily data csv/TOP1000_LPX, 1D.csv"
+  },
+  {
+    "asset_name": "DLB",
+    "file_path": "../Daily data csv/TOP1000_DLB, 1D.csv"
+  },
+  {
+    "asset_name": "TMHC",
+    "file_path": "../Daily data csv/TOP1000_TMHC, 1D.csv"
+  },
+  {
+    "asset_name": "UUUU",
+    "file_path": "../Daily data csv/TOP1000_UUUU, 1D.csv"
+  },
+  {
+    "asset_name": "GTLB",
+    "file_path": "../Daily data csv/TOP1000_GTLB, 1D.csv"
+  },
+  {
+    "asset_name": "UFPI",
+    "file_path": "../Daily data csv/TOP1000_UFPI, 1D.csv"
+  },
+  {
+    "asset_name": "EPRT",
+    "file_path": "../Daily data csv/TOP1000_EPRT, 1D.csv"
+  },
+  {
+    "asset_name": "THO",
+    "file_path": "../Daily data csv/TOP1000_THO, 1D.csv"
+  },
+  {
+    "asset_name": "SWX",
+    "file_path": "../Daily data csv/TOP1000_SWX, 1D.csv"
+  },
+  {
+    "asset_name": "RHP",
+    "file_path": "../Daily data csv/TOP1000_RHP, 1D.csv"
+  },
+  {
+    "asset_name": "FRMI",
+    "file_path": "../Daily data csv/TOP1000_FRMI, 1D.csv"
+  },
+  {
+    "asset_name": "ESE",
+    "file_path": "../Daily data csv/TOP1000_ESE, 1D.csv"
+  },
+  {
+    "asset_name": "HR",
+    "file_path": "../Daily data csv/TOP1000_HR, 1D.csv"
+  },
+  {
+    "asset_name": "QS",
+    "file_path": "../Daily data csv/TOP1000_QS, 1D.csv"
+  },
+  {
+    "asset_name": "ACT",
+    "file_path": "../Daily data csv/TOP1000_ACT, 1D.csv"
+  },
+  {
+    "asset_name": "KYMR",
+    "file_path": "../Daily data csv/TOP1000_KYMR, 1D.csv"
+  },
+  {
+    "asset_name": "MRCY",
+    "file_path": "../Daily data csv/TOP1000_MRCY, 1D.csv"
+  },
+  {
+    "asset_name": "UBSI",
+    "file_path": "../Daily data csv/TOP1000_UBSI, 1D.csv"
+  },
+  {
+    "asset_name": "SNEX",
+    "file_path": "../Daily data csv/TOP1000_SNEX, 1D.csv"
+  },
+  {
+    "asset_name": "CORZ",
+    "file_path": "../Daily data csv/TOP1000_CORZ, 1D.csv"
+  },
+  {
+    "asset_name": "IBRX",
+    "file_path": "../Daily data csv/TOP1000_IBRX, 1D.csv"
+  },
+  {
+    "asset_name": "FLNC",
+    "file_path": "../Daily data csv/TOP1000_FLNC, 1D.csv"
+  },
+  {
+    "asset_name": "OS",
+    "file_path": "../Daily data csv/TOP1000_OS, 1D.csv"
+  },
+  {
+    "asset_name": "MAIN",
+    "file_path": "../Daily data csv/TOP1000_MAIN, 1D.csv"
+  },
+  {
+    "asset_name": "PIPR",
+    "file_path": "../Daily data csv/TOP1000_PIPR, 1D.csv"
+  },
+  {
+    "asset_name": "COGT",
+    "file_path": "../Daily data csv/TOP1000_COGT, 1D.csv"
+  },
+  {
+    "asset_name": "HWC",
+    "file_path": "../Daily data csv/TOP1000_HWC, 1D.csv"
+  },
+  {
+    "asset_name": "HOMB",
+    "file_path": "../Daily data csv/TOP1000_HOMB, 1D.csv"
+  },
+  {
+    "asset_name": "FORM",
+    "file_path": "../Daily data csv/TOP1000_FORM, 1D.csv"
+  },
+  {
+    "asset_name": "CHRD",
+    "file_path": "../Daily data csv/TOP1000_CHRD, 1D.csv"
+  },
+  {
+    "asset_name": "POR",
+    "file_path": "../Daily data csv/TOP1000_POR, 1D.csv"
+  },
+  {
+    "asset_name": "FCN",
+    "file_path": "../Daily data csv/TOP1000_FCN, 1D.csv"
+  },
+  {
+    "asset_name": "FLG",
+    "file_path": "../Daily data csv/TOP1000_FLG, 1D.csv"
+  },
+  {
+    "asset_name": "ACA",
+    "file_path": "../Daily data csv/TOP1000_ACA, 1D.csv"
+  },
+  {
+    "asset_name": "CCCS",
+    "file_path": "../Daily data csv/TOP1000_CCCS, 1D.csv"
+  },
+  {
+    "asset_name": "GOLF",
+    "file_path": "../Daily data csv/TOP1000_GOLF, 1D.csv"
+  },
+  {
+    "asset_name": "AUB",
+    "file_path": "../Daily data csv/TOP1000_AUB, 1D.csv"
+  },
+  {
+    "asset_name": "ABCB",
+    "file_path": "../Daily data csv/TOP1000_ABCB, 1D.csv"
+  },
+  {
+    "asset_name": "MTDR",
+    "file_path": "../Daily data csv/TOP1000_MTDR, 1D.csv"
+  },
+  {
+    "asset_name": "KBR",
+    "file_path": "../Daily data csv/TOP1000_KBR, 1D.csv"
+  },
+  {
+    "asset_name": "OLED",
+    "file_path": "../Daily data csv/TOP1000_OLED, 1D.csv"
+  },
+  {
+    "asset_name": "WH",
+    "file_path": "../Daily data csv/TOP1000_WH, 1D.csv"
+  },
+  {
+    "asset_name": "POWL",
+    "file_path": "../Daily data csv/TOP1000_POWL, 1D.csv"
+  },
+  {
+    "asset_name": "BCPC",
+    "file_path": "../Daily data csv/TOP1000_BCPC, 1D.csv"
+  },
+  {
+    "asset_name": "VIAV",
+    "file_path": "../Daily data csv/TOP1000_VIAV, 1D.csv"
+  },
+  {
+    "asset_name": "OPCH",
+    "file_path": "../Daily data csv/TOP1000_OPCH, 1D.csv"
+  },
+  {
+    "asset_name": "BKH",
+    "file_path": "../Daily data csv/TOP1000_BKH, 1D.csv"
+  },
+  {
+    "asset_name": "VNT",
+    "file_path": "../Daily data csv/TOP1000_VNT, 1D.csv"
+  },
+  {
+    "asset_name": "LEU",
+    "file_path": "../Daily data csv/TOP1000_LEU, 1D.csv"
+  },
+  {
+    "asset_name": "SLM",
+    "file_path": "../Daily data csv/TOP1000_SLM, 1D.csv"
+  },
+  {
+    "asset_name": "RDNT",
+    "file_path": "../Daily data csv/TOP1000_RDNT, 1D.csv"
+  },
+  {
+    "asset_name": "BETA",
+    "file_path": "../Daily data csv/TOP1000_BETA, 1D.csv"
+  },
+  {
+    "asset_name": "ACHR",
+    "file_path": "../Daily data csv/TOP1000_ACHR, 1D.csv"
+  },
+  {
+    "asset_name": "ETSY",
+    "file_path": "../Daily data csv/TOP1000_ETSY, 1D.csv"
+  },
+  {
+    "asset_name": "CNX",
+    "file_path": "../Daily data csv/TOP1000_CNX, 1D.csv"
+  },
+  {
+    "asset_name": "WEX",
+    "file_path": "../Daily data csv/TOP1000_WEX, 1D.csv"
+  },
+  {
+    "asset_name": "STUB",
+    "file_path": "../Daily data csv/TOP1000_STUB, 1D.csv"
+  },
+  {
+    "asset_name": "KD",
+    "file_path": "../Daily data csv/TOP1000_KD, 1D.csv"
+  },
+  {
+    "asset_name": "AX",
+    "file_path": "../Daily data csv/TOP1000_AX, 1D.csv"
+  },
+  {
+    "asset_name": "PACS",
+    "file_path": "../Daily data csv/TOP1000_PACS, 1D.csv"
+  },
+  {
+    "asset_name": "SMR",
+    "file_path": "../Daily data csv/TOP1000_SMR, 1D.csv"
+  },
+  {
+    "asset_name": "BOOT",
+    "file_path": "../Daily data csv/TOP1000_BOOT, 1D.csv"
+  },
+  {
+    "asset_name": "IMVT",
+    "file_path": "../Daily data csv/TOP1000_IMVT, 1D.csv"
+  },
+  {
+    "asset_name": "GVA",
+    "file_path": "../Daily data csv/TOP1000_GVA, 1D.csv"
+  },
+  {
+    "asset_name": "BOTZ",
+    "file_path": "../Daily data csv/THEME_BOTZ, 1D.csv"
+  },
+  {
+    "asset_name": "BJK",
+    "file_path": "../Daily data csv/THEME_BJK, 1D.csv"
+  },
+  {
+    "asset_name": "XBI",
+    "file_path": "../Daily data csv/THEME_XBI, 1D.csv"
+  },
+  {
+    "asset_name": "WGMI",
+    "file_path": "../Daily data csv/THEME_WGMI, 1D.csv"
+  },
+  {
+    "asset_name": "KWEB",
+    "file_path": "../Daily data csv/THEME_KWEB, 1D.csv"
+  },
+  {
+    "asset_name": "HACK",
+    "file_path": "../Daily data csv/THEME_HACK, 1D.csv"
+  },
+  {
+    "asset_name": "ITA",
+    "file_path": "../Daily data csv/THEME_ITA, 1D.csv"
+  },
+  {
+    "asset_name": "JETS",
+    "file_path": "../Daily data csv/THEME_JETS, 1D.csv"
+  },
+  {
+    "asset_name": "ARKG",
+    "file_path": "../Daily data csv/THEME_ARKG, 1D.csv"
+  },
+  {
+    "asset_name": "ARKK",
+    "file_path": "../Daily data csv/THEME_ARKK, 1D.csv"
+  },
+  {
+    "asset_name": "GDX",
+    "file_path": "../Daily data csv/THEME_GDX, 1D.csv"
+  },
+  {
+    "asset_name": "VUG",
+    "file_path": "../Daily data csv/THEME_VUG, 1D.csv"
+  },
+  {
+    "asset_name": "XLV",
+    "file_path": "../Daily data csv/THEME_XLV, 1D.csv"
+  },
+  {
+    "asset_name": "XHB",
+    "file_path": "../Daily data csv/THEME_XHB, 1D.csv"
+  },
+  {
+    "asset_name": "XLI",
+    "file_path": "../Daily data csv/THEME_XLI, 1D.csv"
+  },
+  {
+    "asset_name": "XLB",
+    "file_path": "../Daily data csv/THEME_XLB, 1D.csv"
+  },
+  {
+    "asset_name": "IHI",
+    "file_path": "../Daily data csv/THEME_IHI, 1D.csv"
+  },
+  {
+    "asset_name": "XLE",
+    "file_path": "../Daily data csv/THEME_XLE, 1D.csv"
+  },
+  {
+    "asset_name": "QTUM",
+    "file_path": "../Daily data csv/THEME_QTUM, 1D.csv"
+  },
+  {
+    "asset_name": "XLRE",
+    "file_path": "../Daily data csv/THEME_XLRE, 1D.csv"
+  },
+  {
+    "asset_name": "XRT",
+    "file_path": "../Daily data csv/THEME_XRT, 1D.csv"
+  },
+  {
+    "asset_name": "ROBO",
+    "file_path": "../Daily data csv/THEME_ROBO, 1D.csv"
+  },
+  {
+    "asset_name": "SMH",
+    "file_path": "../Daily data csv/THEME_SMH, 1D.csv"
+  },
+  {
+    "asset_name": "SIL",
+    "file_path": "../Daily data csv/THEME_SIL, 1D.csv"
+  },
+  {
+    "asset_name": "SOCL",
+    "file_path": "../Daily data csv/THEME_SOCL, 1D.csv"
+  },
+  {
+    "asset_name": "IGV",
+    "file_path": "../Daily data csv/THEME_IGV, 1D.csv"
+  },
+  {
+    "asset_name": "SLX",
+    "file_path": "../Daily data csv/THEME_SLX, 1D.csv"
+  },
+  {
+    "asset_name": "IYZ",
+    "file_path": "../Daily data csv/THEME_IYZ, 1D.csv"
+  },
+  {
+    "asset_name": "IYT",
+    "file_path": "../Daily data csv/THEME_IYT, 1D.csv"
+  },
+  {
+    "asset_name": "XLU",
+    "file_path": "../Daily data csv/THEME_XLU, 1D.csv"
+  },
+  {
+    "asset_name": "XLY",
+    "file_path": "../Daily data csv/THEME_XLY, 1D.csv"
+  },
+  {
+    "asset_name": "XLP",
+    "file_path": "../Daily data csv/THEME_XLP, 1D.csv"
+  },
+  {
+    "asset_name": "TLT",
+    "file_path": "../Daily data csv/THEME_TLT, 1D.csv"
+  },
+  {
+    "asset_name": "KRE",
+    "file_path": "../Daily data csv/THEME_KRE, 1D.csv"
+  },
+  {
+    "asset_name": "URA",
+    "file_path": "../Daily data csv/THEME_URA, 1D.csv"
+  },
+  {
+    "asset_name": "XME",
+    "file_path": "../Daily data csv/THEME_XME, 1D.csv"
+  },
+  {
+    "asset_name": "COPX",
+    "file_path": "../Daily data csv/THEME_COPX, 1D.csv"
+  },
+  {
+    "asset_name": "LIT",
+    "file_path": "../Daily data csv/THEME_LIT, 1D.csv"
+  },
+  {
+    "asset_name": "SKYY",
+    "file_path": "../Daily data csv/THEME_SKYY, 1D.csv"
+  },
+  {
+    "asset_name": "ARKX",
+    "file_path": "../Daily data csv/THEME_ARKX, 1D.csv"
+  },
+  {
+    "asset_name": "EEM",
+    "file_path": "../Daily data csv/THEME_EEM, 1D.csv"
+  },
+  {
+    "asset_name": "REMX",
+    "file_path": "../Daily data csv/THEME_REMX, 1D.csv"
+  },
+  {
+    "asset_name": "VOO",
+    "file_path": "../Daily data csv/ETF_VOO, 1D.csv"
+  },
+  {
+    "asset_name": "IVV",
+    "file_path": "../Daily data csv/ETF_IVV, 1D.csv"
+  },
+  {
+    "asset_name": "SPY",
+    "file_path": "../Daily data csv/ETF_SPY, 1D.csv"
+  },
+  {
+    "asset_name": "VTI",
+    "file_path": "../Daily data csv/ETF_VTI, 1D.csv"
+  },
+  {
+    "asset_name": "QQQ",
+    "file_path": "../Daily data csv/ETF_QQQ, 1D.csv"
+  },
+  {
+    "asset_name": "VTV",
+    "file_path": "../Daily data csv/ETF_VTV, 1D.csv"
+  },
+  {
+    "asset_name": "SXR8.DE",
+    "file_path": "../Daily data csv/ETF_SXR8.DE, 1D.csv"
+  },
+  {
+    "asset_name": "IWF",
+    "file_path": "../Daily data csv/ETF_IWF, 1D.csv"
+  },
+  {
+    "asset_name": "VGT",
+    "file_path": "../Daily data csv/ETF_VGT, 1D.csv"
+  },
+  {
+    "asset_name": "IJH",
+    "file_path": "../Daily data csv/ETF_IJH, 1D.csv"
+  },
+  {
+    "asset_name": "SPYM",
+    "file_path": "../Daily data csv/ETF_SPYM, 1D.csv"
+  },
+  {
+    "asset_name": "VIG",
+    "file_path": "../Daily data csv/ETF_VIG, 1D.csv"
+  },
+  {
+    "asset_name": "VO",
+    "file_path": "../Daily data csv/ETF_VO, 1D.csv"
+  },
+  {
+    "asset_name": "IJR",
+    "file_path": "../Daily data csv/ETF_IJR, 1D.csv"
+  },
+  {
+    "asset_name": "RSP",
+    "file_path": "../Daily data csv/ETF_RSP, 1D.csv"
+  },
+  {
+    "asset_name": "ITOT",
+    "file_path": "../Daily data csv/ETF_ITOT, 1D.csv"
+  },
+  {
+    "asset_name": "SCHD",
+    "file_path": "../Daily data csv/ETF_SCHD, 1D.csv"
+  },
+  {
+    "asset_name": "IWM",
+    "file_path": "../Daily data csv/ETF_IWM, 1D.csv"
+  },
+  {
+    "asset_name": "QQQM",
+    "file_path": "../Daily data csv/ETF_QQQM, 1D.csv"
+  },
+  {
+    "asset_name": "IWD",
+    "file_path": "../Daily data csv/ETF_IWD, 1D.csv"
+  },
+  {
+    "asset_name": "IVW",
+    "file_path": "../Daily data csv/ETF_IVW, 1D.csv"
+  },
+  {
+    "asset_name": "SCHX",
+    "file_path": "../Daily data csv/ETF_SCHX, 1D.csv"
+  },
+  {
+    "asset_name": "SCHG",
+    "file_path": "../Daily data csv/ETF_SCHG, 1D.csv"
+  },
+  {
+    "asset_name": "VUSA.DE",
+    "file_path": "../Daily data csv/ETF_VUSA.DE, 1D.csv"
+  },
+  {
+    "asset_name": "QUAL",
+    "file_path": "../Daily data csv/ETF_QUAL, 1D.csv"
+  },
+  {
+    "asset_name": "IVE",
+    "file_path": "../Daily data csv/ETF_IVE, 1D.csv"
+  },
+  {
+    "asset_name": "IWR",
+    "file_path": "../Daily data csv/ETF_IWR, 1D.csv"
+  },
+  {
+    "asset_name": "IWB",
+    "file_path": "../Daily data csv/ETF_IWB, 1D.csv"
+  },
+  {
+    "asset_name": "DIA",
+    "file_path": "../Daily data csv/ETF_DIA, 1D.csv"
+  },
+  {
+    "asset_name": "DFAC",
+    "file_path": "../Daily data csv/ETF_DFAC, 1D.csv"
+  },
+  {
+    "asset_name": "SCHB",
+    "file_path": "../Daily data csv/ETF_SCHB, 1D.csv"
+  },
+  {
+    "asset_name": "P500.DE",
+    "file_path": "../Daily data csv/ETF_P500.DE, 1D.csv"
+  },
+  {
+    "asset_name": "VONG",
+    "file_path": "../Daily data csv/ETF_VONG, 1D.csv"
+  },
+  {
+    "asset_name": "SPYV",
+    "file_path": "../Daily data csv/ETF_SPYV, 1D.csv"
+  },
+  {
+    "asset_name": "DYNF",
+    "file_path": "../Daily data csv/ETF_DYNF, 1D.csv"
+  },
+  {
+    "asset_name": "TQQQ",
+    "file_path": "../Daily data csv/ETF_TQQQ, 1D.csv"
+  },
+  {
+    "asset_name": "VUAA.DE",
+    "file_path": "../Daily data csv/ETF_VUAA.DE, 1D.csv"
+  },
+  {
+    "asset_name": "OEF",
+    "file_path": "../Daily data csv/ETF_OEF, 1D.csv"
+  },
+  {
+    "asset_name": "IUSG",
+    "file_path": "../Daily data csv/ETF_IUSG, 1D.csv"
+  },
+  {
+    "asset_name": "MDY",
+    "file_path": "../Daily data csv/ETF_MDY, 1D.csv"
+  },
+  {
+    "asset_name": "IUSV",
+    "file_path": "../Daily data csv/ETF_IUSV, 1D.csv"
+  },
+  {
+    "asset_name": "FNDX",
+    "file_path": "../Daily data csv/ETF_FNDX, 1D.csv"
+  },
+  {
+    "asset_name": "USMV",
+    "file_path": "../Daily data csv/ETF_USMV, 1D.csv"
+  },
+  {
+    "asset_name": "VOOG",
+    "file_path": "../Daily data csv/ETF_VOOG, 1D.csv"
+  },
+  {
+    "asset_name": "AVUV",
+    "file_path": "../Daily data csv/ETF_AVUV, 1D.csv"
+  },
+  {
+    "asset_name": "SXRV.DE",
+    "file_path": "../Daily data csv/ETF_SXRV.DE, 1D.csv"
+  },
+  {
+    "asset_name": "DVY",
+    "file_path": "../Daily data csv/ETF_DVY, 1D.csv"
+  },
+  {
+    "asset_name": "MTUM",
+    "file_path": "../Daily data csv/ETF_MTUM, 1D.csv"
+  },
+  {
+    "asset_name": "IYW",
+    "file_path": "../Daily data csv/ETF_IYW, 1D.csv"
+  },
+  {
+    "asset_name": "SDY",
+    "file_path": "../Daily data csv/ETF_SDY, 1D.csv"
+  },
+  {
+    "asset_name": "SCHA",
+    "file_path": "../Daily data csv/ETF_SCHA, 1D.csv"
+  },
+  {
+    "asset_name": "IUSA.DE",
+    "file_path": "../Daily data csv/ETF_IUSA.DE, 1D.csv"
+  },
+  {
+    "asset_name": "IWP",
+    "file_path": "../Daily data csv/ETF_IWP, 1D.csv"
+  },
+  {
+    "asset_name": "IWV",
+    "file_path": "../Daily data csv/ETF_IWV, 1D.csv"
+  },
+  {
+    "asset_name": "DFUS",
+    "file_path": "../Daily data csv/ETF_DFUS, 1D.csv"
+  },
+  {
+    "asset_name": "COWZ",
+    "file_path": "../Daily data csv/ETF_COWZ, 1D.csv"
+  },
+  {
+    "asset_name": "VOT",
+    "file_path": "../Daily data csv/ETF_VOT, 1D.csv"
+  },
+  {
+    "asset_name": "SPY5.DE",
+    "file_path": "../Daily data csv/ETF_SPY5.DE, 1D.csv"
+  },
+  {
+    "asset_name": "IWY",
+    "file_path": "../Daily data csv/ETF_IWY, 1D.csv"
+  },
+  {
+    "asset_name": "DGRW",
+    "file_path": "../Daily data csv/ETF_DGRW, 1D.csv"
+  },
+  {
+    "asset_name": "SGAS.DE",
+    "file_path": "../Daily data csv/ETF_SGAS.DE, 1D.csv"
+  },
+  {
+    "asset_name": "SPHQ",
+    "file_path": "../Daily data csv/ETF_SPHQ, 1D.csv"
+  },
+  {
+    "asset_name": "SPMD",
+    "file_path": "../Daily data csv/ETF_SPMD, 1D.csv"
+  },
+  {
+    "asset_name": "ESGU",
+    "file_path": "../Daily data csv/ETF_ESGU, 1D.csv"
+  },
+  {
+    "asset_name": "OM3L.DE",
+    "file_path": "../Daily data csv/ETF_OM3L.DE, 1D.csv"
+  },
+  {
+    "asset_name": "VONV",
+    "file_path": "../Daily data csv/ETF_VONV, 1D.csv"
+  },
+  {
+    "asset_name": "SCHV",
+    "file_path": "../Daily data csv/ETF_SCHV, 1D.csv"
+  },
+  {
+    "asset_name": "GSLC",
+    "file_path": "../Daily data csv/ETF_GSLC, 1D.csv"
+  },
+  {
+    "asset_name": "IWS",
+    "file_path": "../Daily data csv/ETF_IWS, 1D.csv"
+  },
+  {
+    "asset_name": "VTWO",
+    "file_path": "../Daily data csv/ETF_VTWO, 1D.csv"
+  },
+  {
+    "asset_name": "QDVE.DE",
+    "file_path": "../Daily data csv/ETF_QDVE.DE, 1D.csv"
+  },
+  {
+    "asset_name": "SPSM",
+    "file_path": "../Daily data csv/ETF_SPSM, 1D.csv"
+  },
+  {
+    "asset_name": "IWO",
+    "file_path": "../Daily data csv/ETF_IWO, 1D.csv"
+  },
+  {
+    "asset_name": "SPMO",
+    "file_path": "../Daily data csv/ETF_SPMO, 1D.csv"
+  },
+  {
+    "asset_name": "MOAT",
+    "file_path": "../Daily data csv/ETF_MOAT, 1D.csv"
+  },
+  {
+    "asset_name": "DFUV",
+    "file_path": "../Daily data csv/ETF_DFUV, 1D.csv"
+  },
+  {
+    "asset_name": "SPYL.DE",
+    "file_path": "../Daily data csv/ETF_SPYL.DE, 1D.csv"
+  },
+  {
+    "asset_name": "SCHM",
+    "file_path": "../Daily data csv/ETF_SCHM, 1D.csv"
+  },
+  {
+    "asset_name": "DFAS",
+    "file_path": "../Daily data csv/ETF_DFAS, 1D.csv"
+  },
+  {
+    "asset_name": "DFAT",
+    "file_path": "../Daily data csv/ETF_DFAT, 1D.csv"
+  },
+  {
+    "asset_name": "IWN",
+    "file_path": "../Daily data csv/ETF_IWN, 1D.csv"
+  },
+  {
+    "asset_name": "I500.DE",
+    "file_path": "../Daily data csv/ETF_I500.DE, 1D.csv"
+  },
+  {
+    "asset_name": "SPTM",
+    "file_path": "../Daily data csv/ETF_SPTM, 1D.csv"
+  },
+  {
+    "asset_name": "XLG",
+    "file_path": "../Daily data csv/ETF_XLG, 1D.csv"
+  },
+  {
+    "asset_name": "NOBL",
+    "file_path": "../Daily data csv/ETF_NOBL, 1D.csv"
+  },
+  {
+    "asset_name": "MGV",
+    "file_path": "../Daily data csv/ETF_MGV, 1D.csv"
+  },
+  {
+    "asset_name": "AVUS",
+    "file_path": "../Daily data csv/ETF_AVUS, 1D.csv"
+  },
+  {
+    "asset_name": "QLD",
+    "file_path": "../Daily data csv/ETF_QLD, 1D.csv"
+  },
+  {
+    "asset_name": "PAVE",
+    "file_path": "../Daily data csv/ETF_PAVE, 1D.csv"
+  },
+  {
+    "asset_name": "EQQQ.DE",
+    "file_path": "../Daily data csv/ETF_EQQQ.DE, 1D.csv"
+  },
+  {
+    "asset_name": "XD9U.DE",
+    "file_path": "../Daily data csv/ETF_XD9U.DE, 1D.csv"
+  },
+  {
+    "asset_name": "DUHP",
+    "file_path": "../Daily data csv/ETF_DUHP, 1D.csv"
+  },
+  {
+    "asset_name": "PBUS",
+    "file_path": "../Daily data csv/ETF_PBUS, 1D.csv"
+  },
+  {
+    "asset_name": "DFAU",
+    "file_path": "../Daily data csv/ETF_DFAU, 1D.csv"
+  },
+  {
+    "asset_name": "SDVY",
+    "file_path": "../Daily data csv/ETF_SDVY, 1D.csv"
+  },
+  {
+    "asset_name": "AVLV",
+    "file_path": "../Daily data csv/ETF_AVLV, 1D.csv"
+  },
+  {
+    "asset_name": "MGC",
+    "file_path": "../Daily data csv/ETF_MGC, 1D.csv"
+  },
+  {
+    "asset_name": "D500.DE",
+    "file_path": "../Daily data csv/ETF_D500.DE, 1D.csv"
+  },
+  {
     "asset_name": "TNX",
     "file_path": "../Daily data csv/TVC_TNX, 1D.csv"
   },

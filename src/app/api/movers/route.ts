@@ -1054,15 +1054,16 @@ async function processSymbol(
     const outcomeDetail = outcomeForRangeDetailed(qr, bars);
     const currentOutcome = outcomeDetail.outcome;
     const direction: "above" | "below" = vsMid >= 0 ? "above" : "below";
-    const zone = currentOutcome === "NONE"
+    const hasLines = lines.length > 0;
+    const zone = (currentOutcome === "NONE" || !hasLines)
       ? "Developing"
       : classifyZone(vsMid, lines, model, currentOutcome, groupedScenarioLines).zone;
 
     // Compute zones for the quarter's actual traded high and low
     const actualHighVsMid = ((qr.quarterHigh - mid) / mid) * 100;
     const actualLowVsMid = ((qr.quarterLow - mid) / mid) * 100;
-    const highZone = classifyZone(actualHighVsMid, lines, model, currentOutcome, groupedScenarioLines);
-    const lowZone = classifyZone(actualLowVsMid, lines, model, currentOutcome, groupedScenarioLines);
+    const highZone = hasLines ? classifyZone(actualHighVsMid, lines, model, currentOutcome, groupedScenarioLines) : { zone: "Developing" };
+    const lowZone = hasLines ? classifyZone(actualLowVsMid, lines, model, currentOutcome, groupedScenarioLines) : { zone: "Developing" };
 
     // Compute last quarter's close zone relative to the PREVIOUS quarter's distribution.
     let lastQCloseZone: string | undefined;
@@ -1085,7 +1086,7 @@ async function processSymbol(
         },
         bars,
       );
-      const prevCloseResult = classifyZone(prevCloseVsMid, lines, model, prevOutcome, groupedScenarioLines);
+      const prevCloseResult = hasLines ? classifyZone(prevCloseVsMid, lines, model, prevOutcome, groupedScenarioLines) : { zone: "Developing" };
       lastQCloseZone = prevCloseResult.zone;
     }
 
