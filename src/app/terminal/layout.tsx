@@ -113,7 +113,7 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
         <Link
           href="/"
           className="flex items-center gap-2"
-          style={{ textDecoration: "none" }}
+          style={{ textDecoration: "none", flex: 1 }}
         >
           <Image
             src="/logo.svg"
@@ -179,7 +179,7 @@ function TerminalLayoutInner({ children }: { children: React.ReactNode }) {
         </nav>
 
         {/* Right: Account + Settings */}
-        <div className="flex items-center gap-1" style={{ width: 116, justifyContent: "flex-end" }}>
+        <div className="flex items-center gap-1" style={{ flex: 1, justifyContent: "flex-end" }}>
           <button
             onClick={() => setHelpOpen(true)}
             title="Help"
