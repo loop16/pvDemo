@@ -98,7 +98,7 @@ if [[ -n "$ADMIN_SECRET" ]]; then
     echo -n "  model=$MODEL ... "
     STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
       -H "x-admin-secret: $ADMIN_SECRET" \
-      "https://price-vault.com/api/movers?source=live&model=$MODEL")
+      "https://price-vault.com/api/movers?source=live&model=$MODEL&_=$(date +%s)")
     echo "HTTP $STATUS"
   done
   echo "---- movers cache warmed ----"
