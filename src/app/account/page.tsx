@@ -6,6 +6,7 @@ import { getUser } from "@/lib/user-store";
 import AccountActions from "@/components/AccountActions";
 import Link from "next/link";
 import TradingViewForm from "@/components/TradingViewForm";
+import ApiKeySection from "@/components/ApiKeySection";
 
 // Deduplicate the DB call if auth() and getUser() are both called in the same render
 const getCachedUser = cache(getUser);
@@ -111,6 +112,10 @@ export default async function AccountPage() {
                 </p>
 
                 <AccountActions isActive={isActive} plans={plans} isCorePlan={isCorePlan} />
+
+                {isActive && (
+                    <ApiKeySection initialKey={user?.apiKey ?? null} />
+                )}
 
                 {needsTradingView && (
                     <TradingViewForm

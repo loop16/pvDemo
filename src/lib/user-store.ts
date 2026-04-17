@@ -15,6 +15,7 @@ export const UserSchema = z.object({
     stripePriceId: z.string().optional(),
     tradingViewUsername: z.string().optional(),
     emailVerified: z.boolean().optional(),
+    apiKey: z.string().optional(),
 });
 
 export type User = z.infer<typeof UserSchema>;
@@ -26,6 +27,7 @@ async function getCollection() {
     // Ensure indexes exist (no-op after first run)
     await col.createIndex({ email: 1 }, { unique: true });
     await col.createIndex({ stripeCustomerId: 1 }, { sparse: true });
+    await col.createIndex({ apiKey: 1 }, { sparse: true });
     return col;
 }
 
@@ -99,6 +101,12 @@ export async function updatePassword(email: string, newPassword: string): Promis
     const col = await getCollection();
     const passwordHash = await bcrypt.hash(newPassword, 10);
     await col.updateOne({ email }, { $set: { passwordHash } });
+}
+
+export async function getUserByApiKey(apiKey: string): Promise<User | null> {
+    const col = await getCollection();
+    const doc = await col.findOne({ apiKey }, { projection: { _id: 0 } });
+    return doc ?? null;
 }
 
 export async function updateUserByStripeCustomerId(
