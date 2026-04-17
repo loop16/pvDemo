@@ -1304,6 +1304,12 @@ export async function GET(req: NextRequest) {
   // Admin bust requests skip reading cache but still write it, so users get instant loads after warming
   const writeCache = source !== "demo" && process.env.NODE_ENV === "production";
 
+  // Clear all in-memory caches on admin bust so fresh Wasabi data (levels, ohlcv) is reloaded
+  if (isBust) {
+    for (const k of Object.keys(levelsCacheByModel)) delete levelsCacheByModel[k];
+    accessibleSymbolsCache = null;
+  }
+
   try {
     const now = Date.now();
     const recomputeInProgress = recomputeInProgressByModel[cacheKey] ?? false;
