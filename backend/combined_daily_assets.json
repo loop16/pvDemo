@@ -6199,15 +6199,17 @@
   {
     "asset_name": "BRK-B",
     "file_path": "../Daily data csv/TOP1000_BRK-B, 1D.csv",
-    "tv_symbol": "BRK-B",
+    "tv_symbol": "BRK.B",
     "tv_exchange": [
-      "NYSE",
-      "NASDAQ",
-      "NYSEARCA",
-      "AMEX",
-      "CBOE",
-      "",
-      "BATS"
+      "NYSE"
+    ]
+  },
+  {
+    "asset_name": "BRK-A",
+    "file_path": "../Daily data csv/NYSE_BRK.A, 1D.csv",
+    "tv_symbol": "BRK.A",
+    "tv_exchange": [
+      "NYSE"
     ]
   },
   {
