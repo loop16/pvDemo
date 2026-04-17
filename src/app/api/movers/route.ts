@@ -203,39 +203,43 @@ function buildWasabiKey(pathParts: string) {
   return WASABI_PREFIX ? `${WASABI_PREFIX}/${pathParts}` : pathParts;
 }
 
-async function readWasabiJson<T>(pathParts: string): Promise<T> {
-  const { S3Client, GetObjectCommand } = await import("@aws-sdk/client-s3");
+/* ── Shared S3 client (module-level singleton to avoid per-request connection exhaustion) ── */
+let _s3Client: import("@aws-sdk/client-s3").S3Client | null = null;
+let _s3Bucket = "";
+
+async function getS3Client(): Promise<{ client: import("@aws-sdk/client-s3").S3Client; bucket: string }> {
+  const { S3Client } = await import("@aws-sdk/client-s3");
   const bucket = process.env.WASABI_BUCKET || "";
   const accessKeyId = process.env.WASABI_ACCESS_KEY_ID || "";
   const secretAccessKey = process.env.WASABI_SECRET_ACCESS_KEY || "";
   const endpoint = process.env.WASABI_ENDPOINT || "https://s3.us-east-1.wasabisys.com";
   const region = process.env.WASABI_REGION || "us-east-1";
 
+  if (!_s3Client || _s3Bucket !== bucket) {
+    _s3Client = new S3Client({
+      region,
+      endpoint,
+      credentials: { accessKeyId, secretAccessKey },
+      maxAttempts: 2,
+    });
+    _s3Bucket = bucket;
+  }
+  return { client: _s3Client, bucket };
+}
+
+async function readWasabiJson<T>(pathParts: string): Promise<T> {
+  const { GetObjectCommand } = await import("@aws-sdk/client-s3");
+  const { client, bucket } = await getS3Client();
   const key = buildWasabiKey(pathParts);
-  const client = new S3Client({
-    region,
-    endpoint,
-    credentials: { accessKeyId, secretAccessKey },
-  });
   const resp = await client.send(new GetObjectCommand({ Bucket: bucket, Key: key }));
   const raw = await streamToString(resp.Body);
   return JSON.parse(raw) as T;
 }
 
 async function writeWasabiJson(pathParts: string, data: unknown): Promise<void> {
-  const { S3Client, PutObjectCommand } = await import("@aws-sdk/client-s3");
-  const bucket = process.env.WASABI_BUCKET || "";
-  const accessKeyId = process.env.WASABI_ACCESS_KEY_ID || "";
-  const secretAccessKey = process.env.WASABI_SECRET_ACCESS_KEY || "";
-  const endpoint = process.env.WASABI_ENDPOINT || "https://s3.us-east-1.wasabisys.com";
-  const region = process.env.WASABI_REGION || "us-east-1";
-
+  const { PutObjectCommand } = await import("@aws-sdk/client-s3");
+  const { client, bucket } = await getS3Client();
   const key = buildWasabiKey(pathParts);
-  const client = new S3Client({
-    region,
-    endpoint,
-    credentials: { accessKeyId, secretAccessKey },
-  });
   await client.send(new PutObjectCommand({
     Bucket: bucket,
     Key: key,
