@@ -42,18 +42,18 @@ type ClassFilter = 'all' | 'equity' | 'futures' | 'crypto' | 'fx' | 'index' | 'e
 type StatsColumnKey = 'symbol' | 'assetClass' | 'price' | 'changePct' | 'vsMid' | 'zone' | 'magnitude' | 'highZone' | 'lowZone' | 'lastQCloseZone';
 
 const ALL_STATS_COLUMNS: { key: StatsColumnKey; label: string; shortLabel: string; sortKey: StatsSortKey; align: 'left' | 'right'; flex: number }[] = [
-  { key: 'symbol', label: 'SYMBOL', shortLabel: 'SYM', sortKey: 'symbol', align: 'left', flex: 1.3 },
+  { key: 'symbol', label: 'SYMBOL', shortLabel: 'SYMBOL', sortKey: 'symbol', align: 'left', flex: 1.3 },
   { key: 'assetClass', label: 'CLASS', shortLabel: 'CLS', sortKey: 'assetClass', align: 'left', flex: 0.7 },
-  { key: 'lastQCloseZone', label: 'LAST Q', shortLabel: 'LQ', sortKey: 'lastQCloseZone', align: 'left', flex: 1.1 },
+  { key: 'lastQCloseZone', label: 'LAST QUARTER', shortLabel: 'LAST QUARTER', sortKey: 'lastQCloseZone', align: 'left', flex: 1.6 },
   { key: 'highZone', label: 'HIGH ZONE', shortLabel: 'HI', sortKey: 'highZone', align: 'left', flex: 1.1 },
   { key: 'lowZone', label: 'LOW ZONE', shortLabel: 'LO', sortKey: 'lowZone', align: 'left', flex: 1.1 },
-  { key: 'zone', label: 'CURRENT', shortLabel: 'CUR', sortKey: 'zone', align: 'left', flex: 1.1 },
+  { key: 'zone', label: 'CURRENT', shortLabel: 'CURRENT', sortKey: 'zone', align: 'left', flex: 1.3 },
   { key: 'price', label: 'PRICE', shortLabel: 'PRC', sortKey: 'price', align: 'right', flex: 1 },
-  { key: 'changePct', label: 'CHG %', shortLabel: 'CHG%', sortKey: 'changePct', align: 'right', flex: 0.8 },
-  { key: 'magnitude', label: 'MAGNITUDE', shortLabel: 'MAG', sortKey: 'magnitude', align: 'right', flex: 1.1 },
+  { key: 'changePct', label: 'CHANGE %', shortLabel: 'CHANGE %', sortKey: 'changePct', align: 'right', flex: 1 },
+  { key: 'magnitude', label: 'DISTANCE FROM QUARTER MIDPOINT', shortLabel: 'FROM MID %', sortKey: 'magnitude', align: 'right', flex: 1.5 },
 ];
 
-const DEFAULT_VISIBLE_COLUMNS: StatsColumnKey[] = ['symbol', 'zone', 'changePct', 'magnitude'];
+const DEFAULT_VISIBLE_COLUMNS: StatsColumnKey[] = ['symbol', 'lastQCloseZone', 'zone', 'changePct', 'magnitude'];
 
 const STATS_CLASS_BADGE_COLORS: Record<AssetClass, { bg: string; text: string }> = {
   equity: { bg: 'rgba(41, 98, 255, 0.08)', text: '#2962ff' },
@@ -386,8 +386,8 @@ function StatsPanel({
             <span style={{ flex: '1 1 0', maxWidth: 28, height: 3, background: theme.borderLight, borderRadius: 1.5, overflow: 'hidden' }}>
               <span style={{ display: 'block', height: '100%', width: `${barW}%`, background: barColor, borderRadius: 1.5 }} />
             </span>
-            <span style={{ fontSize: 10, fontWeight: 600, color: isExtreme(m) ? '#d97706' : theme.textDim, fontVariantNumeric: 'tabular-nums', minWidth: 28, textAlign: 'right' }}>
-              {m.magnitude.toFixed(1)}
+            <span style={{ fontSize: 10, fontWeight: 600, color: isExtreme(m) ? '#d97706' : theme.textDim, fontVariantNumeric: 'tabular-nums', minWidth: 34, textAlign: 'right' }}>
+              {m.magnitude.toFixed(1)}%
             </span>
           </span>
         );
@@ -601,24 +601,29 @@ function StatsPanel({
             <button
               key={h.key}
               onClick={() => handleSort(h.sortKey)}
+              title={`Sort by ${h.label.toLowerCase()}`}
+              aria-label={`Sort by ${h.label.toLowerCase()}${sortKey === h.sortKey ? `, currently ${sortAsc ? 'ascending' : 'descending'}` : ''}`}
               style={{
                 flex: h.flex,
-                fontSize: 8,
+                fontSize: 7.5,
                 fontWeight: 600,
                 fontFamily: MONO,
-                letterSpacing: '0.06em',
+                letterSpacing: '0.03em',
                 color: sortKey === h.sortKey ? theme.text : theme.textDim,
                 background: 'transparent',
                 border: 'none',
                 cursor: 'pointer',
                 textAlign: h.align,
-                padding: '0 3px',
+                padding: '0 2px',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
               }}
             >
-              {h.shortLabel}{sortKey === h.sortKey ? (sortAsc ? '\u2191' : '\u2193') : ''}
+              {h.shortLabel}{' '}
+              <span aria-hidden="true" style={{ opacity: sortKey === h.sortKey ? 1 : 0.4 }}>
+                {sortKey === h.sortKey ? (sortAsc ? '\u2191' : '\u2193') : '\u2195'}
+              </span>
             </button>
           ))}
         </div>
