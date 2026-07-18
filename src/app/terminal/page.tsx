@@ -712,6 +712,7 @@ function TerminalContent() {
   const searchParams = useSearchParams();
   const { theme } = useTheme();
   const [layout, setLayoutState] = useState<LayoutMode>('1x1');
+  const [showStats, setShowStats] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const setActivePanelSymbolRef = useRef<((symbol: string) => void) | null>(null);
@@ -813,6 +814,35 @@ function TerminalContent() {
               MOBILE MODE
             </span>
           )}
+          <button
+            onClick={() => setShowStats(s => !s)}
+            className="transition-colors"
+            style={{
+              background: showStats ? theme.activeNavBg : 'transparent',
+              borderRadius: 3,
+              minWidth: isMobile ? 70 : 0,
+              height: isMobile ? 30 : 'auto',
+              padding: isMobile ? '0 10px' : 4,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 6,
+            }}
+            title="Toggle stats panel"
+            aria-label="Toggle stats panel"
+            aria-expanded={showStats}
+          >
+            <svg width={16} height={16} viewBox="0 0 16 16" fill="none" stroke={showStats ? theme.text : theme.textDim} strokeWidth={1.5}>
+              <rect x={1} y={8} width={3} height={7} rx={0.5} />
+              <rect x={6} y={4} width={3} height={11} rx={0.5} />
+              <rect x={11} y={1} width={3} height={14} rx={0.5} />
+            </svg>
+            {isMobile && (
+              <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.06em', color: showStats ? theme.text : theme.textDim }}>
+                Stats
+              </span>
+            )}
+          </button>
         </div>
       </div>
 
@@ -828,7 +858,28 @@ function TerminalContent() {
               setActivePanelSymbol={setActivePanelSymbolRef}
             />
           </div>
+          {!isMobile && showStats && <StatsPanel theme={theme} onSymbolSelect={(sym) => setActivePanelSymbolRef.current?.(sym)} />}
         </div>
+        {isMobile && showStats && (
+          <div
+            className="absolute inset-0 z-20 p-3"
+            style={{
+              background: 'rgba(255,255,255,0.18)',
+              backdropFilter: 'blur(18px)',
+              WebkitBackdropFilter: 'blur(18px)',
+            }}
+          >
+            <StatsPanel
+              theme={theme}
+              mobile
+              onClose={() => setShowStats(false)}
+              onSymbolSelect={(sym) => {
+                setActivePanelSymbolRef.current?.(sym);
+                setShowStats(false);
+              }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
