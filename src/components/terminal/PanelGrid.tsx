@@ -469,12 +469,16 @@ function ResizeHandle({
 // PANEL GRID
 // ============================================================================
 
-const DEFAULT_PANELS: PanelConfig[] = [
+const LIVE_DEFAULT_PANELS: PanelConfig[] = [
   { id: '1', symbol: 'SPX', model: 'pro' },
   { id: '2', symbol: 'BTCUSD', model: 'pro' },
   { id: '3', symbol: 'GC', model: 'pro' },
   { id: '4', symbol: 'NQ1!', model: 'pro' },
 ];
+
+const DEMO_DEFAULT_PANELS: PanelConfig[] = LIVE_DEFAULT_PANELS.map((panel) =>
+  panel.id === '4' ? { ...panel, symbol: 'NQ' } : { ...panel }
+);
 
 export interface PanelGridProps {
   layout: LayoutMode;
@@ -488,24 +492,26 @@ const PANELS_STORAGE_KEY = 'pricevault-panels';
 
 export default function PanelGrid({ layout, symbols, source = 'live', initialSymbol, setActivePanelSymbol }: PanelGridProps) {
   const { theme } = useTheme();
+  const defaultPanels = source === 'demo' ? DEMO_DEFAULT_PANELS : LIVE_DEFAULT_PANELS;
+  const panelsStorageKey = source === 'demo' ? `${PANELS_STORAGE_KEY}-demo` : PANELS_STORAGE_KEY;
   const [panels, setPanels] = useState<PanelConfig[]>(() => {
     // Restore last session's panel config from localStorage
     try {
-      const saved = localStorage.getItem(PANELS_STORAGE_KEY);
+      const saved = localStorage.getItem(panelsStorageKey);
       if (saved) {
         const parsed = JSON.parse(saved) as PanelConfig[];
         if (Array.isArray(parsed) && parsed.length >= 4) {
           const restored = parsed.slice(0, 4).map((p, i) => ({
-            ...DEFAULT_PANELS[i],
+            ...defaultPanels[i],
             ...p,
-            id: DEFAULT_PANELS[i].id,
+            id: defaultPanels[i].id,
           }));
           if (initialSymbol) restored[0] = { ...restored[0], symbol: initialSymbol };
           return restored;
         }
       }
     } catch {}
-    const base = [...DEFAULT_PANELS];
+    const base = defaultPanels.map((panel) => ({ ...panel }));
     if (initialSymbol) base[0] = { ...base[0], symbol: initialSymbol };
     return base;
   });
@@ -513,8 +519,8 @@ export default function PanelGrid({ layout, symbols, source = 'live', initialSym
 
   // Persist panel config whenever it changes
   useEffect(() => {
-    try { localStorage.setItem(PANELS_STORAGE_KEY, JSON.stringify(panels)); } catch {}
-  }, [panels]);
+    try { localStorage.setItem(panelsStorageKey, JSON.stringify(panels)); } catch {}
+  }, [panels, panelsStorageKey]);
 
   // Expose a function to set the active panel's symbol from outside
   useEffect(() => {
