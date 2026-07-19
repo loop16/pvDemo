@@ -5074,5 +5074,41 @@
   {
     "asset_name": "TYX",
     "file_path": "../Daily data csv/TVC_TYX, 1D.csv"
+  },
+  {
+    "asset_name": "TSM",
+    "file_path": "../Daily data csv/TOP1000_TSM, 1D.csv"
+  },
+  {
+    "asset_name": "IREN",
+    "file_path": "../Daily data csv/TOP1000_IREN, 1D.csv"
+  },
+  {
+    "asset_name": "FCEL",
+    "file_path": "../Daily data csv/TOP1000_FCEL, 1D.csv"
+  },
+  {
+    "asset_name": "KEEL",
+    "file_path": "../Daily data csv/TOP1000_KEEL, 1D.csv"
+  },
+  {
+    "asset_name": "CLSK",
+    "file_path": "../Daily data csv/TOP1000_CLSK, 1D.csv"
+  },
+  {
+    "asset_name": "AXTI",
+    "file_path": "../Daily data csv/TOP1000_AXTI, 1D.csv"
+  },
+  {
+    "asset_name": "NOK",
+    "file_path": "../Daily data csv/TOP1000_NOK, 1D.csv"
+  },
+  {
+    "asset_name": "BABA",
+    "file_path": "../Daily data csv/TOP1000_BABA, 1D.csv"
+  },
+  {
+    "asset_name": "NBIS",
+    "file_path": "../Daily data csv/TOP1000_NBIS, 1D.csv"
   }
 ]

@@ -6211,5 +6211,131 @@
     "tv_exchange": [
       "TVC"
     ]
+  },
+  {
+    "asset_name": "TSM",
+    "file_path": "../Daily data csv/TOP1000_TSM, 1D.csv",
+    "tv_symbol": "TSM",
+    "tv_exchange": [
+      "NYSE",
+      "NASDAQ",
+      "NYSEARCA",
+      "AMEX",
+      "CBOE",
+      "",
+      "BATS"
+    ]
+  },
+  {
+    "asset_name": "IREN",
+    "file_path": "../Daily data csv/TOP1000_IREN, 1D.csv",
+    "tv_symbol": "IREN",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "NYSEARCA",
+      "AMEX",
+      "CBOE",
+      "",
+      "BATS"
+    ]
+  },
+  {
+    "asset_name": "FCEL",
+    "file_path": "../Daily data csv/TOP1000_FCEL, 1D.csv",
+    "tv_symbol": "FCEL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "NYSEARCA",
+      "AMEX",
+      "CBOE",
+      "",
+      "BATS"
+    ]
+  },
+  {
+    "asset_name": "KEEL",
+    "file_path": "../Daily data csv/TOP1000_KEEL, 1D.csv",
+    "tv_symbol": "KEEL",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "NYSEARCA",
+      "AMEX",
+      "CBOE",
+      "",
+      "BATS"
+    ]
+  },
+  {
+    "asset_name": "CLSK",
+    "file_path": "../Daily data csv/TOP1000_CLSK, 1D.csv",
+    "tv_symbol": "CLSK",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "NYSEARCA",
+      "AMEX",
+      "CBOE",
+      "",
+      "BATS"
+    ]
+  },
+  {
+    "asset_name": "AXTI",
+    "file_path": "../Daily data csv/TOP1000_AXTI, 1D.csv",
+    "tv_symbol": "AXTI",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "NYSEARCA",
+      "AMEX",
+      "CBOE",
+      "",
+      "BATS"
+    ]
+  },
+  {
+    "asset_name": "NOK",
+    "file_path": "../Daily data csv/TOP1000_NOK, 1D.csv",
+    "tv_symbol": "NOK",
+    "tv_exchange": [
+      "NYSE",
+      "NASDAQ",
+      "NYSEARCA",
+      "AMEX",
+      "CBOE",
+      "",
+      "BATS"
+    ]
+  },
+  {
+    "asset_name": "BABA",
+    "file_path": "../Daily data csv/TOP1000_BABA, 1D.csv",
+    "tv_symbol": "BABA",
+    "tv_exchange": [
+      "NYSE",
+      "NASDAQ",
+      "NYSEARCA",
+      "AMEX",
+      "CBOE",
+      "",
+      "BATS"
+    ]
+  },
+  {
+    "asset_name": "NBIS",
+    "file_path": "../Daily data csv/TOP1000_NBIS, 1D.csv",
+    "tv_symbol": "NBIS",
+    "tv_exchange": [
+      "NASDAQ",
+      "NYSE",
+      "NYSEARCA",
+      "AMEX",
+      "CBOE",
+      "",
+      "BATS"
+    ]
   }
 ]
