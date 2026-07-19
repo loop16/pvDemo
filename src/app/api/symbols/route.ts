@@ -8,7 +8,6 @@ export const runtime = "nodejs";
 type AssetClass = 'equity' | 'crypto' | 'futures' | 'fx' | 'index' | 'etf';
 type SymbolEntry = { id: string; label: string; class?: AssetClass };
 const SYMBOL_ID_RENAMES: Record<string, string> = {
-  CL: "CL1!",
   GC: "GC1!",
 };
 

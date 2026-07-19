@@ -26,7 +26,6 @@ const ASSETS_PATH = path.join(process.cwd(), "backend", "assets.json");
 const ASSETS_BASE_DIR = path.join(process.cwd(), "backend");
 const OHLCV_ALIASES: Record<string, string> = {
   BTCUSD: "BTC",
-  CL: "CL1!",
   GC: "GC1!",
   NQ: "NQ1!",
 };
@@ -436,7 +435,7 @@ export async function GET(req: NextRequest) {
   const isDemo = source === "demo" || !shouldUseWasabi(source);
   const symbolMap: Record<string, string> = isDemo
     ? { BTCUSD: "BTC", NQ: "NDX" }
-    : { BTCUSD: "BTC", CL: "CL1!", GC: "GC1!", SPX: "SPX" };
+    : { BTCUSD: "BTC", GC: "GC1!", SPX: "SPX" };
 
   if (model === "beta") {
     try {

@@ -100,7 +100,6 @@ const WASABI_OHLCV_DIR = "ohlcv/symbols";
 
 const OHLCV_ALIASES: Record<string, string> = {
   BTCUSD: "BTC",
-  CL: "CL1!",
   GC: "GC1!",
   NQ: "NQ1!",
 };

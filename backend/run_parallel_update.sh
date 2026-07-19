@@ -88,6 +88,12 @@ TAIL_PID=$!
 wait "$UPLOAD_PID"
 kill "$TAIL_PID" 2>/dev/null || true
 
+/opt/anaconda3/bin/python3 -u namely-site/backend/sync_symbol_index.py \
+  --manifest "namely-site/backend/combined_daily_assets.json" \
+  --output "namely-site/data/levels/symbols/index.json" \
+  --env "/Users/orlandocantoni/Desktop/QPP website/namely-site/.env.local" \
+  --upload
+
 # Warm the movers cache on the live site now that fresh OHLCV data is in Wasabi
 ENV_FILE="/Users/orlandocantoni/Desktop/QPP website/namely-site/.env.local"
 ADMIN_SECRET="$(grep '^ADMIN_SECRET=' "$ENV_FILE" | head -1 | cut -d= -f2- | tr -d '\r\n')"
