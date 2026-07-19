@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider, useTheme } from "@/components/terminal/ThemeContext";
 import HalftoneCanvas from "@/components/HalftoneCanvasV1";
 import SettingsPanel from "@/components/terminal/SettingsPanel";
@@ -71,8 +72,11 @@ function DemoLayoutInner({ children }: { children: React.ReactNode }) {
 
 export default function DemoLayout({ children }: { children: React.ReactNode }) {
   return (
-    <ThemeProvider>
-      <DemoLayoutInner>{children}</DemoLayoutInner>
-    </ThemeProvider>
+    <>
+      <ThemeProvider>
+        <DemoLayoutInner>{children}</DemoLayoutInner>
+      </ThemeProvider>
+      <Analytics />
+    </>
   );
 }
